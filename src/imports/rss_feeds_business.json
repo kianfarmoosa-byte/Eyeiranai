@@ -1,0 +1,466 @@
+{
+  "category": "business",
+  "total_feeds": 92,
+  "feeds": [
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://hosted2.ap.org/atom/APDEFAULT/f70471f764144b2fab526d39972d37b3"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://online.wsj.com/xml/rss/3_7014.xml"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.nytimes.com/services/xml/rss/nyt/Business.xml"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://rss.nytimes.com/services/xml/rss/nyt/Business.xml"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://feeds.reuters.com/reuters/businessNews"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://feeds.washingtonpost.com/rss/rss_storyline"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://feeds.washingtonpost.com/rss/rss_wonkblog"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.economist.com/feeds/print-sections/77/business.xml"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.business-standard.com/rss/latest.rss"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.business-standard.com/rss/home_page_top_stories.rss"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://feeds.harvardbusiness.org/harvardbusiness?format=xml"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://au.ibtimes.com/rss/articles/region/1.rss"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.businessweek.com/search/rssfeed.htm"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.huffingtonpost.com/feeds/verticals/business/news.xml"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.ft.com/rss/home/us"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://rss.cnn.com/rss/edition_business.rss"
+    },
+    {
+      "country": "US",
+      "category": "business",
+      "rss_url": "http://www.bloomberg.com/feed/podcast/law.xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://rss.canada.com/get/?F7537"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/morningstar/glkd"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://news.gc.ca/web/fd-en.do?mthd=thm&ft=atom&crtr.thm1D=7"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://news.gc.ca/web/fd-en.do?mthd=thm&ft=atom&crtr.thm1D=17"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://rss.radio-canada.ca/fils/nouvelles/economieaffaires.xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.calgarysun.com/money/rss.xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.huffingtonpost.ca/feeds/verticals/canada-business/index.xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://rss.canoe.com/Money/home.xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.itbusiness.ca/feed"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.ft.com/rss/home/us"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://rss.cbc.ca/lineup/business.xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.cbj.ca/business_news/canadian_business_news/index.1.rss"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.cbj.ca/business_in_action/april_11/index.1.rss"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/FP_TopStories?format=xml"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.canadianbusiness.com/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.ctvnews.ca/rss/business/ctv-news-business-headlines-1.867648"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://www.economist.com/blogs/americasview/2014/09/politics-alberta?fsrc=rss"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://rss.canada.com/get/?F7477"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://rss.canada.com/get/?F6939"
+    },
+    {
+      "country": "CA",
+      "category": "business",
+      "rss_url": "http://blogs.wsj.com/canadarealtime/feed/?mod=WSJ_Canada_Realtime&mg=blogs-"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.oneindia.com/rss/news-business-fb.xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.tehelka.com/economy/?feed=custom_feed"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.outlookindia.com/rss/section/18"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://sify.com/rss2/business/article/category/bank"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://sify.com/rss2/business/article/category/ipo"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://timesofindia.feedsportal.com/c/33039/f/534010/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://timesofindia.feedsportal.com/c/33039/f/533919/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://economictimes.indiatimes.com/rssfeedsdefault.cms"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.businessweek.com/feeds/most-popular.rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://feeds.reuters.com/reuters/INbusinessNews"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.business-standard.com/rss/todays-paper.rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.business-standard.com/rss/home_page_top_stories.rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://forbesindia.com/rssfeed/rss_all.xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/NDTV-Business?format=xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://feeds.hindustantimes.com/HT-Business?format=xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://zeenews.india.com/rss/business.xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "https://in.news.yahoo.com/rss//india"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://hosted.ap.org/lineups/WORLDHEADS.rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.huffingtonpost.com/feeds/verticals/business/news.xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.livemint.com/rss/homepage"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.nytimes.com/services/xml/rss/nyt/InternationalBusiness.xml"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "https://news.google.com/news/feeds?cf=all&ned=in&hl=en&topic=b&output=rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.thetimes.co.uk/tto/business/markets/india/rss"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.livemint.com/rss/companies"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.livemint.com/rss/consumer"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.livemint.com/rss/money"
+    },
+    {
+      "country": "IN",
+      "category": "business",
+      "rss_url": "http://www.livemint.com/rss/industry"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.economist.com/sections/business-finance/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "https://uk.finance.yahoo.com/news/provider-yahoofinance/?format=rss"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.theweek.co.uk/taxonomy/term/60/feed"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/daily-express-finance-news"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.manchestereveningnews.co.uk/business/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://online.wsj.com/xml/rss/3_7031.xml"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://blogs.wsj.com/moneybeat/category/europe/feed/?mod=WSJ_moneybeat_blog"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://feeds.theguardian.com/theguardian/uk/business/rss"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://feeds.bbci.co.uk/news/business/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://mf.feeds.reuters.com/reuters/UKVideoBusiness"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://news.sky.com/feeds/rss/business.xml"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://rss.feedsportal.com/c/266/f/3510/index.rss"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.telegraph.co.uk/finance/rss"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.thetimes.co.uk/tto/business/rss"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.ibtimes.co.uk/rss/uk"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://www.ft.com/rss/home/europe"
+    },
+    {
+      "country": "GB",
+      "category": "business",
+      "rss_url": "http://blogs.wsj.com/emergingeurope/feed/?mod=emergingeurope&mg=blogs-"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://www.businessspectator.com.au/bs/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://www.cio.com/index.rss"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://www.dynamicbusiness.com.au/feed"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/TheAustralianBusNews?format=xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/TheAustralianBusAviation?format=xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://feeds.feedburner.com/TheAustralianBusinessWorldBusNews?format=xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://feeds.news.com.au/public/rss/2.0/business_top_stories_346.xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://www.abc.net.au/news/feed/51892/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://www.smh.com.au/rssheadlines/business.xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://feeds.news.com.au/heraldsun/rss/heraldsun_news_business_2783.xml"
+    },
+    {
+      "country": "AU",
+      "category": "business",
+      "rss_url": "http://abns.com.au/feed/"
+    }
+  ]
+}

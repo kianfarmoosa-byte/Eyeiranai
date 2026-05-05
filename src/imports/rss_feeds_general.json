@@ -1,0 +1,741 @@
+{
+  "category": "general",
+  "total_feeds": 147,
+  "feeds": [
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.abcnews.com/abcnews/usheadlines"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://rss.cnn.com/rss/cnn_topstories.rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.cbsnews.com/latest/rss/main"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.nytimes.com/services/xml/rss/nyt/National.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://online.wsj.com/xml/rss/3_7085.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://content.usatoday.com/marketing/rss/rsstrans.aspx?feedId=news2"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://rss.csmonitor.com/feeds/usa"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.nbcnews.com/feeds/topstories"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.nbcnews.com/feeds/worldnews"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.reuters.com/Reuters/worldNews"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.reuters.com/Reuters/domesticNews"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://hosted.ap.org/lineups/USHEADS.rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://hosted.ap.org/lineups/WORLDHEADS.rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.huffingtonpost.com/feeds/verticals/world/index.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://news.yahoo.com/rss/us"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://rss.news.yahoo.com/rss/world"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.newsweek.com/rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/thedailybeast/articles"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://qz.com/feed"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.theguardian.com/world/usa/rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.politico.com/rss/politicopicks.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.newyorker.com/feed/news"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/NationPBSNewsHour"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/NewshourWorld"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.usnews.com/rss/news"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.npr.org/rss/rss.php?id=1003"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.npr.org/rss/rss.php?id=1004"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/AtlanticNational"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/TheAtlanticWire"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.latimes.com/nation/rss2.0.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.latimes.com/world/rss2.0.xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://api.breakingnews.com/api/v1/item/?format=rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "https://news.vice.com/rss"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://talkingpointsmemo.com/feed/livewire"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://www.salon.com/category/news/feed/rss/"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://time.com/newsfeed/feed/"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://feeds.foxnews.com/foxnews/latest?format=xml"
+    },
+    {
+      "country": "US",
+      "category": "general",
+      "rss_url": "http://mashable.com/us-world/rss/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F7497"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://news.gc.ca/web/fd-en.do?mthd=ntnl&ft=atom"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://news.gc.ca/web/fd-en.do?mthd=rgnl&ft=atom"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.journaldemontreal.com/rss.xml"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.radio-canada.ca/fils/nouvelles/national.xml"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.calgarysun.com/home/rss.xml"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://leaderpost.com/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://thestarphoenix.com/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://windsorstar.com/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.cbc.ca/cmlink/rss-canada"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.ctvnews.ca/rss/ctvnews-ca-canada-public-rss-1.822284"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F75"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://globalnews.ca/canada/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.thestar.com/feeds.articles.news.canada.rss"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.theglobeandmail.com/news/national/?service=rss"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F270"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.macleans.ca/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F7364"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F264"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.nhl.com/rss/news.xml"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://feeds.reuters.com/Reuters/worldNews"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.660news.com/featured/spotlight/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.brandonsun.com/rss/?path=%2Fnational%2Fbreaking-news"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://thewalrus.ca/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://www.torontosun.com/home/rss.xml"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F243"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F259"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://rss.canada.com/get/?F291"
+    },
+    {
+      "country": "CA",
+      "category": "general",
+      "rss_url": "http://feeds.feedblitz.com/thetyee"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.telegraphindia.com/feeds/rss.jsp?id=3"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.caravanmagazine.in/feed"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://thewire.in/feed/"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.oneindia.com/rss/news-india-fb.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://sify.com/rss2/news/article/category/national"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.tehelka.com/?feed=custom_feed"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.outlookindia.com/rss/main/website"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.outlookindia.com/rss/main/newswire"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.outlookindia.com/rss/section/19"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://feeds.hindustantimes.com/HT-India"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://indianexpress.com/section/india/feed/"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://timesofindia.feedsportal.com/c/33039/f/533916/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://feeds.bbci.co.uk/news/world/asia/india/rss.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://ibnlive.in.com/ibnrss/top.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://timesofindia.feedsportal.com/c/33039/f/533965/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://indiatoday.feedsportal.com/c/33614/f/589699/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.thehindubusinessline.com/news/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.thehindubusinessline.com/news/international/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.thehindu.com/news/national/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://zeenews.india.com/rss/world-news.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.business-standard.com/rss/current-affairs-news-11501.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://nvonews.com/feed/"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://economictimes.indiatimes.com/News/rssfeeds/1715249553.cms"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.sikhsiyasat.com/feed/"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://indiatoday.feedsportal.com/c/33614/f/589699/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.asianage.com/rss/38"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.business-standard.com/rss/home_page_top_stories.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.dnaindia.com/rss.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.deccanchronicle.com/rss.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.deccanherald.com/rss-internal/top-stories.rss"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://syndication.financialexpress.com/rss/latest-news.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.mid-day.com/Resources/midday/rss/news-national.xml"
+    },
+    {
+      "country": "IN",
+      "category": "general",
+      "rss_url": "http://www.livemint.com/rss/homepage"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.theguardian.com/observer/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.theguardian.com/world/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.theweek.co.uk/feeds/all"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://feeds.bbci.co.uk/news/world/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://feeds.bbci.co.uk/news/uk/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.theguardian.com/uk/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://news.sky.com/feeds/rss/uk.xml"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.telegraph.co.uk/news/uknews/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.ft.com/rss/world/uk"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.standard.co.uk/news/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.oxfordmail.co.uk/news/rss/"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.dailymail.co.uk/news/index.rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://rss.feedsportal.com/c/266/f/3503/index.rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://rss.feedsportal.com/c/266/f/3496/index.rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/daily-express-uk-news"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.standard.co.uk/news/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.manchestereveningnews.co.uk/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.itv.com/news/index.rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.thecourier.co.uk/cmlink/1.67998"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/ScottishNewsHeraldScotland"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.channel4.com/news/uk/rss"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.scotsman.com/rss/cmlink/1.65668"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.newsletter.co.uk/rss/cmlink/1.1571541"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://feeds.examiner.ie/ietopstories"
+    },
+    {
+      "country": "GB",
+      "category": "general",
+      "rss_url": "http://www.irishtimes.com/rss/editors-picks-feed-1.1904962?localLinksEnabled=false"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://www.abc.net.au/news/feed/46182/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/TheAustralianTheNationNews"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.smh.com.au/rssheadlines/national.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://www.theguardian.com/au/rss"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://www.abc.net.au/local/rss/sydney/news.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://www.channelnewsasia.com/starterkit/servlet/cna/rss/asiapacific.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.brisbanetimes.com.au/rssheadlines/national.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.brisbanetimes.com.au/rssheadlines/world.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.theage.com.au/rssheadlines/national.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://au.ibtimes.com/rss/articles/countries/13.rss"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://rss.nzherald.co.nz/rss/xml/nzhrsscid_000000002.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://www.gmanetwork.com/news/rss/news"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.bbci.co.uk/news/world/asia/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://www.dailymail.co.uk/auhome/index.rss"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.feedburner.com/dailytelegraphnationalnewsndm?format=xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.news.com.au/public/rss/2.0/bcm_top_stories_257.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.news.com.au/public/rss/2.0/anow_topstories_250.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.news.com.au/heraldsun/rss/heraldsun_news_morenews_2794.xml"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.news.com.au/public/rss/2.0/"
+    },
+    {
+      "country": "AU",
+      "category": "general",
+      "rss_url": "http://feeds.news.com.au/public/rss/2.0/wtn_top_3368.xml"
+    }
+  ]
+}

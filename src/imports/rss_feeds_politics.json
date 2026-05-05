@@ -1,0 +1,631 @@
+{
+  "category": "politics",
+  "total_feeds": 125,
+  "feeds": [
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.politico.com/rss/magazine.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.politico.com/rss/Top10Blogs.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.com/feeds/verticals/politics/index.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://rss.cnn.com/rss/cnn_allpolitics.rss"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.buzzfeed.com/politics.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.nbcnews.com/feeds/nbcpolitics"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.foxnews.com/foxnews/politics"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.washingtonpost.com/rss/rss_election-2012"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://rss.nytimes.com/services/xml/rss/nyt/Upshot.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://thecaucus.blogs.nytimes.com/feed/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.reuters.com/Reuters/PoliticsNews"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://blogs.wsj.com/washwire/feed/?mod=WSJ_Politics%2520and%2520Policy"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.reddit.com/r/politics/.rss"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.dailykos.com/dailykos/index.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.npr.org/rss/rss.php?id=1014"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.npr.org/rss/rss.php?id=5"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.rollcall.com/rss/all_news.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.rollcall.com/news/?zkDo=showRSS"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.rollcall.com/politics/archives/?zkDo=showRSS"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.rollcall.com/policy/archives/?zkDo=showRSS"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.nationaljournal.com/?rss=1"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.nationaljournal.com/white-house?rss=1"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.nationaljournal.com/congress?rss=1"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.nationaljournal.com/politics?rss=1"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.nationaljournal.com/congressional-connection?rss=1"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.thenation.com/rss/articles"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.thenation.com/blogs/rss/politics"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.thenation.com/blogs/rss/foreign-reporting"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.washingtontimes.com/rss/headlines/news/politics/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/realclearpolitics/qlMj"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/BreitbartFeed"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://dailycaller.com/section/politics/feed/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "https://www.nationalreview.com/rss.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/DrudgeReportFeed"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.weeklystandard.com/rss/site.xml"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.usnews.com/blogrss/washington-whispers"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.usnews.com/blogrss/Ken-Walshs-Washington"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.usnews.com/blogrss/ballot-2014"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.slate.com/slate-101526"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/motherjones/Politics"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.newrepublic.com/taxonomy/term/17538/feed"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://fivethirtyeight.com/politics/feed/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://www.redstate.com/feed/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://humanevents.com/feed/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://twitchy.com/category/us-politics/feed/"
+    },
+    {
+      "country": "US",
+      "category": "politics",
+      "rss_url": "http://talkingpointsmemo.com/feed/all"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.ca/feeds/verticals/canada-politics/index.xml"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://backofthebook.ca/feed/rss/"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://rss.radio-canada.ca/fils/nouvelles/politique.xml"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/rabble-news?format=xml"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.hilltimes.com/feed"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.theglobeandmail.com/news/politics/?service=rss"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://rss.cbc.ca/lineup/politics.xml"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.ctvnews.ca/rss/ctvnews-ca-politics-public-rss-1.822302"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://globalnews.ca/politics/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://globalnews.ca/politics/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.economist.com/topics/canadian-politics/index.xml"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.thestar.com/feeds.blogs.news.politics_blog.rss"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.thestar.com/feeds.articles.news.canada.rss"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://www.macleans.ca/author/inklesswells/feed/"
+    },
+    {
+      "country": "CA",
+      "category": "politics",
+      "rss_url": "http://topics.nytimes.com/top/news/international/countriesandterritories/canada/"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.telegraphindia.com/feeds/rss.jsp?id=4"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://sify.com/rss2/news/article/category/politics"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.thehindu.com/news/national/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.thehindu.com/news/international/south-asia/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.thehindu.com/news/cities/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "https://in.news.yahoo.com/rss/politics"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "https://in.news.yahoo.com/rss/national"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/politics/politics.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/politics/elections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/shows/facethenation.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/delhielections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/chhattisgarhelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/loksabhaelections/loksabhaelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/madhyapradeshelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/rajasthanelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/mizoramelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/haryanaelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/maharashtraelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/odishaelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/andhrapradeshelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://ibnlive.in.com/ibnrss/rss/elections/sikkimelections.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://inp.sagepub.com/rss/current.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://indianexpress.com/section/india/politics/feed/"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://timesofindia.feedsportal.com/c/33039/f/533916/index.rss"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.ft.com/rss/world/asiapacific/india"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.firstpost.com/politics/feed"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.frontline.in/politics/?service=rss"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.economist.com/topics/india/index.xml"
+    },
+    {
+      "country": "IN",
+      "category": "politics",
+      "rss_url": "http://www.livemint.com/rss/economy_politics"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://feeds.skynews.com/feeds/rss/politics.xml"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.ft.com/rss/world/uk/politics"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.scotsman.com.dynamic.feedsportal.com/pf/610141/www.scotsman.com/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.independent.co.uk/news/people/diary/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://feeds.bbci.co.uk/news/politics/rss.xml"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://feeds.theguardian.com/theguardian/politics/rss"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.telegraph.co.uk/news/politics/rss"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://mf.feeds.reuters.com/reuters/UKdomesticNews"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.economist.com/blogs/blighty/index.xml"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.economist.com/feeds/print-sections/76/britain.xml"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.economist.com/topics/european-union/index.xml"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/british-national-party/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/london-riots/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.com/tag/uk-election/feed"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/immigration/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/islam/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/media/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/terrorism/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/space-agency/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.huffingtonpost.co.uk/news/economy/feed/"
+    },
+    {
+      "country": "GB",
+      "category": "politics",
+      "rss_url": "http://www.standard.co.uk/news/politics/rss"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/TheAustralianPolitics"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://feeds.news.com.au/public/rss/2.0/au_national_affairs_news_13_3296.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://feeds.feedburner.com/TheAustralianMediaNews"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.businessspectator.com.au/bs/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.abc.net.au/news/feed/1534/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.abc.net.au/radionational/feed/3727018/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.abc.net.au/radionational/feed/2884582/rss.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.pm.gov.au/rss-feeds/press-office"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.rba.gov.au/rss/rss-cb-media-releases.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.crikey.com.au/politics/feed"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.economist.com/topics/australia/index.xml"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://www.theguardian.com/world/australian-politics/rss"
+    },
+    {
+      "country": "AU",
+      "category": "politics",
+      "rss_url": "http://mashable.com/category/australian-politics/rss/"
+    }
+  ]
+}
