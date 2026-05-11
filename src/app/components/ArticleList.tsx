@@ -1,19 +1,31 @@
 import { Star, CheckCheck, RefreshCw, Filter, LayoutGrid, List, Newspaper, Share2, MoreHorizontal, Clock, ArrowDownAZ, ArrowUpZA, Calendar, Inbox } from "lucide-react";
 import { useMemo, useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { Article } from "../data";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Button, Badge, SegmentedControl, EmptyState, SkeletonRow } from "./kian";
 
-const ROW_H = 64;
+const listContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.018, delayChildren: 0.04 } },
+};
+const listItem = {
+  hidden: { opacity: 0, y: 6 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.24, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const ROW_H = 68;
 const VIRT_THRESHOLD = 80;
 
 export type SortMode = 'newest' | 'oldest' | 'source';
+type ViewMode = 'cards' | 'list' | 'magazine';
 
 type Props = {
   articles: Article[];
   selectedId: string | null;
   setSelectedId: (id: string) => void;
-  viewMode: 'cards' | 'list' | 'magazine';
-  setViewMode: (v: 'cards' | 'list' | 'magazine') => void;
+  viewMode: ViewMode;
+  setViewMode: (v: ViewMode) => void;
   title: string;
   toggleStar: (id: string) => void;
   sortMode?: SortMode;
@@ -28,7 +40,10 @@ function parseDate(s: string): number {
   return isNaN(t) ? 0 : t;
 }
 
-export function ArticleList({ articles, selectedId, setSelectedId, viewMode, setViewMode, title, toggleStar, sortMode = 'newest', setSortMode, onRefresh, onMarkAllRead, loading }: Props) {
+export function ArticleList({
+  articles, selectedId, setSelectedId, viewMode, setViewMode, title,
+  toggleStar, sortMode = 'newest', setSortMode, onRefresh, onMarkAllRead, loading,
+}: Props) {
   const sorted = useMemo(() => {
     const arr = [...articles];
     if (sortMode === 'newest') arr.sort((a, b) => parseDate(b.date) - parseDate(a.date));
@@ -80,210 +95,203 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
   const nextSort: SortMode = sortMode === 'newest' ? 'oldest' : sortMode === 'oldest' ? 'source' : 'newest';
   const sortLabel = sortMode === 'newest' ? 'جدیدترین' : sortMode === 'oldest' ? 'قدیمی‌ترین' : 'بر اساس منبع';
   const isEmpty = !loading && sorted.length === 0;
+
   return (
-    <div className="flex-1 flex flex-col bg-white dark:bg-slate-950 min-w-0 min-h-0 h-full">
-      <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center gap-2 sticky top-0 bg-white dark:bg-slate-950 z-10">
-        <h2 className="flex-1">{title} <span className="text-slate-500 text-sm">({sorted.length} مقاله)</span></h2>
-        <button onClick={onRefresh} disabled={loading} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg disabled:opacity-50" title="بروزرسانی">
-          <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-        </button>
-        <button onClick={onMarkAllRead} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="علامت‌گذاری همه به عنوان خوانده شده">
-          <CheckCheck className="w-4 h-4" />
-        </button>
-        <button
-          onClick={() => setSortMode?.(nextSort)}
-          className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg flex items-center gap-1 text-xs"
-          title={`ترتیب: ${sortLabel}`}
-        >
-          <SortIcon className="w-4 h-4" />
-        </button>
-        <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="فیلتر">
-          <Filter className="w-4 h-4" />
-        </button>
-        <div className="w-px h-6 bg-slate-200 dark:bg-slate-700 mx-1"></div>
-        <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5">
-          <button onClick={() => setViewMode('cards')} className={`p-1.5 rounded ${viewMode === 'cards' ? 'bg-white dark:bg-slate-700 shadow-sm' : ''}`} title="کارت‌ها">
-            <LayoutGrid className="w-4 h-4" />
-          </button>
-          <button onClick={() => setViewMode('list')} className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white dark:bg-slate-700 shadow-sm' : ''}`} title="لیست">
-            <List className="w-4 h-4" />
-          </button>
-          <button onClick={() => setViewMode('magazine')} className={`p-1.5 rounded ${viewMode === 'magazine' ? 'bg-white dark:bg-slate-700 shadow-sm' : ''}`} title="مجله">
-            <Newspaper className="w-4 h-4" />
-          </button>
+    <div className="flex-1 flex flex-col bg-[var(--background)] text-[var(--foreground)] min-w-0 min-h-0 h-full">
+      <header className="border-b border-[var(--border)] px-6 py-3 flex items-center gap-2 sticky top-0 z-[var(--z-sticky)]
+                         bg-[var(--background)]/85 backdrop-blur supports-[backdrop-filter]:bg-[var(--background)]/70">
+        <div className="flex-1 flex items-baseline gap-2 min-w-0">
+          <h2 className="text-display text-[17px] font-semibold tracking-tight truncate">{title}</h2>
+          <Badge tone="neutral" variant="soft" size="xs">{sorted.length.toLocaleString("fa-IR")}</Badge>
         </div>
-        <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
-          <Share2 className="w-4 h-4" />
-        </button>
-        <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
-          <MoreHorizontal className="w-4 h-4" />
-        </button>
-      </div>
+
+        <Button variant="ghost" size="sm" onClick={onRefresh} disabled={loading} title="بروزرسانی"
+          iconLeading={<RefreshCw className={`size-4 ${loading ? 'animate-spin' : ''}`} />} />
+        <Button variant="ghost" size="sm" onClick={onMarkAllRead} title="علامت‌گذاری همه به عنوان خوانده شده"
+          iconLeading={<CheckCheck className="size-4" />} />
+        <Button variant="ghost" size="sm" onClick={() => setSortMode?.(nextSort)} title={`ترتیب: ${sortLabel}`}
+          iconLeading={<SortIcon className="size-4" />} />
+        <Button variant="ghost" size="sm" title="فیلتر" iconLeading={<Filter className="size-4" />} />
+
+        <div className="w-px h-6 bg-[var(--border)] mx-1" />
+
+        <SegmentedControl<ViewMode>
+          value={viewMode}
+          onChange={setViewMode}
+          items={[
+            { value: 'list',     label: 'لیست',  icon: <List className="size-3" /> },
+            { value: 'cards',    label: 'کارت',  icon: <LayoutGrid className="size-3" /> },
+            { value: 'magazine', label: 'مجله',  icon: <Newspaper className="size-3" /> },
+          ]}
+        />
+
+        <Button variant="ghost" size="sm" iconLeading={<Share2 className="size-4" />} />
+        <Button variant="ghost" size="sm" iconLeading={<MoreHorizontal className="size-4" />} />
+      </header>
 
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto">
         {loading && articles.length === 0 && (
-          <div className="divide-y divide-slate-200 dark:divide-slate-800">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="px-6 py-3 flex items-start gap-3 animate-pulse">
-                <div className="w-2 h-2 rounded-full mt-2 bg-slate-300 dark:bg-slate-700"></div>
-                <div className="flex-1 space-y-2">
-                  <div className="h-3 w-40 bg-slate-200 dark:bg-slate-800 rounded"></div>
-                  <div className="h-4 w-3/4 bg-slate-200 dark:bg-slate-800 rounded"></div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <div>{Array.from({ length: 8 }).map((_, i) => <SkeletonRow key={i} />)}</div>
         )}
 
         {isEmpty && (
-          <div className="p-12 text-center text-slate-500 flex flex-col items-center gap-3">
-            <Inbox className="w-12 h-12 text-slate-300 dark:text-slate-700" />
-            <div>مقاله‌ای یافت نشد</div>
-            <div className="text-xs">خوراک اضافه کنید یا فیلترها را تغییر دهید</div>
-          </div>
+          <EmptyState
+            size="lg"
+            icon={<Inbox className="size-full" />}
+            title="مقاله‌ای یافت نشد"
+            description="یک خوراک اضافه کنید یا فیلترها را برای دیدن نتایج تغییر دهید."
+          />
         )}
 
         {viewMode === 'list' && (
           virtualize ? (
             <div style={{ height: sorted.length * ROW_H, position: 'relative' }}>
-              <div className="divide-y divide-slate-200 dark:divide-slate-800 absolute left-0 right-0" style={{ top: vRange.start * ROW_H }}>
+              <div className="absolute left-0 right-0" style={{ top: vRange.start * ROW_H }}>
                 {sorted.slice(vRange.start, vRange.end).map(a => (
-                  <div
-                    key={a.id}
-                    role="button"
-                    tabIndex={0}
+                  <ListRow key={a.id} a={a} selected={selectedId === a.id} h={ROW_H}
                     onClick={() => setSelectedId(a.id)}
-                    style={{ height: ROW_H }}
-                    data-aid={a.id}
-                    className={`topic-row cursor-pointer w-full px-6 flex items-center gap-3 text-right hover:bg-slate-50 dark:hover:bg-slate-900 ${selectedId === a.id ? 'bg-blue-50 dark:bg-blue-950/30' : ''} ${a.read ? 'opacity-60' : ''}`}
-                  >
-                    <div className={`w-2 h-2 rounded-full shrink-0 ${a.read ? 'bg-transparent' : 'bg-blue-500'}`}></div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
-                        <span>{a.sourceIcon}</span>
-                        <span className="truncate max-w-[120px]">{a.source}</span>
-                        <span>•</span>
-                        <span className="truncate max-w-[140px]">{a.date}</span>
-                        <span>•</span>
-                        <Clock className="w-3 h-3" />
-                        <span>{a.readTime}</span>
-                      </div>
-                      <div className="truncate">{a.title}</div>
-                    </div>
-                    <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }} className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded">
-                      <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
-                    </button>
-                  </div>
+                    onStar={() => toggleStar(a.id)} />
                 ))}
               </div>
             </div>
           ) : (
-            <div className="divide-y divide-slate-200 dark:divide-slate-800">
+            <motion.div variants={listContainer} initial="hidden" animate="show">
               {sorted.map(a => (
-                <div
-                  key={a.id}
-                  ref={selectedId === a.id ? selectedRef : undefined}
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => setSelectedId(a.id)}
-                  data-aid={a.id}
-                  className={`topic-row cursor-pointer w-full px-6 py-3 flex items-start gap-3 text-right hover:bg-slate-50 dark:hover:bg-slate-900 ${selectedId === a.id ? 'bg-blue-50 dark:bg-blue-950/30' : ''} ${a.read ? 'opacity-60' : ''}`}
-                >
-                  <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${a.read ? 'bg-transparent' : 'bg-blue-500'}`}></div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
-                      <span>{a.sourceIcon}</span>
-                      <span>{a.source}</span>
-                      <span>•</span>
-                      <span>{a.date}</span>
-                      <span>•</span>
-                      <Clock className="w-3 h-3" />
-                      <span>{a.readTime}</span>
-                    </div>
-                    <div className="truncate">{a.title}</div>
-                  </div>
-                  <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }} className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded">
-                    <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
-                  </button>
-                </div>
+                <motion.div key={a.id} variants={listItem}>
+                  <ListRow a={a} selected={selectedId === a.id}
+                    refEl={selectedId === a.id ? selectedRef : undefined}
+                    onClick={() => setSelectedId(a.id)}
+                    onStar={() => toggleStar(a.id)} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           )
         )}
 
         {viewMode === 'cards' && (
-          <div className="p-6 grid gap-4 grid-cols-1 lg:grid-cols-2">
+          <motion.div variants={listContainer} initial="hidden" animate="show"
+            className="p-6 grid gap-5 grid-cols-1 lg:grid-cols-2">
             {sorted.map(a => (
-              <article
-                key={a.id}
-                data-aid={a.id}
-                onClick={() => setSelectedId(a.id)}
-                className={`topic-row cursor-pointer bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-lg transition ${selectedId === a.id ? 'ring-2 ring-blue-500' : ''} ${a.read ? 'opacity-70' : ''}`}
-              >
+              <motion.article variants={listItem} key={a.id} data-aid={a.id} onClick={() => setSelectedId(a.id)}
+                className={`topic-row cursor-pointer surface rounded-[var(--radius-xl)] overflow-hidden
+                            transition-[transform,box-shadow,border-color] duration-[var(--duration-normal)] ease-[var(--ease-out-quart)]
+                            hover:-translate-y-0.5 hover:shadow-[var(--shadow-lg)] hover:border-[var(--border-strong)]
+                            ${selectedId === a.id ? 'ring-2 ring-[var(--brand-500)]' : ''} ${a.read ? 'opacity-70' : ''}`}>
                 {a.image && (
-                  <div className="h-44 overflow-hidden bg-slate-100 dark:bg-slate-800">
-                    <ImageWithFallback src={a.image} alt={a.title} className="w-full h-full object-cover" />
+                  <div className="h-44 overflow-hidden bg-[var(--muted)]">
+                    <ImageWithFallback src={a.image} alt={a.title}
+                      className="w-full h-full object-cover transition-transform duration-[var(--duration-slow)] hover:scale-[1.03]" />
                   </div>
                 )}
                 <div className="p-4">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                  <div className="flex items-center gap-2 text-[11px] text-[var(--foreground-subtle)] mb-2">
                     <span>{a.sourceIcon}</span>
-                    <span>{a.source}</span>
-                    <span>•</span>
-                    <span>{a.date}</span>
+                    <span className="font-medium text-[var(--foreground-muted)]">{a.source}</span>
+                    <span className="text-[var(--border-strong)]">·</span>
+                    <span className="tabular-nums">{a.date}</span>
                   </div>
-                  <h3 className="mb-2 line-clamp-2">{a.title}</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-3 mb-3">{a.preview}</p>
-                  <div className="flex items-center justify-between text-xs text-slate-500">
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {a.readTime}
-                    </div>
-                    <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }}>
-                      <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
+                  <h3 className="text-display text-[16px] font-semibold leading-snug mb-2 line-clamp-2 tracking-tight">{a.title}</h3>
+                  <p className="text-[13px] text-[var(--foreground-muted)] line-clamp-3 mb-3 leading-relaxed">{a.preview}</p>
+                  <div className="flex items-center justify-between text-[11px] text-[var(--foreground-subtle)]">
+                    <span className="flex items-center gap-1 tabular-nums">
+                      <Clock className="size-3" /> {a.readTime}
+                    </span>
+                    <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }}
+                      className="p-1 -m-1 rounded hover:bg-[var(--accent)] transition">
+                      <Star className={`size-4 ${a.starred ? 'fill-[var(--warning-500)] text-[var(--warning-500)]' : 'text-[var(--foreground-subtle)]'}`} />
                     </button>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         )}
 
         {viewMode === 'magazine' && (
-          <div className="p-6 space-y-6">
+          <motion.div variants={listContainer} initial="hidden" animate="show"
+            className="p-6 space-y-6 max-w-3xl mx-auto">
             {sorted.map(a => (
-              <article
-                key={a.id}
-                data-aid={a.id}
-                onClick={() => setSelectedId(a.id)}
-                className={`topic-row cursor-pointer flex gap-4 pb-6 border-b border-slate-200 dark:border-slate-800 ${a.read ? 'opacity-70' : ''}`}
-              >
+              <motion.article variants={listItem} key={a.id} data-aid={a.id} onClick={() => setSelectedId(a.id)}
+                className={`topic-row cursor-pointer flex gap-5 pb-6 border-b border-[var(--border-subtle)]
+                            transition-opacity duration-[var(--duration-fast)]
+                            ${a.read ? 'opacity-65 hover:opacity-100' : ''}`}>
                 {a.image && (
-                  <div className="w-48 h-32 shrink-0 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800">
-                    <ImageWithFallback src={a.image} alt={a.title} className="w-full h-full object-cover" />
+                  <div className="w-52 h-36 shrink-0 rounded-[var(--radius-lg)] overflow-hidden bg-[var(--muted)] ring-1 ring-[var(--border-subtle)]">
+                    <ImageWithFallback src={a.image} alt={a.title}
+                      className="w-full h-full object-cover transition-transform duration-[var(--duration-slow)] hover:scale-[1.03]" />
                   </div>
                 )}
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
-                    <span>{a.sourceIcon} {a.source}</span>
-                    <span>•</span>
+                  <div className="flex items-center gap-2 text-[11px] text-[var(--foreground-subtle)] mb-2">
+                    <span className="font-medium text-[var(--foreground-muted)]">{a.sourceIcon} {a.source}</span>
+                    <span className="text-[var(--border-strong)]">·</span>
                     <span>{a.author}</span>
-                    <span>•</span>
-                    <span>{a.date}</span>
+                    <span className="text-[var(--border-strong)]">·</span>
+                    <span className="tabular-nums">{a.date}</span>
                   </div>
-                  <h3 className="mb-2">{a.title}</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-2">{a.preview}</p>
-                  <div className="flex items-center gap-3 text-xs text-slate-500">
-                    <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {a.readTime}</span>
+                  <h3 className="text-display text-[20px] font-semibold leading-tight mb-2 tracking-tight">{a.title}</h3>
+                  <p className="text-[13.5px] text-[var(--foreground-muted)] line-clamp-2 mb-3 leading-relaxed">{a.preview}</p>
+                  <div className="flex items-center gap-4 text-[11px] text-[var(--foreground-subtle)]">
+                    <span className="flex items-center gap-1 tabular-nums">
+                      <Clock className="size-3" /> {a.readTime}
+                    </span>
                     <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }}>
-                      <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : ''}`} />
+                      <Star className={`size-4 ${a.starred ? 'fill-[var(--warning-500)] text-[var(--warning-500)]' : 'text-[var(--foreground-subtle)]'}`} />
                     </button>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         )}
       </div>
+    </div>
+  );
+}
+
+/* ── Internal: list-row variant (editorial dense) ────────────────── */
+
+function ListRow({ a, selected, h, onClick, onStar, refEl }: {
+  a: Article;
+  selected: boolean;
+  h?: number;
+  onClick: () => void;
+  onStar: () => void;
+  refEl?: React.Ref<HTMLDivElement>;
+}) {
+  return (
+    <div
+      ref={refEl as any}
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      data-aid={a.id}
+      style={h ? { height: h } : undefined}
+      className={`topic-row group cursor-pointer w-full px-6 py-3 flex items-start gap-3 text-right
+                  border-b border-[var(--border-subtle)]
+                  transition-colors duration-[var(--duration-fast)]
+                  hover:bg-[var(--background-subtle)]
+                  ${selected ? 'bg-[var(--brand-50)] dark:bg-[oklch(0.30_0.10_258_/_0.4)]' : ''}
+                  ${a.read ? 'opacity-65 hover:opacity-100' : ''}`}>
+      <div className={`size-1.5 rounded-full mt-2.5 shrink-0 ${a.read ? 'bg-transparent' : 'bg-[var(--brand-500)] shadow-[0_0_8px_var(--brand-500)]'}`} />
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 text-[11px] text-[var(--foreground-subtle)] mb-1">
+          <span>{a.sourceIcon}</span>
+          <span className="truncate max-w-[140px] font-medium text-[var(--foreground-muted)]">{a.source}</span>
+          <span className="text-[var(--border-strong)]">·</span>
+          <span className="truncate max-w-[160px] tabular-nums">{a.date}</span>
+          <span className="text-[var(--border-strong)]">·</span>
+          <span className="flex items-center gap-0.5 tabular-nums"><Clock className="size-3" />{a.readTime}</span>
+        </div>
+        <div className={`truncate text-[13.5px] leading-snug ${selected ? 'font-semibold' : 'font-normal'}
+                         group-hover:text-[var(--brand-600)] dark:group-hover:text-[var(--brand-300)] transition-colors`}>
+          {a.title}
+        </div>
+      </div>
+      <button onClick={(e) => { e.stopPropagation(); onStar(); }}
+        className="p-1 -m-1 rounded hover:bg-[var(--accent)] transition">
+        <Star className={`size-4 ${a.starred ? 'fill-[var(--warning-500)] text-[var(--warning-500)]' : 'text-[var(--foreground-subtle)]'}`} />
+      </button>
     </div>
   );
 }

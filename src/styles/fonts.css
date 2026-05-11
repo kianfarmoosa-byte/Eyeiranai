@@ -1,5 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+/* ────────────────────────────────────────────────────────────────────
+   Typography Foundation — Editorial × Terminal hybrid
+   - Vazirmatn  : UI base (Persian + Latin) — multilingual workhorse
+   - Estedad    : Display / headlines — modern Persian with editorial weight
+   - Geist Mono : Tabular numerics, codes, technical data
+   - Inter      : Latin fallback for English-only contexts
+   ──────────────────────────────────────────────────────────────────── */
 
-body, html {
-  font-family: 'Vazirmatn', system-ui, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdn.jsdelivr.net/gh/aminroosta/estedad@latest/Estedad-FD/Estedad-FD.css');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-sans: 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Estedad', 'Vazirmatn', 'Inter', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+html, body {
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11", "tnum";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Persian text needs ~1.75 line-height for visual breathing; Latin gets tighter. */
+[dir="rtl"], html[lang="fa"] {
+  line-height: 1.75;
+  font-feature-settings: "ss01", "cv11", "kern", "calt";
+}
+
+/* Tabular nums for any class explicitly meant to align numerically. */
+.tabular-nums, .num, [class*="tabular-nums"] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum", "ss01";
+}
+
+/* Display headings (h1/h2 with `.display` opt-in) get Estedad. */
+.display, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.font-mono, code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum", "zero", "ss01";
 }

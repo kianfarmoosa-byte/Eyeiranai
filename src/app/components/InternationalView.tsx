@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Globe2, Loader2, Plus, Check, Filter, EyeOff, Eye, ArrowDown, ArrowUp } from "lucide-react";
+import { Globe2, Loader2, Plus, Check, Filter, EyeOff, Eye, ArrowDown, ArrowUp, Rss, Radar } from "lucide-react";
 import type { Article } from "../data";
 import { INTL_FEEDS, type IntlFeed } from "../internationalFeeds";
 import { api } from "../api";
 import { ArticleList } from "./ArticleList";
 import type { SortMode } from "./ArticleList";
+import { GdeltExplorer } from "./GdeltExplorer";
 
 type Props = {
   onSelectArticle: (a: Article) => void;
@@ -40,6 +41,7 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
   const [importedCount, setImportedCount] = useState<number | null>(null);
   const [registeredCount, setRegisteredCount] = useState(0);
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
+  const [activeTab, setActiveTab] = useState<"feeds" | "gdelt">("feeds");
   const scrollWrapRef = useRef<HTMLDivElement>(null);
   const [scroll, setScroll] = useState({ pct: 0, atTop: true, atBottom: false, visibleFrom: 0, visibleTo: 0 });
 
@@ -238,11 +240,37 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
     );
   }
 
+  if (activeTab === "gdelt") {
+    return (
+      <div className="flex-1 flex flex-col min-w-0 min-h-0 h-full">
+        <div className="border-b border-slate-200 dark:border-slate-800 px-4 py-2 bg-white dark:bg-slate-950 z-20 shrink-0 flex items-center gap-1">
+          <button onClick={() => setActiveTab("feeds")}
+            className="text-[11px] px-2.5 py-1 rounded-full border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 flex items-center gap-1">
+            <Rss className="w-3 h-3" /> فیدها
+          </button>
+          <button onClick={() => setActiveTab("gdelt")}
+            className="text-[11px] px-2.5 py-1 rounded-full border bg-violet-600 text-white border-violet-600 flex items-center gap-1">
+            <Radar className="w-3 h-3" /> GDELT
+          </button>
+        </div>
+        <GdeltExplorer />
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 flex flex-col min-w-0 min-h-0 h-full">
       <div className="border-b border-slate-200 dark:border-slate-800 px-4 py-2.5 bg-white dark:bg-slate-950 z-20 shrink-0">
         <div className="flex items-center gap-2 mb-2">
           <Globe2 className="w-4 h-4 text-cyan-600" />
+          <button onClick={() => setActiveTab("feeds")}
+            className="text-[11px] px-2 py-0.5 rounded-full border bg-cyan-600 text-white border-cyan-600 flex items-center gap-1">
+            <Rss className="w-3 h-3" /> فیدها
+          </button>
+          <button onClick={() => setActiveTab("gdelt")}
+            className="text-[11px] px-2 py-0.5 rounded-full border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 flex items-center gap-1">
+            <Radar className="w-3 h-3" /> GDELT
+          </button>
           <div className="text-xs text-slate-500 flex items-center gap-2">
             <span>{articles.length.toLocaleString("fa-IR")} مقاله از {registeredCount.toLocaleString("fa-IR")}/{totalAvailable.toLocaleString("fa-IR")} منبع</span>
             {progress && progress.total > 0 && (

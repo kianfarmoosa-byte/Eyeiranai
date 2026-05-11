@@ -3,10 +3,19 @@ import { cors } from "npm:hono/cors";
 import { logger } from "npm:hono/logger";
 import { XMLParser } from "npm:fast-xml-parser";
 import * as kv from "./kv_store.tsx";
+import { gdelt } from "./gdelt.tsx";
 
 const app = new Hono();
 
 app.use("*", logger(console.log));
+app.onError((err, c) => {
+  console.log("server onError:", err);
+  const path = c.req.path || "";
+  if (path.includes("/gdelt/")) {
+    return c.json({ articles: [], error: String(err?.message || err) }, 200);
+  }
+  return c.json({ error: String(err?.message || err) }, 500);
+});
 app.use(
   "/*",
   cors({
@@ -47,6 +56,8 @@ function applyRules(item: any, rules: TagRule[]): string[] {
 }
 
 app.get(`${BASE}/health`, (c) => c.json({ status: "ok" }));
+
+app.route(`${BASE}/gdelt`, gdelt);
 
 function stripHtml(html: string): string {
   if (!html) return "";

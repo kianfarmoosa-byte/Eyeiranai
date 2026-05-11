@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { DensityProvider, SkeletonStyles, PageIndicator } from "./components/kian";
 import { Sidebar } from "./components/Sidebar";
 import { ArticleList } from "./components/ArticleList";
 import { ArticleView } from "./components/ArticleView";
@@ -485,6 +486,10 @@ export default function App() {
   const closeMobileDrawer = () => setMobileDrawer(false);
 
   return (
+    <>
+    <DensityProvider />
+    <SkeletonStyles />
+    <PageIndicator loading={loading || searching} />
     <div dir="rtl" lang="fa" className="size-full flex bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden relative">
       <div className="md:hidden fixed top-0 right-0 left-0 z-30 flex items-center gap-2 px-3 h-12 bg-white/90 dark:bg-slate-950/90 backdrop-blur border-b border-slate-200 dark:border-slate-800">
         <button onClick={() => setMobileDrawer(true)} className="p-2 -mr-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="منو">
@@ -688,5 +693,6 @@ export default function App() {
         </div>
       )}
     </div>
+    </>
   );
 }
