@@ -1,0 +1,204 @@
+/* ────────────────────────────────────────────────────────────────────
+   Mobile-only tokens, primitives, and utilities.
+   Loaded after theme.css.
+   ──────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Native-feel sizing */
+  --tap-min: 44px;                 /* Apple HIG minimum tap target */
+  --topbar-h: 56px;
+  --bottomnav-h: 56px;
+  --fab-size: 56px;
+
+  /* Sheets */
+  --sheet-radius: 20px;
+  --sheet-handle-w: 40px;
+  --sheet-handle-h: 5px;
+  --sheet-shadow: 0 -12px 40px rgba(0, 0, 0, 0.25), 0 -2px 6px rgba(0, 0, 0, 0.1);
+
+  /* iOS-native easing curves */
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-ios-spring: cubic-bezier(0.5, 1.5, 0.5, 1);
+  --duration-sheet: 320ms;
+  --duration-page: 280ms;
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Z-stack for mobile chrome */
+  --z-mobile-topbar: 30;
+  --z-mobile-bottomnav: 30;
+  --z-mobile-fab: 35;
+  --z-mobile-sheet: 80;
+  --z-mobile-reader: 90;
+  --z-mobile-search: 95;
+  --z-mobile-toast: 110;
+}
+
+/* Mobile-default: tighter type, slightly larger tap targets */
+@media (max-width: 767px) {
+  html {
+    /* Avoid font-size adjust on rotation (iOS) */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    /* Prevent rubber-band on body but allow inside scroll containers */
+    overscroll-behavior-y: none;
+  }
+
+  /* ── Mobile: strict Blue + White palette ─────────────────────
+     Override the global tokens to a clean two-color system: pure
+     white surfaces and a single blue scale for accents. */
+  :root, .light, [data-theme="light"] {
+    --brand-50:  oklch(0.975 0.020 240);
+    --brand-100: oklch(0.940 0.045 240);
+    --brand-200: oklch(0.870 0.090 240);
+    --brand-300: oklch(0.770 0.140 240);
+    --brand-400: oklch(0.650 0.180 240);
+    --brand-500: oklch(0.560 0.210 240); /* primary */
+    --brand-600: oklch(0.470 0.215 240);
+    --brand-700: oklch(0.380 0.180 240);
+    --brand-800: oklch(0.300 0.130 240);
+    --brand-900: oklch(0.220 0.080 240);
+
+    --background:        #ffffff;
+    --background-subtle: oklch(0.985 0.005 240);
+    --background-muted:  oklch(0.965 0.010 240);
+    --card:              #ffffff;
+    --surface:           #ffffff;
+    --foreground:        oklch(0.18 0.020 240);
+    --foreground-muted:  oklch(0.45 0.020 240);
+    --foreground-subtle: oklch(0.60 0.018 240);
+    --accent:            oklch(0.955 0.020 240);
+    --border-subtle:     oklch(0.94 0.012 240);
+    --border-strong:     oklch(0.86 0.020 240);
+    --primary:           var(--brand-600);
+    --primary-hover:     var(--brand-700);
+  }
+
+  .dark, [data-theme="dark"] {
+    --brand-400: oklch(0.700 0.180 240);
+    --brand-500: oklch(0.620 0.210 240);
+    --brand-600: oklch(0.520 0.215 240);
+
+    --background:        oklch(0.13 0.020 240);
+    --background-subtle: oklch(0.16 0.020 240);
+    --background-muted:  oklch(0.20 0.022 240);
+    --card:              oklch(0.17 0.022 240);
+    --surface:           oklch(0.17 0.022 240);
+    --foreground:        oklch(0.97 0.010 240);
+    --foreground-muted:  oklch(0.72 0.015 240);
+    --foreground-subtle: oklch(0.55 0.018 240);
+    --accent:            oklch(0.24 0.025 240);
+    --border-subtle:     oklch(0.26 0.020 240);
+    --border-strong:     oklch(0.36 0.025 240);
+    --primary:           var(--brand-400);
+    --primary-hover:     var(--brand-300);
+  }
+}
+
+/* ── Mobile-only utilities ─────────────────────────────────── */
+@layer utilities {
+  /* Tap response — kills 300ms delay + ripples */
+  .tap            { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+
+  /* Native press feedback */
+  .press          { transition: transform 120ms var(--ease-out-quart), background-color 120ms; }
+  .press:active   { transform: scale(0.96); }
+
+  /* Safe-area paddings */
+  .pt-safe        { padding-top: var(--safe-top); }
+  .pb-safe        { padding-bottom: var(--safe-bottom); }
+  .pl-safe        { padding-left: var(--safe-left); }
+  .pr-safe        { padding-right: var(--safe-right); }
+  .pb-safe-nav    { padding-bottom: calc(var(--bottomnav-h) + var(--safe-bottom)); }
+  .pt-safe-bar    { padding-top: calc(var(--topbar-h) + var(--safe-top)); }
+
+  /* Dynamic viewport-safe sizing */
+  .h-dscreen      { height: 100dvh; }
+  .min-h-dscreen  { min-height: 100dvh; }
+
+  /* Hide scrollbar but keep scroll (for horizontal snap rails) */
+  .scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+
+  /* Sheet animations */
+  .sheet-enter        { transform: translateY(100%); }
+  .sheet-enter-active { transform: translateY(0); transition: transform var(--duration-sheet) var(--ease-ios); }
+  .sheet-exit         { transform: translateY(0); }
+  .sheet-exit-active  { transform: translateY(100%); transition: transform var(--duration-sheet) var(--ease-ios); }
+
+  .scrim              { background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(2px); }
+}
+
+/* Print: hide all mobile chrome */
+@media print {
+  .mobile-only { display: none !important; }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ── Premium AI surface utilities (v2) ────────────────────────── */
+@layer utilities {
+  /* Aurora gradient border — for AI surfaces. Renders behind via mask. */
+  .ai-border {
+    position: relative;
+    isolation: isolate;
+  }
+  .ai-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--ai-angle, 0deg),
+      oklch(0.78 0.18 256) 0deg,
+      oklch(0.72 0.20 305) 90deg,
+      oklch(0.78 0.18 195) 180deg,
+      oklch(0.72 0.20 256) 270deg,
+      oklch(0.78 0.18 256) 360deg
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+    opacity: 0.65;
+    animation: ai-spin 8s linear infinite;
+  }
+  @property --ai-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  @keyframes ai-spin {
+    to { --ai-angle: 360deg; }
+  }
+
+  /* Soft glow halo for AI cards */
+  .ai-glow {
+    box-shadow:
+      0 0 0 1px oklch(from var(--brand-400) l c h / 0.15),
+      0 10px 30px -10px oklch(from var(--brand-500) l c h / 0.35);
+  }
+
+  /* Streaming caret for live AI text */
+  .ai-caret::after {
+    content: "▍";
+    display: inline-block;
+    margin-inline-start: 2px;
+    color: var(--brand-500);
+    animation: ai-blink 900ms steps(2, end) infinite;
+  }
+  @keyframes ai-blink { 50% { opacity: 0; } }
+
+  /* Stagger reveal — use with style="--i: 0/1/2..." on each child */
+  .stagger-child { animation: anim-up var(--duration-normal) var(--ease-out-expo) both; animation-delay: calc(var(--i, 0) * 40ms); }
+}

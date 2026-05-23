@@ -9,4 +9,3 @@ export { EmptyState } from "./EmptyState";
 export { Skeleton, SkeletonRow, SkeletonStyles } from "./Skeleton";
 export { Spinner } from "./Spinner";
 export { DensityToggle, DensityProvider, applyDensity, loadDensity, type Density } from "./DensityToggle";
-export { PageIndicator } from "./PageIndicator";

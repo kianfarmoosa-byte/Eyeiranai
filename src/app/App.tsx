@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { DensityProvider, SkeletonStyles, PageIndicator } from "./components/kian";
+import { DensityProvider, SkeletonStyles } from "./components/kian";
 import { Sidebar } from "./components/Sidebar";
 import { ArticleList } from "./components/ArticleList";
 import { ArticleView } from "./components/ArticleView";
@@ -48,6 +48,15 @@ import {
 import { TopicBuilder } from "./components/TopicBuilder";
 import { SmartFilterBar } from "./components/SmartFilterBar";
 import {
+  MobileShell, HomeScreen, DiscoverScreen, SavedScreen, TopicsScreen, MeScreen, NotesScreen, NoteEditorScreen, SettingsScreen, HistoryScreen, NotificationsScreen, ProfileSettingsScreen, CategoryScreen, DailyBriefingScreen, ReadingStatsScreen, SourceScreen, InternationalNewsScreen,
+  MobileReader, useIsMobile, SearchSheet, SplashScreen,
+  OnboardingSheet, hasOnboarded, MobileOnboardingV2, AuthScreen, loadUser, clearUser, type KianUser,
+  InstallSheet, wasInstallDismissedRecently, useInstallPrompt,
+  ActionSheet, type ActionItem,
+  ArticleContextSheet, ShareSheet, WidgetPreviewSheet, WhatsNewSheet, hasSeenWhatsNew,
+  QuickNoteSheet,
+} from "./components/mobile";
+import {
   applySmartFilter, applyMute, loadMuteWords, saveMuteWords,
   loadActiveSmart, saveActiveSmart, type SmartFilterId,
 } from "./smartFilters";
@@ -74,6 +83,21 @@ function toArticle(a: RemoteArticle & { category?: string }): Article {
 }
 
 const AUTO_REFRESH_MS = 5 * 60 * 1000;
+
+function buildArticleActions(
+  a: Article,
+  ctx: { isSaved: boolean; toggleSave: (id: string) => void; toggleStar: (id: string) => void; open: (a: Article) => void },
+): ActionItem[] {
+  return [
+    { id: "open",  label: "باز کردن", onSelect: () => ctx.open(a) },
+    { id: "save",  label: ctx.isSaved ? "حذف از ذخیره" : "ذخیره برای بعد", onSelect: () => ctx.toggleSave(a.id) },
+    { id: "star",  label: a.starred ? "حذف ستاره" : "ستاره‌دار کردن", onSelect: () => ctx.toggleStar(a.id) },
+    { id: "share", label: "اشتراک‌گذاری", onSelect: () => {
+      if (navigator.share) navigator.share({ title: a.title, url: a.link ?? location.href }).catch(() => {});
+    }},
+    ...(a.link ? [{ id: "source", label: "مشاهده در منبع اصلی", onSelect: () => window.open(a.link!, "_blank") } as ActionItem] : []),
+  ];
+}
 
 export default function App() {
   const { theme, toggle: toggleTheme } = useTheme();
@@ -114,6 +138,11 @@ export default function App() {
   const [timelineTopic, setTimelineTopic] = useState<TopicQuery | null>(null);
 
   useEffect(() => { setupPWA(); }, []);
+  useEffect(() => {
+    import("./components/mobile/utils/accent").then(({ loadAccentId, applyAccent }) => {
+      applyAccent(loadAccentId());
+    });
+  }, []);
   useEffect(() => { setShowStats(false); setShowDigest(false); }, [activeView, selectedFeed, selectedCategory]);
 
   const loadAll = useCallback(async (opts: { feedId?: string } = {}) => {
@@ -485,11 +514,320 @@ export default function App() {
   const showArticleView = !!selected;
   const closeMobileDrawer = () => setMobileDrawer(false);
 
+  const isMobile = useIsMobile();
+  const [mobileHiddenIds, setMobileHiddenIds] = useState<Set<string>>(() => {
+    try { return new Set(JSON.parse(localStorage.getItem("kian.mobile.hidden") || "[]")); } catch { return new Set(); }
+  });
+  const hideMobileArticle = (a: Article) => {
+    setMobileHiddenIds((prev) => {
+      const next = new Set(prev); next.add(a.id);
+      try { localStorage.setItem("kian.mobile.hidden", JSON.stringify([...next])); } catch {}
+      return next;
+    });
+  };
+  const mobileItems = useMemo(
+    () => items
+      .filter((a) => !mobileHiddenIds.has(a.id))
+      .map((a) => ({ ...a, starred: savedIds.has(a.id) })),
+    [items, savedIds, mobileHiddenIds],
+  );
+  const mobileSelected = useMemo(
+    () => (selected ? { ...selected, starred: savedIds.has(selected.id) } : null),
+    [selected, savedIds],
+  );
+
+  const [mobileSplashOpen, setMobileSplashOpen] = useState(() => {
+    if (typeof sessionStorage === "undefined") return true;
+    return sessionStorage.getItem("kian.mobile.splashSeen") !== "1";
+  });
+  const dismissSplash = () => {
+    try { sessionStorage.setItem("kian.mobile.splashSeen", "1"); } catch {}
+    setMobileSplashOpen(false);
+  };
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [mobileOnboardOpen, setMobileOnboardOpen] = useState(() => isMobile && !hasOnboarded());
+  const [mobileActionFor, setMobileActionFor] = useState<Article | null>(null);
+  const [mobileShareFor, setMobileShareFor] = useState<Article | null>(null);
+  const [mobileWidgetPreviewOpen, setMobileWidgetPreviewOpen] = useState(false);
+  const [mobileWhatsNewOpen, setMobileWhatsNewOpen] = useState(false);
+  useEffect(() => {
+    if (!isMobile) return;
+    if (mobileOnboardOpen) return;
+    if (hasSeenWhatsNew()) return;
+    const t = setTimeout(() => setMobileWhatsNewOpen(true), 2500);
+    return () => clearTimeout(t);
+  }, [isMobile, mobileOnboardOpen]);
+  const [mobileInstallOpen, setMobileInstallOpen] = useState(false);
+  const [mobileQuickNoteOpen, setMobileQuickNoteOpen] = useState(false);
+  const [mobileNotesOpen, setMobileNotesOpen] = useState(false);
+  const [mobileEditingNote, setMobileEditingNote] = useState<import("./notes").Note | null>(null);
+  const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
+  const [mobileHistoryOpen, setMobileHistoryOpen] = useState(false);
+  const [mobileStatsOpen, setMobileStatsOpen] = useState(false);
+  const [mobileIntlOpen, setMobileIntlOpen] = useState(false);
+  const [mobileAuthOpen, setMobileAuthOpen] = useState(false);
+  const [mobileProfileOpen, setMobileProfileOpen] = useState(false);
+  const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
+  const [mobileSourceOpen, setMobileSourceOpen] = useState<string | null>(null);
+  const [mobileBriefingOpen, setMobileBriefingOpen] = useState(false);
+  const [mobileUser, setMobileUser] = useState<KianUser | null>(() => loadUser());
+  const [mobileNotifsOpen, setMobileNotifsOpen] = useState(false);
+  const [mobileUnreadNotifs, setMobileUnreadNotifs] = useState(0);
+  useEffect(() => {
+    if (!isMobile) return;
+    import("./components/mobile/utils/notifications").then((m) => {
+      const list = m.seedFromArticles(mobileItems);
+      setMobileUnreadNotifs(list.filter((n) => !n.read).length);
+    });
+  }, [isMobile, mobileItems, mobileNotifsOpen]);
+  const { canInstall: mobileCanInstall } = useInstallPrompt();
+  useEffect(() => {
+    if (!isMobile || !mobileCanInstall || mobileOnboardOpen) return;
+    if (wasInstallDismissedRecently()) return;
+    const t = setTimeout(() => setMobileInstallOpen(true), 4000);
+    return () => clearTimeout(t);
+  }, [isMobile, mobileCanInstall, mobileOnboardOpen]);
+
+  if (isMobile) {
+    return (
+      <>
+        <DensityProvider />
+        <SkeletonStyles />
+        {mobileSplashOpen && <SplashScreen onDone={dismissSplash} />}
+        <MobileShell
+          renderTab={(tab) => {
+            switch (tab) {
+              case "home":
+                return (
+                  <HomeScreen
+                    articles={mobileItems}
+                    onOpen={(a) => setSelectedId(a.id)}
+                    onToggleSave={(a) => toggleSave(a.id)}
+                    onLongPress={(a) => setMobileActionFor(a)}
+                    onRefresh={() => loadAll(selectedFeed ? { feedId: selectedFeed } : {})}
+                    onSearch={() => setMobileSearchOpen(true)}
+                    onCompose={() => setMobileQuickNoteOpen(true)}
+                  />
+                );
+              case "discover":
+                return (
+                  <DiscoverScreen
+                    articles={mobileItems}
+                    onOpen={(a) => setSelectedId(a.id)}
+                    onToggleSave={(a) => toggleSave(a.id)}
+                    onLongPress={(a) => setMobileActionFor(a)}
+                    onPickCategory={(name) => setMobileCategoryOpen(name)}
+                  />
+                );
+              case "saved":
+                return (
+                  <SavedScreen
+                    articles={mobileItems}
+                    onOpen={(a) => setSelectedId(a.id)}
+                    onToggleSave={(a) => toggleSave(a.id)}
+                    onLongPress={(a) => setMobileActionFor(a)}
+                  />
+                );
+              case "topics":
+                return (
+                  <TopicsScreen
+                    onSelectCategory={(id) => { setSelectedCategory(id); setActiveView("category"); }}
+                    onSelectFeed={(id) => { setSelectedFeed(id); setActiveView("feed"); }}
+                  />
+                );
+              case "me":
+                return <MeScreen
+                  name={mobileUser?.name}
+                  email={mobileUser?.email}
+                  isAuthed={!!mobileUser}
+                  onOpenAuth={() => setMobileAuthOpen(true)}
+                  onOpenProfile={() => setMobileProfileOpen(true)}
+                  onOpenBriefing={() => setMobileBriefingOpen(true)}
+                  onSignOut={() => { clearUser(); setMobileUser(null); }}
+                  onToggleTheme={() => toggleTheme()}
+                  onOpenNotes={() => setMobileNotesOpen(true)}
+                  onOpenSettings={() => setMobileSettingsOpen(true)}
+                  onOpenHistory={() => setMobileHistoryOpen(true)}
+                  onOpenStats={() => setMobileStatsOpen(true)}
+                  onOpenInternational={() => setMobileIntlOpen(true)}
+                  onOpenNotifications={() => setMobileNotifsOpen(true)}
+                  unreadNotifs={mobileUnreadNotifs}
+                />;
+            }
+          }}
+          badges={{ saved: savedIds.size || undefined }}
+          overlays={
+            <>
+              <MobileReader
+                article={mobileSelected}
+                onClose={() => setSelectedId(null)}
+                onToggleSave={(a) => toggleSave(a.id)}
+                onAddNote={() => setMobileQuickNoteOpen(true)}
+                pool={mobileItems}
+                onOpenArticle={(a) => setSelectedId(a.id)}
+              />
+              <SearchSheet
+                open={mobileSearchOpen}
+                onClose={() => setMobileSearchOpen(false)}
+                articles={mobileItems}
+                onOpenArticle={(a) => setSelectedId(a.id)}
+                onToggleSave={(a) => toggleSave(a.id)}
+              />
+              <MobileOnboardingV2 open={mobileOnboardOpen} onDone={() => setMobileOnboardOpen(false)} />
+              <InstallSheet open={mobileInstallOpen} onClose={() => setMobileInstallOpen(false)} />
+              <QuickNoteSheet
+                open={mobileQuickNoteOpen}
+                onClose={() => setMobileQuickNoteOpen(false)}
+                articleId={mobileSelected?.id}
+              />
+              {mobileNotesOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <NotesScreen
+                    onClose={() => setMobileNotesOpen(false)}
+                    onOpenNote={(n) => setMobileEditingNote(n)}
+                  />
+                </div>
+              )}
+              {mobileEditingNote && (
+                <div className="fixed inset-0 z-[calc(var(--z-mobile-reader)+1)] bg-[var(--background)]">
+                  <NoteEditorScreen
+                    note={mobileEditingNote}
+                    onClose={() => setMobileEditingNote(null)}
+                  />
+                </div>
+              )}
+              {mobileSettingsOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <SettingsScreen
+                    onClose={() => setMobileSettingsOpen(false)}
+                    onToggleTheme={() => toggleTheme()}
+                    onOpenWidgetPreview={() => setMobileWidgetPreviewOpen(true)}
+                  />
+                </div>
+              )}
+              <AuthScreen
+                open={mobileAuthOpen}
+                onClose={() => setMobileAuthOpen(false)}
+                onSuccess={(u) => { setMobileUser(u); setMobileAuthOpen(false); }}
+              />
+              {mobileBriefingOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <DailyBriefingScreen
+                    articles={mobileItems}
+                    onClose={() => setMobileBriefingOpen(false)}
+                    onOpenArticle={(a) => { setMobileBriefingOpen(false); setSelectedId(a.id); }}
+                  />
+                </div>
+              )}
+              {mobileCategoryOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <CategoryScreen
+                    category={mobileCategoryOpen}
+                    articles={mobileItems}
+                    onClose={() => setMobileCategoryOpen(null)}
+                    onOpen={(a) => setSelectedId(a.id)}
+                    onToggleSave={(a) => toggleSave(a.id)}
+                    onLongPress={(a) => setMobileActionFor(a)}
+                  />
+                </div>
+              )}
+              {mobileSourceOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <SourceScreen
+                    source={mobileSourceOpen}
+                    articles={mobileItems}
+                    onClose={() => setMobileSourceOpen(null)}
+                    onOpen={(a) => setSelectedId(a.id)}
+                    onToggleSave={(a) => toggleSave(a.id)}
+                    onLongPress={(a) => setMobileActionFor(a)}
+                  />
+                </div>
+              )}
+              {mobileProfileOpen && mobileUser && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <ProfileSettingsScreen
+                    user={mobileUser}
+                    onClose={() => setMobileProfileOpen(false)}
+                    onUpdated={(u) => setMobileUser(u)}
+                    onDelete={() => { clearUser(); setMobileUser(null); setMobileProfileOpen(false); }}
+                  />
+                </div>
+              )}
+              {mobileNotifsOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <NotificationsScreen
+                    onClose={() => setMobileNotifsOpen(false)}
+                    articles={mobileItems}
+                    onOpenArticle={(id) => setSelectedId(id)}
+                  />
+                </div>
+              )}
+              {mobileHistoryOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <HistoryScreen
+                    onClose={() => setMobileHistoryOpen(false)}
+                    articles={mobileItems}
+                    onOpen={(a) => setSelectedId(a.id)}
+                    onToggleSave={(a) => toggleSave(a.id)}
+                    onLongPress={(a) => setMobileActionFor(a)}
+                  />
+                </div>
+              )}
+              {mobileStatsOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <ReadingStatsScreen
+                    onClose={() => setMobileStatsOpen(false)}
+                    articles={mobileItems}
+                    savedCount={savedIds.size}
+                  />
+                </div>
+              )}
+              {mobileIntlOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <InternationalNewsScreen
+                    onClose={() => setMobileIntlOpen(false)}
+                    onOpenArticle={(a) => {
+                      setItems((prev) => prev.some((p) => p.id === a.id) ? prev : [a, ...prev]);
+                      setSelectedId(a.id);
+                    }}
+                  />
+                </div>
+              )}
+              <ArticleContextSheet
+                open={!!mobileActionFor}
+                onClose={() => setMobileActionFor(null)}
+                article={mobileActionFor}
+                onToggleSave={(a) => toggleSave(a.id)}
+                onShare={(a) => { setMobileActionFor(null); setMobileShareFor(a); }}
+                onAskAI={(a) => { setMobileActionFor(null); setSelectedId(a.id); }}
+                onHide={(a) => { hideMobileArticle(a); }}
+                onOpenSource={(s) => { setMobileActionFor(null); setMobileSourceOpen(s); }}
+              />
+              <ShareSheet
+                open={!!mobileShareFor}
+                onClose={() => setMobileShareFor(null)}
+                article={mobileShareFor}
+              />
+              <WidgetPreviewSheet
+                open={mobileWidgetPreviewOpen}
+                onClose={() => setMobileWidgetPreviewOpen(false)}
+                articles={mobileItems}
+              />
+              <WhatsNewSheet
+                open={mobileWhatsNewOpen}
+                onClose={() => setMobileWhatsNewOpen(false)}
+              />
+            </>
+          }
+        />
+      </>
+    );
+  }
+
   return (
     <>
     <DensityProvider />
     <SkeletonStyles />
-    <PageIndicator loading={loading || searching} />
     <div dir="rtl" lang="fa" className="size-full flex bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden relative">
       <div className="md:hidden fixed top-0 right-0 left-0 z-30 flex items-center gap-2 px-3 h-12 bg-white/90 dark:bg-slate-950/90 backdrop-blur border-b border-slate-200 dark:border-slate-800">
         <button onClick={() => setMobileDrawer(true)} className="p-2 -mr-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="منو">

@@ -14,20 +14,26 @@ type Props = {
   onMarkAllRead?: () => void;
 };
 
-const COUNTRY_ORDER = ["US", "GB", "CA", "AU", "IN"] as const;
-const COUNTRY_META: Record<string, { name: string; flag: string }> = {
-  US: { name: "آمریکا", flag: "🇺🇸" },
-  GB: { name: "بریتانیا", flag: "🇬🇧" },
-  CA: { name: "کانادا", flag: "🇨🇦" },
-  AU: { name: "استرالیا", flag: "🇦🇺" },
-  IN: { name: "هند", flag: "🇮🇳" },
-};
+// Derived dynamically from INTL_FEEDS at module load — see below.
+const COUNTRY_META: Record<string, { name: string; flag: string }> = (() => {
+  const m: Record<string, { name: string; flag: string }> = {};
+  for (const f of INTL_FEEDS) {
+    if (!m[f.country]) m[f.country] = { name: f.countryName, flag: f.flag };
+  }
+  return m;
+})();
 
-const CAT_META: Record<string, { name: string }> = {
-  general: { name: "عمومی" },
-  business: { name: "اقتصادی" },
-  politics: { name: "سیاسی" },
-};
+const COUNTRY_ORDER: string[] = (() => {
+  const counts = new Map<string, number>();
+  for (const f of INTL_FEEDS) counts.set(f.country, (counts.get(f.country) ?? 0) + 1);
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).map(([c]) => c);
+})();
+
+const CAT_META: Record<string, { name: string }> = (() => {
+  const m: Record<string, { name: string }> = {};
+  for (const f of INTL_FEEDS) if (!m[f.category]) m[f.category] = { name: f.categoryFa };
+  return m;
+})();
 
 export function InternationalView({ onSelectArticle, selectedId, onToggleStar, onMarkAllRead }: Props) {
   const [articles, setArticles] = useState<Article[]>([]);
