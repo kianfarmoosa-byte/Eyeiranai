@@ -1,0 +1,465 @@
+/* 12 */
+
+position: relative;
+width: 375px;
+height: 65px;
+
+
+
+/* Subtract */
+
+position: absolute;
+width: 375px;
+height: 56px;
+left: 0px;
+top: 9px;
+
+background: #FFFFFF;
+
+
+/* Rectangle 14 */
+
+position: absolute;
+width: 375px;
+height: 56px;
+left: 0px;
+top: 9px;
+
+background: #FFFFFF;
+border-radius: 0px;
+
+
+/* Ellipse 3 */
+
+position: absolute;
+width: 76px;
+height: 78px;
+left: 148.5px;
+top: -34px;
+
+background: #D9D9D9;
+
+
+/* Component 24 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 36px;
+top: 25px;
+
+
+
+/* home-state */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 3 */
+
+width: 16px;
+height: 16px;
+
+background: #000000;
+border: 1px solid #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Component 25 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 105px;
+top: 25px;
+
+
+
+/* notification-state */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 3px 4px;
+gap: 1px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 8 */
+
+box-sizing: border-box;
+
+width: 16px;
+height: 13px;
+
+border: 1px solid #000000;
+border-radius: 17px 17px 0px 0px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Subtract */
+
+width: 7.75px;
+height: 3px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 9 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 8px;
+height: 8px;
+left: 8px;
+top: 12px;
+
+border: 1px solid #000000;
+border-radius: 19px;
+
+
+/* Rectangle 10 */
+
+position: absolute;
+width: 8px;
+height: 5px;
+left: 8px;
+top: 12px;
+
+background: #D9D9D9;
+
+
+/* Frame 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+
+position: absolute;
+width: 40px;
+height: 40px;
+left: calc(50% - 40px/2 - 0.5px);
+top: 0px;
+
+background: #000000;
+border-radius: 50px;
+
+
+/* Component 26 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* create-state */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 4px;
+gap: 10px;
+isolation: isolate;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 12 */
+
+box-sizing: border-box;
+
+width: 16px;
+height: 16px;
+
+border: 1px solid #FFFFFF;
+border-radius: 51px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 13px;
+height: 13px;
+left: 5.5px;
+top: 5.5px;
+
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Vector 2 */
+
+position: absolute;
+width: 12px;
+height: 0px;
+left: 6px;
+top: 12px;
+
+border: 1px solid #000000;
+
+
+/* Vector 3 */
+
+position: absolute;
+width: 12px;
+height: 0px;
+left: 12px;
+top: 6px;
+
+border: 1px solid #000000;
+transform: rotate(-90deg);
+
+
+/* Component 27 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 243px;
+top: 25px;
+
+
+
+/* stats-state */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 4px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 2 */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+
+
+/* Ellipse 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+border: 1px solid #000000;
+
+
+/* Group 1 */
+
+position: absolute;
+width: 7.5px;
+height: 7.5px;
+left: 12px;
+top: 5px;
+
+
+
+/* Vector 1 */
+
+position: absolute;
+width: 7.5px;
+height: 7.5px;
+left: 12px;
+top: 5px;
+
+border: 1px solid #000000;
+
+
+/* Component 28 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 312px;
+top: 25px;
+
+
+
+/* account-state */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 4px;
+gap: 1px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 6 */
+
+box-sizing: border-box;
+
+width: 6px;
+height: 6px;
+
+border: 1px solid #000000;
+border-radius: 23px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 5 */
+
+box-sizing: border-box;
+
+width: 16px;
+height: 9px;
+
+border: 1px solid #000000;
+border-radius: 6px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Rectangle 13 */
+
+position: absolute;
+width: 4px;
+height: 4px;
+left: 46px;
+top: 49px;
+
+background: #000000;
+border-radius: 41px;

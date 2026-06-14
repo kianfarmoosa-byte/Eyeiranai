@@ -21,7 +21,7 @@ export function MobileShell({ renderTab, badges, overlays, initialTab = "home" }
   const [tab, setTab] = useState<MobileTab>(initialTab);
   return (
     <ToastProvider>
-      <div dir="rtl" lang="fa" className="md:hidden fixed inset-0 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
+      <div dir="rtl" lang="fa" className="kian-mobile-theme md:hidden fixed inset-0 bg-[var(--background)] text-[var(--foreground)] overflow-hidden">
         {renderTab(tab, setTab)}
         <OfflineBanner />
         <MobileBottomNav active={tab} onChange={setTab} badges={badges} />

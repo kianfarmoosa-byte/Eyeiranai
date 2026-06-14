@@ -7,7 +7,7 @@
   /* Native-feel sizing */
   --tap-min: 44px;                 /* Apple HIG minimum tap target */
   --topbar-h: 56px;
-  --bottomnav-h: 56px;
+  --bottomnav-h: 65px;
   --fab-size: 56px;
 
   /* Sheets */
@@ -201,4 +201,433 @@
 
   /* Stagger reveal — use with style="--i: 0/1/2..." on each child */
   .stagger-child { animation: anim-up var(--duration-normal) var(--ease-out-expo) both; animation-delay: calc(var(--i, 0) * 40ms); }
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   Kian Mobile Theme — monochrome editorial palette derived from the
+   uploaded onboarding spec (Open Sans / #232323 / #FFFFFF / #B6B6B7 /
+   rounded 16-25px / soft drop shadows). Scoped to `.kian-mobile-theme`
+   so the desktop UI is unaffected. The accent picker still drives the
+   --brand-* family, so colored CTAs remain user-customizable.
+   ──────────────────────────────────────────────────────────────────── */
+.kian-mobile-theme {
+  /* Typography — Urbanist primary (spec), Vazirmatn for Persian glyphs */
+  --font-sans: 'Urbanist', 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Urbanist', 'Estedad', 'Vazirmatn', system-ui, sans-serif;
+
+  /* ── Spec palette (Urbanist) — Blue primary + Orange accent ──
+     Drawn directly from color-palette.css:
+       • Blue scale: #5474FF → #DCE5FF
+       • Orange:     #FF8C32 → #FFF1D6
+       • Ink:        #2C3131 (text/buttons)
+       • Deep navy:  #192252
+       • Greys:      #626262 / #A9A9A9 */
+  --kian-blue-500:   #5474FF;
+  --kian-blue-400:   #7E99FF;
+  --kian-blue-300:   #98AFFF;
+  --kian-blue-200:   #BACBFF;
+  --kian-blue-100:   #DCE5FF;
+  /* Accent — muted dark grey (replaces orange) */
+  --kian-orange-500: #4A4F4F;
+  --kian-orange-400: #6B7070;
+  --kian-orange-300: #8A8F8F;
+  --kian-orange-200: #B0B4B4;
+  --kian-orange-100: #DDE0E0;
+  --kian-ink:        #2C3131;
+  --kian-navy:       #192252;
+  --kian-grey-600:   #626262;
+  --kian-grey-400:   #A9A9A9;
+
+  /* Brand scale → spec blue */
+  --brand-50:  #EEF2FF;
+  --brand-100: #DCE5FF;
+  --brand-200: #BACBFF;
+  --brand-300: #98AFFF;
+  --brand-400: #7E99FF;
+  --brand-500: #5474FF;   /* primary */
+  --brand-600: #3D5DEB;
+  --brand-700: #2C46C7;
+
+  /* Surfaces — clean white with blue-tinted muted */
+  --background:         #FFFFFF;
+  --background-subtle:  #F7F9FF;
+  --background-muted:   #EEF2FF;
+
+  --foreground:         #2C3131;
+  --foreground-muted:   #626262;
+  --foreground-subtle:  #A9A9A9;
+
+  --card:               #FFFFFF;
+  --card-foreground:    #2C3131;
+  --card-elevated:      #FFFFFF;
+
+  --surface:            #F7F9FF;
+  --accent:             #4A4F4F;
+  --accent-foreground:  #FFFFFF;
+
+  --primary:            #5474FF;
+  --primary-foreground: #FFFFFF;
+  --primary-hover:      #3D5DEB;
+
+  --border:             #DCE5FF;
+  --border-strong:      #2C3131;
+  --border-subtle:      #EEF2FF;
+
+  /* Larger, softer radii to match the spec's 16/20/25-px rounding */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 25px;
+  --radius-2xl: 32px;
+
+  /* Editorial elevation — gentle, gray shadows in the spirit of #232323 + 20% alpha */
+  --kian-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --kian-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --kian-shadow-3: 5px 5px 10px rgba(0, 0, 0, 0.20);
+
+  /* Sheet treatment */
+  --sheet-radius: 25px;
+  --sheet-shadow: 0 -10px 30px rgba(0, 0, 0, 0.18), 0 -2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.kian-mobile-theme.dark,
+.dark .kian-mobile-theme {
+  /* Dark variant — deep navy canvas (#192252) per spec, blue accent
+     keeps full saturation, orange used sparingly for highlights */
+  --brand-50:  #192252;
+  --brand-100: #243072;
+  --brand-200: #2C46C7;
+  --brand-300: #3D5DEB;
+  --brand-400: #5474FF;
+  --brand-500: #7E99FF;
+  --brand-600: #98AFFF;
+  --brand-700: #DCE5FF;
+
+  --background:         #192252;
+  --background-subtle:  #141B45;
+  --background-muted:   #243072;
+
+  --foreground:         #FFFFFF;
+  --foreground-muted:   #BACBFF;
+  --foreground-subtle:  #7E99FF;
+
+  --card:               #243072;
+  --card-foreground:    #FFFFFF;
+  --card-elevated:      #2C3A85;
+
+  --surface:            #1F2960;
+  --accent:             #4A4F4F;
+  --accent-foreground:  #FFFFFF;
+
+  --primary:            #5474FF;
+  --primary-foreground: #FFFFFF;
+  --primary-hover:      #7E99FF;
+
+  --border:             #2C3A85;
+  --border-strong:      #5474FF;
+  --border-subtle:      #1F2960;
+
+  --kian-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.5);
+  --kian-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --kian-shadow-3: 5px 5px 16px rgba(0, 0, 0, 0.55);
+}
+
+/* Apply the theme typography & treatments globally inside the shell */
+.kian-mobile-theme,
+.kian-mobile-theme * {
+  font-family: var(--font-sans);
+}
+
+/* Re-balance Persian line-height inside the theme (Open Sans renders denser) */
+.kian-mobile-theme[dir="rtl"],
+.kian-mobile-theme [dir="rtl"] {
+  line-height: 1.7;
+  font-feature-settings: "ss01", "kern", "calt";
+}
+
+/* Card primitive aligned to the spec's soft elevated tile */
+.kian-card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--kian-shadow-2);
+}
+.kian-card-flat {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+/* Pill-shaped action buttons (border-radius: 100px in the spec) */
+.kian-pill {
+  border-radius: 100px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   Bottom nav (ui-styles.css spec)
+   • White bar with a downward concave notch at top-center
+   • Raised circular FAB (dark) protruding through the notch
+   • Side icons sit on the bar, active state = small dot under icon
+   ──────────────────────────────────────────────────────────────────── */
+.kian-bottomnav {
+  height: calc(65px + var(--safe-bottom));
+  background: transparent;
+  filter: drop-shadow(0 -6px 18px rgba(0, 0, 0, 0.08))
+          drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.04));
+}
+.kian-bottomnav-svg path {
+  transition: fill 200ms var(--ease-ios);
+}
+.kian-bottomnav-fab {
+  box-shadow:
+    0 8px 20px -4px rgba(0, 0, 0, 0.30),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 0 0 4px var(--background);
+  transition: transform 160ms var(--ease-ios), background-color 200ms;
+}
+.kian-bottomnav-fab:active { transform: translateX(-50%) scale(0.95); }
+
+.dark .kian-bottomnav {
+  filter: drop-shadow(0 -6px 18px rgba(0, 0, 0, 0.55))
+          drop-shadow(0 -1px 2px rgba(0, 0, 0, 0.35));
+}
+.dark .kian-bottomnav-fab {
+  box-shadow:
+    0 8px 20px -4px rgba(0, 0, 0, 0.55),
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 4px var(--background);
+}
+
+/* Display heading scale taken from spec (40 / 32 / 24 / 20) */
+.kian-mobile-theme h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+.kian-mobile-theme h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.005em; }
+.kian-mobile-theme h3 { font-size: 20px; font-weight: 600; }
+
+/* ────────────────────────────────────────────────────────────────────
+   Kian Input System — derived from input-styles.css spec.
+   Three primary variants:
+     • Pill input (auth-style) → .kian-input / base <input>
+     • Chat input (rounded surface) → .kian-input-chat
+     • Search bar (dark/light flip) → .kian-search-bar / .kian-search-bar.on
+   ──────────────────────────────────────────────────────────────────── */
+.kian-mobile-theme {
+  /* Input tokens (from spec) */
+  --input-bg:           #FFFFFF;
+  --input-bg-soft:      #F1F1F1;
+  --input-border:       transparent;
+  --input-border-focus: #1C1C1C;
+  --input-text:         #1C1C1C;
+  --input-placeholder:  #B6B6B7;
+  --input-icon:         #B6B6B7;
+  --input-icon-active:  #1C1C1C;
+  --input-shadow:       5px 5px 10px rgba(0, 0, 0, 0.20);
+  --input-radius-pill:  50px;
+  --input-radius-soft:  30px;
+  --input-radius-rect:  15px;
+  --input-h:            60px;
+  --input-h-chat:       56px;
+  --input-pad-x:        30px;
+  --input-pad-x-soft:   16px;
+  --input-gap:          15px;
+  --input-font-size:    16px;
+  --input-line:         22px;
+  --input-weight:       600;
+  --input-tracking:     0.05em;
+  --send-bg:            #0B4C26;
+  --send-fg:            #FFFFFF;
+}
+
+.kian-mobile-theme.dark,
+.dark .kian-mobile-theme {
+  --input-bg:           #232323;
+  --input-bg-soft:      #2A2A2A;
+  --input-border-focus: #F1F1F1;
+  --input-text:         #F1F1F1;
+  --input-placeholder:  #7A7A7A;
+  --input-icon:         #7A7A7A;
+  --input-icon-active:  #F1F1F1;
+  --input-shadow:       5px 5px 16px rgba(0, 0, 0, 0.45);
+}
+
+/* Base input typography — applies to ALL inputs/textareas/selects within the
+   theme so even Tailwind-styled inputs inherit the Open Sans treatment. */
+.kian-mobile-theme input,
+.kian-mobile-theme textarea,
+.kian-mobile-theme select {
+  font-family: var(--font-sans);
+  font-size: var(--input-font-size);
+  font-weight: var(--input-weight);
+  line-height: var(--input-line);
+  letter-spacing: var(--input-tracking);
+  color: var(--input-text);
+}
+.kian-mobile-theme input::placeholder,
+.kian-mobile-theme textarea::placeholder {
+  color: var(--input-placeholder);
+  font-weight: var(--input-weight);
+  letter-spacing: var(--input-tracking);
+  opacity: 1;
+}
+.kian-mobile-theme input:focus,
+.kian-mobile-theme textarea:focus,
+.kian-mobile-theme select:focus {
+  outline: none;
+}
+
+/* ── Pill input (auth-style) ─────────────────────────────────── */
+.kian-input,
+.kian-mobile-theme input.kian-input {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--input-h);
+  padding: 16px var(--input-pad-x);
+  gap: var(--input-gap);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius-pill);
+  box-shadow: var(--input-shadow);
+  color: var(--input-text);
+  transition: border-color 160ms var(--ease-ios, ease), box-shadow 200ms var(--ease-ios, ease);
+}
+.kian-input:focus,
+.kian-input:focus-within,
+.kian-mobile-theme input.kian-input:focus {
+  border-color: var(--input-border-focus);
+}
+
+/* Wrapper that places an icon + vertical divider + input on a pill row */
+.kian-input-group {
+  display: flex;
+  align-items: center;
+  gap: var(--input-gap);
+  width: 100%;
+  height: var(--input-h);
+  padding: 16px var(--input-pad-x);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius-pill);
+  box-shadow: var(--input-shadow);
+  transition: border-color 160ms var(--ease-ios, ease);
+}
+.kian-input-group:focus-within { border-color: var(--input-border-focus); }
+.kian-input-group > input,
+.kian-input-group > textarea {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.kian-input-group .kian-input-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--input-icon);
+  flex: none;
+}
+.kian-input-group:focus-within .kian-input-icon { color: var(--input-icon-active); }
+.kian-input-divider {
+  display: inline-block;
+  width: 1px;
+  height: 24px;
+  background: var(--input-icon);
+  flex: none;
+}
+.kian-input-group:focus-within .kian-input-divider { background: var(--input-icon-active); }
+
+/* ── Chat input (rounded soft surface + send pill) ───────────── */
+.kian-input-chat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: var(--input-h-chat);
+  padding: 16px;
+  background: var(--input-bg-soft);
+  border: 0.5px solid transparent;
+  border-radius: var(--input-radius-soft);
+  transition: border-color 160ms var(--ease-ios, ease);
+}
+.kian-input-chat:focus-within { border-color: var(--input-border-focus); }
+.kian-input-chat > input,
+.kian-input-chat > textarea {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--input-text);
+}
+.kian-send-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 100px;
+  background: var(--send-bg);
+  color: var(--send-fg);
+  box-shadow: var(--input-shadow);
+  flex: none;
+  transition: transform 120ms var(--ease-ios, ease), background-color 160ms;
+}
+.kian-send-btn:active { transform: scale(0.96); }
+.kian-send-btn:disabled { opacity: 0.45; box-shadow: none; }
+
+/* ── Search bar (Off=dark, On=white) ─────────────────────────── */
+.kian-search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 30px;
+  background: #232323;
+  color: #FFFFFF;
+  border-radius: var(--input-radius-rect);
+  box-shadow: var(--input-shadow);
+  transition: background-color 200ms var(--ease-ios, ease), color 200ms;
+}
+.kian-search-bar.on,
+.kian-search-bar:focus-within {
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+.kian-search-bar > input {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  padding: 0 12px;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 18px;
+}
+.kian-search-bar > input::placeholder { color: currentColor; opacity: 0.7; }
+
+/* Dark mode flips the off-state to keep contrast against #1C1C1C bg */
+.kian-mobile-theme.dark .kian-search-bar,
+.dark .kian-mobile-theme .kian-search-bar {
+  background: #2A2A2A;
+  color: #F1F1F1;
+}
+.kian-mobile-theme.dark .kian-search-bar.on,
+.dark .kian-mobile-theme .kian-search-bar.on {
+  background: #F1F1F1;
+  color: #1C1C1C;
+}
+
+/* Disabled state — applies across all input variants */
+.kian-input:disabled,
+.kian-input-group:has(input:disabled),
+.kian-input-chat:has(input:disabled) {
+  opacity: 0.55;
+  box-shadow: none;
 }

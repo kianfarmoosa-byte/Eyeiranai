@@ -33,17 +33,29 @@
   --neutral-950: oklch(0.145 0.010 264);
   --neutral-1000: oklch(0.08 0.006 264);
 
-  /* ── Primitive: Brand (deep editorial blue with Persian warmth) ── */
-  --brand-50:  oklch(0.97  0.018 250);
-  --brand-100: oklch(0.93  0.045 250);
-  --brand-200: oklch(0.86  0.090 250);
-  --brand-300: oklch(0.76  0.140 252);
-  --brand-400: oklch(0.65  0.180 254);
-  --brand-500: oklch(0.55  0.215 256);  /* primary action */
-  --brand-600: oklch(0.46  0.220 258);
-  --brand-700: oklch(0.38  0.190 258);
-  --brand-800: oklch(0.30  0.140 258);
-  --brand-900: oklch(0.22  0.090 258);
+  /* ── Primitive: Brand — Tri-color spec (yellow accent) ─────────── */
+  --brand-50:  #FDECEC;
+  --brand-100: #FAD0D0;
+  --brand-200: #F4A5A5;
+  --brand-300: #EC7474;
+  --brand-400: #E14848;
+  --brand-500: #D32F2F;  /* signature red */
+  --brand-600: #B71C1C;
+  --brand-700: #931414;
+  --brand-800: #6B0E0E;
+  --brand-900: #460808;
+
+  /* ── Primitive: Ink — Tri-color spec (dark for tabs/buttons) ──── */
+  --ink-50:  #F4F4F4;
+  --ink-100: #E5E5E5;
+  --ink-200: #C4C4C4;
+  --ink-300: #8A8A8A;
+  --ink-400: #545454;
+  --ink-500: #2E2E2E;
+  --ink-600: #1F1F1F;
+  --ink-700: #1A1A1A;   /* signature dark */
+  --ink-800: #131313;
+  --ink-900: #0A0A0A;
 
   /* ── Primitive: Semantic (success / warning / danger / info) ───── */
   --success-50:  oklch(0.96 0.04  155);
@@ -96,18 +108,19 @@
   --popover:           var(--neutral-0);
   --popover-foreground: var(--neutral-950);
 
-  --primary:                var(--brand-600);
-  --primary-foreground:     var(--neutral-0);
-  --primary-hover:          var(--brand-700);
+  /* Primary = dark (tabs, buttons); Accent = yellow */
+  --primary:                var(--ink-700);
+  --primary-foreground:     #FFFFFF;
+  --primary-hover:          var(--ink-800);
 
-  --secondary:              var(--neutral-100);
-  --secondary-foreground:   var(--neutral-900);
+  --secondary:              var(--brand-500);
+  --secondary-foreground:   var(--ink-900);
 
   --muted:                  var(--neutral-100);
   --muted-foreground:       var(--neutral-500);
 
-  --accent:                 var(--neutral-100);
-  --accent-foreground:      var(--neutral-900);
+  --accent:                 var(--brand-500);
+  --accent-foreground:      var(--ink-900);
 
   --destructive:            var(--danger-500);
   --destructive-foreground: var(--neutral-0);
@@ -121,23 +134,23 @@
   --input-border:           var(--border);
   --switch-background:      var(--neutral-300);
 
-  --ring:                   oklch(0.65 0.20 256 / 0.55);
-  --ring-offset:            var(--neutral-0);
+  --ring:                   rgba(211, 47, 47, 0.55);
+  --ring-offset:            #FFFFFF;
 
-  /* ── Charts (mapped to viz palette) ─────────────────────────── */
-  --chart-1: var(--viz-1);
-  --chart-2: var(--viz-2);
-  --chart-3: var(--viz-3);
-  --chart-4: var(--viz-4);
-  --chart-5: var(--viz-5);
+  /* ── Charts (tri-color: yellow, dark, mid-grey for variety) ── */
+  --chart-1: var(--brand-500);
+  --chart-2: var(--ink-700);
+  --chart-3: var(--brand-300);
+  --chart-4: var(--ink-400);
+  --chart-5: var(--brand-700);
 
   /* ── Sidebar ──────────────────────────────────────────────── */
-  --sidebar:                       var(--neutral-50);
-  --sidebar-foreground:            var(--neutral-900);
-  --sidebar-primary:               var(--brand-600);
-  --sidebar-primary-foreground:    var(--neutral-0);
-  --sidebar-accent:                var(--neutral-100);
-  --sidebar-accent-foreground:     var(--neutral-900);
+  --sidebar:                       var(--ink-700);
+  --sidebar-foreground:            #FFFFFF;
+  --sidebar-primary:               var(--brand-500);
+  --sidebar-primary-foreground:    var(--ink-900);
+  --sidebar-accent:                var(--ink-600);
+  --sidebar-accent-foreground:     #FFFFFF;
   --sidebar-border:                var(--border);
   --sidebar-ring:                  var(--ring);
 
@@ -240,10 +253,10 @@
 
 /* ── DARK THEME — recalibrated, not just inverted ────────── */
 .dark {
-  --background:        var(--neutral-1000);
-  --background-subtle: var(--neutral-950);
-  --background-muted:  var(--neutral-900);
-  --foreground:        var(--neutral-50);
+  --background:        var(--ink-900);
+  --background-subtle: var(--ink-800);
+  --background-muted:  var(--ink-700);
+  --foreground:        #FFFFFF;
   --foreground-muted:  var(--neutral-400);
   --foreground-subtle: var(--neutral-500);
 
@@ -254,18 +267,18 @@
   --popover:           oklch(0.195 0.012 264);
   --popover-foreground: var(--neutral-50);
 
-  --primary:                var(--brand-400);
-  --primary-foreground:     var(--neutral-1000);
-  --primary-hover:          var(--brand-300);
+  --primary:                var(--brand-500);
+  --primary-foreground:     var(--ink-900);
+  --primary-hover:          var(--brand-400);
 
-  --secondary:              var(--neutral-800);
-  --secondary-foreground:   var(--neutral-100);
+  --secondary:              var(--ink-600);
+  --secondary-foreground:   #FFFFFF;
 
-  --muted:                  var(--neutral-800);
-  --muted-foreground:       var(--neutral-400);
+  --muted:                  var(--ink-600);
+  --muted-foreground:       var(--ink-200);
 
-  --accent:                 var(--neutral-800);
-  --accent-foreground:      var(--neutral-50);
+  --accent:                 var(--brand-500);
+  --accent-foreground:      var(--ink-900);
 
   --destructive:            var(--danger-500);
   --destructive-foreground: var(--neutral-50);
@@ -288,12 +301,12 @@
   --chart-4: oklch(0.72 0.21 25);
   --chart-5: oklch(0.70 0.19 305);
 
-  --sidebar:                       oklch(0.135 0.010 264);
-  --sidebar-foreground:            var(--neutral-100);
-  --sidebar-primary:               var(--brand-400);
-  --sidebar-primary-foreground:    var(--neutral-1000);
-  --sidebar-accent:                oklch(0.22 0.012 264);
-  --sidebar-accent-foreground:     var(--neutral-50);
+  --sidebar:                       var(--ink-900);
+  --sidebar-foreground:            #FFFFFF;
+  --sidebar-primary:               var(--brand-500);
+  --sidebar-primary-foreground:    var(--ink-900);
+  --sidebar-accent:                var(--ink-700);
+  --sidebar-accent-foreground:     #FFFFFF;
   --sidebar-border:                var(--border);
   --sidebar-ring:                  var(--ring);
 

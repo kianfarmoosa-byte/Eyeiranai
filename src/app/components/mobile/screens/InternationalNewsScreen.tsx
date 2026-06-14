@@ -11,7 +11,9 @@ import { timeAgoFa, faNum } from "../utils/fa";
 import type { Article } from "../../../data";
 
 type Props = {
-  onClose: () => void;
+  /** When embedded as a bottom-nav tab, the back button is hidden. */
+  embedded?: boolean;
+  onClose?: () => void;
   onOpenArticle?: (a: Article) => void;
 };
 
@@ -24,7 +26,7 @@ const KEY_IMPORTED = "kian.mobile.intlFeedsImported.v1";
  * backend on first visit so the server can fetch + parse RSS, then shows
  * translated Persian headlines alongside the original.
  */
-export function InternationalNewsScreen({ onClose, onOpenArticle }: Props) {
+export function InternationalNewsScreen({ embedded = false, onClose, onOpenArticle }: Props) {
   const haptic = useHaptics();
   const toast = useToast();
   const [articles, setArticles] = useState<RemoteArticle[]>([]);
@@ -158,7 +160,7 @@ export function InternationalNewsScreen({ onClose, onOpenArticle }: Props) {
       topbar={
         <MobileTopBar
           title="اخبار بین‌المللی"
-          onBack={onClose}
+          onBack={embedded ? undefined : onClose}
           trailing={
             <div className="flex items-center gap-1">
               <button

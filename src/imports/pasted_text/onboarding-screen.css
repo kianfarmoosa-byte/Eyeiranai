@@ -1,0 +1,7055 @@
+/* On Boarding Screen 1 */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* image */
+
+position: absolute;
+width: 360px;
+height: 379px;
+left: calc(50% - 360px/2);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+position: absolute;
+width: 380px;
+height: 400px;
+left: calc(50% - 380px/2);
+top: 94px;
+
+background: rgba(197, 197, 197, 0.5);
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Stay Informed, Anytime, Anywhere */
+
+position: absolute;
+width: 380px;
+height: 98px;
+left: calc(50% - 380px/2);
+top: 619px;
+
+/* H3 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 49px;
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+position: absolute;
+width: 350px;
+height: 5px;
+left: calc(50% - 350px/2);
+top: 554px;
+
+filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+
+
+/* Rectangle 1 */
+
+width: 167.5px;
+height: 5px;
+
+/* Black */
+background: #232323;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Rectangle 2 */
+
+width: 167.5px;
+height: 5px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 1;
+
+
+/* Get the latest headlines and breaking news from trusted sources — all in one app. */
+
+position: absolute;
+width: 380px;
+height: 44px;
+left: calc(50% - 380px/2);
+top: 747px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+
+/* Button 3 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px 32px;
+
+position: absolute;
+width: 75px;
+height: 75px;
+left: calc(50% - 75px/2 + 152.5px);
+top: 821px;
+
+/* Black */
+background: #232323;
+/* white */
+border: 1px solid #FFFFFF;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 100px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* east */
+
+width: 20px;
+height: 14px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* On Boarding Screen 2 */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* image */
+
+position: absolute;
+width: 360px;
+height: 379px;
+left: calc(50% - 360px/2);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+position: absolute;
+width: 380px;
+height: 400px;
+left: calc(50% - 380px/2);
+top: 94px;
+
+background: rgba(197, 197, 197, 0.5);
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* News That Matters to You */
+
+position: absolute;
+width: 334px;
+height: 98px;
+left: calc(50% - 334px/2 - 23px);
+top: 619px;
+
+/* H3 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 49px;
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 4 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+position: absolute;
+width: 350px;
+height: 5px;
+left: calc(50% - 350px/2);
+top: 554px;
+
+filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+
+
+/* Rectangle 2 */
+
+width: 167.5px;
+height: 5px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Rectangle 1 */
+
+width: 167.5px;
+height: 5px;
+
+/* Black */
+background: #232323;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 1;
+
+
+/* Personalized news highlights tailored to your interests — politics, tech, and more */
+
+position: absolute;
+width: 380px;
+height: 44px;
+left: calc(50% - 380px/2);
+top: 747px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+
+/* Button 3 */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px 32px;
+
+position: absolute;
+width: 75px;
+height: 75px;
+right: 30px;
+top: 821px;
+
+/* Black */
+background: #232323;
+/* white */
+border: 1px solid #FFFFFF;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 100px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* east */
+
+width: 20px;
+height: 14px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sign In Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* Rectangle 5 */
+
+position: absolute;
+width: 440px;
+height: 699px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 0px 0px 25px 25px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Button 1 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px 32px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+bottom: 339px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Button */
+
+width: 51px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* white */
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Input Field */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 255px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* mail */
+
+width: 20px;
+height: 16px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type something here... */
+
+width: 281px;
+height: 28px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Input Field */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+width: 380px;
+height: 94px;
+left: calc(50% - 380px/2);
+top: 345px;
+
+border-radius: 145px;
+
+
+/* Input Field */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+width: 380px;
+height: 60px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* lock */
+
+width: 16px;
+height: 21px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type something here... */
+
+width: 281px;
+height: 28px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Forgot Password? */
+
+width: 149px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Sign in to continue reading top stories */
+
+position: absolute;
+width: 324px;
+height: 22px;
+left: calc(50% - 324px/2 - 28px);
+top: 173px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+
+/* Welcome Back */
+
+position: absolute;
+width: 232px;
+height: 44px;
+left: calc(50% - 232px/2 - 74px);
+top: 114px;
+
+/* H4 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+display: flex;
+align-items: center;
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 6009 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 30px;
+
+position: absolute;
+width: 150px;
+height: 30px;
+left: calc(50% - 150px/2);
+top: 896px;
+
+
+
+/* Vector */
+
+width: 30px;
+height: 30px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 30px;
+height: 30px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 30px;
+height: 30px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Home Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Frame 177 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 30px;
+
+position: absolute;
+width: 380px;
+height: 81px;
+left: calc(50% - 380px/2);
+top: 84px;
+
+
+
+/* Frame 178 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 5px;
+
+margin: 0 auto;
+width: 184px;
+height: 81px;
+
+border-radius: 25px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* 20 : 21 */
+
+width: 124px;
+height: 54px;
+
+/* H2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 54px;
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Tuesday 02, May 2024 */
+
+width: 184px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 6007 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 18px;
+height: 21.5px;
+
+/* Subtle Grey */
+background: #F1F1F1;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* image */
+
+position: absolute;
+width: 380px;
+height: 240px;
+left: calc(50% - 380px/2);
+top: 225px;
+
+background: rgba(197, 197, 197, 0.5);
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Frame 5 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 5px;
+
+position: absolute;
+width: 350px;
+height: 5px;
+left: calc(50% - 350px/2);
+top: 495px;
+
+filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+
+
+/* Rectangle 2 */
+
+width: 83.75px;
+height: 5px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Rectangle 1 */
+
+width: 83.75px;
+height: 5px;
+
+/* Black */
+background: #232323;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 1;
+
+
+/* Rectangle 4 */
+
+width: 83.75px;
+height: 5px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 1;
+
+
+/* Rectangle 3 */
+
+width: 83.75px;
+height: 5px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 1;
+
+
+/* Frame 6024 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 30px;
+
+position: absolute;
+width: 494px;
+height: 139px;
+left: 30px;
+top: 560px;
+
+
+
+/* Frame 6022 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 15px;
+
+width: 100px;
+height: 139px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image 65 */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Sortnews */
+
+width: 78px;
+height: 24px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 6026 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 15px;
+
+width: 100px;
+height: 139px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Cubicube */
+
+width: 78px;
+height: 24px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 6028 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 15px;
+
+width: 100px;
+height: 139px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Technobo */
+
+width: 82px;
+height: 24px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 6027 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 15px;
+
+width: 104px;
+height: 139px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Weeklynews */
+
+width: 104px;
+height: 24px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 6012 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 99px;
+height: 25px;
+left: 50px;
+top: 356px;
+
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 20-Year Cold Case Finally Solved: Shocking Details Emerge */
+
+position: absolute;
+width: 340px;
+height: 54px;
+left: calc(50% - 340px/2);
+top: 391px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+
+color: #FFFFFF;
+
+
+
+/* Frame 6011 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 5px;
+
+position: absolute;
+width: 380px;
+height: 44px;
+left: calc(50% - 380px/2);
+top: 729px;
+
+
+
+/* Breaking News */
+
+margin: 0 auto;
+width: 240px;
+height: 44px;
+
+/* H4 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Views All */
+
+margin: 0 auto;
+width: 75px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 1000004239 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 160px;
+left: calc(50% - 380px/2);
+top: 803px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+width: 167.5px;
+height: 120px;
+
+background: rgba(197, 197, 197, 0.5);
+border-radius: 20px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 1000004230 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+width: 167.5px;
+height: 130px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Interpol Captures International Fugitive After Decade-Long Manhunt */
+
+width: 167.5px;
+height: 57px;
+
+/* H8 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1000004231 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 99px;
+height: 25px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 12 min ago */
+
+width: 66px;
+height: 18px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: right;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Navigasi Bar */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: calc(50% - 440px/2);
+bottom: 0px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* Black */
+background: #232323;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Profile Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Frame 1000004240 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 30px;
+
+position: absolute;
+width: 380px;
+height: 81px;
+left: calc(50% - 380px/2);
+top: 84px;
+
+
+
+/* Frame 178 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 5px;
+
+margin: 0 auto;
+width: 184px;
+height: 81px;
+
+border-radius: 25px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* 20 : 21 */
+
+width: 124px;
+height: 54px;
+
+/* H2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 54px;
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Tuesday 02, May 2024 */
+
+width: 184px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* settings */
+
+width: 20.1px;
+height: 20px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2);
+top: 225px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Frame 1000004240 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 5px;
+
+position: absolute;
+width: 380px;
+height: 44px;
+left: calc(50% - 380px/2);
+top: 552px;
+
+
+
+/* Bookmark */
+
+margin: 0 auto;
+width: 167px;
+height: 44px;
+
+/* H4 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Views All */
+
+margin: 0 auto;
+width: 75px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Search Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 432px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Frame 160 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 71px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* search_on */
+
+width: 14.51px;
+height: 14.48px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Search */
+
+width: 43px;
+height: 18px;
+
+/* Subhead 3 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 7.5px;
+
+margin: 0 auto;
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* instant_mix */
+
+width: 13.5px;
+height: 12px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 1000004241 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 150px;
+left: calc(50% - 380px/2);
+top: 626px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+width: 167.5px;
+height: 120px;
+
+background: rgba(197, 197, 197, 0.5);
+border-radius: 20px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 1000004230 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+width: 167.5px;
+height: 120px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Suspect Arrested in Mantano Hotel Murder Case */
+
+margin: 0 auto;
+width: 167.5px;
+height: 57px;
+
+/* H8 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1000004231 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 99px;
+height: 25px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 2 week ago */
+
+margin: 0 auto;
+width: 65px;
+height: 18px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: right;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Frame 1000004242 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 150px;
+left: calc(50% - 380px/2);
+top: 806px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+width: 167.5px;
+height: 120px;
+
+background: rgba(197, 197, 197, 0.5);
+border-radius: 20px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 1000004230 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+width: 167.5px;
+height: 120px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* 20-Year Cold Case Finally Solved: Shocking Details Emerge */
+
+margin: 0 auto;
+width: 167.5px;
+height: 57px;
+
+/* H8 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1000004231 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 99px;
+height: 25px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 2 min ago */
+
+margin: 0 auto;
+width: 58px;
+height: 18px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: right;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Alex Morgan */
+
+position: absolute;
+width: 151px;
+height: 33px;
+left: calc(50% - 151px/2 + 0.5px);
+top: 369px;
+
+/* H5 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 33px;
+/* identical to box height */
+text-align: center;
+
+color: #000000;
+
+
+
+/* Frame 1000004248 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 5px;
+
+position: absolute;
+width: 122px;
+height: 24px;
+left: calc(50% - 122px/2);
+top: 340px;
+
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* edit */
+
+width: 18px;
+height: 18px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Edit Profile */
+
+width: 93px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Navigasi Bar */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: calc(50% - 440px/2);
+bottom: 0px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* Black */
+background: #232323;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Settings Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* Rectangle 5 */
+
+position: absolute;
+width: 440px;
+height: 588px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 0px 0px 25px 25px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Frame 1000004249 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 57px;
+
+position: absolute;
+width: 380px;
+height: 54px;
+left: calc(50% - 380px/2);
+top: 84px;
+
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* west */
+
+width: 20px;
+height: 14px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Settings */
+
+margin: 0 auto;
+width: 162px;
+height: 54px;
+
+/* H2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 54px;
+text-align: center;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 6003 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 19px;
+height: 20px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 1000004250 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+gap: 37px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 198px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Notification */
+
+margin: 0 auto;
+width: 121px;
+height: 27px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+margin: 0 auto;
+width: 18px;
+height: 21.5px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 1000004251 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+gap: 37px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 288px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Appearance */
+
+margin: 0 auto;
+width: 120px;
+height: 27px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+margin: 0 auto;
+width: 22px;
+height: 22px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 1000004252 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+gap: 37px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 378px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Select interests */
+
+margin: 0 auto;
+width: 155px;
+height: 27px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+margin: 0 auto;
+width: 20px;
+height: 20px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Frame 1000004253 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+gap: 37px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 468px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Help Center */
+
+margin: 0 auto;
+width: 119px;
+height: 27px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* support */
+
+margin: 0 auto;
+width: 20px;
+height: 20px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Terms of Service */
+
+position: absolute;
+width: 140px;
+height: 22px;
+left: calc(50% - 140px/2 - 1px);
+bottom: 30px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+
+/* Live Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* Dark Black */
+background: #1C1C1C;
+border-radius: 16px;
+
+
+/* image */
+
+position: absolute;
+width: 440px;
+height: 956px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Rectangle 3 */
+
+position: absolute;
+width: 440px;
+height: 333px;
+left: calc(50% - 440px/2);
+top: 623px;
+
+background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+
+
+/* Frame 1000004245 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 155px;
+
+position: absolute;
+width: 380px;
+height: 51px;
+left: 30px;
+top: 84px;
+
+
+
+/* Frame 5999 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 20px;
+
+width: 154px;
+height: 51px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 1000004242 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 154px;
+height: 51px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5975 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 15px;
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image 65 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: calc(50% - 50px/2);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Frame 1000004244 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 5px;
+
+width: 94px;
+height: 51px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 94px;
+height: 27px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+text-align: center;
+
+/* white */
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* 291K Views */
+
+width: 76px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+
+/* white */
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 50px;
+height: 50px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* close */
+
+width: 14px;
+height: 14px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 1000004247 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 273px;
+left: 30px;
+top: 653px;
+
+
+
+/* Frame 5997 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 5px 15px;
+gap: 5px;
+
+width: 98px;
+height: 37px;
+
+background: rgba(255, 0, 0, 0.4);
+backdrop-filter: blur(10px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Live */
+
+width: 41px;
+height: 27px;
+
+/* H6 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 27px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Mass Protest in San Aurelio Escalates into Violent Clashes */
+
+width: 380px;
+height: 147px;
+
+/* H3 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 49px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* San Aurelio City Center • Updated just now */
+
+width: 380px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* #LiveNow#SanAurelioProtest#BreakingNews */
+
+width: 380px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 26 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 - 0.34px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.16%;
+right: 38.87%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.45%;
+right: 10.38%;
+top: 43.45%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.68%;
+right: 11.87%;
+top: 44.64%;
+bottom: 46.43%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.73%;
+right: 9.92%;
+top: 47.02%;
+bottom: 48.81%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.77%;
+right: 80.93%;
+top: 44.13%;
+bottom: 46.35%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.55%;
+right: 16.69%;
+top: 44.05%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.88%;
+right: 22.66%;
+top: 48.81%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.19%;
+right: 23.35%;
+top: 50%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.57%;
+right: 21.97%;
+top: 47.62%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.26%;
+right: 21.28%;
+top: 45.24%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.95%;
+right: 20.59%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Search Result Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Search Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: calc(50% - 380px/2);
+top: 84px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Frame 160 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 228px;
+height: 22px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* search_on */
+
+width: 14.51px;
+height: 14.48px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Search */
+
+width: 200px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 7.5px;
+
+margin: 0 auto;
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* instant_mix */
+
+width: 13.5px;
+height: 12px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 1000004238 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 150px;
+left: calc(50% - 380px/2);
+top: 539px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+width: 167.5px;
+height: 120px;
+
+background: rgba(197, 197, 197, 0.5);
+border-radius: 20px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 1000004230 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+width: 167.5px;
+height: 120px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Suspect Arrested in Mantano Hotel Murder Case */
+
+margin: 0 auto;
+width: 167.5px;
+height: 57px;
+
+/* H8 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1000004231 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 99px;
+height: 25px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 2 week ago */
+
+margin: 0 auto;
+width: 65px;
+height: 18px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: right;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Frame 1000004239 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 160px;
+left: calc(50% - 380px/2);
+top: 719px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+width: 167.5px;
+height: 120px;
+
+background: rgba(197, 197, 197, 0.5);
+border-radius: 20px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 1000004230 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+width: 167.5px;
+height: 130px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Mantano Hotel Tragedy Sparks Security Debate in City */
+
+width: 167.5px;
+height: 57px;
+
+/* H8 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1000004231 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 99px;
+height: 25px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 3 year ago */
+
+width: 62px;
+height: 18px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: right;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Frame 1000004238 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 5px;
+
+position: absolute;
+width: 380px;
+height: 44px;
+left: calc(50% - 380px/2);
+top: 204px;
+
+
+
+/* Category */
+
+margin: 0 auto;
+width: 144px;
+height: 44px;
+
+/* H4 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Views All */
+
+margin: 0 auto;
+width: 75px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* News Related to */
+
+position: absolute;
+width: 261px;
+height: 44px;
+left: calc(50% - 261px/2 - 59.5px);
+top: 438px;
+
+/* H4 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 44px;
+/* identical to box height */
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 1000004238 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 30px;
+
+position: absolute;
+width: 490px;
+height: 100px;
+left: 30px;
+top: 278px;
+
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+transform: matrix(1, 0, 0, -1, 0, 0);
+
+
+/* World */
+
+position: absolute;
+width: 50px;
+height: 22px;
+left: calc(50% - 50px/2);
+top: calc(50% - 22px/2);
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+color: #FFFFFF;
+
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Tech */
+
+position: absolute;
+width: 39px;
+height: 22px;
+left: calc(50% - 39px/2 + 0.5px);
+top: calc(50% - 22px/2);
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+color: #FFFFFF;
+
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Politic */
+
+position: absolute;
+width: 53px;
+height: 22px;
+left: calc(50% - 53px/2 + 0.5px);
+top: calc(50% - 22px/2);
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+color: #FFFFFF;
+
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 100px;
+height: 100px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image */
+
+position: absolute;
+width: 100px;
+height: 100px;
+left: calc(50% - 100px/2 - 0px);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Bussiness */
+
+position: absolute;
+width: 83px;
+height: 22px;
+left: calc(50% - 83px/2 + 0.5px);
+top: calc(50% - 22px/2);
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+color: #FFFFFF;
+
+
+
+/* “Crime in Mantano hotel” */
+
+position: absolute;
+width: 214px;
+height: 22px;
+left: 30px;
+top: 487px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 1000004240 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 15px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 150px;
+left: calc(50% - 380px/2);
+top: 909px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+width: 167.5px;
+height: 120px;
+
+background: rgba(197, 197, 197, 0.5);
+border-radius: 20px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 1000004230 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+width: 167.5px;
+height: 120px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Inside the Mantano Hotel Crime Scene: What We Know So Far */
+
+margin: 0 auto;
+width: 167.5px;
+height: 57px;
+
+/* H8 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 19px;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Frame 1000004231 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 99px;
+height: 25px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 3 */
+
+width: 25px;
+height: 25px;
+
+background: url(Group 8.png);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 64px;
+height: 19px;
+
+/* Subhead 2 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 19px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* 12m ago */
+
+margin: 0 auto;
+width: 51px;
+height: 18px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 400;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: right;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Navigasi Bar */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: calc(50% - 440px/2);
+bottom: 0px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+background: #FFFFFF;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Article Detail Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* image */
+
+position: absolute;
+width: 380px;
+height: 240px;
+left: calc(50% - 380px/2);
+top: 163px;
+
+background: rgba(197, 197, 197, 0.5);
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* image */
+
+position: absolute;
+width: 380px;
+height: 240px;
+left: calc(50% - 380px/2);
+top: 911px;
+
+background: rgba(197, 197, 197, 0.5);
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 25px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Suspect Arrested in Mantano Hotel Murder Case */
+
+position: absolute;
+width: 380px;
+height: 66px;
+left: calc(50% - 380px/2);
+top: 470px;
+
+/* H5 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 33px;
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 5976 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+
+position: absolute;
+width: 380px;
+height: 52px;
+left: 30px;
+top: 83px;
+
+
+
+/* Frame 1000004242 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 144px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5975 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 15px;
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Badges */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 1 */
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 1 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #C4C4C4;
+
+
+/* image 65 */
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: calc(50% - 50px/2);
+top: 0px;
+
+background: rgba(197, 197, 197, 0.5);
+
+
+/* Frame 1000004243 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 5px;
+
+width: 84px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Sortnews */
+
+width: 84px;
+height: 25px;
+
+/* H7 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Crime */
+
+width: 46px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* close */
+
+width: 14px;
+height: 14px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: 195px;
+top: 258px;
+
+background: rgba(35, 35, 35, 0.5);
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* bookmark */
+
+width: 14px;
+height: 18px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 1000004241 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px;
+gap: 76px;
+
+position: absolute;
+width: 380px;
+height: 22px;
+left: calc(50% - 380px/2);
+top: 418px;
+
+
+
+/* Tuesday, 18 April 2024 */
+
+margin: 0 auto;
+width: 190px;
+height: 22px;
+
+/* Subhead 1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* San Aurelio */
+
+margin: 0 auto;
+width: 90px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: italic;
+font-weight: 500;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Local authorities confirmed the arrest of a 34-year-old male suspect believed to be involved in the murder that occurred at the Mantano Hotel last Friday night. According to police spokesperson Maria Delvas, the suspect was apprehended early this morning at a private residence located just outside the city. “He did not resist arrest and is now in custody,” Delvas said during a press conference. The victim, identified as 29-year-old Clara Jenkins, was found in her hotel room with multiple injuries. Early investigation suggests signs of forced entry, although the motive remains unclear. Surveillance footage and witness testimony led investigators to track down the suspect, who was reportedly seen leaving the hotel premises late Friday evening. */
+
+position: absolute;
+width: 380px;
+height: 323px;
+left: calc(50% - 380px/2);
+top: 558px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 19px;
+letter-spacing: 0.05em;
+
+color: #000000;
+
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 50px;
+height: 50px;
+left: calc(50% - 50px/2);
+bottom: 30px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* south */
+
+width: 14px;
+height: 20px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Splash Screen */
+
+position: relative;
+width: 440px;
+height: 956px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 16px;
+
+
+/* Status bars */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: calc(50% - 440px/2);
+top: 0px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 10px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 36px;
+
+
+
+/* Vector */
+
+position: absolute;
+visibility: hidden;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+/* Dark Black */
+background: #1C1C1C;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* SOROT */
+
+position: absolute;
+width: 200px;
+height: 65px;
+left: 120px;
+top: 443px;
+
+/* H1 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 65px;
+text-align: center;
+
+/* Black */
+color: #232323;
+
+
+
+/* Frame 177 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 15px;
+
+position: absolute;
+width: 200px;
+height: 5px;
+left: 120px;
+top: 508px;
+
+/* white */
+background: #FFFFFF;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 20px;
+
+
+/* Rectangle 1 */
+
+width: 100px;
+height: 5px;
+
+/* Black */
+background: #232323;
+border-radius: 10px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;

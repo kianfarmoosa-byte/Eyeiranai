@@ -1,0 +1,2819 @@
+/* Text */
+
+position: absolute;
+width: 133px;
+height: 24px;
+left: 382.5px;
+top: 97px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height, or 100% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #0A0A0A;
+
+
+
+/* Text */
+
+position: absolute;
+width: 198px;
+height: 24px;
+left: 1105px;
+top: 97px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height, or 100% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #0A0A0A;
+
+
+
+/* Input Field */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 821px;
+height: 342px;
+left: calc(50% - 821px/2 - 288.5px);
+top: 145px;
+
+border: 1px dashed #9747FF;
+border-radius: 5px;
+
+
+/* Type=Email, Status=Inactive */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 20px;
+top: 20px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* mail */
+
+width: 20px;
+height: 16px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type something here... */
+
+width: 281px;
+height: 28px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type=Email, Status=Active */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 421px;
+top: 20px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* mail */
+
+width: 20px;
+height: 16px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5733 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+
+width: 281px;
+height: 28px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type something here */
+
+width: 178px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 24px;
+height: 0px;
+
+/* Grey */
+border: 0.5px solid #B6B6B7;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Type=Password 2, Status=Inactive */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+width: 380px;
+height: 94px;
+left: 20px;
+top: 92px;
+
+border-radius: 145px;
+
+
+/* Input Field */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+width: 380px;
+height: 60px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* lock */
+
+width: 16px;
+height: 21px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type something here... */
+
+width: 281px;
+height: 28px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Forgot Password? */
+
+width: 149px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #1C1C1C;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Type=Password 2, Status=Active */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+width: 380px;
+height: 94px;
+left: 421px;
+top: 92px;
+
+border-radius: 145px;
+
+
+/* Input Field */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+width: 380px;
+height: 60px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* lock */
+
+width: 16px;
+height: 21px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5734 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+
+width: 281px;
+height: 28px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type something here... */
+
+width: 193px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 24px;
+height: 0px;
+
+/* Grey */
+border: 0.5px solid #B6B6B7;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Forgot Password? */
+
+width: 149px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #1C1C1C;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Type=Password 1, Status=Inactive */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 20px;
+top: 194px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* lock */
+
+width: 16px;
+height: 21px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type something here... */
+
+width: 281px;
+height: 28px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type=Password 1, Status=Active */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 421px;
+top: 194px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* lock */
+
+width: 16px;
+height: 21px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5733 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+
+width: 281px;
+height: 28px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type something here */
+
+width: 178px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 24px;
+height: 0px;
+
+/* Grey */
+border: 0.5px solid #B6B6B7;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Type=Username, Status=Inactive */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 20px;
+top: 266px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type something here... */
+
+width: 281px;
+height: 28px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type=Username, Status=Active */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px 30px;
+gap: 15px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 421px;
+top: 266px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 50px;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* Grey */
+background: #B6B6B7;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5735 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+
+width: 281px;
+height: 28px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type something here */
+
+width: 178px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Grey */
+color: #B6B6B7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 24px;
+height: 0px;
+
+/* Grey */
+border: 0.5px solid #B6B6B7;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Input Field Chat */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 470px;
+height: 328px;
+left: 926px;
+top: 145px;
+
+border: 1px dashed #9747FF;
+border-radius: 5px;
+
+
+/* State=Off */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 32px 32px 40px;
+gap: 32px;
+
+position: absolute;
+width: 430px;
+height: 128px;
+left: calc(50% - 430px/2);
+bottom: 180px;
+
+/* Shade1 */
+filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+
+
+/* Input Field */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px;
+gap: 12px;
+
+width: 278px;
+height: 56px;
+
+/* Subtle Grey */
+background: #F1F1F1;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Type something here... */
+
+width: 174px;
+height: 24px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Eerie Black */
+color: #323540;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* add */
+
+width: 14px;
+height: 14px;
+
+/* Eerie Black */
+background: #323540;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* mood */
+
+width: 20px;
+height: 20px;
+
+/* Eerie Black */
+background: #323540;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5764 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 56px;
+height: 56px;
+
+/* Green */
+background: #0B4C26;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* send */
+
+width: 19px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* State=On */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 32px 32px 40px;
+gap: 32px;
+
+position: absolute;
+width: 430px;
+height: 128px;
+left: calc(50% - 430px/2);
+bottom: 20px;
+
+/* Shade1 */
+filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+
+
+/* Input Field */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px;
+gap: 12px;
+
+width: 278px;
+height: 56px;
+
+/* Subtle Grey */
+background: #F1F1F1;
+/* Dark Black */
+border: 0.5px solid #1C1C1C;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Frame 5733 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+
+width: 174px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 1;
+
+
+/* Type something here */
+
+width: 178px;
+height: 22px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 22px;
+/* identical to box height */
+display: flex;
+align-items: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #1C1C1C;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Line 1 */
+
+width: 24px;
+height: 0px;
+
+/* Dark Black */
+border: 0.5px solid #1C1C1C;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* add */
+
+width: 14px;
+height: 14px;
+
+/* Eerie Black */
+background: #323540;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* mood */
+
+width: 20px;
+height: 20px;
+
+/* Eerie Black */
+background: #323540;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5764 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 56px;
+height: 56px;
+
+/* Green */
+background: #0B4C26;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* send */
+
+width: 19px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Text */
+
+position: absolute;
+width: 128px;
+height: 24px;
+left: 803px;
+top: 133px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height, or 100% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #0A0A0A;
+
+
+
+/* Status bars */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 472px;
+height: 216px;
+left: 636px;
+top: 181px;
+
+border: 1px dashed #9747FF;
+border-radius: 5px;
+
+
+/* Type=Status Bar, Variant=Default */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: 16px;
+top: 16px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25 */
+
+position: absolute;
+width: 345.33px;
+height: 22px;
+left: calc(50% - 345.33px/2 + 0.12px);
+top: 30px;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 40.26%;
+right: 38.76%;
+top: 35.71%;
+bottom: 38.1%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.56%;
+right: 10.28%;
+top: 43.45%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.79%;
+right: 11.77%;
+top: 44.64%;
+bottom: 46.43%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.84%;
+right: 9.82%;
+top: 47.02%;
+bottom: 48.81%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.87%;
+right: 80.82%;
+top: 44.13%;
+bottom: 46.35%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.66%;
+right: 16.59%;
+top: 44.05%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.99%;
+right: 22.55%;
+top: 48.81%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.3%;
+right: 23.24%;
+top: 50%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.68%;
+right: 21.86%;
+top: 47.62%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.36%;
+right: 21.18%;
+top: 45.24%;
+bottom: 45.24%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 79.05%;
+right: 20.49%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Type=Status Bar, Variant=Dark Mode */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 440px;
+height: 84px;
+left: 16px;
+top: 116px;
+
+
+
+/* Status bars 1 */
+
+width: 430px;
+height: 84px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 26 */
+
+position: absolute;
+width: 345.33px;
+height: 22px;
+left: calc(50% - 345.33px/2 - 0.34px);
+top: 30px;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 40.16%;
+right: 38.87%;
+top: 35.71%;
+bottom: 38.1%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.45%;
+right: 10.38%;
+top: 43.45%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 84.68%;
+right: 11.87%;
+top: 44.64%;
+bottom: 46.43%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 89.73%;
+right: 9.92%;
+top: 47.02%;
+bottom: 48.81%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 9.77%;
+right: 80.93%;
+top: 44.13%;
+bottom: 46.35%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 80.55%;
+right: 16.69%;
+top: 44.05%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.88%;
+right: 22.66%;
+top: 48.81%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 76.19%;
+right: 23.35%;
+top: 50%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.57%;
+right: 21.97%;
+top: 47.62%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.26%;
+right: 21.28%;
+top: 45.24%;
+bottom: 45.24%;
+
+/* white */
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 78.95%;
+right: 20.59%;
+top: 42.86%;
+bottom: 45.24%;
+
+background: rgba(0, 0, 0, 0.21);
+
+
+/* Text */
+
+position: absolute;
+width: 134px;
+height: 24px;
+left: 800px;
+top: 416px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height, or 100% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #0A0A0A;
+
+
+
+/* Text */
+
+position: absolute;
+width: 184px;
+height: 24px;
+left: 243px;
+top: 133px;
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 24px;
+/* identical to box height, or 100% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Dark Black */
+color: #0A0A0A;
+
+
+
+/* Search Bar */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 464px;
+height: 168px;
+left: 636px;
+top: 464px;
+
+border: 1px dashed #9747FF;
+border-radius: 5px;
+
+
+/* Type=Off */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 20px;
+top: 20px;
+
+/* Black */
+background: #232323;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 15px;
+
+
+/* Frame 160 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 71px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* search_on */
+
+width: 14.51px;
+height: 14.48px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Search */
+
+width: 43px;
+height: 18px;
+
+/* Subhead 3 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* white */
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 7.5px;
+
+margin: 0 auto;
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* instant_mix */
+
+width: 13.5px;
+height: 12px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type=On */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 30px;
+
+position: absolute;
+width: 380px;
+height: 60px;
+left: 20px;
+top: 92px;
+
+/* white */
+background: #FFFFFF;
+/* Shade1 */
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+border-radius: 15px;
+
+
+/* Frame 160 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 71px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* search_on */
+
+width: 14.51px;
+height: 14.48px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Search */
+
+width: 43px;
+height: 18px;
+
+/* Subhead 3 */
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+/* identical to box height, or 150% */
+text-align: center;
+letter-spacing: 0.05em;
+
+/* Black */
+color: #232323;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icons */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 7.5px;
+
+margin: 0 auto;
+width: 18px;
+height: 18px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* instant_mix */
+
+width: 13.5px;
+height: 12px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Navigasi Bar */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 480px;
+height: 650px;
+left: 104px;
+top: 197px;
+
+border: 1px dashed #9747FF;
+border-radius: 5px;
+
+
+/* Type=Home */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: 20px;
+top: 20px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* Black */
+background: #232323;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 50px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type=Search */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: 20px;
+top: 180px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+background: #FFFFFF;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type=Profile */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: 20px;
+top: 500px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* Black */
+background: #232323;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Type=Live */
+
+position: absolute;
+width: 440px;
+height: 130px;
+left: 20px;
+top: 340px;
+
+
+
+/* Union */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+/* Black */
+background: #232323;
+
+
+/* Navigation Bar */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+gap: 57px;
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 15.38%;
+bottom: 15.38%;
+
+
+
+/* Frame 5767 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 200px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* home */
+
+width: 16px;
+height: 18px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5769 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* search */
+
+width: 21px;
+height: 21px;
+
+/* white */
+background: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5771 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+background: #FFFFFF;
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+width: 22px;
+height: 15.56px;
+
+/* Black */
+background: #232323;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Frame 5768 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+margin: 0 auto;
+width: 50px;
+height: 70px;
+
+border-radius: 100px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* person */
+
+width: 16px;
+height: 16px;
+
+/* white */
+background: #FFFFFF;
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;

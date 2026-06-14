@@ -1,4 +1,4 @@
-import { Settings, Moon, Bell, Download, Info, ChevronLeft, Type, Globe, NotebookPen, History, LogIn, LogOut, Headphones, BarChart3, Globe2 } from "lucide-react";
+import { Settings, Moon, Bell, Download, Info, ChevronLeft, Type, Globe, NotebookPen, History, LogIn, LogOut, Headphones, BarChart3, Sparkles } from "lucide-react";
 import { MobileScreen } from "../shell/MobileScreen";
 import { MobileTopBar } from "../shell/MobileTopBar";
 
@@ -17,10 +17,10 @@ type Props = {
   onOpenProfile?: () => void;
   onOpenBriefing?: () => void;
   onOpenStats?: () => void;
-  onOpenInternational?: () => void;
+  onOpenTopics?: () => void;
 };
 
-export function MeScreen({ name = "کاربر کیان", email, onOpenSettings, onToggleTheme, onOpenNotes, onOpenHistory, onOpenNotifications, unreadNotifs = 0, isAuthed = false, onOpenAuth, onSignOut, onOpenProfile, onOpenBriefing, onOpenStats, onOpenInternational }: Props) {
+export function MeScreen({ name = "کاربر کیان", email, onOpenSettings, onToggleTheme, onOpenNotes, onOpenHistory, onOpenNotifications, unreadNotifs = 0, isAuthed = false, onOpenAuth, onSignOut, onOpenProfile, onOpenBriefing, onOpenStats, onOpenTopics }: Props) {
   return (
     <MobileScreen topbar={<MobileTopBar title="من" />}>
       <div className="h-full overflow-y-auto scrollbar-none pb-4">
@@ -48,7 +48,7 @@ export function MeScreen({ name = "کاربر کیان", email, onOpenSettings, 
         </Group>
 
         <Group>
-          <Row icon={<Globe2 className="size-4" />} label="اخبار بین‌المللی" onClick={onOpenInternational} value="جدید" />
+          <Row icon={<Sparkles className="size-4" />} label="موضوعات و منابع" onClick={onOpenTopics} />
           <Row icon={<BarChart3 className="size-4" />} label="آمار مطالعه" onClick={onOpenStats} />
           <Row icon={<Headphones className="size-4" />} label="خلاصهٔ صوتی روز" onClick={onOpenBriefing} />
           <Row icon={<NotebookPen className="size-4" />} label="یادداشت‌ها" onClick={onOpenNotes} />

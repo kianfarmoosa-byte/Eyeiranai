@@ -564,7 +564,7 @@ export default function App() {
   const [mobileSettingsOpen, setMobileSettingsOpen] = useState(false);
   const [mobileHistoryOpen, setMobileHistoryOpen] = useState(false);
   const [mobileStatsOpen, setMobileStatsOpen] = useState(false);
-  const [mobileIntlOpen, setMobileIntlOpen] = useState(false);
+  const [mobileTopicsOpen, setMobileTopicsOpen] = useState(false);
   const [mobileAuthOpen, setMobileAuthOpen] = useState(false);
   const [mobileProfileOpen, setMobileProfileOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
@@ -628,11 +628,14 @@ export default function App() {
                     onLongPress={(a) => setMobileActionFor(a)}
                   />
                 );
-              case "topics":
+              case "international":
                 return (
-                  <TopicsScreen
-                    onSelectCategory={(id) => { setSelectedCategory(id); setActiveView("category"); }}
-                    onSelectFeed={(id) => { setSelectedFeed(id); setActiveView("feed"); }}
+                  <InternationalNewsScreen
+                    embedded
+                    onOpenArticle={(a) => {
+                      setItems((prev) => prev.some((p) => p.id === a.id) ? prev : [a, ...prev]);
+                      setSelectedId(a.id);
+                    }}
                   />
                 );
               case "me":
@@ -649,7 +652,7 @@ export default function App() {
                   onOpenSettings={() => setMobileSettingsOpen(true)}
                   onOpenHistory={() => setMobileHistoryOpen(true)}
                   onOpenStats={() => setMobileStatsOpen(true)}
-                  onOpenInternational={() => setMobileIntlOpen(true)}
+                  onOpenTopics={() => setMobileTopicsOpen(true)}
                   onOpenNotifications={() => setMobileNotifsOpen(true)}
                   unreadNotifs={mobileUnreadNotifs}
                 />;
@@ -782,13 +785,20 @@ export default function App() {
                   />
                 </div>
               )}
-              {mobileIntlOpen && (
+              {mobileTopicsOpen && (
                 <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
-                  <InternationalNewsScreen
-                    onClose={() => setMobileIntlOpen(false)}
-                    onOpenArticle={(a) => {
-                      setItems((prev) => prev.some((p) => p.id === a.id) ? prev : [a, ...prev]);
-                      setSelectedId(a.id);
+                  <TopicsScreen
+                    onClose={() => setMobileTopicsOpen(false)}
+                    onSelectCategory={(id) => {
+                      setSelectedCategory(id);
+                      setActiveView("category");
+                      setMobileTopicsOpen(false);
+                      setMobileCategoryOpen(id);
+                    }}
+                    onSelectFeed={(id) => {
+                      setSelectedFeed(id);
+                      setActiveView("feed");
+                      setMobileTopicsOpen(false);
                     }}
                   />
                 </div>

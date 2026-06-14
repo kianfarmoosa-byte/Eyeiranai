@@ -6,11 +6,12 @@ import { ChevronLeft } from "lucide-react";
 type Props = {
   onSelectCategory?: (id: string) => void;
   onSelectFeed?: (id: string) => void;
+  onClose?: () => void;
 };
 
-export function TopicsScreen({ onSelectCategory, onSelectFeed }: Props) {
+export function TopicsScreen({ onSelectCategory, onSelectFeed, onClose }: Props) {
   return (
-    <MobileScreen topbar={<MobileTopBar title="موضوعات" subtitle="دسته‌بندی‌ها و منابع" />}>
+    <MobileScreen topbar={<MobileTopBar title="موضوعات" subtitle="دسته‌بندی‌ها و منابع" onBack={onClose} />}>
       <div className="h-full overflow-y-auto scrollbar-none pb-4">
         <Section title="دسته‌بندی‌ها">
           <div className="grid grid-cols-2 gap-2 px-3">
