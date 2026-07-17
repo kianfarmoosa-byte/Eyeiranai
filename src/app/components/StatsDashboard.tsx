@@ -5,6 +5,7 @@ import { SentimentSummary } from "./SentimentBadge";
 import { TrendingEntities } from "./TrendingEntities";
 import { DuplicateClusters } from "./DuplicateClusters";
 import { TopicDistribution } from "./TopicDistribution";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = {
   articles: Article[];
@@ -97,14 +98,14 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
   const heatColor = (n: number) => {
     if (n === 0) return "bg-slate-100 dark:bg-slate-800";
     const lvl = Math.min(4, Math.ceil((n / stats.maxDay) * 4));
-    return ["", "bg-blue-200 dark:bg-blue-900", "bg-blue-400 dark:bg-blue-700", "bg-blue-500 dark:bg-blue-500", "bg-blue-700 dark:bg-blue-300"][lvl];
+    return ["", "bg-emerald-200 dark:bg-emerald-900", "bg-emerald-400 dark:bg-emerald-700", "bg-emerald-500 dark:bg-emerald-500", "bg-emerald-700 dark:bg-emerald-300"][lvl];
   };
 
   return (
     <div className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-950">
       <div className="max-w-6xl mx-auto p-6">
         <div className="flex items-center gap-2 mb-6">
-          <BarChart3 className="w-6 h-6 text-blue-600" />
+          <BarChart3 className="w-6 h-6 text-emerald-600" />
           <h2 className="text-lg">داشبورد آمار شخصی</h2>
           <div className="flex-1" />
           <button onClick={onClose} className="text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white">بستن</button>
@@ -112,7 +113,7 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
           {[
-            { icon: BookOpen, label: "خوانده‌شده", value: stats.read.toLocaleString("fa-IR"), tint: "from-blue-500 to-cyan-500" },
+            { icon: BookOpen, label: "خوانده‌شده", value: stats.read.toLocaleString("fa-IR"), tint: "from-emerald-500 to-cyan-500" },
             { icon: Clock, label: "دقیقهٔ مطالعه", value: stats.totalMinutes.toLocaleString("fa-IR"), tint: "from-violet-500 to-fuchsia-500" },
             { icon: Star, label: "نشان‌شده", value: stats.starred.toLocaleString("fa-IR"), tint: "from-amber-500 to-orange-500" },
             { icon: Bookmark, label: "ذخیره‌شده", value: stats.saved.toLocaleString("fa-IR"), tint: "from-emerald-500 to-teal-500" },
@@ -137,11 +138,11 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
           </div>
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2 mb-1 text-sm">
-              <Activity className="w-4 h-4 text-blue-500" /> نرخ خواندن
+              <Activity className="w-4 h-4 text-emerald-500" /> نرخ خواندن
             </div>
             <div className="text-2xl tabular-nums">{stats.total ? Math.round((stats.read / stats.total) * 100) : 0}<span className="text-xs opacity-60">٪</span></div>
             <div className="h-2 bg-slate-200 dark:bg-slate-800 rounded-full mt-2 overflow-hidden">
-              <div className="h-full bg-blue-500" style={{ width: `${stats.total ? (stats.read / stats.total) * 100 : 0}%` }} />
+              <div className="h-full bg-emerald-500" style={{ width: `${stats.total ? (stats.read / stats.total) * 100 : 0}%` }} />
             </div>
           </div>
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
@@ -155,7 +156,7 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
 
         <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 mb-6">
           <div className="flex items-center gap-2 mb-3 text-sm">
-            <Calendar className="w-4 h-4 text-blue-500" /> فعالیت سال گذشته
+            <Calendar className="w-4 h-4 text-emerald-500" /> فعالیت سال گذشته
           </div>
           <div className="overflow-x-auto">
             <div className="grid grid-rows-7 grid-flow-col gap-[3px]" style={{ direction: "ltr" }}>
@@ -171,7 +172,7 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
           <div className="flex items-center gap-1 text-[10px] text-slate-500 mt-2 justify-end">
             کم
             {[0, 1, 2, 3, 4].map(l => (
-              <div key={l} className={`w-3 h-3 rounded-[3px] ${["bg-slate-100 dark:bg-slate-800","bg-blue-200 dark:bg-blue-900","bg-blue-400 dark:bg-blue-700","bg-blue-500","bg-blue-700"][l]}`} />
+              <div key={l} className={`w-3 h-3 rounded-[3px] ${["bg-slate-100 dark:bg-slate-800","bg-emerald-200 dark:bg-emerald-900","bg-emerald-400 dark:bg-emerald-700","bg-emerald-500","bg-emerald-700"][l]}`} />
             ))}
             زیاد
           </div>
@@ -192,7 +193,7 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-6">
           <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800">
-            <div className="flex items-center gap-2 mb-3 text-sm"><Globe2 className="w-4 h-4 text-blue-500" /> منابع برتر</div>
+            <div className="flex items-center gap-2 mb-3 text-sm"><Globe2 className="w-4 h-4 text-emerald-500" /> منابع برتر</div>
             <div className="space-y-2">
               {stats.topSources.length === 0 && <div className="text-xs text-slate-500">هنوز داده‌ای نیست</div>}
               {stats.topSources.map(([name, n]) => (
@@ -202,7 +203,7 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
                     <span className="tabular-nums opacity-70">{n.toLocaleString("fa-IR")}</span>
                   </div>
                   <div className="h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-l from-blue-500 to-cyan-400" style={{ width: `${(n / stats.topSources[0][1]) * 100}%` }} />
+                    <div className="h-full bg-gradient-to-l from-emerald-500 to-cyan-400" style={{ width: `${(n / stats.topSources[0][1]) * 100}%` }} />
                   </div>
                 </div>
               ))}
@@ -228,7 +229,7 @@ export function StatsDashboard({ articles, savedIds, onClose }: Props) {
             {stats.hours.map((h, i) => (
               <div key={i} className="flex-1 bg-gradient-to-t from-amber-500 to-orange-300 dark:from-amber-400 dark:to-orange-200 rounded-t"
                 style={{ height: `${(h / stats.maxHour) * 100}%`, minHeight: 2 }}
-                title={`${i}:00 — ${h} مقاله`} />
+                title={`${toFa(i)}:۰۰ — ${toFa(h)} مقاله`} />
             ))}
           </div>
           <div className="flex justify-between text-[10px] text-slate-500 mt-1" style={{ direction: "ltr" }}>

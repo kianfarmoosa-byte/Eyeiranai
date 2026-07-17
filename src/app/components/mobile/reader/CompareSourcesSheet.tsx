@@ -107,7 +107,7 @@ export function CompareSourcesSheet({ open, onClose, article, pool, onOpenArticl
                       {a.sourceIcon} {a.source}
                     </span>
                     {TRUSTED.has(a.source) && (
-                      <BadgeCheck className="size-3.5 text-sky-500 shrink-0" />
+                      <BadgeCheck className="size-3.5 text-emerald-500 shrink-0" />
                     )}
                     <span className="text-[10.5px] text-[var(--foreground-subtle)] mr-auto">
                       {timeAgoFa(a.publishedAt)}

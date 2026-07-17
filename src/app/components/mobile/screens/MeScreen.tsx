@@ -1,4 +1,4 @@
-import { Settings, Moon, Bell, Download, Info, ChevronLeft, Type, Globe, NotebookPen, History, LogIn, LogOut, Headphones, BarChart3, Sparkles } from "lucide-react";
+import { Settings, Moon, Bell, Download, Info, ChevronLeft, Type, Globe, NotebookPen, History, LogIn, LogOut, Headphones, BarChart3, Sparkles, Wand2, Radar, Package } from "lucide-react";
 import { MobileScreen } from "../shell/MobileScreen";
 import { MobileTopBar } from "../shell/MobileTopBar";
 
@@ -18,9 +18,13 @@ type Props = {
   onOpenBriefing?: () => void;
   onOpenStats?: () => void;
   onOpenTopics?: () => void;
+  onOpenStudio?: () => void;
+  onOpenSocial?: () => void;
+  onOpenNewspack?: () => void;
+  socialUnread?: number;
 };
 
-export function MeScreen({ name = "کاربر کیان", email, onOpenSettings, onToggleTheme, onOpenNotes, onOpenHistory, onOpenNotifications, unreadNotifs = 0, isAuthed = false, onOpenAuth, onSignOut, onOpenProfile, onOpenBriefing, onOpenStats, onOpenTopics }: Props) {
+export function MeScreen({ name = "کاربر flow", email, onOpenSettings, onToggleTheme, onOpenNotes, onOpenHistory, onOpenNotifications, unreadNotifs = 0, isAuthed = false, onOpenAuth, onSignOut, onOpenProfile, onOpenBriefing, onOpenStats, onOpenTopics, onOpenStudio, onOpenSocial, onOpenNewspack, socialUnread = 0 }: Props) {
   return (
     <MobileScreen topbar={<MobileTopBar title="من" />}>
       <div className="h-full overflow-y-auto scrollbar-none pb-4">
@@ -48,6 +52,12 @@ export function MeScreen({ name = "کاربر کیان", email, onOpenSettings, 
         </Group>
 
         <Group>
+          <Row icon={<Wand2 className="size-4" />} label="استودیوی محتوا (هوش مصنوعی)" onClick={onOpenStudio} />
+          <Row icon={<Radar className="size-4" />} label="رصد اجتماعی" badge={socialUnread} onClick={onOpenSocial} />
+          <Row icon={<Package className="size-4" />} label="بسته‌های خبری سفارشی" onClick={onOpenNewspack} />
+        </Group>
+
+        <Group>
           <Row icon={<Sparkles className="size-4" />} label="موضوعات و منابع" onClick={onOpenTopics} />
           <Row icon={<BarChart3 className="size-4" />} label="آمار مطالعه" onClick={onOpenStats} />
           <Row icon={<Headphones className="size-4" />} label="خلاصهٔ صوتی روز" onClick={onOpenBriefing} />
@@ -58,7 +68,7 @@ export function MeScreen({ name = "کاربر کیان", email, onOpenSettings, 
         </Group>
 
         <Group>
-          <Row icon={<Info className="size-4" />} label="درباره کیان" value="نسخه ۱.۰" />
+          <Row icon={<Info className="size-4" />} label="درباره flow" value="نسخه ۱.۰" />
           {isAuthed ? (
             <Row icon={<LogOut className="size-4" />} label="خروج از حساب" onClick={onSignOut} />
           ) : (
@@ -78,12 +88,17 @@ function Group({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Row({ icon, label, value, onClick }: { icon: React.ReactNode; label: string; value?: string; onClick?: () => void }) {
+function Row({ icon, label, value, badge, onClick }: { icon: React.ReactNode; label: string; value?: string; badge?: number; onClick?: () => void }) {
   return (
     <li>
       <button onClick={onClick} className="w-full tap press flex items-center gap-3 px-3.5 py-3 text-right">
         <span className="size-8 grid place-items-center rounded-full bg-[var(--accent)] text-[var(--foreground-muted)]">{icon}</span>
         <span className="flex-1 text-[14px]">{label}</span>
+        {badge && badge > 0 ? (
+          <span className="text-[11px] font-semibold bg-rose-500 text-white px-1.5 min-w-[18px] text-center py-0.5 rounded-full">
+            {badge.toLocaleString("fa-IR")}
+          </span>
+        ) : null}
         {value && <span className="text-[12.5px] text-[var(--foreground-subtle)]">{value}</span>}
         <ChevronLeft className="size-4 text-[var(--foreground-subtle)]" />
       </button>

@@ -40,7 +40,7 @@ export function DetailedArticleHeader({ article }: Props) {
             </Badge>
           )}
           {isUpdated && (
-            <Badge tone="bg-sky-500/12 text-sky-600 dark:text-sky-400 border-sky-500/20" icon={<RefreshCw className="size-3" />}>
+            <Badge tone="bg-emerald-500/12 text-emerald-600 dark:text-emerald-400 border-emerald-500/20" icon={<RefreshCw className="size-3" />}>
               به‌روزرسانی شد
             </Badge>
           )}
@@ -61,7 +61,7 @@ export function DetailedArticleHeader({ article }: Props) {
           <div className="flex items-center gap-1 text-[12.5px] font-semibold leading-tight">
             <span className="truncate">{article.source}</span>
             {verified && (
-              <BadgeCheck className="size-3.5 text-sky-500 shrink-0" aria-label="تأیید‌شده" />
+              <BadgeCheck className="size-3.5 text-emerald-500 shrink-0" aria-label="تأیید‌شده" />
             )}
           </div>
           <div className="text-[11px] text-[var(--foreground-subtle)] leading-tight mt-0.5">
@@ -95,7 +95,7 @@ export function DetailedArticleHeader({ article }: Props) {
       </div>
 
       {isUpdated && updatedAt && (
-        <div className="mt-2.5 text-[11px] text-sky-600 dark:text-sky-400">
+        <div className="mt-2.5 text-[11px] text-emerald-600 dark:text-emerald-400">
           آخرین به‌روزرسانی: {timeAgoFa(updatedAt as number)}
         </div>
       )}

@@ -187,7 +187,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
     const colorClass: Record<Highlight["color"], string> = {
       yellow: "bg-yellow-200/70 dark:bg-yellow-500/30",
       green: "bg-emerald-200/70 dark:bg-emerald-500/30",
-      blue: "bg-blue-200/70 dark:bg-blue-500/30",
+      blue: "bg-emerald-200/70 dark:bg-emerald-500/30",
       rose: "bg-rose-200/70 dark:bg-rose-500/30",
     };
     for (const r of ranges) {
@@ -203,7 +203,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
   return (
     <div className={`fixed inset-0 z-50 ${themeClasses}`} dir="rtl">
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-black/10 dark:bg-white/10 z-10">
-        <div className="h-full bg-blue-500 transition-all" style={{ width: `${progress * 100}%` }} />
+        <div className="h-full bg-emerald-500 transition-all" style={{ width: `${progress * 100}%` }} />
       </div>
 
       <div ref={containerRef} className="h-full overflow-y-auto">
@@ -252,7 +252,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
         <button onClick={onClose} className="p-2 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10" title="بستن (Esc)">
           <X className="w-4 h-4" />
         </button>
-        <button onClick={() => setPanel(panel === "summary" ? null : "summary")} className={`p-2 rounded-full ${panel === "summary" ? "bg-blue-500 text-white" : "bg-black/5 dark:bg-white/10 hover:bg-black/10"}`} title="خلاصه (s)">
+        <button onClick={() => setPanel(panel === "summary" ? null : "summary")} className={`p-2 rounded-full ${panel === "summary" ? "bg-emerald-500 text-white" : "bg-black/5 dark:bg-white/10 hover:bg-black/10"}`} title="خلاصه (s)">
           <Sparkles className="w-4 h-4" />
         </button>
         <button onClick={() => setPanel(panel === "highlights" ? null : "highlights")} className={`p-2 rounded-full ${panel === "highlights" ? "bg-amber-500 text-white" : "bg-black/5 dark:bg-white/10 hover:bg-black/10"}`} title="هایلایت‌ها (h)">
@@ -297,7 +297,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
               <div className="flex items-center gap-1 mb-3">
                 {(["tldr", "short", "structured"] as SummaryLevel[]).map(l => (
                   <button key={l} onClick={() => setSummaryLevel(l)}
-                    className={`text-[11px] px-2.5 py-1 rounded-full ${summaryLevel === l ? "bg-blue-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}>
+                    className={`text-[11px] px-2.5 py-1 rounded-full ${summaryLevel === l ? "bg-emerald-500 text-white" : "bg-slate-100 dark:bg-slate-800"}`}>
                     {l === "tldr" ? "خلاصه" : l === "short" ? "پاراگراف" : "ساختاریافته"}
                   </button>
                 ))}
@@ -343,7 +343,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
                         rows={2} className="w-full text-[11px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-1.5" />
                       <div className="flex gap-1 mt-1">
                         <button onClick={() => { updateHighlight(h.id, { note: noteDraft }); setHighlights(getHighlights(article.id)); setEditingNote(null); }}
-                          className="text-[10px] px-2 py-0.5 bg-blue-500 text-white rounded">ذخیره</button>
+                          className="text-[10px] px-2 py-0.5 bg-emerald-500 text-white rounded">ذخیره</button>
                         <button onClick={() => setEditingNote(null)} className="text-[10px] px-2 py-0.5 bg-slate-200 dark:bg-slate-700 rounded">انصراف</button>
                       </div>
                     </div>
@@ -351,7 +351,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
                     <div className="mt-1 text-[11px] italic opacity-75 cursor-pointer" onClick={() => { setEditingNote(h.id); setNoteDraft(h.note || ""); }}>{h.note}</div>
                   ) : null}
                   <div className="mt-1.5 flex items-center gap-2 text-[10px] text-slate-500">
-                    <button onClick={() => { setEditingNote(h.id); setNoteDraft(h.note || ""); }} className="hover:text-blue-500">{h.note ? "ویرایش یادداشت" : "افزودن یادداشت"}</button>
+                    <button onClick={() => { setEditingNote(h.id); setNoteDraft(h.note || ""); }} className="hover:text-emerald-500">{h.note ? "ویرایش یادداشت" : "افزودن یادداشت"}</button>
                     <button onClick={() => { removeHighlight(h.id); setHighlights(getHighlights(article.id)); }} className="hover:text-rose-500 flex items-center gap-1">
                       <Trash2 className="w-3 h-3" /> حذف
                     </button>
@@ -386,7 +386,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
                         const el = containerRef.current; if (!el) return;
                         el.scrollTo({ top: target * (el.scrollHeight - el.clientHeight), behavior: "smooth" });
                       }}
-                      className={`w-full text-right text-[11px] line-clamp-2 px-2 py-1.5 rounded ${active ? "bg-blue-500 text-white" : "hover:bg-slate-100 dark:hover:bg-slate-800"}`}>
+                      className={`w-full text-right text-[11px] line-clamp-2 px-2 py-1.5 rounded ${active ? "bg-emerald-500 text-white" : "hover:bg-slate-100 dark:hover:bg-slate-800"}`}>
                       <span className="opacity-50 ml-1">{(i + 1).toLocaleString("fa-IR")}.</span>
                       {p.slice(0, 80)}
                     </button>
@@ -431,7 +431,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
           {align === "justify" ? <AlignJustify className="w-3.5 h-3.5" /> : <AlignLeft className="w-3.5 h-3.5" />}
         </button>
         <span className="w-px h-4 bg-white/20 mx-1" />
-        <button onClick={speak} className={`p-1.5 rounded-full ${speaking ? "bg-blue-500" : "hover:bg-white/10"}`} title="پخش صوتی">
+        <button onClick={speak} className={`p-1.5 rounded-full ${speaking ? "bg-emerald-500" : "hover:bg-white/10"}`} title="پخش صوتی">
           {speaking ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
         </button>
         {onToggleStar && (
@@ -440,7 +440,7 @@ export function ReadingMode({ article, onClose, onToggleStar, onToggleSave, isSa
           </button>
         )}
         {onToggleSave && (
-          <button onClick={() => onToggleSave(article.id)} className={`p-1.5 rounded-full hover:bg-white/10 ${isSaved ? "text-blue-400" : ""}`} title="ذخیره">
+          <button onClick={() => onToggleSave(article.id)} className={`p-1.5 rounded-full hover:bg-white/10 ${isSaved ? "text-emerald-400" : ""}`} title="ذخیره">
             <Bookmark className="w-3.5 h-3.5" fill={isSaved ? "currentColor" : "none"} />
           </button>
         )}

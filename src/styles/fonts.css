@@ -1,11 +1,14 @@
 /* ────────────────────────────────────────────────────────────────────
-   Typography Foundation — Editorial × Terminal hybrid
-   - Vazirmatn  : UI base (Persian + Latin) — multilingual workhorse
-   - Estedad    : Display / headlines — modern Persian with editorial weight
-   - Geist Mono : Tabular numerics, codes, technical data
-   - Inter      : Latin fallback for English-only contexts
+   Typography Foundation — Strider Editorial System
+   - Newsreader     : Serif display / headlines (editorial voice)
+   - Hanken Grotesk : Sans-serif UI, body, labels, buttons
+   - Vazirmatn      : Persian glyph carrier (per-glyph fallback)
+   - Estedad        : Persian display fallback
+   - Geist Mono     : Tabular numerics, codes, technical data
    ──────────────────────────────────────────────────────────────────── */
 
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/aminroosta/estedad@latest/Estedad-FD/Estedad-FD.css');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap');
@@ -13,8 +16,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --font-sans: 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Estedad', 'Vazirmatn', 'Inter', system-ui, sans-serif;
+  /* Strider Editorial: Hanken Grotesk (UI) + Newsreader (serif display).
+     Vazirmatn/Estedad carry Persian glyphs via per-glyph fallback. */
+  --font-sans: 'Hanken Grotesk', 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Newsreader', 'Estedad', 'Vazirmatn', Georgia, serif;
   --font-mono: 'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
@@ -38,7 +43,7 @@ html, body {
   font-feature-settings: "tnum", "ss01";
 }
 
-/* Display headings (h1/h2 with `.display` opt-in) get Estedad. */
+/* Display headings (h1/h2 with `.display` opt-in) get the serif face. */
 .display, .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.01em;

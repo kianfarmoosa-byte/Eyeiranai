@@ -7,6 +7,7 @@ import {
   computeInfluence, detectEchoChambers,
 } from "./graphAnalytics";
 import { Users, Building2, MapPin, Zap, BookOpen, Layers, Radio } from "lucide-react";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = {
   articles: Article[];
@@ -224,9 +225,9 @@ function buildGraph(articles: Article[], threshold: number, windowHours: number)
 
 function formatDelay(min: number): string {
   if (min < 1) return "همزمان";
-  if (min < 60) return `${Math.round(min)}د`;
-  if (min < 1440) return `${(min / 60).toFixed(1)}س`;
-  return `${(min / 1440).toFixed(1)}ر`;
+  if (min < 60) return `${toFa(Math.round(min))}د`;
+  if (min < 1440) return `${toFa((min / 60).toFixed(1))}س`;
+  return `${toFa((min / 1440).toFixed(1))}ر`;
 }
 
 function VelocitySparkline({ cluster }: { cluster: Cluster }) {
@@ -242,7 +243,7 @@ function VelocitySparkline({ cluster }: { cluster: Cluster }) {
   return (
     <div className="flex items-end gap-0.5 h-8">
       {counts.map((v, i) => (
-        <div key={i} className="flex-1 bg-gradient-to-t from-indigo-500 to-blue-400 rounded-sm" style={{ height: `${(v / max) * 100}%` }} />
+        <div key={i} className="flex-1 bg-gradient-to-t from-emerald-500 to-emerald-400 rounded-sm" style={{ height: `${(v / max) * 100}%` }} />
       ))}
     </div>
   );
@@ -438,7 +439,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
   return (
     <div className="flex-1 flex flex-col bg-[radial-gradient(ellipse_at_top,#eef2ff_0%,#f8fafc_50%,#f1f5f9_100%)] dark:bg-[radial-gradient(ellipse_at_top,#0f172a_0%,#020617_55%,#0b1220_100%)] min-w-0">
       <div className="border-b border-slate-200 dark:border-slate-800 px-5 py-3 flex items-center gap-3 flex-wrap bg-white/70 dark:bg-slate-950/70 backdrop-blur">
-        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white shadow-sm">
+        <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white shadow-sm">
           <Network className="w-4 h-4" />
         </div>
         <div>
@@ -455,7 +456,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
               <span className="text-slate-500">شباهت</span>
               <input type="range" min={0.15} max={0.6} step={0.02} value={threshold}
                 onChange={e => setThreshold(Number(e.target.value))} className="w-24" />
-              <span className="tabular-nums w-8 text-slate-500">{threshold.toFixed(2)}</span>
+              <span className="tabular-nums w-8 text-slate-500">{toFa(threshold.toFixed(2))}</span>
             </label>
             <label className="flex items-center gap-2">
               <span className="text-slate-500">پنجره</span>
@@ -475,7 +476,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
             <Sliders className="w-4 h-4" />
           </button>
           <button onClick={onRefresh} disabled={loading}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-br from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 disabled:opacity-50 text-white rounded-lg shadow-sm">
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-br from-emerald-600 to-emerald-600 hover:from-emerald-500 hover:to-emerald-500 disabled:opacity-50 text-white rounded-lg shadow-sm">
             {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
             <span className="hidden md:inline">بروزرسانی</span>
           </button>
@@ -511,20 +512,20 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
             </div>
           )}
           {isolateCluster && (
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-indigo-600 text-white px-3 py-1.5 rounded-full text-[11px] shadow-lg flex items-center gap-2">
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-emerald-600 text-white px-3 py-1.5 rounded-full text-[11px] shadow-lg flex items-center gap-2">
               <Crosshair className="w-3 h-3" /> حالت تمرکز روی خوشه فعال
-              <button onClick={() => setIsolateCluster(null)} className="hover:bg-indigo-700 rounded-full p-0.5"><X className="w-3 h-3" /></button>
+              <button onClick={() => setIsolateCluster(null)} className="hover:bg-emerald-700 rounded-full p-0.5"><X className="w-3 h-3" /></button>
             </div>
           )}
           <div className="hidden md:block absolute top-3 left-3 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur rounded-xl border border-slate-200 dark:border-slate-800 px-3 py-2 text-[10px] shadow-lg">
             <div className="text-slate-500 mb-1.5">راهنما</div>
             <div className="grid grid-cols-2 gap-x-3 gap-y-1">
               <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500 ring-2 ring-amber-300" /> منشأ</div>
-              <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full border-2 border-indigo-500" /> نفوذ</div>
+              <div className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full border-2 border-emerald-500" /> نفوذ</div>
               <div className="flex items-center gap-1"><span className="w-4 h-0.5 bg-red-500" /> ≤۱۵د</div>
               <div className="flex items-center gap-1"><span className="w-4 h-0.5 bg-orange-500" /> ≤۱س</div>
               <div className="flex items-center gap-1"><span className="w-4 h-0.5 bg-yellow-500" /> ≤۳س</div>
-              <div className="flex items-center gap-1"><span className="w-4 h-0.5 bg-sky-500" /> ≤۱۲س</div>
+              <div className="flex items-center gap-1"><span className="w-4 h-0.5 bg-emerald-500" /> ≤۱۲س</div>
             </div>
             <div className="mt-1.5 pt-1.5 border-t border-slate-200 dark:border-slate-800 text-[9px] text-slate-500">
               اندازه = حجم · حلقه = نفوذ · رنگ = دسته
@@ -574,7 +575,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
               linkDirectionalParticleWidth={2.2}
               linkDirectionalParticleSpeed={0.008}
               linkCurvature={(l: any) => l.directed ? 0 : 0.15}
-              nodeLabel={(n: any) => `${n.icon || ""} ${n.name} — ${n.count} مقاله · نفوذ ${(n.pagerank * 100).toFixed(0)}${n.firstCount ? ` · ${n.firstCount} بار منشأ` : ""}`}
+              nodeLabel={(n: any) => `${n.icon || ""} ${n.name} — ${toFa(n.count)} مقاله · نفوذ ${toFa((n.pagerank * 100).toFixed(0))}${n.firstCount ? ` · ${toFa(n.firstCount)} بار منشأ` : ""}`}
               nodeCanvasObject={(node: any, ctx, globalScale) => {
                 if (!Number.isFinite(node.x) || !Number.isFinite(node.y)) return;
                 const isOrigin = node.firstCount > 0;
@@ -666,7 +667,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                 {selectedCluster.trending && <span className="px-1.5 py-0.5 bg-orange-100 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 rounded text-[10px] flex items-center gap-1"><Flame className="w-3 h-3" /> ترند زودهنگام</span>}
                 {selectedCluster.convergence && <span className="px-1.5 py-0.5 bg-rose-100 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 rounded text-[10px] flex items-center gap-1"><AlertTriangle className="w-3 h-3" /> همگرایی</span>}
                 <span className="px-1.5 py-0.5 bg-slate-100 dark:bg-slate-800 rounded text-[10px] flex items-center gap-1"><Clock className="w-3 h-3" /> {formatDelay(selectedCluster.spanMin)}</span>
-                <span className="px-1.5 py-0.5 bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 rounded text-[10px]">سرعت: {(selectedCluster.velocity * 60).toFixed(1)}/س</span>
+                <span className="px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 rounded text-[10px]">سرعت: {toFa((selectedCluster.velocity * 60).toFixed(1))}/س</span>
               </div>
 
               <div className="mb-3 p-2 bg-slate-50 dark:bg-slate-900 rounded-lg">
@@ -674,9 +675,9 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                 <VelocitySparkline cluster={selectedCluster} />
               </div>
 
-              <div className="mb-3 p-2 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/30 dark:to-blue-950/30 rounded-lg border border-indigo-200 dark:border-indigo-900/40">
+              <div className="mb-3 p-2 bg-gradient-to-r from-emerald-50 to-emerald-50 dark:from-emerald-950/30 dark:to-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-900/40">
                 <div className="flex items-center gap-2 mb-1.5">
-                  <button onClick={() => setPlaying(p => !p)} className="w-6 h-6 flex items-center justify-center rounded-full bg-indigo-600 hover:bg-indigo-500 text-white text-xs">
+                  <button onClick={() => setPlaying(p => !p)} className="w-6 h-6 flex items-center justify-center rounded-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs">
                     {playing ? "⏸" : "▶"}
                   </button>
                   <input type="range" min={0} max={1} step={0.01} value={scrubT}
@@ -707,7 +708,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       </div>
                       <div className="text-xs mt-1 line-clamp-2">{it.title}</div>
                       {it.link && (
-                        <a href={it.link} target="_blank" rel="noreferrer" className="text-xs text-blue-600 dark:text-blue-400 mt-1 inline-flex items-center gap-1">
+                        <a href={it.link} target="_blank" rel="noreferrer" className="text-xs text-emerald-600 dark:text-emerald-400 mt-1 inline-flex items-center gap-1">
                           <ExternalLink className="w-3 h-3" /> متن اصلی
                         </a>
                       )}
@@ -735,23 +736,23 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                 </div>
                 <div className="p-2 bg-slate-50 dark:bg-slate-900 rounded-lg">
                   <div className="text-[10px] text-slate-500">شاخص نفوذ</div>
-                  <div className="text-lg tabular-nums">{(sourceDetail.node.pagerank * 100).toFixed(0)}</div>
+                  <div className="text-lg tabular-nums">{toFa((sourceDetail.node.pagerank * 100).toFixed(0))}</div>
                 </div>
                 <div className="p-2 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
                   <div className="text-[10px] text-slate-500">بار منشأ</div>
                   <div className="text-lg tabular-nums text-amber-700 dark:text-amber-400">{sourceDetail.originCount}</div>
                 </div>
-                <div className="p-2 bg-sky-50 dark:bg-sky-950/30 rounded-lg">
+                <div className="p-2 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg">
                   <div className="text-[10px] text-slate-500">بار بازنشر</div>
-                  <div className="text-lg tabular-nums text-sky-700 dark:text-sky-400">{sourceDetail.republishCount}</div>
+                  <div className="text-lg tabular-nums text-emerald-700 dark:text-emerald-400">{sourceDetail.republishCount}</div>
                 </div>
               </div>
               <div className="mb-3 p-2 bg-slate-50 dark:bg-slate-900 rounded-lg">
                 <div className="flex items-center justify-between text-[10px] text-slate-500 mb-1">
                   <span>نسبت منشأ ← بازنشر</span>
-                  <span className="tabular-nums">{(sourceDetail.biasScore * 100).toFixed(0)}٪ منشأ</span>
+                  <span className="tabular-nums">{toFa((sourceDetail.biasScore * 100).toFixed(0))}٪ منشأ</span>
                 </div>
-                <div className="h-2 bg-sky-200 dark:bg-sky-900 rounded-full overflow-hidden">
+                <div className="h-2 bg-emerald-200 dark:bg-emerald-900 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-r from-amber-500 to-amber-400" style={{ width: `${sourceDetail.biasScore * 100}%` }} />
                 </div>
                 {sourceDetail.republishCount > 0 && (
@@ -772,11 +773,11 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
               <div className="space-y-1">
                 {sourceDetail.clusters.slice(0, 15).map(c => (
                   <button key={c.id} onClick={() => setSelectedCluster(c)}
-                    className="w-full text-right p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-blue-400">
+                    className="w-full text-right p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-emerald-400">
                     <div className="flex items-center gap-1 mb-0.5">
                       {c.origin.source === sourceDetail.node.id
                         ? <span className="text-[9px] px-1 bg-amber-200 text-amber-900 rounded">منشأ</span>
-                        : <span className="text-[9px] px-1 bg-sky-100 text-sky-700 rounded">بازنشر</span>}
+                        : <span className="text-[9px] px-1 bg-emerald-100 text-emerald-700 rounded">بازنشر</span>}
                       {c.trending && <span>🔥</span>}
                     </div>
                     <div className="text-xs line-clamp-2">{c.origin.title}</div>
@@ -802,7 +803,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                   const Icon = t.icon;
                   return (
                     <button key={t.id} onClick={() => setTab(t.id as any)}
-                      className={`shrink-0 px-3 py-2 flex items-center justify-center gap-1 whitespace-nowrap ${tab === t.id ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400' : 'text-slate-500'}`}>
+                      className={`shrink-0 px-3 py-2 flex items-center justify-center gap-1 whitespace-nowrap ${tab === t.id ? 'border-b-2 border-emerald-500 text-emerald-600 dark:text-emerald-400' : 'text-slate-500'}`}>
                       <Icon className="w-3 h-3" /> {t.label}
                     </button>
                   );
@@ -816,14 +817,14 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       <Search className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400" />
                       <input value={clusterQuery} onChange={e => setClusterQuery(e.target.value)}
                         placeholder="جستجو در خوشه‌ها..."
-                        className="w-full bg-slate-100 dark:bg-slate-800 rounded-lg pr-7 pl-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        className="w-full bg-slate-100 dark:bg-slate-800 rounded-lg pr-7 pl-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                     </div>
                     {graph.clusters
                       .filter(c => !clusterQuery || c.origin.title.toLowerCase().includes(clusterQuery.toLowerCase()) || c.items.some(i => i.source.includes(clusterQuery)))
                       .slice(0, 40).map(c => (
                       <div key={c.id} className="group relative">
                         <button onClick={() => setSelectedCluster(c)}
-                          className="w-full text-right p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30">
+                          className="w-full text-right p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30">
                           <div className="text-xs line-clamp-2 pl-14">{c.origin.title}</div>
                           <div className="text-[10px] text-slate-500 mt-1 flex items-center gap-2 flex-wrap">
                             <span>{c.items.length} منبع</span>
@@ -840,7 +841,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                         <div className="absolute top-1 left-1 flex gap-0.5 opacity-0 group-hover:opacity-100 transition">
                           <button onClick={(e) => { e.stopPropagation(); setIsolateCluster(isolateCluster === c.id ? null : c.id); setTimeout(fitView, 200); }}
                             title="تمرکز روی این خوشه در گراف"
-                            className={`p-1 rounded ${isolateCluster === c.id ? "bg-indigo-600 text-white" : "bg-white/90 dark:bg-slate-800 hover:bg-indigo-100 dark:hover:bg-indigo-950"}`}>
+                            className={`p-1 rounded ${isolateCluster === c.id ? "bg-emerald-600 text-white" : "bg-white/90 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-950"}`}>
                             <Crosshair className="w-3 h-3" />
                           </button>
                           <button onClick={(e) => { e.stopPropagation(); toggleWatch(c.id); }}
@@ -863,7 +864,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                         className="w-full text-right p-2 rounded-lg border border-orange-200 dark:border-orange-900/40 bg-orange-50/50 dark:bg-orange-950/20 hover:border-orange-400">
                         <div className="flex items-center gap-1 mb-1">
                           <Flame className="w-3 h-3 text-orange-500" />
-                          <span className="text-[10px] text-orange-700 dark:text-orange-300 tabular-nums">{(c.velocity * 60).toFixed(1)} بازنشر/ساعت</span>
+                          <span className="text-[10px] text-orange-700 dark:text-orange-300 tabular-nums">{toFa((c.velocity * 60).toFixed(1))} بازنشر/ساعت</span>
                         </div>
                         <div className="text-xs line-clamp-2">{c.origin.title}</div>
                         <div className="text-[10px] text-slate-500 mt-1">{c.items.length} منبع · {formatDelay(c.spanMin)}</div>
@@ -882,13 +883,13 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                           const [, mid] = catColor(n.category);
                           return (
                             <button key={n.id} onClick={() => setFocusNode(focusNode === n.id ? null : n.id)}
-                              className={`w-full flex items-center gap-2 text-sm p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 ${focusNode === n.id ? 'bg-indigo-50 dark:bg-indigo-950/30' : ''}`}>
+                              className={`w-full flex items-center gap-2 text-sm p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 ${focusNode === n.id ? 'bg-emerald-50 dark:bg-emerald-950/30' : ''}`}>
                               <span className="w-4 text-[10px] text-slate-400 tabular-nums">{i + 1}</span>
                               <span className="w-2 h-2 rounded-full" style={{ background: mid }} />
                               <span>{n.icon}</span>
                               <span className="flex-1 truncate text-right">{n.name}</span>
                               <div className="w-12 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                                <div className="h-full bg-gradient-to-r from-indigo-500 to-blue-500" style={{ width: `${n.pagerank * 100}%` }} />
+                                <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-500" style={{ width: `${n.pagerank * 100}%` }} />
                               </div>
                             </button>
                           );
@@ -919,7 +920,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                             <span className="w-4 text-[10px] text-slate-400 tabular-nums">{i + 1}</span>
                             <span>{n.icon}</span>
                             <span className="flex-1 truncate">{n.name}</span>
-                            <span className="text-xs tabular-nums text-amber-600 dark:text-amber-400">{n.firstCount}×</span>
+                            <span className="text-xs tabular-nums text-amber-600 dark:text-amber-400">{toFa(n.firstCount)}×</span>
                           </div>
                         ))}
                         {topOrigins.length === 0 && <div className="text-xs text-slate-500">خوشه‌ای تشکیل نشده</div>}
@@ -931,7 +932,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                 {tab === 'similar' && (
                   <div className="space-y-2">
                     {!focusNode && <div className="text-xs text-slate-500 p-3 bg-slate-50 dark:bg-slate-900 rounded-lg">
-                      <Sparkles className="w-4 h-4 mb-1 text-indigo-500" />
+                      <Sparkles className="w-4 h-4 mb-1 text-emerald-500" />
                       یک منبع روی گراف یا از تب «نفوذ» انتخاب کنید تا منابع با الگوی پوشش مشابه را ببینید.
                     </div>}
                     {focusNode && (
@@ -943,13 +944,13 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                           const [, mid] = catColor(s.category);
                           return (
                             <button key={s.id} onClick={() => setFocusNode(s.id)}
-                              className="w-full flex items-center gap-2 text-sm p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-indigo-400">
+                              className="w-full flex items-center gap-2 text-sm p-2 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-emerald-400">
                               <span className="w-2 h-2 rounded-full" style={{ background: mid }} />
                               <span>{s.icon}</span>
                               <span className="flex-1 truncate">{s.name}</span>
                               <span className="text-[10px] text-slate-500 tabular-nums">{s.overlap} خوشهٔ مشترک</span>
                               <div className="w-10 h-1 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-                                <div className="h-full bg-indigo-500" style={{ width: `${Math.min(100, s.score * 200)}%` }} />
+                                <div className="h-full bg-emerald-500" style={{ width: `${Math.min(100, s.score * 200)}%` }} />
                               </div>
                             </button>
                           );
@@ -1013,7 +1014,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       <Search className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400" />
                       <input value={entityQuery} onChange={e => setEntityQuery(e.target.value)}
                         placeholder="جستجوی موجودیت..."
-                        className="w-full bg-slate-100 dark:bg-slate-800 rounded-lg pr-7 pl-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        className="w-full bg-slate-100 dark:bg-slate-800 rounded-lg pr-7 pl-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500" />
                     </div>
                     <div className="flex gap-1 flex-wrap">
                       {([
@@ -1024,7 +1025,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                         { id: 'event', label: 'رویداد', Icon: Zap },
                       ] as const).map(f => (
                         <button key={f.id} onClick={() => setEntityTypeFilter(f.id as any)}
-                          className={`text-[10px] px-2 py-1 rounded-full border flex items-center gap-1 ${entityTypeFilter === f.id ? 'bg-blue-600 text-white border-blue-600' : 'border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400'}`}>
+                          className={`text-[10px] px-2 py-1 rounded-full border flex items-center gap-1 ${entityTypeFilter === f.id ? 'bg-emerald-600 text-white border-emerald-600' : 'border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400'}`}>
                           <f.Icon className="w-3 h-3" /> {f.label}
                         </button>
                       ))}
@@ -1033,7 +1034,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       {analytics.entities.size.toLocaleString("fa-IR")} موجودیت شناسایی شد · {analytics.kg.length.toLocaleString("fa-IR")} ارتباط در گراف دانش
                     </div>
                     {focusEntityDetail && (
-                      <div className="rounded-lg border border-indigo-300 dark:border-indigo-800 bg-indigo-50/50 dark:bg-indigo-950/20 p-2">
+                      <div className="rounded-lg border border-emerald-300 dark:border-emerald-800 bg-emerald-50/50 dark:bg-emerald-950/20 p-2">
                         <div className="flex items-start justify-between gap-2">
                           <div className="min-w-0">
                             <div className="text-xs truncate">{focusEntityDetail.ent.name}</div>
@@ -1043,7 +1044,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                           </div>
                           <div className="flex items-center gap-1">
                             <a href={focusEntityDetail.ent.wikiUrl} target="_blank" rel="noreferrer"
-                              className="p-1 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/40 text-indigo-600" title="ویکی‌پدیا">
+                              className="p-1 rounded hover:bg-emerald-100 dark:hover:bg-emerald-900/40 text-emerald-600" title="ویکی‌پدیا">
                               <ExternalLink className="w-3 h-3" />
                             </a>
                             <button onClick={() => setFocusEntity(null)} className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
@@ -1052,14 +1053,14 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                           </div>
                         </div>
                         {focusEntityDetail.related.length > 0 && (
-                          <div className="mt-2 pt-2 border-t border-indigo-200 dark:border-indigo-900/40">
+                          <div className="mt-2 pt-2 border-t border-emerald-200 dark:border-emerald-900/40">
                             <div className="text-[10px] text-slate-500 mb-1">مرتبط:</div>
                             <div className="flex flex-wrap gap-1">
                               {focusEntityDetail.related.map(r => {
                                 const o = analytics.entities.get(r.other);
                                 return (
                                   <button key={r.other} onClick={() => setFocusEntity(r.other)}
-                                    className="text-[10px] px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-indigo-400">
+                                    className="text-[10px] px-2 py-0.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-emerald-400">
                                     {o?.name || r.other} <span className="text-slate-400">·{r.weight}</span>
                                   </button>
                                 );
@@ -1073,10 +1074,10 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       {filteredEntities.map(e => {
                         const typeIcon = e.type === 'person' ? Users : e.type === 'org' ? Building2 : e.type === 'place' ? MapPin : Zap;
                         const TypeIcon = typeIcon;
-                        const tint = e.type === 'person' ? 'text-blue-600' : e.type === 'org' ? 'text-purple-600' : e.type === 'place' ? 'text-green-600' : 'text-rose-600';
+                        const tint = e.type === 'person' ? 'text-emerald-600' : e.type === 'org' ? 'text-purple-600' : e.type === 'place' ? 'text-green-600' : 'text-rose-600';
                         return (
                           <button key={e.key} onClick={() => setFocusEntity(e.key)}
-                            className={`w-full text-right p-2 rounded-lg border hover:border-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/30 ${focusEntity === e.key ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-950/30' : 'border-slate-200 dark:border-slate-800'}`}>
+                            className={`w-full text-right p-2 rounded-lg border hover:border-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 ${focusEntity === e.key ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30' : 'border-slate-200 dark:border-slate-800'}`}>
                             <div className="flex items-center gap-2">
                               <TypeIcon className={`w-3.5 h-3.5 shrink-0 ${tint}`} />
                               <div className="text-xs flex-1 truncate">{e.name}</div>
@@ -1102,13 +1103,13 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       const c = graph.clusters.find(x => x.id === n.clusterId);
                       return (
                         <div key={n.id} className="p-2 rounded-lg border border-slate-200 dark:border-slate-800">
-                          <button onClick={() => c && setSelectedCluster(c)} className="text-xs text-right w-full hover:text-blue-600">
+                          <button onClick={() => c && setSelectedCluster(c)} className="text-xs text-right w-full hover:text-emerald-600">
                             {c?.origin.title}
                           </button>
-                          <div className="text-[11px] text-indigo-600 dark:text-indigo-400 mt-1">{n.label}</div>
+                          <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mt-1">{n.label}</div>
                           <div className="flex flex-wrap gap-1 mt-1.5">
                             {n.terms.map(t => (
-                              <span key={t} className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300">{t}</span>
+                              <span key={t} className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300">{t}</span>
                             ))}
                           </div>
                           <div className="text-[10px] text-slate-500 mt-1.5">
@@ -1137,15 +1138,15 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                       if (!A || !B) return null;
                       return (
                         <div key={i} className="p-2 rounded-lg border border-slate-200 dark:border-slate-800">
-                          <button onClick={() => setSelectedCluster(A)} className="text-xs text-right w-full hover:text-blue-600 line-clamp-2">
+                          <button onClick={() => setSelectedCluster(A)} className="text-xs text-right w-full hover:text-emerald-600 line-clamp-2">
                             ← {A.origin.title}
                           </button>
                           <div className="flex items-center gap-1 text-[10px] text-slate-500 my-1">
-                            <GitBranch className="w-3 h-3" /> فاصله: {link.gapHours.toFixed(1)} ساعت
+                            <GitBranch className="w-3 h-3" /> فاصله: {toFa(link.gapHours.toFixed(1))} ساعت
                             <span>·</span>
                             <span>{link.sharedEntities.length} موجودیت مشترک</span>
                           </div>
-                          <button onClick={() => setSelectedCluster(B)} className="text-xs text-right w-full hover:text-blue-600 line-clamp-2">
+                          <button onClick={() => setSelectedCluster(B)} className="text-xs text-right w-full hover:text-emerald-600 line-clamp-2">
                             → {B.origin.title}
                           </button>
                           <div className="flex flex-wrap gap-1 mt-1.5">
@@ -1171,7 +1172,7 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
                         <div className="flex items-center justify-between">
                           <div className="text-xs">خوشهٔ {g.members.length} منبعی</div>
                           <span className="text-[10px] px-1.5 py-0.5 rounded bg-rose-600 text-white tabular-nums">
-                            انسجام {(g.cohesion * 100).toFixed(0)}٪
+                            انسجام {toFa((g.cohesion * 100).toFixed(0))}٪
                           </span>
                         </div>
                         <div className="text-[10px] text-slate-500 mt-1">

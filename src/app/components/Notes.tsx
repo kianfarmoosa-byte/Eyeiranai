@@ -91,7 +91,7 @@ export function Notes({ open, onClose, onOpenArticle, currentArticle, initialNot
         className="w-full md:max-w-5xl md:max-h-[90vh] bg-white dark:bg-slate-950 md:rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         <header className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 shrink-0">
           <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <FileText className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             <h2 className="font-semibold text-lg">یادداشت‌ها — با backlink</h2>
           </div>
           <div className="flex items-center gap-1">
@@ -108,18 +108,18 @@ export function Notes({ open, onClose, onOpenArticle, currentArticle, initialNot
                 <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="جست‌وجو…"
                   className="w-full pr-7 pl-2 py-1.5 rounded-md bg-slate-100 dark:bg-slate-900 text-sm outline-none" />
               </div>
-              <button onClick={create} className="p-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white"><Plus className="w-4 h-4" /></button>
+              <button onClick={create} className="p-1.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white"><Plus className="w-4 h-4" /></button>
             </div>
             <div className="flex-1 overflow-y-auto">
               {filtered.length === 0 ? (
                 <div className="p-3 text-center text-xs text-slate-500">یادداشتی نیست.</div>
               ) : filtered.map(n => (
                 <button key={n.id} onClick={() => setActiveId(n.id)}
-                  className={`w-full text-right px-3 py-2 border-b border-slate-100 dark:border-slate-900 ${activeId === n.id ? "bg-blue-50 dark:bg-blue-950/40" : "hover:bg-slate-50 dark:hover:bg-slate-900"}`}>
+                  className={`w-full text-right px-3 py-2 border-b border-slate-100 dark:border-slate-900 ${activeId === n.id ? "bg-emerald-50 dark:bg-emerald-950/40" : "hover:bg-slate-50 dark:hover:bg-slate-900"}`}>
                   <div className="flex items-center gap-1.5">
                     <div className="text-sm font-medium truncate flex-1">{n.title || "بدون عنوان"}</div>
                     {counts[n.id] > 0 && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 shrink-0" title={`${counts[n.id]} ارجاع`}>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 shrink-0" title={`${counts[n.id]} ارجاع`}>
                         ← {counts[n.id]}
                       </span>
                     )}
@@ -157,7 +157,7 @@ export function Notes({ open, onClose, onOpenArticle, currentArticle, initialNot
                 <div className="border-t border-slate-200 dark:border-slate-800 p-3 grid grid-cols-1 md:grid-cols-3 gap-3 shrink-0 max-h-56 overflow-y-auto">
                   <Section title="پیوندها">
                     {links.length === 0 ? <Hint /> : links.map(l => (
-                      <button key={l} onClick={() => openLink(l)} className="block w-full text-right text-xs px-2 py-1 rounded hover:bg-slate-100 dark:hover:bg-slate-900 text-blue-600">
+                      <button key={l} onClick={() => openLink(l)} className="block w-full text-right text-xs px-2 py-1 rounded hover:bg-slate-100 dark:hover:bg-slate-900 text-emerald-600">
                         <LinkIcon className="w-3 h-3 inline ms-1" />[[{l}]]
                       </button>
                     ))}

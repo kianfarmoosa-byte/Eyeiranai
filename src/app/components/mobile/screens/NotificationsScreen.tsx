@@ -27,7 +27,7 @@ const ICONS: Record<NotifKind, React.ReactNode> = {
 
 const TONES: Record<NotifKind, string> = {
   breaking: "bg-rose-500/12 text-rose-600 dark:text-rose-400",
-  topic:    "bg-sky-500/12 text-sky-600 dark:text-sky-400",
+  topic:    "bg-emerald-500/12 text-emerald-600 dark:text-emerald-400",
   digest:   "bg-violet-500/12 text-violet-600 dark:text-violet-400",
   system:   "bg-[var(--background-muted)] text-[var(--foreground-muted)]",
   mention:  "bg-amber-500/12 text-amber-600 dark:text-amber-400",
@@ -137,7 +137,7 @@ export function NotificationsScreen({ onClose, articles, onOpenArticle }: Props)
                   startAction={n.read ? undefined : {
                     label: "خواندم",
                     icon: <CheckCheck className="size-4" />,
-                    color: "bg-sky-500",
+                    color: "bg-emerald-500",
                     onTrigger: () => setList(markRead(n.id)),
                   }}
                 >

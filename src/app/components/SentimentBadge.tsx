@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Article } from "../data";
 import { scoreArticle, sentimentColor, sentimentEmoji, sentimentLabelFa } from "../sentiment";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = {
   article: Article;
@@ -16,11 +17,11 @@ export function SentimentBadge({ article, size = "sm", showScore = false }: Prop
   return (
     <span
       className={`inline-flex items-center gap-1 rounded-full ${pad} ${cls}`}
-      title={`احساس: ${sentimentLabelFa(s.label)} • امتیاز: ${s.score.toFixed(2)} (${s.positives}+ / ${s.negatives}-)`}
+      title={`احساس: ${sentimentLabelFa(s.label)} • امتیاز: ${toFa(s.score.toFixed(2))} (${toFa(s.positives)}+ / ${toFa(s.negatives)}-)`}
     >
       <span>{sentimentEmoji(s.label)}</span>
       <span>{sentimentLabelFa(s.label)}</span>
-      {showScore && <span className="opacity-70">{s.score.toFixed(2)}</span>}
+      {showScore && <span className="opacity-70">{toFa(s.score.toFixed(2))}</span>}
     </span>
   );
 }
@@ -47,26 +48,26 @@ export function SentimentSummary({ articles }: { articles: Article[] }) {
         <span className="text-xs text-slate-500">{agg.total} مقاله</span>
       </div>
       <div className="flex h-3 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 mb-3">
-        <div className="bg-emerald-500" style={{ width: `${pct(agg.pos)}%` }} title={`مثبت ${pct(agg.pos)}%`} />
-        <div className="bg-slate-400" style={{ width: `${pct(agg.neu)}%` }} title={`خنثی ${pct(agg.neu)}%`} />
-        <div className="bg-rose-500" style={{ width: `${pct(agg.neg)}%` }} title={`منفی ${pct(agg.neg)}%`} />
+        <div className="bg-emerald-500" style={{ width: `${pct(agg.pos)}%` }} title={`مثبت ${toFa(pct(agg.pos))}٪`} />
+        <div className="bg-slate-400" style={{ width: `${pct(agg.neu)}%` }} title={`خنثی ${toFa(pct(agg.neu))}٪`} />
+        <div className="bg-rose-500" style={{ width: `${pct(agg.neg)}%` }} title={`منفی ${toFa(pct(agg.neg))}٪`} />
       </div>
       <div className="grid grid-cols-3 gap-2 text-center text-xs">
         <div>
-          <div className="text-emerald-600 dark:text-emerald-400 font-bold">🙂 {agg.pos}</div>
-          <div className="text-slate-500">مثبت {pct(agg.pos)}%</div>
+          <div className="text-emerald-600 dark:text-emerald-400 font-bold">🙂 {toFa(agg.pos)}</div>
+          <div className="text-slate-500">مثبت {toFa(pct(agg.pos))}٪</div>
         </div>
         <div>
-          <div className="text-slate-500 font-bold">😐 {agg.neu}</div>
-          <div className="text-slate-500">خنثی {pct(agg.neu)}%</div>
+          <div className="text-slate-500 font-bold">😐 {toFa(agg.neu)}</div>
+          <div className="text-slate-500">خنثی {toFa(pct(agg.neu))}٪</div>
         </div>
         <div>
-          <div className="text-rose-600 dark:text-rose-400 font-bold">😟 {agg.neg}</div>
-          <div className="text-slate-500">منفی {pct(agg.neg)}%</div>
+          <div className="text-rose-600 dark:text-rose-400 font-bold">😟 {toFa(agg.neg)}</div>
+          <div className="text-slate-500">منفی {toFa(pct(agg.neg))}٪</div>
         </div>
       </div>
       <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500 text-center">
-        امتیاز میانگین: <span className={`font-bold ${agg.avg > 0.1 ? "text-emerald-600 dark:text-emerald-400" : agg.avg < -0.1 ? "text-rose-600 dark:text-rose-400" : ""}`}>{agg.avg.toFixed(2)}</span>
+        امتیاز میانگین: <span className={`font-bold ${agg.avg > 0.1 ? "text-emerald-600 dark:text-emerald-400" : agg.avg < -0.1 ? "text-rose-600 dark:text-rose-400" : ""}`}>{toFa(agg.avg.toFixed(2))}</span>
       </div>
     </div>
   );

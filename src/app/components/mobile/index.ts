@@ -11,3 +11,4 @@ export * from "./splash";
 export * from "./onboarding";
 export * from "./auth";
 export * from "./briefing";
+export * from "./studio";

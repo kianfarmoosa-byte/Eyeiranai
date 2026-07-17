@@ -13,6 +13,8 @@ import { DetailedArticleHeader } from "./DetailedArticleHeader";
 import { CompareSourcesSheet } from "./CompareSourcesSheet";
 import { EventTimelineSheet } from "./EventTimelineSheet";
 import { translateText, TRANSLATION_DISCLAIMER_EN, TRANSLATION_DISCLAIMER_FA } from "../ai/translate";
+import { api } from "../../../api";
+import { studioUserId } from "../studio/studio";
 import { ShareSheet } from "../sheets/ShareSheet";
 import { recordRead } from "../utils/history";
 import { relatedTo } from "../utils/related";
@@ -44,6 +46,31 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
   const [timelineOpen, setTimelineOpen] = useState(false);
   const [translateOn, setTranslateOn] = useState(false);
   const [bionicOn, setBionicOn] = useState(false);
+  // AI translation of the full article body. null = not loaded; falls back to local preview.
+  const [aiTranslation, setAiTranslation] = useState<string | null>(null);
+  const [translating, setTranslating] = useState(false);
+
+  // Reset cached translation when the article changes.
+  useEffect(() => { setAiTranslation(null); setTranslateOn(false); }, [article?.id]);
+
+  // Fetch a real translation the first time the user turns translation on.
+  useEffect(() => {
+    if (!translateOn || !article || aiTranslation !== null) return;
+    let cancelled = false;
+    setTranslating(true);
+    (async () => {
+      try {
+        const text = await api.aiTranslate({ text: article.content, to: "en" }, studioUserId());
+        if (!cancelled) setAiTranslation(text || translateText(article.content, "en"));
+      } catch (e) {
+        console.log("reader AI translate failed, using local preview:", e);
+        if (!cancelled) setAiTranslation(translateText(article.content, "en"));
+      } finally {
+        if (!cancelled) setTranslating(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [translateOn, article?.id, aiTranslation]);  // eslint-disable-line react-hooks/exhaustive-deps
   const [showTop, setShowTop] = useState(false);
   const [highlights, setHighlights] = useState<string[]>([]);
   useEffect(() => {
@@ -197,9 +224,19 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
                 >
                   <Languages className="size-3.5 shrink-0 text-[var(--brand-500)] mt-0.5" />
                   <div>
-                    <div className="font-semibold text-[var(--brand-500)] mb-0.5">English preview</div>
-                    <div dir="ltr" className="leading-snug">{TRANSLATION_DISCLAIMER_EN}</div>
-                    <div dir="rtl" lang="fa" className="leading-snug mt-1 opacity-80">{TRANSLATION_DISCLAIMER_FA}</div>
+                    <div className="font-semibold text-[var(--brand-500)] mb-0.5">
+                      {translating ? "Translating…" : "English translation"}
+                    </div>
+                    {translating ? (
+                      <div dir="rtl" lang="fa" className="leading-snug">در حال ترجمه با هوش مصنوعی…</div>
+                    ) : aiTranslation ? (
+                      <div dir="rtl" lang="fa" className="leading-snug opacity-80">ترجمه با هوش مصنوعی انجام شد. برای متن مرجع، به منبع اصلی مراجعه کن.</div>
+                    ) : (
+                      <>
+                        <div dir="ltr" className="leading-snug">{TRANSLATION_DISCLAIMER_EN}</div>
+                        <div dir="rtl" lang="fa" className="leading-snug mt-1 opacity-80">{TRANSLATION_DISCLAIMER_FA}</div>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
@@ -210,7 +247,12 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
                 lang={translateOn ? "en" : "fa"}
               >
                 {translateOn ? (
-                  bionicOn ? bionicNodes(translateText(article.content, "en")) : translateText(article.content, "en")
+                  translating && !aiTranslation ? (
+                    <span dir="rtl" lang="fa" className="text-[var(--foreground-muted)]">در حال آماده‌سازی ترجمه…</span>
+                  ) : (() => {
+                    const txt = aiTranslation ?? translateText(article.content, "en");
+                    return bionicOn ? bionicNodes(txt) : txt;
+                  })()
                 ) : (
                   splitWithHighlights(article.content, highlights).map((seg, i) =>
                     seg.mark ? (

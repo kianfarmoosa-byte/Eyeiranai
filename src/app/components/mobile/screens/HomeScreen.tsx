@@ -70,7 +70,7 @@ export function HomeScreen({ articles, onOpen, onToggleSave, onLongPress, onRefr
 
   return (
     <MobileScreen
-      topbar={<MobileTopBar title="خانه" subtitle={countFa(articles.length, "مقاله")} onMenu={onMenu} onSearch={onSearch} loading={loading} onRefresh={refresh} />}
+      topbar={<MobileTopBar title={<span className="text-[18px] font-black tracking-tight text-[var(--foreground)]">FLOW</span>} subtitle={countFa(articles.length, "مقاله")} onMenu={onMenu} onSearch={onSearch} loading={loading} onRefresh={refresh} />}
       fab={<MobileFab icon={<Pen className="size-6" />} label="نوشتن" onClick={onCompose} />}
     >
       <div ref={scrollRef} {...handlers} className="h-full overflow-y-auto scrollbar-none">

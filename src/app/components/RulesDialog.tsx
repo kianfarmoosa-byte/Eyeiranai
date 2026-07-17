@@ -101,7 +101,7 @@ export function RulesDialog({ open, onClose, onDone }: Props) {
                 <button
                   key={f.id}
                   onClick={() => toggleField(f.id)}
-                  className={`text-xs px-2.5 py-1 rounded-full border ${draft.fields.has(f.id) ? 'bg-blue-100 dark:bg-blue-900/40 border-blue-400 text-blue-700 dark:text-blue-300' : 'border-slate-300 dark:border-slate-700 text-slate-500'}`}
+                  className={`text-xs px-2.5 py-1 rounded-full border ${draft.fields.has(f.id) ? 'bg-emerald-100 dark:bg-emerald-900/40 border-emerald-400 text-emerald-700 dark:text-emerald-300' : 'border-slate-300 dark:border-slate-700 text-slate-500'}`}
                 >
                   {f.label}
                 </button>
@@ -110,7 +110,7 @@ export function RulesDialog({ open, onClose, onDone }: Props) {
             <button
               onClick={addRule}
               disabled={loading || !draft.tag || !draft.keywords.trim()}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-lg text-sm"
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
               افزودن قانون
@@ -135,7 +135,7 @@ export function RulesDialog({ open, onClose, onDone }: Props) {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="text-sm">{r.name}</span>
-                    <span className="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full">#{r.tag}</span>
+                    <span className="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 rounded-full">#{r.tag}</span>
                   </div>
                   <div className="text-xs text-slate-500 mt-1 truncate">
                     {r.keywords.join("، ")}

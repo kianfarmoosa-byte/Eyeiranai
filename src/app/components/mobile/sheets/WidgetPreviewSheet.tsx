@@ -36,8 +36,8 @@ export function WidgetPreviewSheet({ open, onClose, articles }: Props) {
     <BottomSheet open={open} onClose={onClose} title="پیش‌نمایش ویجت‌ها" snap="full">
       <div className="px-4 pb-6">
         <p className="text-[12px] text-[var(--foreground-muted)] mb-3 leading-relaxed">
-          این پیش‌نمایشی از ظاهر ویجت‌های کیان روی صفحهٔ قفل گوشی است. برای فعال‌سازی واقعی روی iOS باید
-          از منوی ویجت‌ها در صفحهٔ قفل کیان را اضافه کنی.
+          این پیش‌نمایشی از ظاهر ویجت‌های flow روی صفحهٔ قفل گوشی است. برای فعال‌سازی واقعی روی iOS باید
+          از منوی ویجت‌ها در صفحهٔ قفل flow را اضافه کنی.
         </p>
 
         {/* Phone frame */}
@@ -80,7 +80,7 @@ export function WidgetPreviewSheet({ open, onClose, articles }: Props) {
               {top[0] && (
                 <div className="rounded-[18px] bg-white/15 backdrop-blur-xl border border-white/15 p-2.5 text-white shadow-lg">
                   <div className="flex items-center gap-1.5 text-[9px] font-semibold opacity-80 uppercase tracking-wide">
-                    <Newspaper className="size-2.5" /> کیان · تیتر داغ
+                    <Newspaper className="size-2.5" /> flow · تیتر داغ
                   </div>
                   <div className="mt-1 text-[11px] font-bold leading-snug line-clamp-3" dir="rtl">
                     {top[0].title}
@@ -129,7 +129,7 @@ export function WidgetPreviewSheet({ open, onClose, articles }: Props) {
           <ol className="mt-1.5 list-decimal pr-4 space-y-0.5">
             <li>روی صفحهٔ قفل، با لمس و نگه‌داشتن وارد ویرایش شو.</li>
             <li>دکمهٔ «افزودن ویجت» را بزن.</li>
-            <li>اپ «کیان» را جستجو و ویجت مورد نظر را اضافه کن.</li>
+            <li>اپ «flow» را جستجو و ویجت مورد نظر را اضافه کن.</li>
           </ol>
         </div>
       </div>

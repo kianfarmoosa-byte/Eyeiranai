@@ -1,4 +1,4 @@
-import { Search, Rss, FileText, Star, Circle, Settings, Plus, TrendingUp, Bookmark, Tag, FileUp, ChevronDown, ChevronLeft, RefreshCw, AlertTriangle, Trash2, Network, Globe2, BarChart3, Sunrise, Command, Sparkles, Filter, Brain, NotebookPen, Clock, Pin, X } from "lucide-react";
+import { Search, Rss, FileText, Star, Circle, Settings, Plus, TrendingUp, Bookmark, Tag, FileUp, ChevronDown, ChevronLeft, RefreshCw, AlertTriangle, Trash2, Network, Globe2, BarChart3, Sunrise, Command, Sparkles, Filter, Brain, NotebookPen, Clock, Pin, X, Wand2, Radar, Package, MonitorDot } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { type Topic, topicColorClasses } from "../topics";
@@ -34,10 +34,12 @@ type Props = {
   onOpenKnowledge?: () => void;
   onOpenNotes?: () => void;
   onOpenTimeline?: () => void;
+  onOpenStudio?: () => void;
   pinnedTopics?: PinnedTopic[];
   onToggleTopic?: (id: string) => void;
   onClearTopics?: () => void;
   onAddTopic?: () => void;
+  socialUnread?: number;
 };
 
 export function Sidebar({
@@ -47,8 +49,8 @@ export function Sidebar({
   totals = { all: 0, unread: 0, starred: 0, saved: 0 },
   search = "", setSearch = () => {}, lastRefresh = null,
   feedStatus = {}, onOpenOpml = () => {}, onRemoveFeed, onOpenHelp, onOpenRules,
-  onOpenStats, onOpenDigest, onOpenPalette, onOpenSourceHub, onOpenSavedSearches, onOpenKnowledge, onOpenNotes, onOpenTimeline,
-  pinnedTopics = [], onToggleTopic, onClearTopics, onAddTopic,
+  onOpenStats, onOpenDigest, onOpenPalette, onOpenSourceHub, onOpenSavedSearches, onOpenKnowledge, onOpenNotes, onOpenTimeline, onOpenStudio,
+  pinnedTopics = [], onToggleTopic, onClearTopics, onAddTopic, socialUnread = 0,
 }: Props & { onOpenHelp?: () => void; onOpenRules?: () => void }) {
   const [feedsOpen, setFeedsOpen] = useState(true);
   const [catsOpen, setCatsOpen] = useState(true);
@@ -63,6 +65,9 @@ export function Sidebar({
     { id: 'tags', label: 'برچسب‌ها', icon: Tag, count: null },
     { id: 'international', label: 'اخبار بین‌الملل', icon: Globe2, count: null },
     { id: 'graph', label: 'نقشهٔ رسانه‌ای', icon: Network, count: null },
+    { id: 'room', label: 'اتاق رصد رسانه‌ای', icon: MonitorDot, count: null },
+    { id: 'social', label: 'رصد اجتماعی', icon: Radar, count: null, badge: socialUnread || null },
+    { id: 'newspack', label: 'بسته‌های خبری سفارشی', icon: Package, count: null },
     { id: 'digest', label: 'گزارش روزانه', icon: Sunrise, count: null, action: onOpenDigest },
     { id: 'stats', label: 'داشبورد آمار', icon: BarChart3, count: null, action: onOpenStats },
     { id: 'source-hub', label: 'منبع‌یاب چندپلتفرمی', icon: Sparkles, count: null, action: onOpenSourceHub },
@@ -70,6 +75,7 @@ export function Sidebar({
     { id: 'knowledge', label: 'موتور دانش', icon: Brain, count: null, action: onOpenKnowledge },
     { id: 'notes', label: 'یادداشت‌ها', icon: NotebookPen, count: null, action: onOpenNotes },
     { id: 'timeline', label: 'خط زمانی موضوع', icon: Clock, count: null, action: onOpenTimeline },
+    { id: 'studio', label: 'استودیوی محتوا', icon: Wand2, count: null, action: onOpenStudio },
   ];
 
   const grouped = useMemo(() => {
@@ -98,8 +104,11 @@ export function Sidebar({
   return (
     <aside className="w-72 max-w-[85vw] bg-slate-50 dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 flex flex-col h-full">
       <div className="p-4 border-b border-slate-200 dark:border-slate-800">
+        <div className="flex items-center mb-4">
+          <span className="text-[20px] font-black tracking-tight text-slate-900 dark:text-whit px-[100px] py-[0px]e">FLOW</span>
+        </div>
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white">ک</div>
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white">ک</div>
           <div className="flex-1 min-w-0">
             <div className="truncate">کاربر نمونه</div>
             <div className="text-slate-500 text-sm truncate">user@example.com</div>
@@ -117,12 +126,12 @@ export function Sidebar({
             type="text"
             data-search-input
             placeholder="جستجو در مقالات... ( / )"
-            className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg py-2 pr-9 pl-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg py-2 pr-9 pl-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
         </div>
         {onOpenPalette && (
           <button onClick={onOpenPalette}
-            className="mt-2 w-full flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-700 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
+            className="mt-2 w-full flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-emerald-400 dark:hover:border-emerald-700 text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition">
             <Command className="w-3.5 h-3.5" />
             <span className="flex-1 text-right">پنل دستورات</span>
             <kbd className="text-[10px] bg-slate-100 dark:bg-slate-800 rounded px-1.5 py-0.5">Ctrl K</kbd>
@@ -142,13 +151,18 @@ export function Sidebar({
                   if ((item as any).action) { (item as any).action(); return; }
                   setActiveView(item.id); setSelectedFeed(null); setSelectedCategory(null);
                 }}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-right transition ${active ? 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-right transition ${active ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 <span className="flex-1 text-sm">{item.label}</span>
                 {item.count !== null && item.count !== undefined && (
                   <span className="text-xs bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded-full">{item.count}</span>
                 )}
+                {(item as any).badge ? (
+                  <span className="text-[11px] font-semibold bg-rose-500 text-white px-1.5 min-w-[18px] text-center py-0.5 rounded-full">
+                    {(item as any).badge.toLocaleString("fa-IR")}
+                  </span>
+                ) : null}
               </button>
             );
           })}
@@ -220,12 +234,12 @@ export function Sidebar({
                       </button>
                       <button
                         onClick={() => { setActiveView('category'); setSelectedCategory(cat); setSelectedFeed(null); }}
-                        className={`flex-1 flex items-center gap-2 px-2 py-1.5 rounded-lg text-right text-sm ${catActive ? 'bg-blue-100 dark:bg-blue-900/40' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                        className={`flex-1 flex items-center gap-2 px-2 py-1.5 rounded-lg text-right text-sm ${catActive ? 'bg-emerald-100 dark:bg-emerald-900/40' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
                       >
                         <span className="w-2 h-2 rounded-full shrink-0" style={{ background: catColor(cat) }}></span>
                         <span className="flex-1 truncate">{cat}</span>
                         <span className="text-xs text-slate-500">{list.length}</span>
-                        {unread > 0 && <span className="text-xs bg-blue-500 text-white px-1.5 rounded-full">{unread}</span>}
+                        {unread > 0 && <span className="text-xs bg-emerald-500 text-white px-1.5 rounded-full">{unread}</span>}
                       </button>
                     </div>
                     {expanded && (
@@ -237,7 +251,7 @@ export function Sidebar({
                             <div key={feed.id} className="group flex items-center gap-1">
                               <button
                                 onClick={() => { setSelectedFeed(feed.id); setActiveView('feed'); setSelectedCategory(null); }}
-                                className={`flex-1 flex items-center gap-2 px-2 py-1 rounded text-right text-xs ${selectedFeed === feed.id ? 'bg-blue-100 dark:bg-blue-900/40' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                                className={`flex-1 flex items-center gap-2 px-2 py-1 rounded text-right text-xs ${selectedFeed === feed.id ? 'bg-emerald-100 dark:bg-emerald-900/40' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
                               >
                                 <span>{feed.icon}</span>
                                 <span className={`flex-1 truncate ${broken ? 'text-red-500' : ''}`}>{feed.name}</span>
@@ -288,7 +302,7 @@ export function Sidebar({
                   <div key={feed.id} className="group flex items-center gap-1">
                     <button
                       onClick={() => { setSelectedFeed(feed.id); setActiveView('feed'); setSelectedCategory(null); }}
-                      className={`flex-1 flex items-center gap-3 px-3 py-1.5 rounded-lg text-right text-sm ${selectedFeed === feed.id ? 'bg-blue-100 dark:bg-blue-900/40' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                      className={`flex-1 flex items-center gap-3 px-3 py-1.5 rounded-lg text-right text-sm ${selectedFeed === feed.id ? 'bg-emerald-100 dark:bg-emerald-900/40' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
                     >
                       <span>{feed.icon}</span>
                       <span className={`flex-1 truncate ${broken ? 'text-red-500' : ''}`}>{feed.name}{feed.category ? ` — ${feed.category}` : ''}</span>

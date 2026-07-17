@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, ChevronDown, RefreshCw, MessageSquareText, Clock } from "lucide-react";
 import type { Article } from "../../../data";
-import { summarize, streamText, type SummaryMode } from "./summarize";
+import { summarize, summarizeAI, streamText, type Summary, type SummaryMode } from "./summarize";
 import { useHaptics } from "../hooks";
 import { faNum } from "../utils/fa";
 
@@ -19,7 +19,20 @@ export function SummaryCard({ article, onAsk }: Props) {
   const [streaming, setStreaming] = useState<boolean>(false);
   const [token, setToken] = useState(0);
 
-  const sum = useMemo(() => summarize(article), [article, token]);
+  // Show the instant local summary first, then replace with the LLM result.
+  const [sum, setSum] = useState<Summary>(() => summarize(article));
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setSum(summarize(article)); // instant placeholder for the new article
+    (async () => {
+      const result = await summarizeAI(article);
+      if (!cancelled) { setSum(result); setLoading(false); }
+    })();
+    return () => { cancelled = true; };
+  }, [article, token]);
 
   const target = mode === "tldr" ? sum.tldr : mode === "long" ? sum.long : "";
   useEffect(() => {
@@ -46,18 +59,28 @@ export function SummaryCard({ article, onAsk }: Props) {
         className="w-full flex items-center gap-2 px-3.5 py-3 tap press text-right"
         aria-expanded={open}
       >
-        <span className="size-7 grid place-items-center rounded-full bg-gradient-to-br from-[var(--brand-400)] to-[var(--brand-600)] text-white shadow-[var(--shadow-sm)]">
+        <motion.span
+          className="size-7 grid place-items-center rounded-full bg-gradient-to-br from-[var(--brand-400)] to-[var(--brand-600)] text-white shadow-[var(--shadow-sm)]"
+          animate={loading ? { scale: [1, 1.12, 1] } : { scale: 1 }}
+          transition={loading ? { duration: 1.1, repeat: Infinity, ease: "easeInOut" } : { duration: 0.2 }}
+        >
           <Sparkles className="size-4" />
-        </span>
+        </motion.span>
         <span className="flex-1 min-w-0">
           <div className="text-[13.5px] font-semibold leading-tight">خلاصهٔ هوشمند</div>
           <div className="text-[11px] text-[var(--foreground-subtle)] mt-0.5 flex items-center gap-1.5">
-            <Clock className="size-3" />
-            <span>{faNum(sum.readingMinutes)} دقیقه مطالعه</span>
-            {sum.entities.length > 0 && (
+            {loading ? (
+              <span className="text-[var(--brand-500)]">در حال تحلیل با هوش مصنوعی…</span>
+            ) : (
               <>
-                <span>·</span>
-                <span className="truncate">{sum.entities.slice(0, 3).join("، ")}</span>
+                <Clock className="size-3" />
+                <span>{faNum(sum.readingMinutes)} دقیقه مطالعه</span>
+                {sum.entities.length > 0 && (
+                  <>
+                    <span>·</span>
+                    <span className="truncate">{sum.entities.slice(0, 3).join("، ")}</span>
+                  </>
+                )}
               </>
             )}
           </div>

@@ -116,10 +116,7 @@ export function MobileBottomNav({
           onClick={() => press(center.id)}
           aria-current={active === center.id ? "page" : undefined}
           aria-label={center.label}
-          className="absolute left-1/2 -translate-x-1/2 -top-1
-                     size-[52px] rounded-full grid place-items-center
-                     bg-[var(--foreground)] text-[var(--card)]
-                     tap press kian-bottomnav-fab"
+          className="absolute left-1/2 -translate-x-1/2 -top-1 size-[52px] rounded-full grid place-items-center bg-[var(--foreground)] text-[var(--card)] tap press kian-bottomnav-fab mx-[0px] my-[-15px]"
         >
           <center.Icon className="size-6" strokeWidth={2.4} />
           {active === center.id && (

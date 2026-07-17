@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Loader2, Sparkles, TrendingUp, TrendingDown } from "lucide-react";
 import { gdeltTimeline, GDELT_PRESET_THEMES } from "../gdelt";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = {
   country?: string;
@@ -115,7 +116,7 @@ export function GdeltThemeExplorer({ country, lang, timespan, onPickTheme }: Pro
         {loading && (
           <span className="flex items-center gap-1 text-slate-500">
             <Loader2 className="w-3 h-3 animate-spin" />
-            {progress.done}/{progress.total}
+            {toFa(progress.done)}/{toFa(progress.total)}
           </span>
         )}
       </div>
@@ -145,9 +146,9 @@ export function GdeltThemeExplorer({ country, lang, timespan, onPickTheme }: Pro
                   }`}>
                     {isUp && <TrendingUp className="w-3 h-3" />}
                     {isDown && <TrendingDown className="w-3 h-3" />}
-                    {trendPct > 0 ? "+" : ""}{trendPct}%
+                    {trendPct > 0 ? "+" : ""}{toFa(trendPct)}٪
                   </span>
-                  <span className="text-[11px] tabular-nums text-slate-500 w-14 text-left">{s.total.toFixed(0)}</span>
+                  <span className="text-[11px] tabular-nums text-slate-500 w-14 text-left">{toFa(s.total.toFixed(0))}</span>
                 </div>
                 <div className="mt-1 h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                   <div className="h-full bg-gradient-to-l from-violet-500 to-fuchsia-500" style={{ width: `${widthPct}%` }} />

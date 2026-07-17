@@ -1,6 +1,7 @@
 import { Minus, Plus, Sun, Moon, Monitor } from "lucide-react";
 import { BottomSheet } from "../primitives/BottomSheet";
 import { useHaptics } from "../hooks";
+import { toFa } from "../utils/fa";
 
 export type ReaderSettings = {
   fontSize: number;
@@ -32,7 +33,7 @@ export function ReaderSettingsSheet({ open, onClose, value, onChange }: Props) {
       <div className="px-4 py-3 flex flex-col gap-5">
         <Stepper
           label="اندازه متن"
-          value={`${value.fontSize}px`}
+          value={`${toFa(value.fontSize)}px`}
           onMinus={() => patch({ fontSize: Math.max(FS_MIN, value.fontSize - 1) })}
           onPlus={() => patch({ fontSize: Math.min(FS_MAX, value.fontSize + 1) })}
           disabledMinus={value.fontSize <= FS_MIN}
@@ -41,7 +42,7 @@ export function ReaderSettingsSheet({ open, onClose, value, onChange }: Props) {
         />
         <Stepper
           label="فاصله خطوط"
-          value={value.lineHeight.toFixed(2)}
+          value={toFa(value.lineHeight.toFixed(2))}
           onMinus={() => patch({ lineHeight: Math.max(LH_MIN, +(value.lineHeight - 0.1).toFixed(2)) })}
           onPlus={() => patch({ lineHeight: Math.min(LH_MAX, +(value.lineHeight + 0.1).toFixed(2)) })}
           disabledMinus={value.lineHeight <= LH_MIN}
@@ -57,7 +58,7 @@ export function ReaderSettingsSheet({ open, onClose, value, onChange }: Props) {
           />
           <div className="flex justify-between text-[11px] text-[var(--foreground-subtle)] mt-1">
             <span>۰٫۵×</span>
-            <span className="font-semibold text-[var(--foreground)]">{value.ttsRate.toFixed(1)}×</span>
+            <span className="font-semibold text-[var(--foreground)]">{toFa(value.ttsRate.toFixed(1))}×</span>
             <span>۲×</span>
           </div>
         </div>

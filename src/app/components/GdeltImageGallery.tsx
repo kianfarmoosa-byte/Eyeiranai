@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { ExternalLink, Image as ImageIcon } from "lucide-react";
 import type { GdeltArticle } from "../gdelt";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = { articles: GdeltArticle[] };
 
@@ -54,7 +55,7 @@ export function GdeltImageGallery({ articles }: Props) {
               className="w-full max-h-[60vh] object-contain bg-slate-100 dark:bg-slate-950" />
             <div className="p-4">
               <a href={active.url} target="_blank" rel="noopener noreferrer"
-                className="text-sm font-medium hover:text-blue-500 flex items-center gap-1.5">
+                className="text-sm font-medium hover:text-emerald-500 flex items-center gap-1.5">
                 {active.title}
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
@@ -65,7 +66,7 @@ export function GdeltImageGallery({ articles }: Props) {
                 <span>·</span>
                 <span>{active.language}</span>
                 {active.date && <><span>·</span><span>{new Date(active.date).toLocaleString("fa-IR")}</span></>}
-                {typeof active.tone === "number" && <><span>·</span><span>لحن {active.tone.toFixed(1)}</span></>}
+                {typeof active.tone === "number" && <><span>·</span><span>لحن {toFa(active.tone.toFixed(1))}</span></>}
               </div>
             </div>
           </div>

@@ -109,7 +109,7 @@ export function DailyBriefingScreen({ articles, onClose, onOpenArticle }: Props)
 
           <div className="absolute inset-x-0 top-0 pt-3 px-4 flex items-center gap-2">
             <span className="size-2 rounded-full bg-rose-400 animate-pulse" />
-            <span className="text-[11px] font-bold tracking-wider">رادیو کیان</span>
+            <span className="text-[11px] font-bold tracking-wider">رادیو flow</span>
             <span className="text-[11px] text-white/80">· پخش زنده از فید شما</span>
           </div>
 

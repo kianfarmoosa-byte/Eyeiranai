@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { motion } from "motion/react";
-import { Sparkles } from "lucide-react";
 
 type Props = {
   onDone: () => void;
@@ -10,7 +9,7 @@ type Props = {
 
 /**
  * RTL Persian splash inspired by the Figma "HUM AI NEWS" red-gradient splash
- * (#ED1C24 → #61070A). Rebrands as «کیان» (Kian) — minimal, premium, fluid.
+ * (#ED1C24 → #61070A). Rebrands as «flow» (Kian) — minimal, premium, fluid.
  */
 export function SplashScreen({ onDone, duration = 2200 }: Props) {
   useEffect(() => {
@@ -49,10 +48,8 @@ export function SplashScreen({ onDone, duration = 2200 }: Props) {
             className="relative"
           >
             <div className="absolute inset-0 rounded-[28px] bg-white/15 blur-2xl scale-110" />
-            <div className="relative size-[88px] rounded-[24px] bg-white/95 grid place-items-center shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]">
-              <div className="size-[58px] rounded-[16px] bg-gradient-to-br from-[#ED1C24] to-[#61070A] grid place-items-center">
-                <Sparkles className="size-7 text-white" strokeWidth={2.4} />
-              </div>
+            <div className="relative rounded-[24px] bg-white/95 px-9 py-6 grid place-items-center shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]">
+              <span className="text-[46px] font-black tracking-[-0.03em] leading-none bg-gradient-to-br from-[#ED1C24] to-[#61070A] bg-clip-text text-transparent">FLOW</span>
             </div>
           </motion.div>
 
@@ -62,10 +59,7 @@ export function SplashScreen({ onDone, duration = 2200 }: Props) {
             transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="text-center"
           >
-            <div className="text-[34px] font-black tracking-[-0.02em] leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.3)]">
-              کیان
-            </div>
-            <div className="mt-2 text-[12px] tracking-[0.18em] text-white/85">
+            <div className="text-[12px] tracking-[0.18em] text-white/85">
               اخبار · مبتنی بر هوش مصنوعی
             </div>
           </motion.div>
@@ -82,7 +76,7 @@ export function SplashScreen({ onDone, duration = 2200 }: Props) {
             className="h-full w-[60%] bg-white/85"
           />
         </div>
-        <div className="text-[10.5px] tracking-[0.22em] text-white/65">KIAN · v1.0</div>
+        <div className="text-[10.5px] tracking-[0.22em] text-white/65">FLOW · v1.0</div>
       </div>
     </motion.div>
   );

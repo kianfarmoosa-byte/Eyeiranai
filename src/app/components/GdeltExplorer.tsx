@@ -13,6 +13,7 @@ import { GdeltImageGallery } from "./GdeltImageGallery";
 import { GdeltWatchlistBar } from "./GdeltWatchlistBar";
 import type { Watchlist } from "../gdeltWatchlist";
 import { Button, Input, Tag, SegmentedControl, Badge, EmptyState, SkeletonRow } from "./kian";
+import { toFa } from "./mobile/utils/fa";
 
 const TIMESPANS: Array<{ value: string; label: string }> = [
   { value: "1h",  label: "۱ ساعت" },
@@ -303,7 +304,7 @@ export function GdeltExplorer() {
                     </>}
                     {typeof a.tone === "number" && (
                       <span className={`px-1.5 py-0.5 rounded-[var(--radius-xs)] tabular-nums font-mono text-[10px] ${toneClasses(a.tone)}`}>
-                        لحن {a.tone.toFixed(1)}
+                        لحن {toFa(a.tone.toFixed(1))}
                       </span>
                     )}
                     <ExternalLink className="size-3 mr-auto opacity-0 group-hover:opacity-50 transition-opacity" />

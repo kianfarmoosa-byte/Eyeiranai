@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Loader2, TrendingUp, Activity } from "lucide-react";
 import { gdeltTimeline, type GdeltDocQuery } from "../gdelt";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = {
   query: GdeltDocQuery;
@@ -79,7 +80,7 @@ export function GdeltTimeline({ query, enabled }: Props) {
         <button onClick={() => setMode("TimelineVol")}
           className={`text-[11px] px-2 py-0.5 rounded-full border flex items-center gap-1 ${
             mode === "TimelineVol"
-              ? "bg-sky-500 text-white border-sky-500"
+              ? "bg-emerald-500 text-white border-emerald-500"
               : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"
           }`}>
           <Activity className="w-3 h-3" /> حجم
@@ -96,9 +97,9 @@ export function GdeltTimeline({ query, enabled }: Props) {
           {loading && <Loader2 className="w-3 h-3 animate-spin inline ml-1" />}
           {points.length > 0 && !loading && (
             <>
-              {isTone ? "میانگین" : "اوج"}: {(isTone ? last : peak).toFixed(isTone ? 2 : 0)}
+              {isTone ? "میانگین" : "اوج"}: {toFa((isTone ? last : peak).toFixed(isTone ? 2 : 0))}
               <span className="opacity-50"> · </span>
-              بازه {min.toFixed(isTone ? 1 : 0)} → {max.toFixed(isTone ? 1 : 0)}
+              بازه {toFa(min.toFixed(isTone ? 1 : 0))} → {toFa(max.toFixed(isTone ? 1 : 0))}
             </>
           )}
         </span>
@@ -114,7 +115,7 @@ export function GdeltTimeline({ query, enabled }: Props) {
           {!isTone && anomalies.map((a, i) => (
             <g key={i}>
               <circle cx={a.x} cy={a.y} r="3.5" fill="#ef4444" stroke="#fff" strokeWidth="1">
-                <title>{`اوج ناهنجار: ${a.v.toFixed(0)} در ${a.date}`}</title>
+                <title>{`اوج ناهنجار: ${toFa(a.v.toFixed(0))} در ${a.date}`}</title>
               </circle>
             </g>
           ))}
@@ -122,7 +123,7 @@ export function GdeltTimeline({ query, enabled }: Props) {
         {!isTone && anomalies.length > 0 && (
           <div className="text-[10px] text-rose-500 mt-1 flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block" />
-            {anomalies.length.toLocaleString("fa-IR")} اوج ناهنجار (≥ μ+2σ، یعنی {(mean + 2 * stddev).toFixed(0)})
+            {anomalies.length.toLocaleString("fa-IR")} اوج ناهنجار (≥ μ+2σ، یعنی {toFa((mean + 2 * stddev).toFixed(0))})
           </div>
         )}
       </>)}

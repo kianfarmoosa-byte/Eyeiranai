@@ -56,7 +56,7 @@ export function OpmlDialog({ open, onClose, onDone }: Props) {
 
         <div className="space-y-3">
           <button onClick={() => fileRef.current?.click()} disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg">
+            className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-lg">
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
             واردسازی فایل OPML
           </button>

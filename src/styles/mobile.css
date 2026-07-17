@@ -211,67 +211,65 @@
    --brand-* family, so colored CTAs remain user-customizable.
    ──────────────────────────────────────────────────────────────────── */
 .kian-mobile-theme {
-  /* Typography — Urbanist primary (spec), Vazirmatn for Persian glyphs */
-  --font-sans: 'Urbanist', 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Urbanist', 'Estedad', 'Vazirmatn', system-ui, sans-serif;
+  /* Typography — Hanken Grotesk UI + Newsreader serif display (spec),
+     Vazirmatn carries Persian glyphs via per-glyph fallback. */
+  --font-sans: 'Hanken Grotesk', 'Vazirmatn', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Newsreader', 'Estedad', 'Vazirmatn', Georgia, serif;
 
-  /* ── Spec palette (Urbanist) — Blue primary + Orange accent ──
-     Drawn directly from color-palette.css:
-       • Blue scale: #5474FF → #DCE5FF
-       • Orange:     #FF8C32 → #FFF1D6
-       • Ink:        #2C3131 (text/buttons)
-       • Deep navy:  #192252
-       • Greys:      #626262 / #A9A9A9 */
-  --kian-blue-500:   #5474FF;
-  --kian-blue-400:   #7E99FF;
-  --kian-blue-300:   #98AFFF;
-  --kian-blue-200:   #BACBFF;
-  --kian-blue-100:   #DCE5FF;
-  /* Accent — muted dark grey (replaces orange) */
-  --kian-orange-500: #4A4F4F;
-  --kian-orange-400: #6B7070;
-  --kian-orange-300: #8A8F8F;
-  --kian-orange-200: #B0B4B4;
-  --kian-orange-100: #DDE0E0;
-  --kian-ink:        #2C3131;
-  --kian-navy:       #192252;
-  --kian-grey-600:   #626262;
-  --kian-grey-400:   #A9A9A9;
+  /* ── Strider Editorial System — Light Mint + Charcoal on off-white ──
+       • Mint (accent):      #2FB08B / lightest #F2FDFA
+       • Charcoal (primary): #1A1919 / black #000
+       • Surface:            #FFFFFF (pure white)
+       • Neutrals:           #4C4547 / #7E7577 / #CFC4C6 */
+  --kian-mint:       #2FB08B;
+  --kian-mint-tint:  #F2FDFA;
+  --kian-charcoal:   #1A1919;
+  --kian-ink:        #1B1C1C;
+  --kian-grey-600:   #4C4547;
+  --kian-grey-400:   #7E7577;
 
-  /* Brand scale → spec blue */
-  --brand-50:  #EEF2FF;
-  --brand-100: #DCE5FF;
-  --brand-200: #BACBFF;
-  --brand-300: #98AFFF;
-  --brand-400: #7E99FF;
-  --brand-500: #5474FF;   /* primary */
-  --brand-600: #3D5DEB;
-  --brand-700: #2C46C7;
+  /* Brand scale → light mint (anchored #F2FDFA) */
+  --brand-50:  #F2FDFA;
+  --brand-100: #DCF7EF;
+  --brand-200: #BCEFDF;
+  --brand-300: #8FE3C9;
+  --brand-400: #5CD0AD;
+  --brand-500: #2FB08B;   /* fresh mint accent */
+  --brand-600: #229A79;
+  --brand-700: #1B7C62;
 
-  /* Surfaces — clean white with blue-tinted muted */
+  /* Surfaces — pure white */
   --background:         #FFFFFF;
-  --background-subtle:  #F7F9FF;
-  --background-muted:   #EEF2FF;
+  --background-subtle:  #FAFAFA;
+  --background-muted:   #F4F4F5;
 
-  --foreground:         #2C3131;
-  --foreground-muted:   #626262;
-  --foreground-subtle:  #A9A9A9;
+  --foreground:         #1B1C1C;
+  --foreground-muted:   #4C4547;
+  --foreground-subtle:  #7E7577;
 
   --card:               #FFFFFF;
-  --card-foreground:    #2C3131;
+  --card-foreground:    #1B1C1C;
   --card-elevated:      #FFFFFF;
 
-  --surface:            #F7F9FF;
-  --accent:             #4A4F4F;
-  --accent-foreground:  #FFFFFF;
+  --surface:            #FAFAFA;
+  --accent:             #DCF7EF;   /* pale mint highlight */
+  --accent-foreground:  #0E3F32;
 
-  --primary:            #5474FF;
+  --primary:            #1A1919;   /* charcoal CTAs (spec) */
   --primary-foreground: #FFFFFF;
-  --primary-hover:      #3D5DEB;
+  --primary-hover:      #000000;
 
-  --border:             #DCE5FF;
-  --border-strong:      #2C3131;
-  --border-subtle:      #EEF2FF;
+  --secondary:            #EFEDED;
+  --secondary-foreground: #1B1C1C;
+  --muted:              #EFEDED;
+  --muted-foreground:   #7E7577;
+
+  --border:             #CFC4C6;
+  --border-strong:      #7E7577;
+  --border-subtle:      #E4E2E2;
+
+  --input-background:   #FFFFFF;
+  --ring:               rgba(47, 176, 139, 0.5);
 
   /* Larger, softer radii to match the spec's 16/20/25-px rounding */
   --radius-xs: 6px;
@@ -281,52 +279,65 @@
   --radius-xl: 25px;
   --radius-2xl: 32px;
 
-  /* Editorial elevation — gentle, gray shadows in the spirit of #232323 + 20% alpha */
-  --kian-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
-  --kian-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
-  --kian-shadow-3: 5px 5px 10px rgba(0, 0, 0, 0.20);
+  /* Editorial elevation — gentle, tonal shadows (subtle over heavy) */
+  --kian-shadow-1: 0 1px 2px rgba(27, 28, 28, 0.04), 0 1px 3px rgba(27, 28, 28, 0.06);
+  --kian-shadow-2: 0 4px 12px rgba(27, 28, 28, 0.07), 0 2px 4px rgba(27, 28, 28, 0.04);
+  --kian-shadow-3: 5px 5px 12px rgba(27, 28, 28, 0.14);
 
   /* Sheet treatment */
   --sheet-radius: 25px;
-  --sheet-shadow: 0 -10px 30px rgba(0, 0, 0, 0.18), 0 -2px 6px rgba(0, 0, 0, 0.06);
+  --sheet-shadow: 0 -10px 30px rgba(27, 28, 28, 0.16), 0 -2px 6px rgba(27, 28, 28, 0.06);
+}
+
+/* Pure white background (no atmospheric tint) — light mobile only */
+.kian-mobile-theme:not(.dark) {
+  background: var(--background);
 }
 
 .kian-mobile-theme.dark,
 .dark .kian-mobile-theme {
-  /* Dark variant — deep navy canvas (#192252) per spec, blue accent
-     keeps full saturation, orange used sparingly for highlights */
-  --brand-50:  #192252;
-  --brand-100: #243072;
-  --brand-200: #2C46C7;
-  --brand-300: #3D5DEB;
-  --brand-400: #5474FF;
-  --brand-500: #7E99FF;
-  --brand-600: #98AFFF;
-  --brand-700: #DCE5FF;
+  /* Dark variant — matte charcoal canvas with bright mint accents.
+     Editorial palette inverted: charcoal surfaces, mint highlights. */
+  --brand-50:  #0E3F32;
+  --brand-100: #155E4A;
+  --brand-200: #1B7C62;
+  --brand-300: #229A79;
+  --brand-400: #2FB08B;
+  --brand-500: #5CD0AD;
+  --brand-600: #8FE3C9;
+  --brand-700: #DCF7EF;
 
-  --background:         #192252;
-  --background-subtle:  #141B45;
-  --background-muted:   #243072;
+  --background:         #1B1C1C;
+  --background-subtle:  #232424;
+  --background-muted:   #2B2C2C;
 
-  --foreground:         #FFFFFF;
-  --foreground-muted:   #BACBFF;
-  --foreground-subtle:  #7E99FF;
+  --foreground:         #F2F0F0;
+  --foreground-muted:   #CFC4C6;
+  --foreground-subtle:  #A39A9C;
 
-  --card:               #243072;
-  --card-foreground:    #FFFFFF;
-  --card-elevated:      #2C3A85;
+  --card:               #232424;
+  --card-foreground:    #F2F0F0;
+  --card-elevated:      #2B2C2C;
 
-  --surface:            #1F2960;
-  --accent:             #4A4F4F;
-  --accent-foreground:  #FFFFFF;
+  --surface:            #232424;
+  --accent:             #5CD0AD;   /* bright mint highlight */
+  --accent-foreground:  #0E3F32;
 
-  --primary:            #5474FF;
-  --primary-foreground: #FFFFFF;
-  --primary-hover:      #7E99FF;
+  --primary:            #5CD0AD;   /* mint CTAs pop on charcoal */
+  --primary-foreground: #0E3F32;
+  --primary-hover:      #8FE3C9;
 
-  --border:             #2C3A85;
-  --border-strong:      #5474FF;
-  --border-subtle:      #1F2960;
+  --secondary:            #2B2C2C;
+  --secondary-foreground: #F2F0F0;
+  --muted:              #2B2C2C;
+  --muted-foreground:   #A39A9C;
+
+  --border:             #3A3B3B;
+  --border-strong:      #5CD0AD;
+  --border-subtle:      #2B2C2C;
+
+  --input-background:   #232424;
+  --ring:               rgba(92, 208, 173, 0.5);
 
   --kian-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.5);
   --kian-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -630,4 +641,18 @@
 .kian-input-chat:has(input:disabled) {
   opacity: 0.55;
   box-shadow: none;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+   Desktop Studio host — the desktop workspace reuses the mobile Studio
+   sub-screens (which assume a full mobile viewport). Neutralize their
+   full-height + bottom-nav padding so they flow naturally inside the
+   desktop content panel (single scroll, no clipped action bars).
+   ──────────────────────────────────────────────────────────────────── */
+.studio-desktop-host .h-dscreen {
+  height: auto !important;
+  min-height: 100%;
+}
+.studio-desktop-host main[style] {
+  padding-bottom: 0 !important;
 }

@@ -7,6 +7,7 @@ import { useToast } from "../primitives/Toast";
 import { INTL_FEEDS, type IntlFeed } from "../../../internationalFeeds";
 import { api, type RemoteArticle } from "../../../api";
 import { translateText } from "../ai/translate";
+import { studioUserId } from "../studio/studio";
 import { timeAgoFa, faNum } from "../utils/fa";
 import type { Article } from "../../../data";
 
@@ -35,6 +36,9 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
   const [showFa, setShowFa] = useState(true);
   const [country, setCountry] = useState<string>(ALL);
   const [cat, setCat] = useState<string>(ALL);
+  // Real AI translations of headlines, cached by original title.
+  const [faMap, setFaMap] = useState<Record<string, string>>({});
+  const [translating, setTranslating] = useState(false);
 
   const intlByName = useMemo(() => {
     const m = new Map<string, IntlFeed>();
@@ -74,7 +78,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
         }));
       if (payload.length > 0) {
         await api.bulkAdd(payload);
-        toast({ kind: "success", message: `${payload.length} منبع بین‌المللی افزوده شد` });
+        toast({ kind: "success", message: `${faNum(payload.length)} منبع بین‌المللی افزوده شد` });
       }
       try { localStorage.setItem(KEY_IMPORTED, "1"); } catch {}
     } catch (e) {
@@ -142,6 +146,35 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
       .sort((a, b) => +new Date(b.article.date) - +new Date(a.article.date));
   }, [enriched, country, cat]);
 
+  // When Persian view is on, translate visible headlines with the real LLM
+  // (batched + server-cached), falling back to the offline heuristic instantly.
+  useEffect(() => {
+    if (!showFa) return;
+    const titles = Array.from(new Set(filtered.slice(0, 100).map((e) => e.article.title))).filter((t) => t && !faMap[t]);
+    if (titles.length === 0) return;
+    let cancelled = false;
+    (async () => {
+      setTranslating(true);
+      try {
+        for (let i = 0; i < titles.length; i += 30) {
+          const chunk = titles.slice(i, i + 30);
+          const out = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+          if (cancelled) return;
+          setFaMap((m) => {
+            const next = { ...m };
+            chunk.forEach((t, j) => { if (out[j]) next[t] = out[j]; });
+            return next;
+          });
+        }
+      } catch (e) {
+        console.log("intl batch translate failed:", e);
+      } finally {
+        if (!cancelled) setTranslating(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [showFa, filtered]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const open = (a: RemoteArticle) => {
     if (!onOpenArticle) return;
     haptic("tap");
@@ -169,7 +202,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
                 aria-label={showFa ? "نمایش زبان اصلی" : "نمایش ترجمه فارسی"}
                 title={showFa ? "نمایش زبان اصلی" : "نمایش ترجمه فارسی"}
               >
-                <Languages className={`size-5 ${showFa ? "text-[var(--brand-500)]" : ""}`} />
+                {translating ? <Loader2 className="size-5 animate-spin text-[var(--brand-500)]" /> : <Languages className={`size-5 ${showFa ? "text-[var(--brand-500)]" : ""}`} />}
               </button>
               <button
                 onClick={() => { haptic("select"); refresh(); }}
@@ -186,7 +219,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
     >
       <div className="h-full overflow-y-auto scrollbar-none pb-6">
         {/* Hero strip */}
-        <div className="mx-3 mt-3 rounded-[var(--radius-lg)] p-4 bg-gradient-to-br from-sky-500 via-indigo-500 to-violet-600 text-white shadow-sm">
+        <div className="mx-3 mt-3 rounded-[var(--radius-lg)] p-4 bg-gradient-to-br from-emerald-500 via-emerald-500 to-violet-600 text-white shadow-sm">
           <div className="flex items-center gap-2 mb-1.5">
             <Globe2 className="size-5" />
             <div className="text-[14px] font-bold">شبکهٔ منابع جهانی</div>
@@ -243,7 +276,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
         {/* Articles */}
         <ul className="mt-3 px-3 space-y-2">
           {filtered.slice(0, 100).map(({ article, flag, countryName, categoryFa }) => {
-            const titleFa = showFa ? translateText(article.title, "fa") : null;
+            const titleFa = showFa ? (faMap[article.title] || translateText(article.title, "fa")) : null;
             return (
               <li key={article.id}>
                 <button

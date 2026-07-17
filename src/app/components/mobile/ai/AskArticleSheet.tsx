@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Send, Sparkles } from "lucide-react";
 import { BottomSheet } from "../primitives/BottomSheet";
 import { useHaptics } from "../hooks";
-import { answer, streamText } from "./summarize";
+import { answerAI, streamText } from "./summarize";
 import type { Article } from "../../../data";
 
 type Turn = { role: "user" | "ai"; text: string; streaming?: boolean };
@@ -47,10 +47,14 @@ export function AskArticleSheet({ open, onClose, article, prefill }: Props) {
     if (!article || !q.trim()) return;
     haptic("select");
     setInput("");
+    // Snapshot prior conversation for context before adding the new turns.
+    const history = turns
+      .filter((t) => t.text.trim())
+      .map((t) => ({ role: t.role, text: t.text }));
     const userTurn: Turn = { role: "user", text: q.trim() };
     const aiTurn: Turn = { role: "ai", text: "", streaming: true };
     setTurns((t) => [...t, userTurn, aiTurn]);
-    const full = answer(article, q);
+    const full = await answerAI(article, q.trim(), history);
     let acc = "";
     for await (const ch of streamText(full, { chunkChars: 3, delayMs: 12 })) {
       acc += ch;

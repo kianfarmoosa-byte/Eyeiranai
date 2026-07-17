@@ -18,7 +18,7 @@ type Props = {
 
 // Tailwind gradient classes mapped to category id; falls back to brand.
 const CAT_GRADIENT: Record<string, string> = {
-  tech:    "from-indigo-500 to-blue-600",
+  tech:    "from-emerald-500 to-emerald-600",
   news:    "from-rose-500 to-red-600",
   sport:   "from-emerald-500 to-teal-600",
   culture: "from-amber-500 to-orange-600",
@@ -63,7 +63,7 @@ export function DiscoverScreen({ articles, onOpen, onToggleSave, onPickCategory,
   const showResults = !!q.trim() || !!activeTag;
 
   return (
-    <MobileScreen topbar={<MobileTopBar title="کاوش" subtitle="چی توی کیان داغه؟" />}>
+    <MobileScreen topbar={<MobileTopBar title="کاوش" subtitle="چی توی flow داغه؟" />}>
       <div className="h-full overflow-y-auto scrollbar-none pb-4">
         {/* Search */}
         <div className="px-4 pt-3 sticky top-0 z-[1] bg-[var(--background)] pb-2">
@@ -147,7 +147,7 @@ function TodayStories({ items, onOpen }: { items: Article[]; onOpen: (a: Article
   if (items.length === 0) return null;
   return (
     <section className="mt-4">
-      <SectionHeader icon={<Sparkles className="size-4" />} title="خواندنی‌های امروز" hint="منتخب کیان" />
+      <SectionHeader icon={<Sparkles className="size-4" />} title="خواندنی‌های امروز" hint="منتخب flow" />
       <div className="flex gap-3 overflow-x-auto scrollbar-none px-3 snap-x snap-mandatory pb-1">
         {items.map((a, i) => (
           <button

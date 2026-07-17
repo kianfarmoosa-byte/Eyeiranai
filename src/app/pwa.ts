@@ -51,19 +51,19 @@ self.addEventListener('fetch', (e) => {
 `;
 
 const MANIFEST = {
-  name: "کیان — RSS هوشمند فارسی",
-  short_name: "کیان",
+  name: "FLOW — RSS هوشمند فارسی",
+  short_name: "FLOW",
   description: "خواننده RSS با هوش مصنوعی، گراف رسانه، و اخبار بین‌الملل",
   start_url: ".",
   display: "standalone",
-  background_color: "#0b0f17",
-  theme_color: "#1e293b",
+  background_color: "#FBF9F8",
+  theme_color: "#2FB08B",
   dir: "rtl",
   lang: "fa-IR",
   orientation: "any",
   icons: [
-    { src: "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='#2563eb'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-family='Tahoma' font-size='110' fill='white'>ک</text></svg>`), sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-    { src: "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='#2563eb'/><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' font-family='Tahoma' font-size='300' fill='white'>ک</text></svg>`), sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" },
+    { src: "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='#2FB08B'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, ui-serif, serif' font-weight='600' font-size='120' fill='#FBF9F8'>f</text></svg>`), sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+    { src: "data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='100' fill='#2FB08B'/><text x='50%' y='56%' dominant-baseline='middle' text-anchor='middle' font-family='Georgia, ui-serif, serif' font-weight='600' font-size='320' fill='#FBF9F8'>f</text></svg>`), sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" },
   ],
 };
 
@@ -78,7 +78,7 @@ export function setupPWA() {
 
     let theme = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
     if (!theme) { theme = document.createElement("meta"); theme.name = "theme-color"; document.head.appendChild(theme); }
-    theme.content = "#1e293b";
+    theme.content = "#2FB08B";
 
     if ("serviceWorker" in navigator) {
       const swBlob = new Blob([SW_SOURCE], { type: "text/javascript" });

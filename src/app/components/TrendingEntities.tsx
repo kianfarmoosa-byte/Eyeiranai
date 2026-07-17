@@ -48,7 +48,7 @@ export function TrendingEntities({ articles, max = 20, onClickEntity }: Props) {
             </div>
             <div className="h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-l from-blue-500 to-violet-400 group-hover:opacity-80"
+                className="h-full bg-gradient-to-l from-emerald-500 to-violet-400 group-hover:opacity-80"
                 style={{ width: `${(e.count / maxCount) * 100}%` }}
               />
             </div>

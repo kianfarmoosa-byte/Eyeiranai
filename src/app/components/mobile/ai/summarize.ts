@@ -1,7 +1,9 @@
-// Lightweight, local heuristic summarizer for Persian/English news text.
-// Replace internals with a real LLM call when a backend is wired.
+// Persian/English news summarizer. Primary path is a real LLM (server-proxied);
+// the local heuristic below is kept as an offline / failure fallback.
 
 import type { Article } from "../../../data";
+import { api } from "../../../api";
+import { studioUserId } from "../studio/studio";
 
 export type SummaryMode = "tldr" | "bullets" | "long";
 
@@ -140,4 +142,47 @@ export function answer(article: Article, question: string): string {
   const best = scored.sort((a, b) => b.hit - a.hit).filter((x) => x.hit > 0).slice(0, 2).map((x) => x.s);
   if (!best.length) return "موضوع پرسش در این مقاله مستقیماً پوشش داده نشده، اما خلاصه‌اش این است: " + clamp(sents[0], 200);
   return best.join(" ");
+}
+
+// ── LLM-backed variants (server-proxied). Fall back to local heuristics. ──
+
+/** Real summary via the backend LLM; falls back to the local extractive summary. */
+export async function summarizeAI(article: Article): Promise<Summary> {
+  try {
+    const s = await api.aiSummarize({
+      title: article.title || "",
+      content: article.content || article.preview || "",
+    }, studioUserId());
+    // Guard against partial responses by backfilling from the local summary.
+    const local = summarize(article);
+    return {
+      tldr: s.tldr || local.tldr,
+      bullets: s.bullets?.length ? s.bullets : local.bullets,
+      long: s.long || local.long,
+      entities: s.entities?.length ? s.entities : local.entities,
+      readingMinutes: s.readingMinutes || local.readingMinutes,
+    };
+  } catch (e) {
+    console.log("summarizeAI failed, using local fallback:", e);
+    return summarize(article);
+  }
+}
+
+/** Real answer via the backend LLM; falls back to the local keyword answer. */
+export async function answerAI(
+  article: Article,
+  question: string,
+  history: { role: string; text: string }[] = [],
+): Promise<string> {
+  try {
+    return await api.aiAsk({
+      title: article.title || "",
+      content: article.content || article.preview || "",
+      question,
+      history,
+    }, studioUserId());
+  } catch (e) {
+    console.log("answerAI failed, using local fallback:", e);
+    return answer(article, question);
+  }
 }

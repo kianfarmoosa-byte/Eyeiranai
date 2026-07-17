@@ -114,14 +114,14 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
   return (
     <aside className="w-[480px] bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col relative">
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-slate-200 dark:bg-slate-800 z-20">
-        <div className="h-full bg-blue-500 transition-[width] duration-150" style={{ width: `${progress}%` }}></div>
+        <div className="h-full bg-emerald-500 transition-[width] duration-150" style={{ width: `${progress}%` }}></div>
       </div>
       <div className="border-b border-slate-200 dark:border-slate-800 p-3 flex items-center gap-1">
         <button onClick={() => toggleStar(article.id)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
           <Star className={`w-4 h-4 ${article.starred ? 'fill-yellow-400 text-yellow-400' : ''}`} />
         </button>
         <button onClick={() => article && toggleSave?.(article.id)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="ذخیره">
-          <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-blue-500 text-blue-500' : ''}`} />
+          <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-emerald-500 text-emerald-500' : ''}`} />
         </button>
         <div className="w-px h-5 bg-slate-200 dark:bg-slate-700 mx-1"></div>
         <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
@@ -176,7 +176,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
                   </button>
                 ))}
               </div>
-              <button onClick={createAndAttach} className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm flex items-center justify-center gap-1.5">
+              <button onClick={createAndAttach} className="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm flex items-center justify-center gap-1.5">
                 <Plus className="w-4 h-4" /> یادداشت جدید
               </button>
             </div>
@@ -187,7 +187,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
             <span className="text-lg">{article.sourceIcon}</span>
             {onOpenTimeline ? (
               <button onClick={() => onOpenTimeline({ kind: "source", source: article.source })}
-                className="hover:text-blue-600 inline-flex items-center gap-1" title="خط زمانی این منبع">
+                className="hover:text-emerald-600 inline-flex items-center gap-1" title="خط زمانی این منبع">
                 {article.source} <Clock className="w-3 h-3" />
               </button>
             ) : (
@@ -206,7 +206,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
             {article.link && (
               <>
                 <span>•</span>
-                <a href={article.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline">
+                <a href={article.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 hover:underline">
                   <ExternalLink className="w-3 h-3" /> مشاهده در منبع اصلی
                 </a>
               </>
@@ -257,14 +257,14 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
           {related && related.length > 0 && (
             <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
               <div className="text-sm font-semibold mb-3 flex items-center gap-2">
-                <span className="inline-block w-1 h-4 bg-blue-500 rounded"></span>
+                <span className="inline-block w-1 h-4 bg-emerald-500 rounded"></span>
                 مقالات مرتبط
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {related.slice(0, 6).map(r => (
                   <button key={r.article.id} onClick={() => onSelectRelated?.(r.article.id)}
                     className="text-right p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800">
-                    <div className="text-[11px] text-blue-600 dark:text-blue-400 mb-0.5">
+                    <div className="text-[11px] text-emerald-600 dark:text-emerald-400 mb-0.5">
                       {r.article.source} · {Math.round(r.score * 100)}٪ مرتبط
                     </div>
                     <div className="text-sm font-medium line-clamp-2">{r.article.title}</div>

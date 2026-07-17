@@ -155,9 +155,9 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                     onClick={() => setSelectedId(a.id)}
                     style={{ height: ROW_H }}
                     data-aid={a.id}
-                    className={`topic-row cursor-pointer w-full px-6 flex items-center gap-3 text-right hover:bg-slate-50 dark:hover:bg-slate-900 ${selectedId === a.id ? 'bg-blue-50 dark:bg-blue-950/30' : ''} ${a.read ? 'opacity-60' : ''}`}
+                    className={`topic-row cursor-pointer w-full px-6 flex items-center gap-3 text-right hover:bg-slate-50 dark:hover:bg-slate-900 ${selectedId === a.id ? 'bg-emerald-50 dark:bg-emerald-950/30' : ''} ${a.read ? 'opacity-60' : ''}`}
                   >
-                    <div className={`w-2 h-2 rounded-full shrink-0 ${a.read ? 'bg-transparent' : 'bg-blue-500'}`}></div>
+                    <div className={`w-2 h-2 rounded-full shrink-0 ${a.read ? 'bg-transparent' : 'bg-emerald-500'}`}></div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
                         <span>{a.sourceIcon}</span>
@@ -187,9 +187,9 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                   tabIndex={0}
                   onClick={() => setSelectedId(a.id)}
                   data-aid={a.id}
-                  className={`topic-row cursor-pointer w-full px-6 py-3 flex items-start gap-3 text-right hover:bg-slate-50 dark:hover:bg-slate-900 ${selectedId === a.id ? 'bg-blue-50 dark:bg-blue-950/30' : ''} ${a.read ? 'opacity-60' : ''}`}
+                  className={`topic-row cursor-pointer w-full px-6 py-3 flex items-start gap-3 text-right hover:bg-slate-50 dark:hover:bg-slate-900 ${selectedId === a.id ? 'bg-emerald-50 dark:bg-emerald-950/30' : ''} ${a.read ? 'opacity-60' : ''}`}
                 >
-                  <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${a.read ? 'bg-transparent' : 'bg-blue-500'}`}></div>
+                  <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${a.read ? 'bg-transparent' : 'bg-emerald-500'}`}></div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
                       <span>{a.sourceIcon}</span>
@@ -218,7 +218,7 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                 key={a.id}
                 data-aid={a.id}
                 onClick={() => setSelectedId(a.id)}
-                className={`topic-row cursor-pointer bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-lg transition ${selectedId === a.id ? 'ring-2 ring-blue-500' : ''} ${a.read ? 'opacity-70' : ''}`}
+                className={`topic-row cursor-pointer bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-lg transition ${selectedId === a.id ? 'ring-2 ring-emerald-500' : ''} ${a.read ? 'opacity-70' : ''}`}
               >
                 {a.image && (
                   <div className="h-44 overflow-hidden bg-slate-100 dark:bg-slate-800">

@@ -28,7 +28,7 @@ export function QualityInsights({ article, overrideScore }: Props) {
         </span>
         <div className="flex-1 min-w-0">
           <div className="text-[13.5px] font-semibold leading-tight">تحلیل کیفیت مقاله</div>
-          <div className="text-[11px] text-[var(--foreground-subtle)] mt-0.5">ارزیابی هوشمند کیان</div>
+          <div className="text-[11px] text-[var(--foreground-subtle)] mt-0.5">ارزیابی هوشمند flow</div>
         </div>
         <ScorePill value={final} grade={grade} />
       </header>
@@ -119,7 +119,7 @@ function compute(article: Article) {
     provenance: {
       ok: TRUSTED.has(article.source),
       detail: TRUSTED.has(article.source)
-        ? `منبع ${article.source} از فهرست منابع تأییدشده کیان`
+        ? `منبع ${article.source} از فهرست منابع تأییدشده flow`
         : `${article.source} هنوز در فهرست تأییدشده ثبت نشده`,
     },
   };
@@ -127,14 +127,14 @@ function compute(article: Article) {
 
 function gradeOf(v: number) {
   if (v >= 85) return { label: "عالی",      tone: "bg-emerald-500/12 text-emerald-600 dark:text-emerald-400" };
-  if (v >= 70) return { label: "خوب",       tone: "bg-sky-500/12 text-sky-600 dark:text-sky-400" };
+  if (v >= 70) return { label: "خوب",       tone: "bg-emerald-500/12 text-emerald-600 dark:text-emerald-400" };
   if (v >= 55) return { label: "متوسط",     tone: "bg-amber-500/12 text-amber-600 dark:text-amber-400" };
   return        { label: "نیاز به بررسی", tone: "bg-rose-500/12 text-rose-600 dark:text-rose-400" };
 }
 
 function barTone(v: number) {
   if (v >= 80) return "bg-emerald-500";
-  if (v >= 65) return "bg-sky-500";
+  if (v >= 65) return "bg-emerald-500";
   if (v >= 50) return "bg-amber-500";
   return "bg-rose-500";
 }

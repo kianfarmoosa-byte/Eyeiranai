@@ -205,13 +205,13 @@ export function CommandPalette({ open, onClose, articles, feeds, actions, theme 
                     data-cmd-idx={idx}
                     onMouseEnter={() => setActive(idx)}
                     onClick={() => { item.run(); onClose(); }}
-                    className={`w-full flex items-center gap-3 px-3 py-2 text-right text-sm ${isActive ? "bg-blue-50 dark:bg-blue-950/40 text-blue-900 dark:text-blue-100" : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"}`}
+                    className={`w-full flex items-center gap-3 px-3 py-2 text-right text-sm ${isActive ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-100" : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800"}`}
                   >
-                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-blue-600 dark:text-blue-300" : "text-slate-400"}`} />
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-emerald-600 dark:text-emerald-300" : "text-slate-400"}`} />
                     <span className="flex-1 truncate">{item.label}</span>
                     {item.hint && <span className="text-[11px] text-slate-400 truncate max-w-[40%]">{item.hint}</span>}
                     {item.shortcut && <kbd className="text-[10px] bg-slate-100 dark:bg-slate-800 rounded px-1.5 py-0.5">{item.shortcut}</kbd>}
-                    {isActive && <ArrowRight className="w-3.5 h-3.5 text-blue-500" />}
+                    {isActive && <ArrowRight className="w-3.5 h-3.5 text-emerald-500" />}
                   </button>
                 );
               })}

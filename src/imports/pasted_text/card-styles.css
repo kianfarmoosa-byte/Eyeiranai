@@ -1,0 +1,5840 @@
+/* Phone / 04 */
+
+position: relative;
+width: 414px;
+height: 896px;
+
+background: #FFFFFF;
+
+
+/* Frame 6 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+position: absolute;
+left: 16px;
+right: 17px;
+top: 68px;
+bottom: 38px;
+
+
+
+/* Drag area */
+
+width: 381px;
+height: 630px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Cards 04 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 0px;
+top: 0px;
+
+background: #E9EAEF;
+border-radius: 32px;
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 32px;
+right: 32px;
+top: 32px;
+
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 427.78px;
+height: 370.78px;
+left: 23px;
+top: 298px;
+
+
+
+/* Star 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 143.78px;
+top: 361.78px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+
+
+/* Star 4 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 51px;
+top: 298px;
+
+border: 1px solid #000000;
+
+
+/* Star 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 93px;
+height: 93px;
+left: 280px;
+top: 298px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+
+
+/* Star 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 57px;
+height: 57px;
+left: 23px;
+top: 375px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 32px;
+top: 542px;
+
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 20.83%;
+top: 50%;
+bottom: 50%;
+
+border: 2px solid #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 50%;
+top: 20.83%;
+bottom: 20.83%;
+
+border: 2px solid #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Cards 03 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: -731.98px;
+top: 146.95px;
+
+background: #F8EED5;
+border-radius: 32px;
+transform: rotate(-30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 43.71px;
+right: 20.29px;
+top: 43.71px;
+
+transform: rotate(-30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 444px;
+height: 444px;
+left: 204.89px;
+top: 187.38px;
+
+transform: rotate(-30deg);
+
+
+/* Star 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 444px;
+height: 444px;
+right: -267.89px;
+bottom: -1.38px;
+
+background: #F8EED5;
+border: 1px solid #111111;
+transform: rotate(-30deg);
+
+
+/* Star 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 288px;
+height: 288px;
+right: -218.44px;
+bottom: 48.07px;
+
+background: #EDD5BF;
+border: 1px solid #111111;
+transform: rotate(-30deg);
+
+
+/* Star 3 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 154px;
+height: 154px;
+right: -175.96px;
+bottom: 90.55px;
+
+background: #DC7E7E;
+border: 1px solid #111111;
+transform: rotate(-30deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 298.71px;
+top: 582.89px;
+
+transform: rotate(-30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 43.04%;
+bottom: -1.38%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Cards 02 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: -731.98px;
+top: 146.95px;
+
+background: #D4ECCD;
+border-radius: 32px;
+transform: rotate(-30deg);
+
+
+/* Img */
+
+position: absolute;
+width: 317px;
+height: 297px;
+left: 293.53px;
+top: 343.13px;
+
+transform: rotate(-15deg);
+
+
+/* Ellipse 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 380.34px;
+top: 459.63px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 413.31px;
+top: 343.13px;
+
+background: rgba(0, 0, 0, 0.1);
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 293.53px;
+top: 375.22px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 308px;
+left: 43.71px;
+right: 20.29px;
+top: 43.71px;
+
+transform: rotate(-30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 298.71px;
+top: 582.89px;
+
+transform: rotate(-30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 43.04%;
+bottom: -1.38%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Cards 01 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: -731.98px;
+top: 146.95px;
+
+background: #CDE3F3;
+border-radius: 32px;
+transform: rotate(-30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 284px;
+left: 43.71px;
+right: 20.29px;
+top: 43.71px;
+
+transform: rotate(-30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 48px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 371.35px;
+height: 342.39px;
+left: 225.89px;
+top: 260.08px;
+
+transform: rotate(-30deg);
+
+
+/* Polygon 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 238px;
+height: 274px;
+left: 316.32px;
+top: 309.81px;
+
+background: #D8EEFF;
+border: 1px solid #000000;
+transform: rotate(-49.35deg);
+
+
+/* Polygon 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 75.9px;
+height: 87.38px;
+left: 389.24px;
+top: 331.8px;
+
+background: #B9D8EF;
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 269.15px;
+top: 370.82px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 298.71px;
+top: 615.89px;
+
+transform: rotate(-30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Toolbar */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 32px 32px 20px;
+gap: 16px;
+
+width: 381px;
+height: 144px;
+
+background: #E9EAEF;
+border-radius: 32px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btn / Primary */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 317px;
+height: 56px;
+
+background: #000000;
+border-radius: 12px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Want to try */
+
+width: 285px;
+height: 24px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* x / Pagination */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 6px 50px;
+gap: 8px;
+
+width: 317px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Dot 01 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Dot 02 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Dot 03 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Pointer */
+
+width: 8px;
+height: 8px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Status Bar / iPhone 13 & 13 Pro */
+
+position: absolute;
+width: 414px;
+height: 44px;
+left: 0px;
+top: 0px;
+
+
+
+/* Notch */
+
+position: absolute;
+visibility: hidden;
+width: 164px;
+height: 31px;
+left: 125px;
+top: -2px;
+
+
+
+/* Notch */
+
+position: absolute;
+width: 164px;
+height: 31px;
+left: calc(50% - 164px/2);
+top: -2px;
+
+background: #000000;
+
+
+/* Right Side */
+
+position: absolute;
+width: 66.66px;
+height: 11.34px;
+left: 321.67px;
+top: 17.33px;
+
+
+
+/* Battery */
+
+position: absolute;
+left: 87.92%;
+right: 6.2%;
+top: 39.39%;
+bottom: 34.85%;
+
+
+
+/* Rectangle */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 22px;
+height: 11.33px;
+left: calc(50% - 22px/2 + 168px);
+top: 17.33px;
+
+mix-blend-mode: normal;
+opacity: 0.35;
+border: 1px solid #000000;
+border-radius: 2.66667px;
+
+
+/* Combined Shape */
+
+position: absolute;
+width: 1.33px;
+height: 4px;
+left: calc(50% - 1.33px/2 + 180.66px);
+top: 21px;
+
+background: #000000;
+mix-blend-mode: normal;
+opacity: 0.4;
+
+
+/* Rectangle */
+
+position: absolute;
+width: 18px;
+height: 7.33px;
+left: calc(50% - 18px/2 + 168px);
+top: 19.33px;
+
+background: #000000;
+border-radius: 1.1px;
+
+
+/* Wifi */
+
+position: absolute;
+width: 15.27px;
+height: 10.97px;
+left: calc(50% - 15.27px/2 + 144.33px);
+top: 17.33px;
+
+background: #000000;
+
+
+/* Mobile Signal */
+
+position: absolute;
+width: 17px;
+height: 10.67px;
+left: calc(50% - 17px/2 + 123.17px);
+top: 17.67px;
+
+background: #000000;
+
+
+/* Left Side */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: 30px;
+top: 12px;
+
+
+
+/* _Time */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: calc(50% - 54px/2 - 150px);
+top: 12px;
+
+border-radius: 24px;
+
+
+/* 9:41 */
+
+position: absolute;
+width: 54px;
+height: 20px;
+left: 0px;
+top: 1px;
+
+/* Default/Bold/Subheadline */
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+text-align: center;
+letter-spacing: -0.5px;
+
+/* Label Color/Light/Primary */
+color: #000000;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+height: 38px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+width: 146px;
+height: 5px;
+left: calc(50% - 146px/2);
+bottom: 8px;
+
+background: #000000;
+border-radius: 100px;
+
+
+/* Phone / 03 */
+
+position: relative;
+width: 414px;
+height: 896px;
+
+background: #FFFFFF;
+
+
+/* Frame 6 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+position: absolute;
+left: 16px;
+right: 17px;
+top: 68px;
+bottom: 38px;
+
+
+
+/* Drag area */
+
+width: 381px;
+height: 630px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Cards 04 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 468.02px;
+top: 146.95px;
+
+background: #E9EAEF;
+border-radius: 32px;
+transform: rotate(30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 200.71px;
+right: -136.71px;
+top: 43.71px;
+
+transform: rotate(30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 427.78px;
+height: 370.78px;
+left: 0.53px;
+top: 269.58px;
+
+transform: rotate(30deg);
+
+
+/* Star 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 105.13px;
+top: 385.2px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 4 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 56.67px;
+top: 283.58px;
+
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 93px;
+height: 93px;
+left: 361.99px;
+top: 398.08px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 57px;
+height: 57px;
+left: 118.92px;
+top: 336.26px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 43.71px;
+top: 485.39px;
+
+transform: rotate(30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Cards 03 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 0px;
+top: 0px;
+
+background: #F8EED4;
+border-radius: 32px;
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 32px;
+right: 32px;
+top: 32px;
+
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 444px;
+height: 444px;
+left: 68px;
+top: 292px;
+
+
+
+/* Star 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 444px;
+height: 444px;
+right: -131px;
+bottom: -106px;
+
+background: #F8EED4;
+border: 1px solid #111111;
+
+
+/* Star 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 288px;
+height: 288px;
+right: -53px;
+bottom: -28px;
+
+background: #EDD5BF;
+border: 1px solid #111111;
+
+
+/* Star 3 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 154px;
+height: 154px;
+right: 14px;
+bottom: 39px;
+
+background: #DC7E7E;
+border: 1px solid #111111;
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 32px;
+top: 542px;
+
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 20.83%;
+top: 50%;
+bottom: 50%;
+
+border: 2px solid #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 50%;
+top: 20.83%;
+bottom: 20.83%;
+
+border: 2px solid #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 20.83%;
+top: 50%;
+bottom: 50%;
+
+border: 2px solid #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 50%;
+right: 20.83%;
+top: 20.83%;
+bottom: 20.83%;
+
+border: 2px solid #000000;
+
+
+/* Cards 02 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: -731.98px;
+top: 146.95px;
+
+background: #D4ECCD;
+border-radius: 32px;
+transform: rotate(-30deg);
+
+
+/* Img */
+
+position: absolute;
+width: 317px;
+height: 297px;
+left: 293.53px;
+top: 343.13px;
+
+transform: rotate(-15deg);
+
+
+/* Ellipse 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 380.34px;
+top: 459.63px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 413.31px;
+top: 343.13px;
+
+background: rgba(0, 0, 0, 0.1);
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 293.53px;
+top: 375.22px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 308px;
+left: 43.71px;
+right: 20.29px;
+top: 43.71px;
+
+transform: rotate(-30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 298.71px;
+top: 582.89px;
+
+transform: rotate(-30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 43.04%;
+bottom: -1.38%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Cards 01 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: -731.98px;
+top: 146.95px;
+
+background: #CDE3F3;
+border-radius: 32px;
+transform: rotate(-30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 284px;
+left: 43.71px;
+right: 20.29px;
+top: 43.71px;
+
+transform: rotate(-30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 48px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 371.35px;
+height: 342.39px;
+left: 225.89px;
+top: 260.08px;
+
+transform: rotate(-30deg);
+
+
+/* Polygon 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 238px;
+height: 274px;
+left: 316.32px;
+top: 309.81px;
+
+background: #D8EEFF;
+border: 1px solid #000000;
+transform: rotate(-49.35deg);
+
+
+/* Polygon 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 75.9px;
+height: 87.38px;
+left: 389.24px;
+top: 331.8px;
+
+background: #B9D8EF;
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 269.15px;
+top: 370.82px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 298.71px;
+top: 615.89px;
+
+transform: rotate(-30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Toolbar */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 32px 32px 20px;
+gap: 16px;
+
+width: 381px;
+height: 144px;
+
+background: #F8EED4;
+border-radius: 32px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btn / Primary */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 317px;
+height: 56px;
+
+background: #000000;
+border-radius: 12px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Want to try */
+
+width: 285px;
+height: 24px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* x / Pagination */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 6px 50px;
+gap: 8px;
+
+width: 317px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Dot 01 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Dot 02 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Pointer */
+
+width: 8px;
+height: 8px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Dot 03 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Status Bar / iPhone 13 & 13 Pro */
+
+position: absolute;
+width: 414px;
+height: 44px;
+left: 0px;
+top: 0px;
+
+
+
+/* Notch */
+
+position: absolute;
+visibility: hidden;
+width: 164px;
+height: 31px;
+left: 125px;
+top: -2px;
+
+
+
+/* Notch */
+
+position: absolute;
+width: 164px;
+height: 31px;
+left: calc(50% - 164px/2);
+top: -2px;
+
+background: #000000;
+
+
+/* Right Side */
+
+position: absolute;
+width: 66.66px;
+height: 11.34px;
+left: 321.67px;
+top: 17.33px;
+
+
+
+/* Battery */
+
+position: absolute;
+left: 87.92%;
+right: 6.2%;
+top: 39.39%;
+bottom: 34.85%;
+
+
+
+/* Rectangle */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 22px;
+height: 11.33px;
+left: calc(50% - 22px/2 + 168px);
+top: 17.33px;
+
+mix-blend-mode: normal;
+opacity: 0.35;
+border: 1px solid #000000;
+border-radius: 2.66667px;
+
+
+/* Combined Shape */
+
+position: absolute;
+width: 1.33px;
+height: 4px;
+left: calc(50% - 1.33px/2 + 180.66px);
+top: 21px;
+
+background: #000000;
+mix-blend-mode: normal;
+opacity: 0.4;
+
+
+/* Rectangle */
+
+position: absolute;
+width: 18px;
+height: 7.33px;
+left: calc(50% - 18px/2 + 168px);
+top: 19.33px;
+
+background: #000000;
+border-radius: 1.1px;
+
+
+/* Wifi */
+
+position: absolute;
+width: 15.27px;
+height: 10.97px;
+left: calc(50% - 15.27px/2 + 144.33px);
+top: 17.33px;
+
+background: #000000;
+
+
+/* Mobile Signal */
+
+position: absolute;
+width: 17px;
+height: 10.67px;
+left: calc(50% - 17px/2 + 123.17px);
+top: 17.67px;
+
+background: #000000;
+
+
+/* Left Side */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: 30px;
+top: 12px;
+
+
+
+/* _Time */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: calc(50% - 54px/2 - 150px);
+top: 12px;
+
+border-radius: 24px;
+
+
+/* 9:41 */
+
+position: absolute;
+width: 54px;
+height: 20px;
+left: 0px;
+top: 1px;
+
+/* Default/Bold/Subheadline */
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+text-align: center;
+letter-spacing: -0.5px;
+
+/* Label Color/Light/Primary */
+color: #000000;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+height: 38px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+width: 146px;
+height: 5px;
+left: calc(50% - 146px/2);
+bottom: 8px;
+
+background: #000000;
+border-radius: 100px;
+
+
+/* Phone / 02 */
+
+position: relative;
+width: 414px;
+height: 896px;
+
+background: #FFFFFF;
+
+
+/* Frame 6 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+position: absolute;
+left: 16px;
+right: 17px;
+top: 68px;
+bottom: 38px;
+
+
+
+/* Drag area */
+
+width: 381px;
+height: 630px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Cards 04 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 468.02px;
+top: 146.95px;
+
+background: #E9EAEF;
+border-radius: 32px;
+transform: rotate(30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 200.71px;
+right: -136.71px;
+top: 43.71px;
+
+transform: rotate(30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 427.78px;
+height: 370.78px;
+left: 0.53px;
+top: 269.58px;
+
+transform: rotate(30deg);
+
+
+/* Star 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 105.13px;
+top: 385.2px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 4 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 56.67px;
+top: 283.58px;
+
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 93px;
+height: 93px;
+left: 361.99px;
+top: 398.08px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 57px;
+height: 57px;
+left: 118.92px;
+top: 336.26px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 43.71px;
+top: 485.39px;
+
+transform: rotate(30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Cards 03 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 468.02px;
+top: 146.95px;
+
+background: #F8EED5;
+border-radius: 32px;
+transform: rotate(30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 200.71px;
+right: -136.71px;
+top: 43.71px;
+
+transform: rotate(30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 444px;
+height: 444px;
+left: 5.89px;
+top: 286.88px;
+
+transform: rotate(30deg);
+
+
+/* Star 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 444px;
+height: 444px;
+right: -68.89px;
+bottom: -100.88px;
+
+background: #F8EED5;
+border: 1px solid #111111;
+transform: rotate(30deg);
+
+
+/* Star 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 288px;
+height: 288px;
+right: -19.44px;
+bottom: -51.43px;
+
+background: #EDD5BF;
+border: 1px solid #111111;
+transform: rotate(30deg);
+
+
+/* Star 3 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 154px;
+height: 154px;
+right: 23.04px;
+bottom: -8.95px;
+
+background: #DC7E7E;
+border: 1px solid #111111;
+transform: rotate(30deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 43.71px;
+top: 485.39px;
+
+transform: rotate(30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 43.04%;
+bottom: -1.38%;
+
+border: 2px solid #000000;
+transform: rotate(30deg);
+
+
+/* Cards 02 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 0px;
+top: 0px;
+
+background: #D4ECCD;
+border-radius: 32px;
+
+
+/* Img */
+
+position: absolute;
+width: 317px;
+height: 297px;
+left: 60px;
+top: 350px;
+
+transform: rotate(15deg);
+
+
+/* Ellipse 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 119.89px;
+top: 466.5px;
+
+border: 1px solid #000000;
+transform: rotate(15deg);
+
+
+/* Ellipse 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 206.69px;
+top: 382.09px;
+
+background: rgba(0, 0, 0, 0.1);
+border: 1px solid #000000;
+transform: rotate(15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 86.92px;
+top: 350px;
+
+border: 1px solid #000000;
+transform: rotate(15deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 308px;
+left: 32px;
+right: 32px;
+top: 32px;
+
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 32px;
+top: 542px;
+
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 20.83%;
+top: 50%;
+bottom: 50%;
+
+border: 2px solid #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 50%;
+top: 20.83%;
+bottom: 20.83%;
+
+border: 2px solid #000000;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 20.83%;
+top: 50%;
+bottom: 50%;
+
+border: 2px solid #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 50%;
+right: 20.83%;
+top: 20.83%;
+bottom: 20.83%;
+
+border: 2px solid #000000;
+
+
+/* Cards 01 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: -731.98px;
+top: 146.95px;
+
+background: #CDE3F3;
+border-radius: 32px;
+transform: rotate(-30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 284px;
+left: 43.71px;
+right: 20.29px;
+top: 43.71px;
+
+transform: rotate(-30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 48px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 371.35px;
+height: 342.39px;
+left: 225.89px;
+top: 260.08px;
+
+transform: rotate(-30deg);
+
+
+/* Polygon 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 238px;
+height: 274px;
+left: 316.32px;
+top: 309.81px;
+
+background: #D8EEFF;
+border: 1px solid #000000;
+transform: rotate(-49.35deg);
+
+
+/* Polygon 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 75.9px;
+height: 87.38px;
+left: 389.24px;
+top: 331.8px;
+
+background: #B9D8EF;
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 269.15px;
+top: 370.82px;
+
+border: 1px solid #000000;
+transform: rotate(-15deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 298.71px;
+top: 615.89px;
+
+transform: rotate(-30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, 0.5, 0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(-30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: rotate(-30deg);
+
+
+/* Toolbar */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 32px 32px 20px;
+gap: 16px;
+
+width: 381px;
+height: 144px;
+
+background: #D4ECCD;
+border-radius: 32px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btn / Primary */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 317px;
+height: 56px;
+
+background: #000000;
+border-radius: 12px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Want to try */
+
+width: 285px;
+height: 24px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* x / Pagination */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 6px 50px;
+gap: 8px;
+
+width: 317px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Dot 01 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Pointer */
+
+width: 8px;
+height: 8px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Dot 02 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Dot 03 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Status Bar / iPhone 13 & 13 Pro */
+
+position: absolute;
+width: 414px;
+height: 44px;
+left: 0px;
+top: 0px;
+
+
+
+/* Notch */
+
+position: absolute;
+visibility: hidden;
+width: 164px;
+height: 31px;
+left: 125px;
+top: -2px;
+
+
+
+/* Notch */
+
+position: absolute;
+width: 164px;
+height: 31px;
+left: calc(50% - 164px/2);
+top: -2px;
+
+background: #000000;
+
+
+/* Right Side */
+
+position: absolute;
+width: 66.66px;
+height: 11.34px;
+left: 321.67px;
+top: 17.33px;
+
+
+
+/* Battery */
+
+position: absolute;
+left: 87.92%;
+right: 6.2%;
+top: 39.39%;
+bottom: 34.85%;
+
+
+
+/* Rectangle */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 22px;
+height: 11.33px;
+left: calc(50% - 22px/2 + 168px);
+top: 17.33px;
+
+mix-blend-mode: normal;
+opacity: 0.35;
+border: 1px solid #000000;
+border-radius: 2.66667px;
+
+
+/* Combined Shape */
+
+position: absolute;
+width: 1.33px;
+height: 4px;
+left: calc(50% - 1.33px/2 + 180.66px);
+top: 21px;
+
+background: #000000;
+mix-blend-mode: normal;
+opacity: 0.4;
+
+
+/* Rectangle */
+
+position: absolute;
+width: 18px;
+height: 7.33px;
+left: calc(50% - 18px/2 + 168px);
+top: 19.33px;
+
+background: #000000;
+border-radius: 1.1px;
+
+
+/* Wifi */
+
+position: absolute;
+width: 15.27px;
+height: 10.97px;
+left: calc(50% - 15.27px/2 + 144.33px);
+top: 17.33px;
+
+background: #000000;
+
+
+/* Mobile Signal */
+
+position: absolute;
+width: 17px;
+height: 10.67px;
+left: calc(50% - 17px/2 + 123.17px);
+top: 17.67px;
+
+background: #000000;
+
+
+/* Left Side */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: 30px;
+top: 12px;
+
+
+
+/* _Time */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: calc(50% - 54px/2 - 150px);
+top: 12px;
+
+border-radius: 24px;
+
+
+/* 9:41 */
+
+position: absolute;
+width: 54px;
+height: 20px;
+left: 0px;
+top: 1px;
+
+/* Default/Bold/Subheadline */
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+text-align: center;
+letter-spacing: -0.5px;
+
+/* Label Color/Light/Primary */
+color: #000000;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+height: 38px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+width: 146px;
+height: 5px;
+left: calc(50% - 146px/2);
+bottom: 8px;
+
+background: #000000;
+border-radius: 100px;
+
+
+/* Phone / 01 */
+
+position: relative;
+width: 414px;
+height: 896px;
+
+background: #FFFFFF;
+
+
+/* Frame 6 */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+position: absolute;
+left: 16px;
+right: 17px;
+top: 68px;
+bottom: 38px;
+
+
+
+/* Drag area */
+
+width: 381px;
+height: 630px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Cards 04 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 468.02px;
+top: 146.95px;
+
+background: #E9EAEF;
+border-radius: 32px;
+transform: rotate(30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 200.71px;
+right: -136.71px;
+top: 43.71px;
+
+transform: rotate(30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 427.78px;
+height: 370.78px;
+left: 0.53px;
+top: 269.58px;
+
+transform: rotate(30deg);
+
+
+/* Star 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 105.13px;
+top: 385.2px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 4 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 307px;
+height: 307px;
+left: 56.67px;
+top: 283.58px;
+
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 93px;
+height: 93px;
+left: 361.99px;
+top: 398.08px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Star 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 57px;
+height: 57px;
+left: 118.92px;
+top: 336.26px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+transform: rotate(30deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 43.71px;
+top: 485.39px;
+
+transform: rotate(30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Cards 03 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 468.02px;
+top: 146.95px;
+
+background: #F8EED5;
+border-radius: 32px;
+transform: rotate(30deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 252px;
+left: 200.71px;
+right: -136.71px;
+top: 43.71px;
+
+transform: rotate(30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 168px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 444px;
+height: 444px;
+left: 5.89px;
+top: 286.88px;
+
+transform: rotate(30deg);
+
+
+/* Star 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 444px;
+height: 444px;
+right: -68.89px;
+bottom: -100.88px;
+
+background: #F8EED5;
+border: 1px solid #111111;
+transform: rotate(30deg);
+
+
+/* Star 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 288px;
+height: 288px;
+right: -19.44px;
+bottom: -51.43px;
+
+background: #EDD5BF;
+border: 1px solid #111111;
+transform: rotate(30deg);
+
+
+/* Star 3 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 154px;
+height: 154px;
+right: 23.04px;
+bottom: -8.95px;
+
+background: #DC7E7E;
+border: 1px solid #111111;
+transform: rotate(30deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 43.71px;
+top: 485.39px;
+
+transform: rotate(30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 43.04%;
+bottom: -1.38%;
+
+border: 2px solid #000000;
+transform: rotate(30deg);
+
+
+/* Cards 02 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 468.02px;
+top: 146.95px;
+
+background: #D4ECCD;
+border-radius: 32px;
+transform: rotate(30deg);
+
+
+/* Img */
+
+position: absolute;
+width: 317px;
+height: 297px;
+left: 48.52px;
+top: 371.54px;
+
+transform: rotate(45deg);
+
+
+/* Ellipse 7 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 92.36px;
+top: 488.92px;
+
+border: 1px solid #000000;
+transform: rotate(45deg);
+
+
+/* Ellipse 6 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 209.74px;
+top: 459.22px;
+
+background: rgba(0, 0, 0, 0.1);
+border: 1px solid #000000;
+transform: rotate(45deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 122.06px;
+top: 371.54px;
+
+border: 1px solid #000000;
+transform: rotate(45deg);
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 308px;
+left: 172.71px;
+right: -108.71px;
+top: 43.71px;
+
+transform: rotate(30deg);
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 72px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 122px;
+height: 56px;
+left: 43.71px;
+top: 485.39px;
+
+transform: rotate(30deg);
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 28.46%;
+right: 42.37%;
+top: 28.46%;
+bottom: 13.21%;
+
+border: 2px solid #000000;
+transform: matrix(-0.87, -0.5, -0.5, 0.87, 0, 0);
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+transform: rotate(30deg);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 5.46px;
+top: 5.46px;
+
+background: #000000;
+transform: rotate(30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 43.04%;
+right: -1.38%;
+top: 53.72%;
+bottom: 46.28%;
+
+border: 2px solid #000000;
+transform: rotate(30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 53.72%;
+right: 17.12%;
+top: 43.04%;
+bottom: -1.38%;
+
+border: 2px solid #000000;
+transform: rotate(30deg);
+
+
+/* Cards 01 */
+
+position: absolute;
+width: 381px;
+height: 630px;
+left: 0px;
+top: 0px;
+
+background: #CDE3F3;
+border-radius: 32px;
+
+
+/* Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 12px;
+
+position: absolute;
+height: 284px;
+left: 32px;
+right: 32px;
+top: 32px;
+
+
+
+/* Title */
+
+width: 317px;
+height: 224px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 56px;
+line-height: 56px;
+/* or 100% */
+
+color: #111111;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Description */
+
+width: 317px;
+height: 48px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* or 150% */
+
+color: #5B5C60;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Img */
+
+position: absolute;
+width: 371.35px;
+height: 342.39px;
+left: 68px;
+top: 334px;
+
+
+
+/* Polygon 1 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 238px;
+height: 274px;
+left: 124px;
+top: 339px;
+
+background: #D8EEFF;
+border: 1px solid #000000;
+transform: rotate(-19.35deg);
+
+
+/* Polygon 2 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 75.9px;
+height: 87.38px;
+left: 234px;
+top: 334px;
+
+background: #B9D8EF;
+border: 1px solid #000000;
+transform: rotate(15deg);
+
+
+/* Ellipse 5 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 193px;
+height: 193px;
+left: 68px;
+top: 334px;
+
+border: 1px solid #000000;
+transform: rotate(15deg);
+
+
+/* Btns */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+position: absolute;
+width: 56px;
+height: 56px;
+left: 32px;
+top: 542px;
+
+
+
+/* Back */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+display: none;
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Btn / Next */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 16px;
+gap: 8px;
+
+width: 56px;
+height: 56px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+border-radius: 35px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Icon / Arrow */
+
+width: 24px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 16px;
+height: 16px;
+left: 4px;
+top: 4px;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 20.83%;
+right: 20.83%;
+top: 50%;
+bottom: 50%;
+
+border: 2px solid #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 50%;
+right: 20.83%;
+top: 20.83%;
+bottom: 20.83%;
+
+border: 2px solid #000000;
+
+
+/* Toolbar */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 32px 32px 20px;
+gap: 16px;
+
+width: 381px;
+height: 144px;
+
+background: #CDE3F3;
+border-radius: 32px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Btn / Primary */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 16px;
+gap: 10px;
+
+width: 317px;
+height: 56px;
+
+background: #000000;
+border-radius: 12px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Want to try */
+
+width: 285px;
+height: 24px;
+
+font-family: 'Suisse Intl';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* x / Pagination */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 6px 50px;
+gap: 8px;
+
+width: 317px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Pointer */
+
+width: 8px;
+height: 8px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Dot 01 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Dot 02 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Dot 03 */
+
+width: 4px;
+height: 4px;
+
+background: #000000;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Status Bar / iPhone 13 & 13 Pro */
+
+position: absolute;
+width: 414px;
+height: 44px;
+left: 0px;
+top: 0px;
+
+
+
+/* Notch */
+
+position: absolute;
+visibility: hidden;
+width: 164px;
+height: 31px;
+left: 125px;
+top: -2px;
+
+
+
+/* Notch */
+
+position: absolute;
+width: 164px;
+height: 31px;
+left: calc(50% - 164px/2);
+top: -2px;
+
+background: #000000;
+
+
+/* Right Side */
+
+position: absolute;
+width: 66.66px;
+height: 11.34px;
+left: 321.67px;
+top: 17.33px;
+
+
+
+/* Battery */
+
+position: absolute;
+left: 87.92%;
+right: 6.2%;
+top: 39.39%;
+bottom: 34.85%;
+
+
+
+/* Rectangle */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 22px;
+height: 11.33px;
+left: calc(50% - 22px/2 + 168px);
+top: 17.33px;
+
+mix-blend-mode: normal;
+opacity: 0.35;
+border: 1px solid #000000;
+border-radius: 2.66667px;
+
+
+/* Combined Shape */
+
+position: absolute;
+width: 1.33px;
+height: 4px;
+left: calc(50% - 1.33px/2 + 180.66px);
+top: 21px;
+
+background: #000000;
+mix-blend-mode: normal;
+opacity: 0.4;
+
+
+/* Rectangle */
+
+position: absolute;
+width: 18px;
+height: 7.33px;
+left: calc(50% - 18px/2 + 168px);
+top: 19.33px;
+
+background: #000000;
+border-radius: 1.1px;
+
+
+/* Wifi */
+
+position: absolute;
+width: 15.27px;
+height: 10.97px;
+left: calc(50% - 15.27px/2 + 144.33px);
+top: 17.33px;
+
+background: #000000;
+
+
+/* Mobile Signal */
+
+position: absolute;
+width: 17px;
+height: 10.67px;
+left: calc(50% - 17px/2 + 123.17px);
+top: 17.67px;
+
+background: #000000;
+
+
+/* Left Side */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: 30px;
+top: 12px;
+
+
+
+/* _Time */
+
+position: absolute;
+width: 54px;
+height: 21px;
+left: calc(50% - 54px/2 - 150px);
+top: 12px;
+
+border-radius: 24px;
+
+
+/* 9:41 */
+
+position: absolute;
+width: 54px;
+height: 20px;
+left: 0px;
+top: 1px;
+
+/* Default/Bold/Subheadline */
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+text-align: center;
+letter-spacing: -0.5px;
+
+/* Label Color/Light/Primary */
+color: #000000;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+height: 38px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+
+
+
+/* Home Indicator */
+
+position: absolute;
+width: 146px;
+height: 5px;
+left: calc(50% - 146px/2);
+bottom: 8px;
+
+background: #000000;
+border-radius: 100px;

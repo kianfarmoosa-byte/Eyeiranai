@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Loader2, MapPin, RefreshCw, ZoomIn, ZoomOut } from "lucide-react";
 import { feature } from "topojson-client";
 import { gdeltGeo, type GdeltDocQuery } from "../gdelt";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = { query: GdeltDocQuery };
 
@@ -208,7 +209,7 @@ export function GdeltGeoMap({ query }: Props) {
               style={{ left: `${px}%`, top: `${py}%`, transform: "translate(-50%, calc(-100% - 8px))" }} dir="rtl">
               <div className="font-medium">{hover.name || "—"}</div>
               <div>پوشش: {hover.count.toLocaleString("fa-IR")}</div>
-              {typeof hover.tone === "number" && <div>لحن: {hover.tone.toFixed(2)}</div>}
+              {typeof hover.tone === "number" && <div>لحن: {toFa(hover.tone.toFixed(2))}</div>}
             </div>
           );
         })()}

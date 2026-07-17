@@ -17,7 +17,7 @@ export type Accent = {
 };
 
 export const ACCENTS: Accent[] = [
-  { id: "blue",   name: "آبی",     swatch: "oklch(0.55 0.215 256)", brand500: "oklch(0.55 0.215 256)", brand600: "oklch(0.46 0.220 258)", brand700: "oklch(0.38 0.190 258)" },
+  { id: "gold",   name: "طلایی",   swatch: "#F5BF0F", brand500: "#F5BF0F", brand600: "#D9A60A", brand700: "#B0850A" },
   { id: "violet", name: "بنفش",    swatch: "oklch(0.55 0.230 300)", brand500: "oklch(0.55 0.230 300)", brand600: "oklch(0.46 0.235 302)", brand700: "oklch(0.38 0.205 302)" },
   { id: "rose",   name: "رز",      swatch: "oklch(0.60 0.215 12)",  brand500: "oklch(0.60 0.215 12)",  brand600: "oklch(0.50 0.220 14)",  brand700: "oklch(0.42 0.190 14)"  },
   { id: "amber",  name: "کهربا",   swatch: "oklch(0.70 0.180 65)",  brand500: "oklch(0.70 0.180 65)",  brand600: "oklch(0.60 0.190 60)",  brand700: "oklch(0.50 0.170 55)"  },
@@ -26,7 +26,7 @@ export const ACCENTS: Accent[] = [
 ];
 
 export function loadAccentId(): string {
-  try { return localStorage.getItem(KEY) || "blue"; } catch { return "blue"; }
+  try { return localStorage.getItem(KEY) || "gold"; } catch { return "gold"; }
 }
 
 export function saveAccentId(id: string) {

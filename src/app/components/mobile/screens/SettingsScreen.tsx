@@ -6,6 +6,7 @@ import { useHaptics } from "../hooks";
 import { useToast } from "../primitives/Toast";
 import { DEFAULT_READER_SETTINGS, type ReaderSettings } from "../sheets/ReaderSettingsSheet";
 import { ACCENTS, loadAccentId, saveAccentId, applyAccent } from "../utils/accent";
+import { toFa } from "../utils/fa";
 
 const RS_KEY = "kian.mobile.readerSettings";
 
@@ -104,7 +105,7 @@ export function SettingsScreen({ onClose, onToggleTheme, themeMode = "auto", onO
           <div className="px-3.5 py-3 border-t border-[var(--border-subtle)]">
             <div className="flex items-center justify-between mb-1.5">
               <span className="text-[13px]">سرعت پخش صوتی</span>
-              <span className="text-[12px] tabular-nums">{rs.ttsRate.toFixed(1)}×</span>
+              <span className="text-[12px] tabular-nums">{toFa(rs.ttsRate.toFixed(1))}×</span>
             </div>
             <input
               type="range" min={0.5} max={2} step={0.1}
@@ -131,7 +132,7 @@ export function SettingsScreen({ onClose, onToggleTheme, themeMode = "auto", onO
         </Section>
 
         <div className="mt-6 text-center text-[11px] text-[var(--foreground-subtle)]">
-          کیان · نسخه ۱.۰
+          flow · نسخه ۱.۰
         </div>
       </div>
     </MobileScreen>

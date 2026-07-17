@@ -24,7 +24,7 @@ export function InstallSheet({ open, onClose }: Props) {
 
   const install = async () => {
     const r = await prompt();
-    if (r === "accepted") toast({ kind: "success", title: "کیان نصب شد" });
+    if (r === "accepted") toast({ kind: "success", title: "flow نصب شد" });
     else if (r === "unavailable") toast({ kind: "info", title: "مرورگر شما از نصب پشتیبانی نمی‌کنه", body: "از منوی مرورگر «افزودن به صفحه اصلی» رو امتحان کن." });
     markInstallDismissed();
     onClose();
@@ -38,7 +38,7 @@ export function InstallSheet({ open, onClose }: Props) {
             <Smartphone className="size-6" />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="text-[16px] font-bold">کیان رو نصب کن</h2>
+            <h2 className="text-[16px] font-bold">flow رو نصب کن</h2>
             <p className="text-[12px] text-[var(--foreground-subtle)]">دسترسی سریع، بدون مرورگر</p>
           </div>
         </div>

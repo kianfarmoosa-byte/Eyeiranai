@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, Newspaper, Bot, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useHaptics } from "../hooks";
+import { useSwipeGesture } from "../hooks/useSwipeGesture";
 
 const STORAGE_KEY = "kian.mobile.onboarded";
 
@@ -12,41 +13,89 @@ function markOnboarded() {
   try { localStorage.setItem(STORAGE_KEY, "1"); } catch {}
 }
 
+/** Decorative geometry rendered bottom-trailing on each card (outline / monochrome). */
+type Deco = "stars" | "circles" | "polygons" | "squares";
+
 type Step = {
-  icon: JSX.Element;
-  eyebrow: string;
   title: string;
   body: string;
-  gradient: string;
-  accent: string;
+  /** Card surface tint (monochrome grayscale steps). */
+  surface: string;
+  deco: Deco;
 };
 
 const STEPS: Step[] = [
   {
-    icon: <Newspaper className="size-10" strokeWidth={1.8} />,
-    eyebrow: "گام ۱ از ۳",
-    title: "خبرها، روان و سریع",
-    body: "همهٔ خوراک‌های فارسی محبوبت را یک‌جا بخوان؛ بدون شلوغی، با تجربه‌ای واقعاً موبایلی.",
-    gradient: "linear-gradient(160deg, #ED1C24 0%, #61070A 100%)",
-    accent: "#ED1C24",
+    title: "خبرها،\nروان و سریع",
+    body: "همهٔ خوراک‌های فارسی و جهانی محبوبت را یک‌جا بخوان؛ بدون شلوغی، با تجربه‌ای واقعاً موبایلی.",
+    surface: "var(--neutral-100)",
+    deco: "polygons",
   },
   {
-    icon: <Bot className="size-10" strokeWidth={1.8} />,
-    eyebrow: "گام ۲ از ۳",
-    title: "خلاصه‌ساز هوش مصنوعی",
-    body: "هر مقاله را در چند ثانیه بفهم. خلاصهٔ کوتاه، بولت‌های کلیدی و امکان پرسیدن سؤال از متن.",
-    gradient: "linear-gradient(160deg, #6366F1 0%, #312E81 100%)",
-    accent: "#6366F1",
+    title: "خلاصه‌ساز\nهوش مصنوعی",
+    body: "هر مقاله را در چند ثانیه بفهم؛ خلاصهٔ کوتاه، بولت‌های کلیدی و امکان پرسیدن سؤال از متن.",
+    surface: "var(--neutral-50)",
+    deco: "circles",
   },
   {
-    icon: <Sparkles className="size-10" strokeWidth={1.8} />,
-    eyebrow: "گام ۳ از ۳",
-    title: "موضوعاتِ شخصی‌سازی‌شده",
-    body: "علاقه‌مندی‌هایت را انتخاب کن تا کیان مرتبط‌ترین خبرها را اولویت‌بندی و پیشنهاد کند.",
-    gradient: "linear-gradient(160deg, #10B981 0%, #064E3B 100%)",
-    accent: "#10B981",
+    title: "گرافِ\nشبکهٔ رسانه",
+    body: "مسیر انتشار یک خبر میان منابع را ببین و با فوکوس موضوعی، روایت‌های مرتبط را دنبال کن.",
+    surface: "var(--neutral-100)",
+    deco: "stars",
+  },
+  {
+    title: "موضوعاتِ\nشخصی‌سازی‌شده",
+    body: "علاقه‌مندی‌هایت را انتخاب کن تا flow مرتبط‌ترین خبرها را اولویت‌بندی و پیشنهاد کند.",
+    surface: "var(--neutral-50)",
+    deco: "squares",
   },
 ];
+
+const SPRING = { type: "spring" as const, stiffness: 320, damping: 34, mass: 0.9 };
+
+function Decoration({ kind }: { kind: Deco }) {
+  // Monochrome outline geometry — echoes the Figma template's stacked shapes.
+  const stroke = "var(--border-strong)";
+  const fillSoft = "color-mix(in oklch, var(--foreground) 6%, transparent)";
+  const fillAccent = "var(--accent)";
+  const common = "absolute pointer-events-none";
+
+  if (kind === "circles") {
+    return (
+      <div className={`${common} -bottom-6 -left-6 size-[220px]`} aria-hidden>
+        <div className="absolute bottom-10 left-16 size-[150px] rounded-full" style={{ border: `1px solid ${stroke}` }} />
+        <div className="absolute bottom-0 left-0 size-[150px] rounded-full" style={{ border: `1px solid ${stroke}`, background: fillSoft }} />
+        <div className="absolute bottom-20 left-2 size-[150px] rounded-full" style={{ border: `1px solid ${stroke}` }} />
+      </div>
+    );
+  }
+  if (kind === "polygons") {
+    return (
+      <div className={`${common} -bottom-4 -left-4 size-[230px]`} aria-hidden>
+        <div className="absolute bottom-6 left-10 size-[170px] -rotate-[49deg]" style={{ border: `1px solid ${stroke}`, background: fillSoft, borderRadius: "10px" }} />
+        <div className="absolute bottom-16 left-20 size-[60px] -rotate-[15deg]" style={{ border: `1px solid ${stroke}`, background: fillAccent, borderRadius: "8px" }} />
+        <div className="absolute bottom-2 left-0 size-[150px] rounded-full -rotate-[15deg]" style={{ border: `1px solid ${stroke}` }} />
+      </div>
+    );
+  }
+  if (kind === "stars") {
+    return (
+      <div className={`${common} -bottom-6 -left-6 size-[230px]`} aria-hidden>
+        <div className="absolute bottom-6 left-10 size-[180px] rotate-45" style={{ border: `1px solid ${stroke}` }} />
+        <div className="absolute bottom-0 left-0 size-[120px] rotate-12" style={{ border: `1px solid ${stroke}`, background: fillSoft }} />
+        <div className="absolute bottom-24 left-24 size-[64px] rotate-[30deg]" style={{ border: `1px solid ${stroke}`, background: fillAccent }} />
+      </div>
+    );
+  }
+  // squares
+  return (
+    <div className={`${common} -bottom-6 -left-6 size-[230px]`} aria-hidden>
+      <div className="absolute bottom-8 left-12 size-[160px] rounded-[20px]" style={{ border: `1px solid ${stroke}`, background: fillSoft }} />
+      <div className="absolute bottom-0 left-0 size-[120px] rounded-[16px]" style={{ border: `1px solid ${stroke}` }} />
+      <div className="absolute bottom-2 left-28 size-[56px] rounded-[12px]" style={{ border: `1px solid ${stroke}`, background: fillAccent }} />
+    </div>
+  );
+}
 
 type Props = {
   open: boolean;
@@ -55,35 +104,63 @@ type Props = {
 
 export function MobileOnboardingV2({ open, onDone }: Props) {
   const [idx, setIdx] = useState(0);
+  const [dir, setDir] = useState(1); // 1 = forward, -1 = back
+  const [drag, setDrag] = useState(0);
   const haptic = useHaptics();
+  const draggingRef = useRef(false);
+
   const step = STEPS[idx];
   const isLast = idx === STEPS.length - 1;
+  const isFirst = idx === 0;
+
+  const finish = () => { markOnboarded(); onDone(); };
+  const goNext = () => {
+    haptic("tap");
+    if (isLast) finish();
+    else { setDir(1); setIdx((i) => i + 1); }
+  };
+  const goBack = () => {
+    if (isFirst) return;
+    haptic("tap");
+    setDir(-1);
+    setIdx((i) => i - 1);
+  };
+  const goTo = (i: number) => {
+    if (i === idx) return;
+    haptic("tap");
+    setDir(i > idx ? 1 : -1);
+    setIdx(i);
+  };
+
+  // RTL: swipe left (negative dx) = next, swipe right (positive dx) = previous.
+  // Exclude `wasMoved` (a helper fn) so it isn't spread onto the DOM element.
+  const { wasMoved: _wasMoved, ...swipe } = useSwipeGesture(
+    {
+      onMove: (dx) => { draggingRef.current = true; setDrag(dx); },
+      onSwipeLeft: goNext,
+      onSwipeRight: goBack,
+      onEnd: () => { draggingRef.current = false; setDrag(0); },
+    },
+    { axisRatio: 1.3, allowVertical: false, threshold: 56 }
+  );
 
   if (!open) return null;
 
-  const finish = () => { markOnboarded(); onDone(); };
-  const next = () => {
-    haptic("tap");
-    if (isLast) finish();
-    else setIdx((i) => i + 1);
-  };
-  const back = () => { haptic("tap"); if (idx > 0) setIdx((i) => i - 1); };
+  // Card enters rotated/offset from the trailing edge, like the Figma deck.
+  const enterFrom = dir > 0
+    ? { x: 60, rotate: 18, opacity: 0, scale: 0.94 }
+    : { x: -60, rotate: -18, opacity: 0, scale: 0.94 };
+  const exitTo = dir > 0
+    ? { x: -60, rotate: -18, opacity: 0, scale: 0.94 }
+    : { x: 60, rotate: 18, opacity: 0, scale: 0.94 };
 
   return (
     <div
       dir="rtl"
       className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)] flex flex-col"
     >
-      {/* Skip button */}
-      <div className="absolute top-0 inset-x-0 pt-[calc(12px+var(--safe-top))] px-4 flex items-center justify-between z-10">
-        <button
-          onClick={back}
-          disabled={idx === 0}
-          className="size-9 rounded-full grid place-items-center tap press disabled:opacity-0 transition-opacity bg-[var(--background-muted)]"
-          aria-label="قبلی"
-        >
-          <ChevronRight className="size-5" />
-        </button>
+      {/* Top bar: skip */}
+      <div className="flex items-center justify-end px-4 pt-[calc(10px+var(--safe-top))] pb-2">
         <button
           onClick={finish}
           className="h-9 px-4 rounded-full text-[12.5px] text-[var(--foreground-muted)] tap press"
@@ -92,108 +169,115 @@ export function MobileOnboardingV2({ open, onDone }: Props) {
         </button>
       </div>
 
-      {/* Hero gradient stage */}
-      <div className="relative h-[58%] overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.98 }}
-            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0"
-            style={{ background: step.gradient }}
-          >
-            {/* highlights */}
+      {/* Card stage */}
+      <div className="flex-1 px-4 min-h-0">
+        <div className="relative h-full w-full" style={{ perspective: 1200 }}>
+          {/* trailing ghost card peeking behind, for depth */}
+          {!isLast && (
             <div
-              className="absolute inset-0 pointer-events-none"
-              style={{ background: "radial-gradient(120% 70% at 50% 15%, rgba(255,255,255,0.28) 0%, transparent 60%)" }}
-            />
-            <div
-              className="absolute inset-0 pointer-events-none opacity-[0.07] mix-blend-overlay"
+              className="absolute inset-0 rounded-[32px] origin-bottom"
               style={{
-                backgroundImage:
-                  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+                background: "var(--background-muted)",
+                transform: "rotate(6deg) scale(0.96) translateY(8px)",
+                opacity: 0.5,
               }}
             />
+          )}
 
-            {/* floating glyph */}
-            <div className="absolute inset-0 grid place-items-center">
-              <motion.div
-                initial={{ y: 18, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-                className="relative"
-              >
-                <div className="absolute inset-0 rounded-[28px] bg-white/20 blur-2xl scale-110" />
-                <div className="relative size-[120px] rounded-[28px] bg-white/95 grid place-items-center shadow-[0_22px_48px_-14px_rgba(0,0,0,0.45)]">
-                  <div
-                    className="size-[80px] rounded-[20px] grid place-items-center text-white"
-                    style={{ background: step.gradient }}
-                  >
-                    {step.icon}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+          <AnimatePresence mode="popLayout" custom={dir}>
+            <motion.div
+              key={idx}
+              custom={dir}
+              initial={enterFrom}
+              animate={{
+                x: draggingRef.current ? drag : 0,
+                rotate: draggingRef.current ? drag * 0.03 : 0,
+                opacity: 1,
+                scale: 1,
+              }}
+              exit={exitTo}
+              transition={draggingRef.current ? { duration: 0 } : SPRING}
+              {...swipe}
+              className="absolute inset-0 rounded-[32px] overflow-hidden touch-pan-y select-none"
+              style={{
+                background: step.surface,
+                border: "1px solid var(--border)",
+                boxShadow: "0 30px 60px -28px rgba(0,0,0,0.35)",
+              }}
+            >
+              {/* text block */}
+              <div className="absolute top-8 inset-x-8 flex flex-col gap-3">
+                <h1 className="text-[clamp(38px,12vw,52px)] font-black leading-[1.04] tracking-tight text-[var(--foreground)] whitespace-pre-line">
+                  {step.title}
+                </h1>
+                <p className="text-[15px] leading-[1.8] text-[var(--foreground-muted)] max-w-[300px]">
+                  {step.body}
+                </p>
+              </div>
 
-        {/* curve mask into content area */}
-        <div
-          className="absolute inset-x-0 bottom-[-1px] h-10 bg-[var(--background)]"
-          style={{ borderTopLeftRadius: "32px", borderTopRightRadius: "32px" }}
-        />
+              {/* geometric decoration bottom-trailing */}
+              <Decoration kind={step.deco} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* Copy + actions */}
-      <div className="flex-1 flex flex-col px-7 pt-2 pb-[calc(24px+var(--safe-bottom))]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ y: 16, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -8, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="flex-1 flex flex-col items-center text-center gap-3"
-          >
-            <span
-              className="text-[11px] font-semibold tracking-[0.18em] uppercase"
-              style={{ color: step.accent }}
-            >
-              {step.eyebrow}
-            </span>
-            <h1 className="text-[24px] font-black leading-tight tracking-tight">{step.title}</h1>
-            <p className="text-[14px] leading-[1.85] text-[var(--foreground-muted)] max-w-[320px]">
-              {step.body}
-            </p>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* progress dots */}
-        <div className="flex items-center justify-center gap-1.5 my-5">
-          {STEPS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => { haptic("tap"); setIdx(i); }}
-              className={`h-1.5 rounded-full transition-all duration-300 tap ${
-                i === idx ? "w-7" : "w-1.5 bg-[var(--border-strong)]"
-              }`}
-              style={i === idx ? { background: step.accent } : undefined}
-              aria-label={`گام ${i + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* CTA */}
-        <button
-          onClick={next}
-          className="h-13 w-full rounded-full text-white text-[15px] font-semibold tap press flex items-center justify-center gap-2 shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)]"
-          style={{ background: step.gradient, height: "52px" }}
+      {/* Toolbar */}
+      <div className="px-4 pt-3 pb-[calc(16px+var(--safe-bottom))]">
+        <div
+          className="rounded-[32px] px-5 pt-5 pb-4 flex flex-col gap-4"
+          style={{ background: step.surface, border: "1px solid var(--border)" }}
         >
-          {isLast ? "شروع کنیم" : "بعدی"}
-          <ChevronLeft className="size-4" />
-        </button>
+          {/* nav arrows + primary CTA */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={goBack}
+              disabled={isFirst}
+              aria-label="قبلی"
+              className="shrink-0 rounded-full grid place-items-center tap press transition-opacity disabled:opacity-0"
+              style={{ width: 52, height: 52, background: "var(--background)", border: "1px solid var(--border-strong)" }}
+            >
+              {/* RTL: previous points right */}
+              <ArrowRight className="size-5 text-[var(--foreground)]" />
+            </button>
+
+            <button
+              onClick={goNext}
+              className="flex-1 rounded-[14px] text-[15px] font-semibold tap press flex items-center justify-center gap-2"
+              style={{
+                height: 52,
+                background: "var(--foreground)",
+                color: "var(--background)",
+              }}
+            >
+              {isLast ? "بزن بریم" : "بعدی"}
+              {/* RTL: forward points left */}
+              {!isLast && <ArrowLeft className="size-4" />}
+            </button>
+          </div>
+
+          {/* pagination dots */}
+          <div className="flex items-center justify-center gap-2">
+            {STEPS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`گام ${i + 1}`}
+                className="grid place-items-center tap"
+                style={{ width: 14, height: 14 }}
+              >
+                <motion.span
+                  animate={{
+                    width: i === idx ? 18 : 5,
+                    backgroundColor: i === idx ? "var(--accent)" : "var(--border-strong)",
+                  }}
+                  transition={{ duration: 0.25 }}
+                  className="block h-[5px] rounded-full"
+                />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

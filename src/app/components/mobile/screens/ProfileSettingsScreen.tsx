@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Camera, Check, Mail, User, Pencil, Globe, MapPin, ShieldCheck, Trash2, Bell, BookOpen } from "lucide-react";
+import { Camera, Check, Mail, User, Pencil, Globe, MapPin, ShieldCheck, Trash2, Bell, BookOpen, Sparkles, KeyRound, Loader2 } from "lucide-react";
 import { MobileScreen } from "../shell/MobileScreen";
 import { MobileTopBar } from "../shell/MobileTopBar";
 import { useHaptics } from "../hooks";
 import { isEmail, saveUser, type KianUser } from "../auth/auth";
+import { api, type AiConfigStatus } from "../../../api";
+import { studioUserId } from "../studio/studio";
 
 type Props = {
   user: KianUser;
@@ -195,6 +197,9 @@ export function ProfileSettingsScreen({ user, onClose, onUpdated, onDelete }: Pr
           </SegRow>
         </Group>
 
+        {/* AI key (BYO) */}
+        <AiKeySection />
+
         {/* Security */}
         <Group title="امنیت">
           <Row icon={<ShieldCheck className="size-4" />} label="تأیید دو مرحله‌ای" value="غیرفعال" />
@@ -213,6 +218,125 @@ export function ProfileSettingsScreen({ user, onClose, onUpdated, onDelete }: Pr
         </div>
       </div>
     </MobileScreen>
+  );
+}
+
+/* ── AI key (bring-your-own) ───────────────────────────────────── */
+
+function AiKeySection() {
+  const haptic = useHaptics();
+  const uid = studioUserId();
+  const [cfg, setCfg] = useState<AiConfigStatus | null>(null);
+  const [apiKey, setApiKey] = useState("");
+  const [baseUrl, setBaseUrl] = useState("");
+  const [model, setModel] = useState("");
+  const [open, setOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  const load = async () => {
+    try {
+      const c = await api.aiGetConfig(uid);
+      setCfg(c);
+      setBaseUrl(c.baseUrl || c.defaultBase);
+      setModel(c.model || c.defaultModel);
+    } catch (e) {
+      console.log("load ai config failed:", e);
+    }
+  };
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const save = async () => {
+    if (!apiKey.trim()) { setMsg({ ok: false, text: "کلید API را وارد کن" }); return; }
+    haptic("select");
+    setBusy(true);
+    setMsg(null);
+    try {
+      await api.aiSaveConfig(uid, { apiKey: apiKey.trim(), baseUrl: baseUrl.trim(), model: model.trim() });
+      setApiKey("");
+      setOpen(false);
+      setMsg({ ok: true, text: "کلید بررسی و ذخیره شد" });
+      await load();
+    } catch (e: any) {
+      console.log("save ai config failed:", e);
+      setMsg({ ok: false, text: String(e?.message || e).slice(0, 160) });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const remove = async () => {
+    haptic("heavy");
+    setBusy(true);
+    try {
+      await api.aiDeleteConfig(uid);
+      setMsg({ ok: true, text: "به کلید پیش‌فرض برنامه بازگشت" });
+      await load();
+    } catch (e) {
+      console.log("remove ai config failed:", e);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const usingCustom = !!cfg?.hasKey;
+
+  return (
+    <section className="mt-5">
+      <h3 className="text-[11px] font-semibold text-[var(--foreground-subtle)] uppercase tracking-wider px-4 mb-2">هوش مصنوعی</h3>
+      <div className="mx-3 rounded-[var(--radius-lg)] bg-[var(--card)] border border-[var(--border-subtle)] overflow-hidden">
+        <div className="px-3.5 py-3 flex items-center gap-3">
+          <span className="size-8 grid place-items-center rounded-full bg-[var(--accent)] text-[var(--foreground-muted)]"><Sparkles className="size-4" /></span>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13.5px] leading-tight">کلید هوش مصنوعی اختصاصی</div>
+            <div className="text-[11px] text-[var(--foreground-subtle)] mt-0.5 truncate">
+              {usingCustom ? `کلید شما فعال است · ${cfg?.model}` : "استفاده از کلید پیش‌فرض برنامه"}
+            </div>
+          </div>
+          {usingCustom ? (
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600">فعال</span>
+          ) : (
+            <button onClick={() => { haptic("tap"); setOpen((o) => !o); }} className="h-8 px-3 rounded-full bg-[var(--brand-500)] text-white text-[12px] tap press">
+              افزودن کلید
+            </button>
+          )}
+        </div>
+
+        {(open || usingCustom) && (
+          <div className="px-3.5 pb-3.5 border-t border-[var(--border-subtle)] pt-3 space-y-2">
+            <p className="text-[11.5px] text-[var(--foreground-subtle)] leading-relaxed">
+              کلید را از حساب سرویس هوش مصنوعی خودت (سازگار با OpenAI) وارد کن. کلید فقط روی سرور ذخیره می‌شود و هرگز در دستگاه نمایش داده نمی‌شود.
+            </p>
+            <div className="flex items-center gap-1.5 rounded-[var(--radius-md)] bg-[var(--input-background)] border border-[var(--border-subtle)] px-3 h-10">
+              <KeyRound className="size-4 text-[var(--foreground-subtle)] shrink-0" />
+              <input value={apiKey} onChange={(e) => setApiKey(e.target.value)} type="password" placeholder={usingCustom ? "برای تغییر، کلید جدید را وارد کن" : "API Key"} dir="ltr" className="flex-1 bg-transparent outline-none text-[14px]" />
+            </div>
+            <input value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)} placeholder="Base URL (https://.../v1)" dir="ltr"
+              className="w-full h-10 px-3 rounded-[var(--radius-md)] bg-[var(--input-background)] border border-[var(--border-subtle)] text-[14px] outline-none" />
+            <input value={model} onChange={(e) => setModel(e.target.value)} placeholder="Model (مثلاً claude-sonnet-4-6)" dir="ltr"
+              className="w-full h-10 px-3 rounded-[var(--radius-md)] bg-[var(--input-background)] border border-[var(--border-subtle)] text-[14px] outline-none" />
+
+            {msg && (
+              <div className={`text-[12px] rounded-lg px-3 py-2 ${msg.ok ? "text-emerald-600 bg-emerald-500/10" : "text-rose-500 bg-rose-500/10 border border-rose-500/20"}`}>
+                {msg.text}
+              </div>
+            )}
+
+            <div className="flex items-center gap-2">
+              <button onClick={save} disabled={busy} className="flex-1 h-10 rounded-[var(--radius-md)] bg-[var(--brand-500)] text-white text-[13px] font-semibold tap press flex items-center justify-center gap-2 disabled:opacity-50">
+                {busy ? <Loader2 className="size-4 animate-spin" /> : <Check className="size-4" />}
+                {busy ? "در حال بررسی…" : "بررسی و ذخیره"}
+              </button>
+              {usingCustom && (
+                <button onClick={remove} disabled={busy} className="h-10 px-3 rounded-[var(--radius-md)] border border-rose-500/30 text-rose-500 text-[13px] tap press">
+                  حذف کلید
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
 

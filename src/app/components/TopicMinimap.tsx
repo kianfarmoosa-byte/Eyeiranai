@@ -9,9 +9,9 @@ type Props = {
 };
 
 const LEVEL_COLOR: Record<TopicScore["level"], string> = {
-  strong: "bg-indigo-500",
-  medium: "bg-indigo-400",
-  weak: "bg-indigo-300",
+  strong: "bg-emerald-500",
+  medium: "bg-emerald-400",
+  weak: "bg-emerald-300",
   none: "bg-transparent",
 };
 

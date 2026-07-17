@@ -76,7 +76,7 @@ export function DailyDigest({ articles, onSelect, onClose }: Props) {
   const today = new Date().toLocaleDateString("fa-IR", { weekday: "long", month: "long", day: "numeric" });
 
   return (
-    <div className="flex-1 overflow-y-auto bg-gradient-to-b from-amber-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-950 dark:to-blue-950/40">
+    <div className="flex-1 overflow-y-auto bg-gradient-to-b from-amber-50 via-white to-emerald-50 dark:from-slate-950 dark:via-slate-950 dark:to-emerald-950/40">
       <div className="max-w-4xl mx-auto p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-rose-500 flex items-center justify-center text-white shadow-lg">
@@ -109,8 +109,8 @@ export function DailyDigest({ articles, onSelect, onClose }: Props) {
         <div className="space-y-2 mb-6">
           {digest.topPicks.map((a, i) => (
             <button key={a.id} onClick={() => onSelect(a.id)}
-              className="w-full text-right bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-md transition flex gap-3">
-              <div className="w-8 h-8 shrink-0 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white text-xs">{(i + 1).toLocaleString("fa-IR")}</div>
+              className="w-full text-right bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-md transition flex gap-3">
+              <div className="w-8 h-8 shrink-0 rounded-full bg-gradient-to-br from-emerald-500 to-violet-500 flex items-center justify-center text-white text-xs">{(i + 1).toLocaleString("fa-IR")}</div>
               <div className="flex-1 min-w-0">
                 <div className="text-xs text-slate-500 mb-1 flex items-center gap-2">
                   <span>{a.source}</span><span>·</span><Clock className="w-3 h-3" /><span>{a.readTime}</span>
@@ -132,7 +132,7 @@ export function DailyDigest({ articles, onSelect, onClose }: Props) {
               <div className="space-y-1.5">
                 {arr.map(a => (
                   <button key={a.id} onClick={() => onSelect(a.id)}
-                    className="w-full text-right text-sm hover:text-blue-600 dark:hover:text-blue-400 line-clamp-2">
+                    className="w-full text-right text-sm hover:text-emerald-600 dark:hover:text-emerald-400 line-clamp-2">
                     {a.title}
                   </button>
                 ))}

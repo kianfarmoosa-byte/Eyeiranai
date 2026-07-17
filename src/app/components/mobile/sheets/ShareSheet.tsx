@@ -31,7 +31,7 @@ export function ShareSheet({ open, onClose, article }: Props) {
 
   if (!article) return null;
   const shareUrl = article.link ?? location.href;
-  const shareText = `${article.title} — از کیان`;
+  const shareText = `${article.title} — از flow`;
 
   const copyLink = async () => {
     haptic("tap");
@@ -198,7 +198,7 @@ async function drawCard(canvas: HTMLCanvasElement, a: Article): Promise<string> 
   ctx.font = "bold 38px system-ui, -apple-system, sans-serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText("✦  کیان", W - 180, 105);
+  ctx.fillText("✦  flow", W - 180, 105);
 
   // Optional image strip (top-left, RTL means content origin on right)
   if (a.image) {
@@ -256,7 +256,7 @@ async function drawCard(canvas: HTMLCanvasElement, a: Article): Promise<string> 
   ctx.fillStyle = "rgba(255,255,255,0.92)";
   ctx.font = "bold 26px system-ui, -apple-system, 'Vazirmatn', sans-serif";
   ctx.textAlign = "left";
-  ctx.fillText("اپ کیان • RSS هوشمند", 80, H - 80);
+  ctx.fillText("اپ flow • RSS هوشمند", 80, H - 80);
 
   return canvas.toDataURL("image/png");
 }

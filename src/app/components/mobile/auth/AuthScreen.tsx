@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Mail, Lock, User, Eye, EyeOff, Sparkles, ChevronLeft, Apple, Chrome, ShieldCheck } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, ChevronLeft, Apple, Chrome, ShieldCheck } from "lucide-react";
 import { useHaptics } from "../hooks";
 import { isEmail, saveUser, scorePassword, type KianUser } from "./auth";
 
@@ -79,13 +79,11 @@ export function AuthScreen({ open, initialMode = "signin", onClose, onSuccess }:
         </button>
 
         <div className="absolute inset-x-0 bottom-0 p-5 pb-6">
-          <div className="size-12 rounded-2xl bg-white/95 grid place-items-center mb-3">
-            <div className="size-9 rounded-xl bg-gradient-to-br from-[#ED1C24] to-[#61070A] grid place-items-center">
-              <Sparkles className="size-5 text-white" />
-            </div>
+          <div className="inline-flex rounded-2xl bg-white/95 px-4 py-2 mb-3">
+            <span className="text-[22px] font-black tracking-tight bg-gradient-to-br from-[#ED1C24] to-[#61070A] bg-clip-text text-transparent">FLOW</span>
           </div>
           <h1 className="text-[24px] font-black tracking-tight leading-none">
-            {isSignup ? "ساخت حساب کیان" : "خوش آمدید"}
+            {isSignup ? "ساخت حساب flow" : "خوش آمدید"}
           </h1>
           <p className="text-[13px] text-white/85 mt-1.5 max-w-[280px] leading-relaxed">
             {isSignup
@@ -193,7 +191,7 @@ export function AuthScreen({ open, initialMode = "signin", onClose, onSuccess }:
               <span>
                 <ShieldCheck className="inline size-3.5 text-emerald-500 ml-0.5" />
                 با <a href="#" className="text-[var(--brand-500)] underline">قوانین</a> و
-                <a href="#" className="text-[var(--brand-500)] underline mr-1">سیاست حریم خصوصی</a> کیان موافقم.
+                <a href="#" className="text-[var(--brand-500)] underline mr-1">سیاست حریم خصوصی</a> flow موافقم.
               </span>
             </label>
           )}

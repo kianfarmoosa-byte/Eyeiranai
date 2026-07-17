@@ -45,13 +45,13 @@ export function GdeltCountryStrip({ articles, activeCountry, onPick }: Props) {
           return (
             <button key={code} onClick={() => onPick(active ? "" : code)}
               className={`group shrink-0 flex flex-col items-center gap-0.5 px-1 py-0.5 rounded ${
-                active ? "bg-blue-100 dark:bg-blue-900/40" : "hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                active ? "bg-emerald-100 dark:bg-emerald-900/40" : "hover:bg-slate-100 dark:hover:bg-slate-800/60"
               }`}
               title={`${code}: ${n.toLocaleString("fa-IR")} مقاله`}>
               <span className="text-[10px] tabular-nums text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300">
                 {n.toLocaleString("fa-IR")}
               </span>
-              <div className={`w-5 rounded-sm ${active ? "bg-blue-500" : "bg-gradient-to-t from-cyan-500 to-blue-500"}`} style={{ height: `${h}px` }} />
+              <div className={`w-5 rounded-sm ${active ? "bg-emerald-500" : "bg-gradient-to-t from-cyan-500 to-emerald-500"}`} style={{ height: `${h}px` }} />
               <span className="text-sm leading-none">{FLAGS[code] || "🏳"}</span>
               <span className="text-[10px] text-slate-500 tabular-nums">{code}</span>
             </button>

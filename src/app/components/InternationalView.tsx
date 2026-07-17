@@ -223,7 +223,7 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
     return (
       <div className="flex-1 flex flex-col bg-white dark:bg-slate-950 min-w-0">
         <div className="flex-1 overflow-y-auto p-6">
-          <div className="max-w-2xl mx-auto rounded-2xl border-2 border-dashed border-cyan-300 dark:border-cyan-900/60 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/30 dark:to-blue-950/30 p-8 text-center">
+          <div className="max-w-2xl mx-auto rounded-2xl border-2 border-dashed border-cyan-300 dark:border-cyan-900/60 bg-gradient-to-br from-cyan-50 to-emerald-50 dark:from-cyan-950/30 dark:to-emerald-950/30 p-8 text-center">
             <Globe2 className="w-12 h-12 mx-auto text-cyan-500 mb-3" />
             <h3 className="text-base mb-2">به اخبار بین‌الملل خوش آمدید</h3>
             <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
@@ -352,7 +352,7 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
 
       <div className="pointer-events-none absolute top-2 bottom-2 left-1.5 w-1 rounded-full bg-slate-200/60 dark:bg-slate-800/60 overflow-hidden">
         <div
-          className="absolute left-0 right-0 top-0 bg-gradient-to-b from-cyan-500 to-blue-600 rounded-full transition-[height] duration-100"
+          className="absolute left-0 right-0 top-0 bg-gradient-to-b from-cyan-500 to-emerald-600 rounded-full transition-[height] duration-100"
           style={{ height: `${Math.max(4, scroll.pct * 100)}%` }}
         />
       </div>

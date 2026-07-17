@@ -13,3 +13,4 @@ export { CategoryScreen } from "./CategoryScreen";
 export { ReadingStatsScreen } from "./ReadingStatsScreen";
 export { SourceScreen } from "./SourceScreen";
 export { InternationalNewsScreen } from "./InternationalNewsScreen";
+export { SocialScreen } from "./SocialScreen";

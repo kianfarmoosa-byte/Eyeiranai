@@ -27,7 +27,7 @@ export function TopicDistribution({ articles }: Props) {
   return (
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4">
       <div className="flex items-center gap-2 mb-3">
-        <Target className="w-4 h-4 text-indigo-500" />
+        <Target className="w-4 h-4 text-emerald-500" />
         <h3 className="text-sm font-medium">توزیع موضوعی</h3>
         <span className="text-xs text-slate-500 mr-auto">{articles.length} خبر</span>
       </div>

@@ -22,7 +22,7 @@ const FEATURES: Feat[] = [
     icon: <Clock className="size-5" />,
     title: "خط زمانی رویداد",
     desc: "از هر خبر، خط زمانی خودکار از منابع و گزارش‌های مرتبط را ببین.",
-    tone: "from-sky-500 to-blue-600",
+    tone: "from-emerald-500 to-emerald-600",
   },
   {
     icon: <Languages className="size-5" />,
@@ -51,8 +51,8 @@ const FEATURES: Feat[] = [
   {
     icon: <LayoutGrid className="size-5" />,
     title: "پیش‌نمایش ویجت قفل",
-    desc: "از تنظیمات، ظاهر ویجت کیان روی صفحهٔ قفل را ببین.",
-    tone: "from-indigo-500 to-violet-600",
+    desc: "از تنظیمات، ظاهر ویجت flow روی صفحهٔ قفل را ببین.",
+    tone: "from-emerald-500 to-violet-600",
   },
 ];
 
@@ -67,7 +67,7 @@ export function WhatsNewSheet({ open, onClose }: Props) {
             <Sparkles className="size-5" />
           </span>
           <div>
-            <div className="text-[15px] font-bold leading-tight">قابلیت‌های جدید کیان</div>
+            <div className="text-[15px] font-bold leading-tight">قابلیت‌های جدید flow</div>
             <div className="text-[11.5px] text-[var(--foreground-muted)] leading-tight">شش ابزار تازه برای خواندنِ هوشمندتر</div>
           </div>
         </div>

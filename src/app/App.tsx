@@ -8,11 +8,16 @@ import { OpmlDialog } from "./components/OpmlDialog";
 import { ShortcutsDialog } from "./components/ShortcutsDialog";
 import { RulesDialog } from "./components/RulesDialog";
 import { GraphView } from "./components/GraphView";
+import { MonitoringRoom } from "./components/room/MonitoringRoom";
 import { InternationalView } from "./components/InternationalView";
+import { SocialListening } from "./components/SocialListening";
+import { NewspackBuilder } from "./components/newspack/NewspackBuilder";
+import { NewspackScreen } from "./components/mobile/screens/NewspackScreen";
 import { useKeyboardShortcuts } from "./components/useKeyboardShortcuts";
 import { CommandPalette } from "./components/CommandPalette";
 import { ReadingMode } from "./components/ReadingMode";
 import { StatsDashboard } from "./components/StatsDashboard";
+import { MediaAnalyticsDashboard } from "./components/analytics/MediaAnalyticsDashboard";
 import { DailyDigest } from "./components/DailyDigest";
 import { SourceHub } from "./components/SourceHub";
 import { SavedSearches } from "./components/SavedSearches";
@@ -24,10 +29,12 @@ import type { TopicQuery } from "./timeline";
 import { relatedArticles } from "./knowledge";
 import { buildIndex, semanticSearch } from "./semanticSearch";
 import { setupPWA } from "./pwa";
+import { useAutomationHeartbeat } from "./useAutomationHeartbeat";
 import { offlineCache } from "./offlineCache";
 import { useTheme } from "./components/ThemeToggle";
 import type { SortMode } from "./components/ArticleList";
 import { api, RemoteArticle, RemoteFeed } from "./api";
+import { seedMediaDirectory, directorySeeded } from "./seedDirectory";
 import { articles as sampleArticles } from "./data";
 import type { Article } from "./data";
 import { duplicatesForArticle } from "./duplicates";
@@ -49,12 +56,12 @@ import { TopicBuilder } from "./components/TopicBuilder";
 import { SmartFilterBar } from "./components/SmartFilterBar";
 import {
   MobileShell, HomeScreen, DiscoverScreen, SavedScreen, TopicsScreen, MeScreen, NotesScreen, NoteEditorScreen, SettingsScreen, HistoryScreen, NotificationsScreen, ProfileSettingsScreen, CategoryScreen, DailyBriefingScreen, ReadingStatsScreen, SourceScreen, InternationalNewsScreen,
-  MobileReader, useIsMobile, SearchSheet, SplashScreen,
+  MobileReader, useIsMobile, SearchSheet,
   OnboardingSheet, hasOnboarded, MobileOnboardingV2, AuthScreen, loadUser, clearUser, type KianUser,
   InstallSheet, wasInstallDismissedRecently, useInstallPrompt,
   ActionSheet, type ActionItem,
   ArticleContextSheet, ShareSheet, WidgetPreviewSheet, WhatsNewSheet, hasSeenWhatsNew,
-  QuickNoteSheet,
+  QuickNoteSheet, StudioScreen, DesktopStudio, SocialScreen,
 } from "./components/mobile";
 import {
   applySmartFilter, applyMute, loadMuteWords, saveMuteWords,
@@ -135,9 +142,11 @@ export default function App() {
   const [knowledgeOpen, setKnowledgeOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
   const [timelineOpen, setTimelineOpen] = useState(false);
+  const [studioOpen, setStudioOpen] = useState(false);
   const [timelineTopic, setTimelineTopic] = useState<TopicQuery | null>(null);
 
   useEffect(() => { setupPWA(); }, []);
+  useAutomationHeartbeat();
   useEffect(() => {
     import("./components/mobile/utils/accent").then(({ loadAccentId, applyAccent }) => {
       applyAccent(loadAccentId());
@@ -151,7 +160,7 @@ export default function App() {
     try {
       const [feedsList, remote] = await Promise.all([
         api.listFeeds(),
-        api.listArticles(opts.feedId ? { feedId: opts.feedId } : { limit: 60 }),
+        api.listArticles(opts.feedId ? { feedId: opts.feedId } : { limit: 600 }),
       ]);
       setFeeds(feedsList);
       const mapped = remote.map(toArticle);
@@ -191,7 +200,22 @@ export default function App() {
     }
   }, [items.length]);
 
-  useEffect(() => { loadAll(); offlineCache.prune().catch(() => {}); }, []);
+  useEffect(() => {
+    (async () => {
+      // On first run (or after a directory-version bump), wipe existing feeds
+      // and import the full CSV media directory (domestic Iran + international).
+      try {
+        if (!directorySeeded()) {
+          const n = await seedMediaDirectory();
+          if (n > 0) console.log(`Media directory seeded: ${n} feeds imported.`);
+        }
+      } catch (e) {
+        console.log("Media directory seed failed:", e);
+      }
+      await loadAll();
+    })();
+    offlineCache.prune().catch(() => {});
+  }, []);
 
   const semIndex = useMemo(() => buildIndex(items), [items]);
 
@@ -411,6 +435,9 @@ export default function App() {
     if (activeView === 'savedsearch' && activeSearch) return `${activeSearch.icon || '🔍'} ${activeSearch.name}`;
     if (activeView === 'tags') return 'برچسب‌ها';
     if (activeView === 'international') return 'اخبار بین‌الملل';
+    if (activeView === 'room') return 'اتاق رصد رسانه‌ای';
+    if (activeView === 'social') return 'رصد اجتماعی';
+    if (activeView === 'newspack') return 'بسته‌های خبری سفارشی';
     if (activeView === 'feed' && selectedFeed) return feeds.find(f => f.id === selectedFeed)?.name || '';
     if (activeView === 'category' && selectedCategory) return selectedCategory;
     return 'همه مقالات';
@@ -536,14 +563,6 @@ export default function App() {
     [selected, savedIds],
   );
 
-  const [mobileSplashOpen, setMobileSplashOpen] = useState(() => {
-    if (typeof sessionStorage === "undefined") return true;
-    return sessionStorage.getItem("kian.mobile.splashSeen") !== "1";
-  });
-  const dismissSplash = () => {
-    try { sessionStorage.setItem("kian.mobile.splashSeen", "1"); } catch {}
-    setMobileSplashOpen(false);
-  };
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mobileOnboardOpen, setMobileOnboardOpen] = useState(() => isMobile && !hasOnboarded());
   const [mobileActionFor, setMobileActionFor] = useState<Article | null>(null);
@@ -565,6 +584,9 @@ export default function App() {
   const [mobileHistoryOpen, setMobileHistoryOpen] = useState(false);
   const [mobileStatsOpen, setMobileStatsOpen] = useState(false);
   const [mobileTopicsOpen, setMobileTopicsOpen] = useState(false);
+  const [mobileStudioOpen, setMobileStudioOpen] = useState(false);
+  const [mobileSocialOpen, setMobileSocialOpen] = useState(false);
+  const [mobileNewspackOpen, setMobileNewspackOpen] = useState(false);
   const [mobileAuthOpen, setMobileAuthOpen] = useState(false);
   const [mobileProfileOpen, setMobileProfileOpen] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<string | null>(null);
@@ -580,6 +602,28 @@ export default function App() {
       setMobileUnreadNotifs(list.filter((n) => !n.read).length);
     });
   }, [isMobile, mobileItems, mobileNotifsOpen]);
+  // Social Listening — unread burst/emerging alert count, folded into the inbox.
+  const [socialUnread, setSocialUnread] = useState(0);
+  useEffect(() => {
+    let alive = true;
+    const run = async () => {
+      try {
+        const r = await api.socialGetAlerts({});
+        if (!alive) return;
+        setSocialUnread(r.unread);
+        if (isMobile && r.alerts.length) {
+          const m = await import("./components/mobile/utils/notifications");
+          m.addSocialAlertNotifs(r.alerts);
+          setMobileUnreadNotifs(m.unreadCount());
+        }
+      } catch (e) {
+        console.log("social alerts sync error:", e);
+      }
+    };
+    run();
+    const t = setInterval(run, 90_000);
+    return () => { alive = false; clearInterval(t); };
+  }, [isMobile, mobileSocialOpen, mobileNotifsOpen, activeView]);
   const { canInstall: mobileCanInstall } = useInstallPrompt();
   useEffect(() => {
     if (!isMobile || !mobileCanInstall || mobileOnboardOpen) return;
@@ -593,7 +637,6 @@ export default function App() {
       <>
         <DensityProvider />
         <SkeletonStyles />
-        {mobileSplashOpen && <SplashScreen onDone={dismissSplash} />}
         <MobileShell
           renderTab={(tab) => {
             switch (tab) {
@@ -653,6 +696,10 @@ export default function App() {
                   onOpenHistory={() => setMobileHistoryOpen(true)}
                   onOpenStats={() => setMobileStatsOpen(true)}
                   onOpenTopics={() => setMobileTopicsOpen(true)}
+                  onOpenStudio={() => setMobileStudioOpen(true)}
+                  onOpenSocial={() => setMobileSocialOpen(true)}
+                  onOpenNewspack={() => setMobileNewspackOpen(true)}
+                  socialUnread={socialUnread}
                   onOpenNotifications={() => setMobileNotifsOpen(true)}
                   unreadNotifs={mobileUnreadNotifs}
                 />;
@@ -706,6 +753,27 @@ export default function App() {
                     onToggleTheme={() => toggleTheme()}
                     onOpenWidgetPreview={() => setMobileWidgetPreviewOpen(true)}
                   />
+                </div>
+              )}
+              {mobileStudioOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <StudioScreen
+                    articles={mobileItems}
+                    onClose={() => setMobileStudioOpen(false)}
+                  />
+                </div>
+              )}
+              {mobileSocialOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <SocialScreen
+                    onClose={() => setMobileSocialOpen(false)}
+                    onOpenStudio={() => { setMobileSocialOpen(false); setMobileStudioOpen(true); }}
+                  />
+                </div>
+              )}
+              {mobileNewspackOpen && (
+                <div className="fixed inset-0 z-[var(--z-mobile-reader)] bg-[var(--background)]">
+                  <NewspackScreen onClose={() => setMobileNewspackOpen(false)} />
                 </div>
               )}
               <AuthScreen
@@ -843,7 +911,7 @@ export default function App() {
         <button onClick={() => setMobileDrawer(true)} className="p-2 -mr-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="منو">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
-        <div className="text-sm truncate flex-1">{title || 'کیان'}</div>
+        <div className="text-sm truncate flex-1">{title || 'flow'}</div>
         <button onClick={() => loadAll(selectedFeed ? { feedId: selectedFeed } : {})} disabled={loading} className="p-2 -ml-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-50" aria-label="بروزرسانی">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className={loading ? 'animate-spin' : ''}><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
         </button>
@@ -868,6 +936,7 @@ export default function App() {
         onOpenKnowledge={() => setKnowledgeOpen(true)}
         onOpenNotes={() => setNotesOpen(true)}
         onOpenTimeline={() => { setTimelineTopic(null); setTimelineOpen(true); }}
+        onOpenStudio={() => setStudioOpen(true)}
         onRefresh={() => loadAll(selectedFeed ? { feedId: selectedFeed } : {})}
         loading={loading}
         totals={totals}
@@ -886,6 +955,7 @@ export default function App() {
         onToggleTopic={toggleTopic}
         onClearTopics={clearTopics}
         onAddTopic={() => { setBuilderInitial(null); setBuilderOpen(true); }}
+        socialUnread={socialUnread}
       />
       </div>
       {error && (
@@ -895,11 +965,27 @@ export default function App() {
       )}
       <div className="flex-1 flex min-w-0 pt-12 md:pt-0 pb-14 md:pb-0">
       {showStats ? (
-        <StatsDashboard articles={items} savedIds={savedIds} onClose={() => setShowStats(false)} />
+        <MediaAnalyticsDashboard articles={items} savedIds={savedIds} onClose={() => setShowStats(false)} />
       ) : showDigest ? (
         <DailyDigest articles={items} onClose={() => setShowDigest(false)} onSelect={(id) => { setShowDigest(false); handleSelect(id); }} />
       ) : activeView === 'graph' ? (
         <GraphView articles={items} loading={loading} onRefresh={() => loadAll()} />
+      ) : activeView === 'room' ? (
+        <MonitoringRoom
+          articles={items}
+          loading={loading}
+          onRefresh={() => loadAll()}
+          onSelect={(a) => handleSelect(a.id)}
+          onSendToNewspack={(text) => {
+            try { navigator.clipboard?.writeText(text); } catch { /* ignore */ }
+            setActiveView('newspack');
+            setSelectedId(null);
+          }}
+        />
+      ) : activeView === 'social' ? (
+        <SocialListening onOpenStudio={() => setStudioOpen(true)} />
+      ) : activeView === 'newspack' ? (
+        <NewspackBuilder userId="app" />
       ) : activeView === 'international' ? (
         <>
           <div className={`${showArticleView ? 'hidden md:flex' : 'flex'} flex-1 min-w-0`}>
@@ -973,7 +1059,7 @@ export default function App() {
           { id: 'graph', label: 'گراف', path: 'M4 4h4v4H4zm12 0h4v4h-4zM4 16h4v4H4zm12 0h4v4h-4zM8 6h8M8 18h8M6 8v8M18 8v8' },
         ].map(n => (
           <button key={n.id} onClick={() => { setActiveView(n.id); setSelectedId(null); }}
-            className={`flex flex-col items-center justify-center gap-0.5 text-[10px] ${activeView === n.id ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500'}`}>
+            className={`flex flex-col items-center justify-center gap-0.5 text-[10px] ${activeView === n.id ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500'}`}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d={n.path}/></svg>
             {n.label}
           </button>
@@ -1024,6 +1110,7 @@ export default function App() {
       <TimelineView open={timelineOpen} onClose={() => setTimelineOpen(false)} articles={items} initialTopic={timelineTopic} onSelectArticle={(id) => { setTimelineOpen(false); handleSelect(id); }} />
       <KnowledgePanel open={knowledgeOpen} onClose={() => setKnowledgeOpen(false)} articles={items} onSelect={(id) => { setKnowledgeOpen(false); handleSelect(id); }} onOpenTimeline={(topic) => { setKnowledgeOpen(false); setTimelineTopic(topic); setTimelineOpen(true); }} />
       <Notes open={notesOpen} onClose={() => setNotesOpen(false)} onOpenArticle={(id) => { setNotesOpen(false); handleSelect(id); }} currentArticle={selected ? { id: selected.id, title: selected.title } : null} />
+      {studioOpen && <DesktopStudio articles={items} onClose={() => setStudioOpen(false)} />}
       <OpmlDialog open={opmlOpen} onClose={() => setOpmlOpen(false)} onDone={() => loadAll()} />
       <ShortcutsDialog open={helpOpen} onClose={() => setHelpOpen(false)} />
       <RulesDialog open={rulesOpen} onClose={() => setRulesOpen(false)} onDone={() => loadAll(selectedFeed ? { feedId: selectedFeed } : {})} />

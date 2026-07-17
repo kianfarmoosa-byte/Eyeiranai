@@ -7,7 +7,7 @@ import { useHaptics } from "../hooks";
 const STORAGE_KEY = "kian.mobile.onboarded";
 
 const STEPS = [
-  { icon: <Sparkles className="size-8" />, title: "خوش اومدی به کیان",
+  { icon: <Sparkles className="size-8" />, title: "خوش اومدی به flow",
     body: "خوراک‌خوانِ فارسیِ هوشمند با موضوعات، فیلترهای دلخواه و تجربه‌ای کاملاً موبایلی." },
   { icon: <Bookmark className="size-8" />, title: "ذخیره برای بعد",
     body: "هر مقاله‌ای رو با ضربه روی نشانک نگه دار؛ توی تبِ «ذخیره» همیشه در دسترسته — حتی آفلاین." },

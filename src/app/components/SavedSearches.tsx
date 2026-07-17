@@ -6,6 +6,7 @@ import {
   loadSearches, upsertSearch, removeSearch, newSearch, applySearch,
   type SavedSearch, type DateRange,
 } from "../savedSearches";
+import { toFa } from "./mobile/utils/fa";
 
 type Props = {
   open: boolean;
@@ -92,7 +93,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
         className="w-full md:max-w-3xl md:max-h-[88vh] bg-white dark:bg-slate-950 md:rounded-2xl shadow-2xl flex flex-col overflow-hidden">
         <header className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 shrink-0">
           <div className="flex items-center gap-2">
-            <Filter className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+            <Filter className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             <h2 className="font-semibold text-lg">جست‌وجوهای ذخیره‌شده و فیلترهای هوشمند</h2>
           </div>
           <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"><X className="w-5 h-5" /></button>
@@ -102,7 +103,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
           {!editing ? (
             <div className="space-y-3">
               <button onClick={startNew}
-                className="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2">
+                className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2">
                 <Plus className="w-4 h-4" /> فیلتر جدید
               </button>
               {list.length === 0 ? (
@@ -120,10 +121,10 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                           {summary(s)}
                         </div>
                       </button>
-                      <span className="text-xs px-2 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 shrink-0">
+                      <span className="text-xs px-2 py-1 rounded-md bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 shrink-0">
                         {counts[s.id] ?? 0}
                       </span>
-                      <button onClick={() => onApply(s)} className="p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 text-blue-600" title="اعمال">
+                      <button onClick={() => onApply(s)} className="p-1.5 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 text-emerald-600" title="اعمال">
                         <ChevronRight className="w-4 h-4" />
                       </button>
                       <button onClick={() => startEdit(s)} className="text-xs px-2 py-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">ویرایش</button>
@@ -141,7 +142,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                 <input value={editing.icon || ""} onChange={(e) => setEditing({ ...editing, icon: e.target.value })} maxLength={2}
                   className="w-12 px-2 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-center text-2xl" />
                 <input value={editing.name} onChange={(e) => setEditing({ ...editing, name: e.target.value })}
-                  placeholder="نام فیلتر" className="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 outline-none focus:border-blue-500" />
+                  placeholder="نام فیلتر" className="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 outline-none focus:border-emerald-500" />
               </div>
 
               <Section icon={<Type className="w-4 h-4" />} title="کلمات کلیدی">
@@ -149,8 +150,8 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                   <input value={kwInput} onChange={(e) => setKwInput(e.target.value)}
                     onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addKw(); } }}
                     placeholder="کلمه‌ای وارد کنید (پیشوند - برای حذف)"
-                    className="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 outline-none focus:border-blue-500" />
-                  <button onClick={addKw} className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm">افزودن</button>
+                    className="flex-1 px-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 outline-none focus:border-emerald-500" />
+                  <button onClick={addKw} className="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm">افزودن</button>
                 </div>
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {editing.keywords.map((k, i) => {
@@ -181,7 +182,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                 <div className="flex flex-wrap gap-1.5">
                   {DR_LABELS.map(d => (
                     <button key={d.value} onClick={() => setEditing({ ...editing, dateRange: d.value })}
-                      className={`px-3 py-1 rounded-md text-xs ${editing.dateRange === d.value ? "bg-blue-600 text-white" : "bg-slate-100 dark:bg-slate-900 hover:bg-slate-200"}`}>
+                      className={`px-3 py-1 rounded-md text-xs ${editing.dateRange === d.value ? "bg-emerald-600 text-white" : "bg-slate-100 dark:bg-slate-900 hover:bg-slate-200"}`}>
                       {d.label}
                     </button>
                   ))}
@@ -193,7 +194,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                   <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
                     {feeds.map(f => (
                       <button key={f.id} onClick={() => togSrc(f.id)}
-                        className={`px-2 py-1 rounded-md text-xs flex items-center gap-1 ${editing.sources.includes(f.id) ? "bg-blue-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
+                        className={`px-2 py-1 rounded-md text-xs flex items-center gap-1 ${editing.sources.includes(f.id) ? "bg-emerald-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
                         <span>{f.icon}</span>{f.name}
                       </button>
                     ))}
@@ -206,7 +207,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                   <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
                     {allTags.map(t => (
                       <button key={t} onClick={() => togTag(t)}
-                        className={`px-2 py-1 rounded-md text-xs ${editing.tags.includes(t) ? "bg-blue-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
+                        className={`px-2 py-1 rounded-md text-xs ${editing.tags.includes(t) ? "bg-emerald-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
                         #{t}
                       </button>
                     ))}
@@ -240,7 +241,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
                     <button
                       key={opt}
                       onClick={() => setEditing({ ...editing, sentiment: opt })}
-                      className={`px-2 py-1 rounded-md text-xs ${ (editing.sentiment || "any") === opt ? "bg-blue-500 text-white" : "bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" }`}
+                      className={`px-2 py-1 rounded-md text-xs ${ (editing.sentiment || "any") === opt ? "bg-emerald-500 text-white" : "bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800" }`}
                     >
                       {opt === "any" ? "هر" : opt === "positive" ? "🙂 مثبت" : opt === "neutral" ? "😐 خنثی" : "😟 منفی"}
                     </button>
@@ -249,7 +250,7 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
               </Section>
 
               <div className="flex gap-2 pt-2 border-t border-slate-200 dark:border-slate-800">
-                <button onClick={commit} className="flex-1 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2">
+                <button onClick={commit} className="flex-1 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-2">
                   <Save className="w-4 h-4" /> ذخیره
                 </button>
                 <button onClick={() => { commit(); if (editing) onApply(editing); }}
@@ -268,9 +269,9 @@ export function SavedSearches({ open, onClose, articles, feeds, onApply }: Props
 
 function summary(s: SavedSearch): string {
   const parts: string[] = [];
-  if (s.keywords.length) parts.push(`${s.keywords.length} کلیدواژه`);
-  if (s.sources.length) parts.push(`${s.sources.length} منبع`);
-  if (s.tags.length) parts.push(`${s.tags.length} برچسب`);
+  if (s.keywords.length) parts.push(`${toFa(s.keywords.length)} کلیدواژه`);
+  if (s.sources.length) parts.push(`${toFa(s.sources.length)} منبع`);
+  if (s.tags.length) parts.push(`${toFa(s.tags.length)} برچسب`);
   if (s.dateRange !== "any") parts.push(DR_LABELS.find(d => d.value === s.dateRange)?.label || "");
   if (s.starredOnly) parts.push("نشان");
   if (s.unreadOnly) parts.push("نخوانده");

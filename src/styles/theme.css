@@ -1,22 +1,18 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ════════════════════════════════════════════════════════════════════
-   KIAN DESIGN SYSTEM — v2.0
-   Editorial × Terminal hybrid for Persian-first news intelligence.
+   STRIDER EDITORIAL SYSTEM — applied to KIAN/flow
+   Editorial Minimalism: broadsheet authority × modern SaaS calm.
 
-   Token layers:
-     1. Primitive scales      (oklch, immutable)
-     2. Semantic aliases      (background, foreground, etc.)
-     3. Component tokens      (sidebar, card, etc.)
-     4. Motion / radius / shadow / density
-
-   All colors use OKLCH for perceptually uniform contrast in light & dark.
+   Palette: Mint (secondary/accent) + Charcoal (primary) on off-white.
+   Type:    Newsreader (serif display) + Hanken Grotesk (sans UI).
+   Depth:   tonal layering + subtle outlines over heavy shadows.
    ════════════════════════════════════════════════════════════════════ */
 
 :root {
   /* ── Base ─────────────────────────────────────────────────────────── */
   --font-size: 15px;
-  --radius: 0.625rem;
+  --radius: 1rem;
 
   /* ── Primitive: Neutral 12-step scale (cool gray, OKLCH) ────────── */
   --neutral-0:   oklch(1     0     0);
@@ -33,29 +29,29 @@
   --neutral-950: oklch(0.145 0.010 264);
   --neutral-1000: oklch(0.08 0.006 264);
 
-  /* ── Primitive: Brand — Tri-color spec (yellow accent) ─────────── */
-  --brand-50:  #FDECEC;
-  --brand-100: #FAD0D0;
-  --brand-200: #F4A5A5;
-  --brand-300: #EC7474;
-  --brand-400: #E14848;
-  --brand-500: #D32F2F;  /* signature red */
-  --brand-600: #B71C1C;
-  --brand-700: #931414;
-  --brand-800: #6B0E0E;
-  --brand-900: #460808;
+  /* ── Primitive: Brand — Light "Mint" spectrum (anchored #F2FDFA) ── */
+  --brand-50:  #F2FDFA;  /* lightest tint (requested base) */
+  --brand-100: #DCF7EF;
+  --brand-200: #BCEFDF;
+  --brand-300: #8FE3C9;
+  --brand-400: #5CD0AD;
+  --brand-500: #2FB08B;  /* fresh mint accent */
+  --brand-600: #229A79;
+  --brand-700: #1B7C62;
+  --brand-800: #155E4A;
+  --brand-900: #0E3F32;
 
-  /* ── Primitive: Ink — Tri-color spec (dark for tabs/buttons) ──── */
-  --ink-50:  #F4F4F4;
-  --ink-100: #E5E5E5;
-  --ink-200: #C4C4C4;
-  --ink-300: #8A8A8A;
-  --ink-400: #545454;
-  --ink-500: #2E2E2E;
-  --ink-600: #1F1F1F;
-  --ink-700: #1A1A1A;   /* signature dark */
-  --ink-800: #131313;
-  --ink-900: #0A0A0A;
+  /* ── Primitive: Ink — Editorial "Charcoal" spectrum ──────────── */
+  --ink-50:  #F2F0F0;   /* inverse-on-surface */
+  --ink-100: #E4E2E2;   /* surface-container-highest */
+  --ink-200: #CFC4C6;   /* outline-variant */
+  --ink-300: #A39A9C;
+  --ink-400: #7E7577;   /* outline */
+  --ink-500: #4C4547;   /* on-surface-variant */
+  --ink-600: #303030;   /* inverse-surface */
+  --ink-700: #1A1919;   /* signature charcoal */
+  --ink-800: #141313;
+  --ink-900: #000000;   /* primary black */
 
   /* ── Primitive: Semantic (success / warning / danger / info) ───── */
   --success-50:  oklch(0.96 0.04  155);
@@ -93,65 +89,65 @@
   --tone-neutral: oklch(0.78 0.10 85);
   --tone-pos:    oklch(0.62 0.18 155);
 
-  /* ── Semantic Aliases (light theme) ──────────────────────────── */
-  --background:        var(--neutral-0);
-  --background-subtle: var(--neutral-50);
-  --background-muted:  var(--neutral-100);
-  --foreground:        var(--neutral-950);
-  --foreground-muted:  var(--neutral-600);
-  --foreground-subtle: var(--neutral-500);
+  /* ── Semantic Aliases (light — pure white surfaces) ─── */
+  --background:        #FFFFFF;   /* pure white */
+  --background-subtle: #FAFAFA;   /* barely-there layering */
+  --background-muted:  #F4F4F5;   /* subtle container */
+  --foreground:        #1B1C1C;   /* on-surface */
+  --foreground-muted:  #4C4547;   /* on-surface-variant */
+  --foreground-subtle: #7E7577;   /* outline */
 
-  --card:              var(--neutral-0);
-  --card-foreground:   var(--neutral-950);
-  --card-elevated:     var(--neutral-0);
+  --card:              #FFFFFF;   /* surface-container-lowest */
+  --card-foreground:   #1B1C1C;
+  --card-elevated:     #FFFFFF;
 
-  --popover:           var(--neutral-0);
-  --popover-foreground: var(--neutral-950);
+  --popover:           #FFFFFF;
+  --popover-foreground: #1B1C1C;
 
-  /* Primary = dark (tabs, buttons); Accent = yellow */
+  /* Primary = charcoal (tabs, buttons); Accent = mint */
   --primary:                var(--ink-700);
   --primary-foreground:     #FFFFFF;
-  --primary-hover:          var(--ink-800);
+  --primary-hover:          var(--ink-900);
 
-  --secondary:              var(--brand-500);
-  --secondary-foreground:   var(--ink-900);
+  --secondary:              #EFEDED;
+  --secondary-foreground:   #1B1C1C;
 
-  --muted:                  var(--neutral-100);
-  --muted-foreground:       var(--neutral-500);
+  --muted:                  #EFEDED;
+  --muted-foreground:       #7E7577;
 
-  --accent:                 var(--brand-500);
-  --accent-foreground:      var(--ink-900);
+  --accent:                 var(--brand-100);
+  --accent-foreground:      #0E3F32;
 
   --destructive:            var(--danger-500);
-  --destructive-foreground: var(--neutral-0);
+  --destructive-foreground: #FFFFFF;
 
-  --border:                 oklch(0.92 0.005 264);
-  --border-strong:          oklch(0.85 0.008 264);
-  --border-subtle:          oklch(0.96 0.003 264);
+  --border:                 #CFC4C6;   /* outline-variant */
+  --border-strong:          #7E7577;   /* outline */
+  --border-subtle:          #E4E2E2;   /* surface-container-highest */
 
   --input:                  transparent;
-  --input-background:       var(--neutral-50);
+  --input-background:       #FFFFFF;
   --input-border:           var(--border);
-  --switch-background:      var(--neutral-300);
+  --switch-background:      var(--ink-200);
 
-  --ring:                   rgba(211, 47, 47, 0.55);
+  --ring:                   rgba(47, 176, 139, 0.5);
   --ring-offset:            #FFFFFF;
 
-  /* ── Charts (tri-color: yellow, dark, mid-grey for variety) ── */
+  /* ── Charts (mint + charcoal + tints) ── */
   --chart-1: var(--brand-500);
   --chart-2: var(--ink-700);
   --chart-3: var(--brand-300);
   --chart-4: var(--ink-400);
   --chart-5: var(--brand-700);
 
-  /* ── Sidebar ──────────────────────────────────────────────── */
+  /* ── Sidebar (charcoal ground, mint highlight) ──────────────── */
   --sidebar:                       var(--ink-700);
   --sidebar-foreground:            #FFFFFF;
-  --sidebar-primary:               var(--brand-500);
-  --sidebar-primary-foreground:    var(--ink-900);
+  --sidebar-primary:               var(--brand-100);
+  --sidebar-primary-foreground:    #0E3F32;
   --sidebar-accent:                var(--ink-600);
   --sidebar-accent-foreground:     #FFFFFF;
-  --sidebar-border:                var(--border);
+  --sidebar-border:                var(--ink-600);
   --sidebar-ring:                  var(--ring);
 
   /* ── Type scale (1.250 minor third — editorial cadence) ──── */
@@ -195,14 +191,14 @@
   --space-12: 3rem;   /* 48 */
   --space-16: 4rem;   /* 64 */
 
-  /* ── Radius ladder ────────────────────────────────────── */
+  /* ── Radius ladder (editorial high-radius / pill language) ── */
   --radius-none: 0;
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;    /* rounded.sm */
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;      /* rounded.DEFAULT — cards & images */
+  --radius-xl: 1.5rem;    /* rounded.md */
+  --radius-2xl: 2rem;     /* rounded.lg */
   --radius-full: 9999px;
 
   /* ── Shadow ladder (6 levels, layered for depth realism) ── */
@@ -251,7 +247,7 @@
 .density-cozy        { --density-row-y: 0.5rem;  --density-row-x: 0.875rem; --density-gap: 0.5rem; }
 .density-compact     { --density-row-y: 0.3125rem; --density-row-x: 0.625rem; --density-gap: 0.375rem; }
 
-/* ── DARK THEME — recalibrated, not just inverted ────────── */
+/* ── DARK THEME — charcoal surfaces, bright mint accents ────── */
 .dark {
   --background:        var(--ink-900);
   --background-subtle: var(--ink-800);
@@ -260,16 +256,16 @@
   --foreground-muted:  var(--neutral-400);
   --foreground-subtle: var(--neutral-500);
 
-  --card:              oklch(0.165 0.012 264);
+  --card:              oklch(0.165 0.008 160);
   --card-foreground:   var(--neutral-50);
-  --card-elevated:     oklch(0.195 0.012 264);
+  --card-elevated:     oklch(0.195 0.008 160);
 
-  --popover:           oklch(0.195 0.012 264);
+  --popover:           oklch(0.195 0.008 160);
   --popover-foreground: var(--neutral-50);
 
-  --primary:                var(--brand-500);
+  --primary:                var(--brand-400);
   --primary-foreground:     var(--ink-900);
-  --primary-hover:          var(--brand-400);
+  --primary-hover:          var(--brand-300);
 
   --secondary:              var(--ink-600);
   --secondary-foreground:   #FFFFFF;
@@ -277,37 +273,37 @@
   --muted:                  var(--ink-600);
   --muted-foreground:       var(--ink-200);
 
-  --accent:                 var(--brand-500);
+  --accent:                 var(--brand-400);
   --accent-foreground:      var(--ink-900);
 
   --destructive:            var(--danger-500);
   --destructive-foreground: var(--neutral-50);
 
-  --border:                 oklch(0.27 0.012 264);
-  --border-strong:          oklch(0.34 0.014 264);
-  --border-subtle:          oklch(0.22 0.010 264);
+  --border:                 oklch(0.27 0.008 160);
+  --border-strong:          oklch(0.34 0.010 160);
+  --border-subtle:          oklch(0.22 0.006 160);
 
-  --input-background:       oklch(0.20 0.010 264);
+  --input-background:       oklch(0.20 0.008 160);
   --input-border:           var(--border);
   --switch-background:      var(--neutral-700);
 
-  --ring:                   oklch(0.65 0.20 256 / 0.55);
+  --ring:                   rgba(92, 208, 173, 0.55);
   --ring-offset:            var(--neutral-1000);
 
-  /* Charts: brighter for dark contrast */
-  --chart-1: oklch(0.70 0.20 256);
-  --chart-2: oklch(0.74 0.16 155);
-  --chart-3: oklch(0.78 0.17 85);
-  --chart-4: oklch(0.72 0.21 25);
-  --chart-5: oklch(0.70 0.19 305);
+  /* Charts: mint spectrum for dark contrast */
+  --chart-1: oklch(0.78 0.13 160);
+  --chart-2: oklch(0.88 0.06 160);
+  --chart-3: oklch(0.66 0.12 160);
+  --chart-4: oklch(0.72 0.03 160);
+  --chart-5: oklch(0.55 0.10 160);
 
   --sidebar:                       var(--ink-900);
   --sidebar-foreground:            #FFFFFF;
-  --sidebar-primary:               var(--brand-500);
+  --sidebar-primary:               var(--brand-400);
   --sidebar-primary-foreground:    var(--ink-900);
   --sidebar-accent:                var(--ink-700);
   --sidebar-accent-foreground:     #FFFFFF;
-  --sidebar-border:                var(--border);
+  --sidebar-border:                var(--ink-700);
   --sidebar-ring:                  var(--ring);
 
   --shadow-xs:  0 1px 2px 0 oklch(0 0 0 / 0.5);
@@ -320,6 +316,33 @@
   --shadow-xl:  0 8px 16px -4px oklch(0 0 0 / 0.55),
                 0 24px 48px -8px oklch(0 0 0 / 0.7);
   --shadow-2xl: 0 32px 64px -16px oklch(0 0 0 / 0.85);
+}
+
+/* ── MOBILE DARK — matte charcoal surfaces (scoped to mobile, ≤767px) ──
+   Soft matte dark theme with mint accent (inherited via --brand-*). */
+@media (max-width: 767px) {
+  .dark {
+    --background:        oklch(0.225 0.003 160);
+    --background-subtle: oklch(0.260 0.003 160);
+    --background-muted:  oklch(0.300 0.004 160);
+
+    --card:              oklch(0.255 0.003 160);
+    --card-elevated:     oklch(0.300 0.004 160);
+    --popover:           oklch(0.285 0.004 160);
+
+    --secondary:         oklch(0.300 0.004 160);
+    --muted:             oklch(0.300 0.004 160);
+    --muted-foreground:  var(--neutral-300);
+
+    --border:            oklch(0.350 0.004 160);
+    --border-strong:     oklch(0.430 0.005 160);
+    --border-subtle:     oklch(0.310 0.004 160);
+
+    --input-background:  oklch(0.275 0.003 160);
+
+    --sidebar:           oklch(0.225 0.003 160);
+    --sidebar-accent:    oklch(0.300 0.004 160);
+  }
 }
 
 /* ── Tailwind v4 inline @theme bridge (existing utility classes work) ── */
@@ -380,7 +403,12 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Editorial type scale — Persian-tuned line heights. */
+  /* Pure white background (no atmospheric tint) in light mode. */
+  html:not(.dark) body {
+    background: var(--background);
+  }
+
+  /* Editorial type scale — serif display, Persian-tuned line heights. */
   h1 {
     font-family: var(--font-display);
     font-size: var(--text-3xl);
@@ -429,7 +457,7 @@
     line-height: var(--leading-normal);
   }
 
-  /* Selection — branded */
+  /* Selection — branded (mint tint) */
   ::selection {
     background: oklch(from var(--brand-300) l c h / 0.4);
     color: var(--foreground);

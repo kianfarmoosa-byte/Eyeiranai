@@ -27,8 +27,8 @@ const EVENT_STYLE: Record<TimelineEvent["kind"], { icon: any; cls: string }> = {
   first:      { icon: Sparkles,   cls: "from-emerald-500 to-teal-500" },
   spike:      { icon: Zap,        cls: "from-amber-500 to-rose-500" },
   peak:       { icon: TrendingUp, cls: "from-rose-500 to-pink-600" },
-  broadening: { icon: Users,      cls: "from-violet-500 to-blue-500" },
-  resurgence: { icon: RotateCcw,  cls: "from-blue-500 to-cyan-500" },
+  broadening: { icon: Users,      cls: "from-violet-500 to-emerald-500" },
+  resurgence: { icon: RotateCcw,  cls: "from-emerald-500 to-cyan-500" },
 };
 
 export function TimelineView({ open, onClose, articles, initialTopic, onSelectArticle }: Props) {
@@ -157,7 +157,7 @@ export function TimelineView({ open, onClose, articles, initialTopic, onSelectAr
 
         <header className="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 shrink-0">
           <div className="flex items-center gap-2 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 text-white flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-violet-600 text-white flex items-center justify-center shrink-0">
               <Clock className="w-4 h-4" />
             </div>
             <div className="min-w-0">
@@ -204,10 +204,10 @@ export function TimelineView({ open, onClose, articles, initialTopic, onSelectAr
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") submit(); }}
                 placeholder="موضوع: مثلاً «هوش مصنوعی»، «#اقتصاد»، نام شخص…"
-                className="w-full pr-8 pl-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 text-sm outline-none focus:ring-2 ring-blue-500/30"
+                className="w-full pr-8 pl-3 py-2 rounded-lg bg-slate-100 dark:bg-slate-900 text-sm outline-none focus:ring-2 ring-emerald-500/30"
               />
             </div>
-            <button onClick={submit} className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm flex items-center gap-1.5">
+            <button onClick={submit} className="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm flex items-center gap-1.5">
               <Sparkles className="w-4 h-4" /> ترسیم
             </button>
             <div className="flex rounded-lg bg-slate-100 dark:bg-slate-900 p-0.5">
@@ -239,7 +239,7 @@ export function TimelineView({ open, onClose, articles, initialTopic, onSelectAr
               <GitCompareArrows className="w-3 h-3 text-slate-400" />
               <span className="text-[11px] text-slate-500">موضوعات مقایسه:</span>
               {topic && (
-                <span className="text-[11px] px-2 py-0.5 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">
+                <span className="text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">
                   {topicLabelOf(topic)} (پایه)
                 </span>
               )}
@@ -293,7 +293,7 @@ export function TimelineView({ open, onClose, articles, initialTopic, onSelectAr
             <div className="flex items-end gap-0.5 h-16">
               {timeline.buckets.map(b => {
                 const h = b.articles.length === 0 ? 2 : Math.max(4, Math.round((b.articles.length / maxCount) * 60));
-                const tone = b.isSpike ? "bg-rose-500" : b.articles.length === 0 ? "bg-slate-200 dark:bg-slate-800" : "bg-blue-500";
+                const tone = b.isSpike ? "bg-rose-500" : b.articles.length === 0 ? "bg-slate-200 dark:bg-slate-800" : "bg-emerald-500";
                 const hasAnn = !!annotations[b.key];
                 return (
                   <div key={b.key} title={`${b.label}: ${b.articles.length.toLocaleString("fa-IR")} مقاله${hasAnn ? " · 📝" : ""}`}
@@ -309,12 +309,12 @@ export function TimelineView({ open, onClose, articles, initialTopic, onSelectAr
           <div className="px-4 py-2 border-b border-slate-200 dark:border-slate-800 shrink-0 flex flex-wrap gap-1.5 items-center">
             <span className="text-[11px] text-slate-500 flex items-center gap-1"><Layers className="w-3 h-3" /> منابع:</span>
             <button onClick={() => setSourceFilter(null)}
-              className={`text-xs px-2 py-0.5 rounded-md ${!sourceFilter ? "bg-blue-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
+              className={`text-xs px-2 py-0.5 rounded-md ${!sourceFilter ? "bg-emerald-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
               همه ({timeline.total.toLocaleString("fa-IR")})
             </button>
             {timeline.topSources.map(s => (
               <button key={s.source} onClick={() => setSourceFilter(sourceFilter === s.source ? null : s.source)}
-                className={`text-xs px-2 py-0.5 rounded-md flex items-center gap-1 ${sourceFilter === s.source ? "bg-blue-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
+                className={`text-xs px-2 py-0.5 rounded-md flex items-center gap-1 ${sourceFilter === s.source ? "bg-emerald-600 text-white" : "bg-slate-100 dark:bg-slate-900"}`}>
                 {s.icon && <span>{s.icon}</span>}
                 {s.source}
                 <span className="opacity-60">{s.count.toLocaleString("fa-IR")}</span>
@@ -342,7 +342,7 @@ export function TimelineView({ open, onClose, articles, initialTopic, onSelectAr
                     const isEditing = annDraftKey === b.key;
                     return (
                       <div key={b.key} className="relative ps-6">
-                        <div className={`absolute right-0 top-2 w-3 h-3 rounded-full ring-4 ring-white dark:ring-slate-950 ${b.isSpike ? "bg-rose-500" : b._articles.length === 0 ? "bg-slate-300 dark:bg-slate-700" : "bg-blue-500"}`}></div>
+                        <div className={`absolute right-0 top-2 w-3 h-3 rounded-full ring-4 ring-white dark:ring-slate-950 ${b.isSpike ? "bg-rose-500" : b._articles.length === 0 ? "bg-slate-300 dark:bg-slate-700" : "bg-emerald-500"}`}></div>
                         <div className="flex items-center gap-2 flex-wrap mb-2">
                           <div className="text-sm font-semibold">{b.label}</div>
                           {b._articles.length > 0 && (
@@ -458,10 +458,10 @@ function HeatmapGrid({ heatmap, topicLabel }: { heatmap: ReturnType<typeof build
   const intensity = (c: number) => {
     if (c === 0) return "bg-slate-100 dark:bg-slate-900";
     const r = c / Math.max(1, heatmap.max);
-    if (r > 0.75) return "bg-blue-700 text-white";
-    if (r > 0.5)  return "bg-blue-500 text-white";
-    if (r > 0.25) return "bg-blue-400";
-    return "bg-blue-200 dark:bg-blue-900";
+    if (r > 0.75) return "bg-emerald-700 text-white";
+    if (r > 0.5)  return "bg-emerald-500 text-white";
+    if (r > 0.25) return "bg-emerald-400";
+    return "bg-emerald-200 dark:bg-emerald-900";
   };
   const grid: any[][] = Array.from({ length: 7 }, () => Array(heatmap.weeks).fill(null));
   for (const c of heatmap.cells) grid[c.weekday][c.week] = c;
@@ -494,7 +494,7 @@ function HeatmapGrid({ heatmap, topicLabel }: { heatmap: ReturnType<typeof build
       <div className="flex items-center gap-2 mt-4 text-[11px] text-slate-500">
         <span>کم</span>
         <div className="flex gap-1">
-          {["bg-slate-100 dark:bg-slate-900", "bg-blue-200 dark:bg-blue-900", "bg-blue-400", "bg-blue-500", "bg-blue-700"].map(c => (
+          {["bg-slate-100 dark:bg-slate-900", "bg-emerald-200 dark:bg-emerald-900", "bg-emerald-400", "bg-emerald-500", "bg-emerald-700"].map(c => (
             <div key={c} className={`w-4 h-4 rounded ${c}`}></div>
           ))}
         </div>
