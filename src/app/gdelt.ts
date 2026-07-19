@@ -44,26 +44,27 @@ function toParams(q: GdeltDocQuery): URLSearchParams {
   return p;
 }
 
-async function call(path: string, params: URLSearchParams) {
+async function call(path: string, params: URLSearchParams, signal?: AbortSignal) {
   const r = await fetch(`${BASE}${path}?${params}`, {
     headers: { Authorization: `Bearer ${publicAnonKey}` },
+    signal,
   });
   if (!r.ok) throw new Error(`gdelt ${path} → ${r.status}`);
   return r.json();
 }
 
-export async function gdeltDoc(query: GdeltDocQuery): Promise<{ articles: GdeltArticle[] }> {
-  return call("/doc", toParams(query));
+export async function gdeltDoc(query: GdeltDocQuery, signal?: AbortSignal): Promise<{ articles: GdeltArticle[] }> {
+  return call("/doc", toParams(query), signal);
 }
 
-export async function gdeltTimeline(query: GdeltDocQuery & { mode?: "TimelineVol" | "TimelineTone" }) {
+export async function gdeltTimeline(query: GdeltDocQuery & { mode?: "TimelineVol" | "TimelineTone" }, signal?: AbortSignal) {
   const p = toParams(query);
   if (query.mode) p.set("mode", query.mode);
-  return call("/timeline", p);
+  return call("/timeline", p, signal);
 }
 
-export async function gdeltGeo(query: GdeltDocQuery): Promise<any> {
-  return call("/geo", toParams(query));
+export async function gdeltGeo(query: GdeltDocQuery, signal?: AbortSignal): Promise<any> {
+  return call("/geo", toParams(query), signal);
 }
 
 export async function gdeltTv(q: string, opts: { network?: string; timespan?: string } = {}) {

@@ -4,6 +4,8 @@ import type { Article } from "../../data";
 import { scoreArticle, sentimentLabelFa } from "../../sentiment";
 import { timeAgoFa, faNum } from "../mobile/utils/fa";
 import { articleMs, tokensOf } from "./roomUtils";
+import { Input } from "../ui/input";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select";
 
 // ── ۳.۱ دیوار خبر زنده (Live News Wall) ──
 // جریان زندهٔ عناوین همهٔ منابع با رنگ‌بندی لحن، نشان اهمیت، فیلتر سریع، سنجاق.
@@ -100,8 +102,8 @@ export function LiveNewsWall({ articles, pins, onTogglePin, onSelect, big, compa
         <div className="flex flex-wrap items-center gap-2 p-3 border-b border-slate-200 dark:border-slate-800 shrink-0">
           <div className="relative">
             <Search className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
-            <input value={kw} onChange={e => setKw(e.target.value)} placeholder="کلیدواژه…"
-              className="w-40 bg-slate-100 dark:bg-slate-800 rounded-lg pr-7 pl-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+            <Input value={kw} onChange={e => setKw(e.target.value)} placeholder="کلیدواژه…"
+              className="w-40 h-8 pr-7 pl-2 text-xs" />
           </div>
           <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 gap-1">
             <button className={seg(tone === "all")} onClick={() => setTone("all")}>همه</button>
@@ -109,18 +111,26 @@ export function LiveNewsWall({ articles, pins, onTogglePin, onSelect, big, compa
             <button className={seg(tone === "neutral")} onClick={() => setTone("neutral")}>خنثی</button>
             <button className={seg(tone === "negative")} onClick={() => setTone("negative")}>منفی</button>
           </div>
-          <select value={source} onChange={e => setSource(e.target.value)}
-            className="bg-slate-100 dark:bg-slate-800 rounded-lg px-2 py-1.5 text-xs max-w-[10rem]">
-            <option value="">همهٔ منابع</option>
-            {sources.map(([s, c]) => <option key={s} value={s}>{s} ({faNum(c)})</option>)}
-          </select>
-          <select value={hours} onChange={e => setHours(Number(e.target.value))}
-            className="appearance-none bg-slate-100 dark:bg-slate-800 rounded-lg text-xs py-1.5 pr-3 pl-7 bg-no-repeat bg-[position:left_0.5rem_center] bg-[length:0.7rem] bg-[url(&quot;data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20fill='none'%20viewBox='0%200%2024%2024'%20stroke='%2394a3b8'%20stroke-width='2.5'%3E%3Cpath%20stroke-linecap='round'%20stroke-linejoin='round'%20d='M6%209l6%206%206-6'/%3E%3C/svg%3E&quot;)] focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer">
-            <option value={3}>۳ ساعت</option>
-            <option value={12}>۱۲ ساعت</option>
-            <option value={24}>۲۴ ساعت</option>
-            <option value={72}>۳ روز</option>
-          </select>
+          <Select value={source || "all"} onValueChange={v => setSource(v === "all" ? "" : v)}>
+            <SelectTrigger size="sm" className="w-[10rem] text-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">همهٔ منابع</SelectItem>
+              {sources.map(([s, c]) => <SelectItem key={s} value={s}>{s} ({faNum(c)})</SelectItem>)}
+            </SelectContent>
+          </Select>
+          <Select value={String(hours)} onValueChange={v => setHours(Number(v))}>
+            <SelectTrigger size="sm" className="w-[6.5rem] text-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="3">۳ ساعت</SelectItem>
+              <SelectItem value="12">۱۲ ساعت</SelectItem>
+              <SelectItem value="24">۲۴ ساعت</SelectItem>
+              <SelectItem value="72">۳ روز</SelectItem>
+            </SelectContent>
+          </Select>
           {(kw || source || tone !== "all" || hours !== 24) && (
             <button onClick={() => { setKw(""); setSource(""); setTone("all"); setHours(24); }}
               className="inline-flex items-center gap-1 text-xs text-slate-500 hover:text-rose-500">

@@ -26,6 +26,8 @@ type Props = {
   feedStatus?: Record<string, { ok: boolean; error?: string }>;
   onOpenOpml?: () => void;
   onRemoveFeed?: (id: string) => void;
+  onPruneFeeds?: () => void;
+  pruning?: boolean;
   onOpenStats?: () => void;
   onOpenDigest?: () => void;
   onOpenPalette?: () => void;
@@ -48,7 +50,7 @@ export function Sidebar({
   theme, onToggleTheme, feeds, onAddFeed, onRefresh, loading,
   totals = { all: 0, unread: 0, starred: 0, saved: 0 },
   search = "", setSearch = () => {}, lastRefresh = null,
-  feedStatus = {}, onOpenOpml = () => {}, onRemoveFeed, onOpenHelp, onOpenRules,
+  feedStatus = {}, onOpenOpml = () => {}, onRemoveFeed, onPruneFeeds, pruning = false, onOpenHelp, onOpenRules,
   onOpenStats, onOpenDigest, onOpenPalette, onOpenSourceHub, onOpenSavedSearches, onOpenKnowledge, onOpenNotes, onOpenTimeline, onOpenStudio,
   pinnedTopics = [], onToggleTopic, onClearTopics, onAddTopic, socialUnread = 0,
 }: Props & { onOpenHelp?: () => void; onOpenRules?: () => void }) {
@@ -286,6 +288,13 @@ export function Sidebar({
             <button onClick={onRefresh} className="p-1.5 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg" title="بروزرسانی">
               <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} />
             </button>
+            {onPruneFeeds && (
+              <button onClick={onPruneFeeds} disabled={pruning}
+                className="p-1.5 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg disabled:opacity-50"
+                title="بررسی سلامت و حذف خوراک‌های خراب">
+                <Wand2 className={`w-3 h-3 ${pruning ? 'animate-pulse text-emerald-500' : ''}`} />
+              </button>
+            )}
             <button onClick={onAddFeed} className="p-1.5 text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-lg" title="افزودن خوراک">
               <Plus className="w-3 h-3" />
             </button>

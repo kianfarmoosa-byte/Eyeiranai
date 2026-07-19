@@ -27,8 +27,8 @@ const NOTIFS_CAP = 50;
 const HISTORY_CAP = 60;
 
 // ── AI config (self-contained to avoid a circular import with index.tsx) ──
-const AI_BASE = "https://apimaster.ai/v1";
-const AI_MODEL = "claude-sonnet-4-6";
+const AI_BASE = "https://api.tokenrouter.com/v1";
+const AI_MODEL = "z-ai/glm-5.2-free";
 
 async function getAiConfig(userId?: string): Promise<{ key: string; base: string; model: string }> {
   if (userId) {
@@ -39,7 +39,7 @@ async function getAiConfig(userId?: string): Promise<{ key: string; base: string
       }
     } catch (e) { console.log("newspack getAiConfig error:", String(e)); }
   }
-  return { key: Deno.env.get("AI_API_KEY") || "", base: AI_BASE, model: AI_MODEL };
+  return { key: Deno.env.get("TOKENROUTER_API_KEY") || Deno.env.get("AI_API_KEY") || "", base: AI_BASE, model: AI_MODEL };
 }
 
 type ChatMsg = { role: "system" | "user" | "assistant"; content: string };

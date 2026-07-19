@@ -8,6 +8,7 @@ import {
   setOperator, getNotes, setNotes, getShifts, setShifts,
   getAlerts, type TeamNote, type ShiftHandoff, uid,
 } from "./roomStore";
+import { Input } from "../ui/input";
 
 // ── ۳.۵ همکاری هم‌زمان تیمی (Collaborative Watch) ──
 // حضور، یادداشت/برچسب مشترک روی اخبار، منشن، و تحویل شیفت با خلاصهٔ AI.
@@ -140,10 +141,10 @@ export function CollaborativeWatch({ articles, operator, onOperatorChange, onSel
       {nameEdit ? (
         <div className="shrink-0 p-2 border-b border-slate-200 dark:border-slate-800 flex items-center gap-2">
           <span className="text-xs text-slate-500">نام شما:</span>
-          <input defaultValue={operator} id="op-name"
+          <Input defaultValue={operator} id="op-name"
             onKeyDown={e => { if (e.key === "Enter") { const v = (e.target as HTMLInputElement).value.trim(); if (v) { setOperator(v); onOperatorChange(v); setNameEdit(false); } } }}
             placeholder="مثلاً رضایی"
-            className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500" />
+            className="flex-1 h-8 px-2 text-xs" />
           <button onClick={() => { const el = document.getElementById("op-name") as HTMLInputElement; const v = el?.value.trim(); if (v) { setOperator(v); onOperatorChange(v); setNameEdit(false); } }}
             className="px-3 py-1.5 rounded-lg text-xs bg-teal-600 text-white hover:bg-teal-700">ثبت</button>
         </div>
@@ -226,10 +227,10 @@ export function CollaborativeWatch({ articles, operator, onOperatorChange, onSel
           ))}
         </div>
         <div className="flex items-center gap-2">
-          <input value={text} onChange={e => setText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()}
+          <Input value={text} onChange={e => setText(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()}
             placeholder={operator ? "یادداشت تیمی… (با @نام اشاره کنید)" : "ابتدا نام خود را ثبت کنید"}
             disabled={!operator}
-            className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:opacity-50" />
+            className="flex-1 text-sm" />
           <button onClick={addNote} disabled={!operator || !text.trim()}
             className="p-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-50"><Send className="w-4 h-4" /></button>
         </div>

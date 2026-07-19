@@ -496,19 +496,21 @@ export function GraphView({ articles, loading, onRefresh }: Props) {
             )}
           </div>
           {allCategories.length > 0 && (
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 flex gap-1 flex-wrap justify-center max-w-xl bg-white/70 dark:bg-slate-900/70 backdrop-blur rounded-full border border-slate-200 dark:border-slate-800 px-2 py-1 shadow-lg">
-              <span className="text-[10px] text-slate-500 self-center px-1 flex items-center gap-1"><Filter className="w-3 h-3" /></span>
-              {allCategories.map(cat => {
-                const [, mid] = catColor(cat);
-                const active = catFilter.has(cat);
-                return (
-                  <button key={cat} onClick={() => toggleCat(cat)}
-                    className={`text-[10px] px-2 py-0.5 rounded-full border transition ${active ? "text-white shadow-sm" : "text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:border-slate-400"}`}
-                    style={active ? { background: mid, borderColor: mid } : {}}>
-                    {cat || "—"}
-                  </button>
-                );
-              })}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 z-10 w-[min(92vw,42rem)] flex items-center gap-2 bg-white/70 dark:bg-slate-900/70 backdrop-blur rounded-full border border-slate-200 dark:border-slate-800 pr-3 pl-2 py-1.5 shadow-lg">
+              <span className="shrink-0 text-slate-500 flex items-center"><Filter className="w-3.5 h-3.5" /></span>
+              <div className="flex-1 min-w-0 flex items-center gap-1 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {allCategories.map(cat => {
+                  const [, mid] = catColor(cat);
+                  const active = catFilter.has(cat);
+                  return (
+                    <button key={cat} onClick={() => toggleCat(cat)}
+                      className={`shrink-0 whitespace-nowrap text-[10px] leading-none px-2.5 py-1 rounded-full border transition ${active ? "text-white shadow-sm border-transparent" : "text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600"}`}
+                      style={active ? { background: mid, borderColor: mid } : {}}>
+                      {cat || "—"}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           )}
           {isolateCluster && (

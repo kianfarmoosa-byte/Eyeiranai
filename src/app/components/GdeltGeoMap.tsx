@@ -1,10 +1,15 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Loader2, MapPin, RefreshCw, ZoomIn, ZoomOut } from "lucide-react";
 import { feature } from "topojson-client";
 import { gdeltGeo, type GdeltDocQuery } from "../gdelt";
 import { toFa } from "./mobile/utils/fa";
 
-type Props = { query: GdeltDocQuery };
+type Props = {
+  query: GdeltDocQuery;
+  // پس از پایان هر واکشی (موفق یا ناموفق، اما نه لغوشده) صدا زده می‌شود؛
+  // به مصرف‌کننده اجازه می‌دهد واکشی‌ها را زنجیره‌ای اجرا کند (مثل پخش زمانی).
+  onLoaded?: () => void;
+};
 
 type Point = {
   id: string;
@@ -82,7 +87,7 @@ async function loadWorldPaths(): Promise<string[]> {
   return paths;
 }
 
-export function GdeltGeoMap({ query }: Props) {
+export function GdeltGeoMap({ query, onLoaded }: Props) {
   const [points, setPoints] = useState<Point[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -90,6 +95,7 @@ export function GdeltGeoMap({ query }: Props) {
   const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [hover, setHover] = useState<Point | null>(null);
   const [worldPaths, setWorldPaths] = useState<string[]>([]);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -103,22 +109,36 @@ export function GdeltGeoMap({ query }: Props) {
 
   const fetchGeo = async () => {
     if (!hasQuery) { setPoints([]); setError(null); return; }
+    // درخواست قبلی را لغو کن تا اتصال نیمه‌کاره روی سرور باقی نماند.
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
     setLoading(true);
     setError(null);
+    let aborted = false;
     try {
-      const r: any = await gdeltGeo(query);
+      const r: any = await gdeltGeo(query, controller.signal);
+      if (controller.signal.aborted) { aborted = true; return; }
       setPoints(extractPoints(r));
     } catch (e: any) {
+      // لغو عمدی درخواست خطا نیست.
+      if (e?.name === "AbortError" || controller.signal.aborted) { aborted = true; return; }
       console.error("GDELT geo failed:", e);
       setError(String(e?.message || e));
       setPoints([]);
     } finally {
-      setLoading(false);
+      if (abortRef.current === controller) {
+        abortRef.current = null;
+        setLoading(false);
+      }
+      // فقط برای واکشیِ به‌پایان‌رسیده (نه لغوشده) اطلاع بده.
+      if (!aborted) onLoaded?.();
     }
   };
 
   useEffect(() => {
     fetchGeo();
+    return () => abortRef.current?.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query.q, query.country, query.theme, query.lang, query.timespan]);
 

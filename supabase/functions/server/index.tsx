@@ -88,8 +88,11 @@ app.route(`${BASE}/newspack`, newspack);
 // Proxies AI requests to an OpenAI-compatible endpoint. Keys live only on the
 // server and never reach the frontend. Each user may supply their own key
 // (stored in KV under ai:config:{u}); otherwise the shared AI_API_KEY is used.
-const AI_BASE = "https://apimaster.ai/v1";
-const AI_MODEL = "claude-sonnet-4-6";
+const AI_BASE = "https://api.tokenrouter.com/v1";
+const AI_MODEL = "z-ai/glm-5.2-free";
+
+// Default server key: prefer the dedicated TokenRouter key, fall back to AI_API_KEY.
+const defaultAiKey = () => Deno.env.get("TOKENROUTER_API_KEY") || Deno.env.get("AI_API_KEY") || "";
 
 const aiConfigKey = (u: string) => `ai:config:${u}`;
 
@@ -108,7 +111,7 @@ async function getAiConfig(userId?: string): Promise<{ key: string; base: string
       }
     } catch (e) { console.log("getAiConfig error:", String(e)); }
   }
-  return { key: Deno.env.get("AI_API_KEY") || "", base: AI_BASE, model: AI_MODEL, source: "default" };
+  return { key: defaultAiKey(), base: AI_BASE, model: AI_MODEL, source: "default" };
 }
 
 type ChatMsg = { role: "system" | "user" | "assistant"; content: string };
@@ -1937,6 +1940,42 @@ function getText(v: any): string {
   return String(v);
 }
 
+// Cheap, LLM-free language guess used to decide which headlines need Persian
+// translation. Persian and Arabic share the Arabic script, so we look for
+// Persian-specific letters to separate them; anything with mostly Latin/other
+// script is flagged "other" (→ will be translated to Persian on the client).
+function detectLang(s: string): "fa" | "ar" | "other" {
+  const t = String(s || "");
+  if (!t.trim()) return "fa";
+  const persianSpecific = /[پچژگکی]/; // ی is U+06CC (Persian), distinct from Arabic ي
+  const arabicScript = (t.match(/[؀-ۿ]/g) || []).length;
+  const latin = (t.match(/[A-Za-zЀ-ӿͰ-Ͽ]/g) || []).length; // Latin/Cyrillic/Greek
+  if (arabicScript >= latin && arabicScript > 0) {
+    return persianSpecific.test(t) ? "fa" : "ar";
+  }
+  return latin > 0 ? "other" : "fa";
+}
+
+// Normalized content signature for cross-feed duplicate collapse. The same wire
+// story republished by several outlets should appear once.
+function contentSig(title: string, link: string): string {
+  const canonLink = String(link || "")
+    .trim()
+    .replace(/^https?:\/\//i, "")
+    .replace(/^www\./i, "")
+    .replace(/[#?].*$/, "")
+    .replace(/\/+$/, "")
+    .toLowerCase();
+  if (canonLink) return "l:" + canonLink;
+  const t = String(title || "")
+    .toLowerCase()
+    .replace(/[ً-ْ]/g, "")   // strip Arabic diacritics
+    .replace(/ی/g, "ي").replace(/ک/g, "ك")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+  return "t:" + t.slice(0, 90);
+}
+
 async function fetchAndParseFeed(url: string, feedId: string, timeoutMs = 7000) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -1963,10 +2002,11 @@ async function fetchAndParseFeed(url: string, feedId: string, timeoutMs = 7000) 
     const description = getText(it.description || it.summary);
     const content = getText(it["content:encoded"] || it.content || it.description || it.summary);
     const id = `${feedId}-${link || i}`;
+    const cleanTitle = stripHtml(title);
     return {
       id,
       feedId,
-      title: stripHtml(title),
+      title: cleanTitle,
       link,
       source: feedTitle,
       author: getText(it.author || it["dc:creator"]) || feedTitle,
@@ -1974,6 +2014,7 @@ async function fetchAndParseFeed(url: string, feedId: string, timeoutMs = 7000) 
       preview: stripHtml(description).slice(0, 280),
       content: stripHtml(content),
       image: extractImage(it),
+      lang: detectLang(cleanTitle),
     };
   });
 }
@@ -2135,6 +2176,18 @@ app.get(`${BASE}/articles`, async (c) => {
   if (feedIdParam) scoped = merged.filter((it: any) => it.feedId === feedIdParam);
   else if (categoryParam) scoped = merged.filter((it: any) => feedIds.has(it.feedId));
 
+  // Collapse cross-feed duplicates (same story republished by multiple outlets).
+  // `scoped` is already newest-first, so the first occurrence we keep is freshest.
+  if (!feedIdParam) {
+    const seenSig = new Set<string>();
+    scoped = scoped.filter((it: any) => {
+      const sig = contentSig(it.title, it.link);
+      if (seenSig.has(sig)) return false;
+      seenSig.add(sig);
+      return true;
+    });
+  }
+
   const total = scoped.length;
   const page = scoped.slice(offsetParam, offsetParam + limitParam).map((it: any) => ({
     ...it,
@@ -2148,6 +2201,67 @@ app.get(`${BASE}/articles`, async (c) => {
 app.get(`${BASE}/feeds/status`, async (c) => {
   const status = (await kv.get(FEED_STATUS_KEY)) || {};
   return c.json({ status });
+});
+
+// Health-check feeds live and remove dead ones. Bounded per request to stay
+// within the platform connection budget: checks the stalest `limit` feeds, then
+// reports `remaining` so the client can loop until the whole directory is swept.
+// Feeds that return a permanent error (404/410/403/DNS/invalid feed) are dropped
+// immediately; transient failures (timeout/5xx) are dropped only after repeating.
+app.post(`${BASE}/feeds/prune`, async (c) => {
+  try {
+    const list: any[] = (await kv.get(FEEDS_KEY)) || [];
+    const status: Record<string, any> = (await kv.get(FEED_STATUS_KEY)) || {};
+    const limit = Math.min(Math.max(Number(c.req.query("limit") || "60"), 1), 120);
+    const runStart = Date.now();
+    const deadline = runStart + 22000;
+
+    // Stalest-checked first so repeated calls fan out across the directory.
+    const targets = [...list]
+      .sort((a, b) => (status[a.id]?.lastCheck || 0) - (status[b.id]?.lastCheck || 0))
+      .slice(0, limit);
+
+    const removedIds = new Set<string>();
+    const removedList: { id: string; name: string; url: string; error: string }[] = [];
+    let checked = 0;
+    let idx = 0;
+    const CONCURRENCY = 12;
+    async function worker() {
+      while (idx < targets.length) {
+        const f = targets[idx++];
+        if (Date.now() > deadline) break;
+        checked++;
+        try {
+          await fetchAndParseFeed(f.url, f.id, 8000);
+          status[f.id] = { ok: true, lastOk: Date.now(), lastCheck: Date.now(), failCount: 0 };
+        } catch (e) {
+          const msg = String(e).slice(0, 200);
+          const prev = status[f.id] || {};
+          const permanent = /fetch failed (400|401|403|404|410|451|530)|invalid feed format|invalid feed|ENOTFOUND|dns|getaddrinfo|certificate|ssl/i.test(msg);
+          const failCount = (prev.failCount || 0) + 1;
+          status[f.id] = { ok: false, error: msg, lastOk: prev.lastOk, lastFail: Date.now(), lastCheck: Date.now(), failCount };
+          if (permanent || failCount >= 2) {
+            removedIds.add(f.id);
+            removedList.push({ id: f.id, name: f.name, url: f.url, error: msg });
+          }
+        }
+      }
+    }
+    await Promise.all(Array.from({ length: CONCURRENCY }, worker));
+
+    const next = list.filter((f) => !removedIds.has(f.id));
+    for (const id of removedIds) delete status[id];
+    await kv.set(FEEDS_KEY, next);
+    await kv.set(FEED_STATUS_KEY, status);
+
+    // Feeds still needing a check this sweep (not yet checked since runStart).
+    const remaining = next.filter((f) => (status[f.id]?.lastCheck || 0) < runStart).length;
+
+    return c.json({ ok: true, checked, removed: removedIds.size, removedList, total: next.length, remaining });
+  } catch (e) {
+    console.log("feeds/prune error:", String(e));
+    return c.json({ error: String(e) }, 500);
+  }
 });
 
 app.get(`${BASE}/tags`, async (c) => {

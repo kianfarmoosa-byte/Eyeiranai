@@ -34,6 +34,7 @@ import { offlineCache } from "./offlineCache";
 import { useTheme } from "./components/ThemeToggle";
 import type { SortMode } from "./components/ArticleList";
 import { api, RemoteArticle, RemoteFeed } from "./api";
+import { studioUserId } from "./components/mobile/studio/studio";
 import { seedMediaDirectory, directorySeeded } from "./seedDirectory";
 import { articles as sampleArticles } from "./data";
 import type { Article } from "./data";
@@ -86,7 +87,36 @@ function toArticle(a: RemoteArticle & { category?: string }): Article {
     category: (a as any).category || a.feedId,
     tags: a.tags || [],
     link: a.link,
+    lang: a.lang,
   };
+}
+
+// Fallback language guess for cached/legacy articles that lack a server `lang`.
+function guessNonPersian(title: string): boolean {
+  const t = String(title || "");
+  if (!t.trim()) return false;
+  const arabicScript = (t.match(/[؀-ۿ]/g) || []).length;
+  const latin = (t.match(/[A-Za-zЀ-ӿͰ-Ͽ]/g) || []).length;
+  return latin > 0 && latin >= arabicScript;
+}
+
+// Content signature used to collapse the same story republished by several feeds.
+function articleSig(a: Article): string {
+  const link = (a.link || "")
+    .trim()
+    .replace(/^https?:\/\//i, "")
+    .replace(/^www\./i, "")
+    .replace(/[#?].*$/, "")
+    .replace(/\/+$/, "")
+    .toLowerCase();
+  if (link) return "l:" + link;
+  const t = (a.titleOriginal || a.title || "")
+    .toLowerCase()
+    .replace(/[ً-ْ]/g, "")
+    .replace(/ی/g, "ي").replace(/ک/g, "ك")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
+    .trim();
+  return "t:" + t.slice(0, 90);
 }
 
 const AUTO_REFRESH_MS = 5 * 60 * 1000;
@@ -164,9 +194,18 @@ export default function App() {
       ]);
       setFeeds(feedsList);
       const mapped = remote.map(toArticle);
+      // Dedupe by id, then collapse cross-feed duplicates (same story, many outlets).
       const dedupe = (arr: Article[]) => {
-        const seen = new Set<string>();
-        return arr.filter(a => { if (seen.has(a.id)) return false; seen.add(a.id); return true; });
+        const seenId = new Set<string>();
+        const seenSig = new Set<string>();
+        return arr.filter(a => {
+          if (seenId.has(a.id)) return false;
+          seenId.add(a.id);
+          const sig = articleSig(a);
+          if (seenSig.has(sig)) return false;
+          seenSig.add(sig);
+          return true;
+        });
       };
       if (opts.feedId) {
         feedCacheRef.current.set(opts.feedId, mapped);
@@ -216,6 +255,66 @@ export default function App() {
     })();
     offlineCache.prune().catch(() => {});
   }, []);
+
+  // AI-translate non-Persian headlines to Persian (batched + server-cached).
+  // The original headline is preserved in `titleOriginal`; every view that reads
+  // `title` then shows Persian automatically.
+  const triedTitlesRef = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const pending = items
+      .filter(a => !a.titleTranslated
+        && (a.lang ? a.lang !== "fa" : guessNonPersian(a.title))
+        && a.title && !triedTitlesRef.current.has(a.title))
+      .slice(0, 120);
+    if (pending.length === 0) return;
+    const titles = Array.from(new Set(pending.map(a => a.title)));
+    titles.forEach(t => triedTitlesRef.current.add(t));
+    let cancelled = false;
+    (async () => {
+      try {
+        const map: Record<string, string> = {};
+        for (let i = 0; i < titles.length; i += 30) {
+          const chunk = titles.slice(i, i + 30);
+          const out = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+          chunk.forEach((t, j) => { if (out[j] && out[j].trim()) map[t] = out[j].trim(); });
+        }
+        if (cancelled || Object.keys(map).length === 0) return;
+        setItems(prev => prev.map(a => (
+          !a.titleTranslated && map[a.title]
+            ? { ...a, titleOriginal: a.title, title: map[a.title], titleTranslated: true }
+            : a
+        )));
+      } catch (e) {
+        console.log("headline translation failed:", e);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [items]);
+
+  // Live health-check the whole feed directory and remove dead feeds, looping in
+  // bounded batches until the sweep completes, then reload.
+  const [pruning, setPruning] = useState(false);
+  const pruneFeeds = useCallback(async () => {
+    if (pruning) return;
+    setPruning(true);
+    let removed = 0;
+    try {
+      for (let i = 0; i < 30; i++) {
+        const r = await api.pruneFeeds(60);
+        removed += r.removed;
+        if (r.remaining <= 0) break;
+      }
+      const s = await api.feedStatus().catch(() => ({}));
+      setFeedStatus(s as any);
+      await loadAll();
+      setError(removed > 0 ? `بررسی سلامت انجام شد — ${removed} خوراک خراب حذف شد.` : "بررسی سلامت انجام شد — همهٔ خوراک‌ها سالم‌اند.");
+    } catch (e) {
+      console.log("prune feeds failed:", e);
+      setError("بررسی سلامت خوراک‌ها ناموفق بود.");
+    } finally {
+      setPruning(false);
+    }
+  }, [pruning, loadAll]);
 
   const semIndex = useMemo(() => buildIndex(items), [items]);
 
@@ -946,6 +1045,8 @@ export default function App() {
         feedStatus={feedStatus}
         onOpenOpml={() => setOpmlOpen(true)}
         onRemoveFeed={removeFeed}
+        onPruneFeeds={pruneFeeds}
+        pruning={pruning}
         onOpenHelp={() => setHelpOpen(true)}
         onOpenRules={() => setRulesOpen(true)}
         onOpenStats={() => { setShowStats(true); setShowDigest(false); }}
@@ -1043,7 +1144,7 @@ export default function App() {
           loading={loading}
         />
       </div>
-      <div className={`${showArticleView ? 'flex fixed md:relative inset-0 md:inset-auto z-20 md:z-auto bg-white dark:bg-slate-950' : 'hidden md:flex'} flex-1 min-w-0`}>
+      <div className={`${showArticleView ? 'flex fixed md:relative inset-0 md:inset-auto z-20 md:z-auto bg-white dark:bg-slate-950' : 'hidden md:flex'} flex-1 min-w-0 p-[0px] m-[0px]`}>
         <ArticleView article={selected} onClose={() => setSelectedId(null)} toggleStar={toggleStar} toggleSave={toggleSave} isSaved={selected ? savedIds.has(selected.id) : false} onTagsChange={setArticleTags} related={related} duplicates={duplicates} onSelectRelated={handleSelect} onOpenTimeline={(topic) => { setTimelineTopic(topic); setTimelineOpen(true); }} />
       </div>
       </>

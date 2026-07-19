@@ -45,6 +45,7 @@ export type RemoteArticle = {
   starred: boolean;
   readTime: string;
   tags?: string[];
+  lang?: string; // "fa" | "ar" | "other" — server-detected; "other" → translate to Persian
 };
 
 export const api = {
@@ -79,6 +80,10 @@ export const api = {
     req("/tags", { method: "POST", body: JSON.stringify({ id, tags }) }),
   listTags: () => req("/tags").then(r => r.tags as Record<string, string[]>),
   feedStatus: () => req("/feeds/status").then(r => r.status as Record<string, { ok: boolean; error?: string; lastOk?: number; lastFail?: number }>),
+  /** Live health-check a bounded batch of feeds and remove dead ones. Returns `remaining` for looping. */
+  pruneFeeds: (limit = 60) =>
+    req(`/feeds/prune?limit=${limit}`, { method: "POST", body: "{}" })
+      .then(r => r as { ok: boolean; checked: number; removed: number; removedList: { id: string; name: string; url: string; error: string }[]; total: number; remaining: number }),
   importOpml: (xml: string) => req("/opml", { method: "POST", body: JSON.stringify({ xml }) }),
   listRules: () => req("/rules").then(r => r.rules as TagRule[]),
   saveRule: (rule: Partial<TagRule>) => req("/rules", { method: "POST", body: JSON.stringify(rule) }).then(r => r.rules as TagRule[]),

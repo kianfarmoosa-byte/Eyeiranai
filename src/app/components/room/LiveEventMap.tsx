@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Globe2, Search, Layers, Play, Pause, History } from "lucide-react";
 import { GdeltGeoMap } from "../GdeltGeoMap";
 import { GDELT_PRESET_THEMES, type GdeltDocQuery } from "../../gdelt";
+import { Input } from "../ui/input";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select";
 
 // ── ۳.۲ نقشهٔ رویداد زنده (Live Event Map) ──
 // نقشهٔ جغرافیایی رویدادها بر پایهٔ GDELT با:
@@ -47,7 +49,9 @@ const SPANS: { id: string; label: string }[] = [
 
 // فریم‌های پخش زمانی: پنجرهٔ زمانی به‌تدریج تا ۲۴ ساعت باز می‌شود.
 const LAPSE_FRAMES = ["1h", "3h", "6h", "12h", "24h"];
-const LAPSE_MS = 1800;
+// مکث نمایشِ هر فریم پس از کامل‌شدن واکشی آن (نه فاصلهٔ واکشی‌ها). چون فریم بعد
+// تنها پس از اتمام واکشی فریم فعلی آغاز می‌شود، هیچ درخواستی لغو نمی‌شود.
+const LAPSE_MS = 1500;
 
 export function LiveEventMap({ initialQuery = "ایران", big }: Props) {
   const [q, setQ] = useState(initialQuery);
@@ -70,24 +74,48 @@ export function LiveEventMap({ initialQuery = "ایران", big }: Props) {
     setTheme(l && l.themes.length ? l.themes[0] : "");
   }
 
-  // پخش زمانی: پنجره را فریم‌به‌فریم جلو می‌برد.
-  useEffect(() => {
+  // پخش زمانی به‌صورت «زنجیره‌ای بر پایهٔ اتمام واکشی» است: هر فریم فقط پس از
+  // کامل‌شدن واکشیِ فریم قبلی جلو می‌رود، پس هیچ درخواستی نیمه‌کاره لغو نمی‌شود
+  // (که علت پیام «connection closed before message completed» روی سرور بود).
+  const advanceTimer = useRef<number | null>(null);
+  const fallbackTimer = useRef<number | null>(null);
+
+  const clearTimers = () => {
+    if (advanceTimer.current) { window.clearTimeout(advanceTimer.current); advanceTimer.current = null; }
+    if (fallbackTimer.current) { window.clearTimeout(fallbackTimer.current); fallbackTimer.current = null; }
+  };
+
+  const advanceFrame = () => {
+    clearTimers();
+    setFrame(f => {
+      const next = f + 1;
+      if (next >= LAPSE_FRAMES.length) { setPlaying(false); return LAPSE_FRAMES.length - 1; }
+      return next;
+    });
+  };
+
+  // با اتمام واکشی نقشه، اگر در حال پخش هستیم، پس از مکث کوتاهِ نمایش به فریم بعد برو.
+  function handleMapLoaded() {
     if (!playing) return;
-    const t = setInterval(() => {
-      setFrame(f => {
-        const next = f + 1;
-        if (next >= LAPSE_FRAMES.length) { setPlaying(false); return LAPSE_FRAMES.length - 1; }
-        return next;
-      });
-    }, LAPSE_MS);
-    return () => clearInterval(t);
-  }, [playing]);
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    advanceTimer.current = window.setTimeout(advanceFrame, LAPSE_MS);
+  }
+
+  // ایمنی: اگر به هر دلیل رویداد اتمام واکشی نرسید، پخش قفل نشود.
+  useEffect(() => {
+    if (!playing) { clearTimers(); return; }
+    if (fallbackTimer.current) window.clearTimeout(fallbackTimer.current);
+    fallbackTimer.current = window.setTimeout(advanceFrame, LAPSE_MS + 12000);
+    return clearTimers;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playing, frame]);
 
   // فریم فعال پخش، پنجرهٔ زمانی مؤثر را تعیین می‌کند.
   const effectiveSpan = playing ? LAPSE_FRAMES[frame] : timespan;
 
   function toggleLapse() {
     if (playing) {
+      clearTimers();
       setPlaying(false);
       setTimespan(savedSpan.current);
     } else {
@@ -117,9 +145,9 @@ export function LiveEventMap({ initialQuery = "ایران", big }: Props) {
         {!big && (
           <div className="relative mr-2">
             <Search className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
-            <input value={draft} onChange={e => setDraft(e.target.value)} onKeyDown={e => e.key === "Enter" && setQ(draft.trim())}
+            <Input value={draft} onChange={e => setDraft(e.target.value)} onKeyDown={e => e.key === "Enter" && setQ(draft.trim())}
               placeholder="موضوع…"
-              className="w-40 bg-slate-100 dark:bg-slate-800 rounded-lg pr-7 pl-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+              className="w-40 h-8 pr-7 pl-2 text-xs" />
           </div>
         )}
 
@@ -164,15 +192,19 @@ export function LiveEventMap({ initialQuery = "ایران", big }: Props) {
 
         {/* زیرموضوع لایهٔ فعال */}
         {!big && layer.themes.length > 0 && (
-          <select value={theme} onChange={e => setTheme(e.target.value)}
-            className="mr-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-2 py-1 text-xs">
-            {layer.themes.map(code => <option key={code} value={code}>{themeLabel(code)}</option>)}
-          </select>
+          <Select value={theme} onValueChange={setTheme}>
+            <SelectTrigger size="sm" className="mr-1 w-[11rem] text-xs">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {layer.themes.map(code => <SelectItem key={code} value={code}>{themeLabel(code)}</SelectItem>)}
+            </SelectContent>
+          </Select>
         )}
       </div>
 
       <div className="flex-1 min-h-0">
-        <GdeltGeoMap query={query} />
+        <GdeltGeoMap query={query} onLoaded={handleMapLoaded} />
       </div>
     </div>
   );

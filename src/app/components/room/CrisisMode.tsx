@@ -9,6 +9,7 @@ import {
   type CrisisState,
 } from "./roomStore";
 import { articleMs, tokensOf } from "./roomUtils";
+import { Input } from "../ui/input";
 
 // ── ۳.۸ حالت بحران (Crisis Mode) ──
 // فعال‌سازی یک‌کلیکی، خط زمانی زندهٔ بحران، شمارندهٔ زمان سپری‌شده،
@@ -134,9 +135,9 @@ export function CrisisMode({ articles, onSelectArticle, onSendToNewspack, onClos
             چک‌لیست پروتکل پاسخ و گزارش پس از بحران.
           </p>
           <div className="flex items-center gap-2">
-            <input value={newTopic} onChange={e => setNewTopic(e.target.value)} onKeyDown={e => e.key === "Enter" && activate()}
+            <Input value={newTopic} onChange={e => setNewTopic(e.target.value)} onKeyDown={e => e.key === "Enter" && activate()}
               placeholder="موضوع بحران را وارد کنید…"
-              className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500" />
+              className="flex-1 h-10 text-sm" />
             <button onClick={activate} disabled={!newTopic.trim()}
               className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-rose-600 text-white hover:bg-rose-700 disabled:opacity-50">
               <Siren className="w-4 h-4" /> فعال‌سازی
@@ -233,9 +234,9 @@ export function CrisisMode({ articles, onSelectArticle, onSendToNewspack, onClos
       {!fullscreen && (
         <div className="shrink-0 p-3 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2">
           <Plus className="w-4 h-4 text-slate-400" />
-          <input value={note} onChange={e => setNote(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()}
+          <Input value={note} onChange={e => setNote(e.target.value)} onKeyDown={e => e.key === "Enter" && addNote()}
             placeholder="ثبت اقدام یا یادداشت در خط زمانی بحران…"
-            className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500" />
+            className="flex-1 text-sm" />
           <button onClick={addNote} disabled={!note.trim()}
             className="px-3 py-2 rounded-lg bg-rose-600 text-white text-sm hover:bg-rose-700 disabled:opacity-50">ثبت</button>
         </div>

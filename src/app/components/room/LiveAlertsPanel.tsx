@@ -10,6 +10,8 @@ import {
   RESPONSE_FLOW, uid,
   type RoomAlert, type KeywordWatch, type AlertSeverity, type ResponseStatus,
 } from "./roomStore";
+import { Input } from "../ui/input";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select";
 
 // ── ۳.۴ پنل هشدارهای زنده و مدیریت واکنش (Live Alerts) ──
 // سطح‌بندی شدت، تولید خودکار هشدار از دیده‌بان کلیدواژه و رادار موج،
@@ -165,15 +167,19 @@ export function LiveAlertsPanel({ articles, operator, soundOn, onToggleSound, on
       {showWatches && (
         <div className="shrink-0 p-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 space-y-2">
           <div className="flex items-center gap-1.5">
-            <input value={newTerm} onChange={e => setNewTerm(e.target.value)} onKeyDown={e => e.key === "Enter" && addWatch()}
+            <Input value={newTerm} onChange={e => setNewTerm(e.target.value)} onKeyDown={e => e.key === "Enter" && addWatch()}
               placeholder="کلیدواژهٔ دیده‌بانی…"
-              className="flex-1 bg-white dark:bg-slate-900 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-            <select value={newSev} onChange={e => setNewSev(e.target.value as AlertSeverity)}
-              className="bg-white dark:bg-slate-900 rounded-lg px-2 py-1.5 text-xs">
-              <option value="urgent">فوری</option>
-              <option value="important">مهم</option>
-              <option value="normal">عادی</option>
-            </select>
+              className="flex-1 h-8 px-2 text-xs" />
+            <Select value={newSev} onValueChange={v => setNewSev(v as AlertSeverity)}>
+              <SelectTrigger size="sm" className="w-[5.5rem] text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="urgent">فوری</SelectItem>
+                <SelectItem value="important">مهم</SelectItem>
+                <SelectItem value="normal">عادی</SelectItem>
+              </SelectContent>
+            </Select>
             <button onClick={addWatch} className="p-1.5 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700"><Plus className="w-3.5 h-3.5" /></button>
           </div>
           <div className="flex flex-wrap gap-1.5">

@@ -107,7 +107,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
 
   if (!article) {
     return (
-      <aside className="w-[480px] bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-500">مقاله‌ای برای نمایش انتخاب کنید</aside>
+      <aside className="flex-1 min-w-0 bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex items-center justify-center text-slate-500">مقاله‌ای برای نمایش انتخاب کنید</aside>
     );
   }
 
@@ -155,7 +155,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto relative">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto relative m-[0px] p-[0px]">
         {hl && (
           <button onClick={quickHighlight}
             style={{ left: Math.max(60, Math.min(hl.x, 380)), top: Math.max(8, hl.y) }}
@@ -182,7 +182,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
             </div>
           </div>
         )}
-        <article className="p-6 max-w-2xl mx-auto">
+        <article className="max-w-none w-full px-6 py-[23px] m-[0px]">
           <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
             <span className="text-lg">{article.sourceIcon}</span>
             {onOpenTimeline ? (

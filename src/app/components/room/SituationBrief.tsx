@@ -6,6 +6,7 @@ import { studioUserId } from "../mobile/studio/studio";
 import { scoreArticle, sentimentLabelFa } from "../../sentiment";
 import { faNum, jalaali } from "../mobile/utils/fa";
 import { articleMs, detectWaves } from "./roomUtils";
+import { Input } from "../ui/input";
 
 // ── ۳.۷ خلاصه‌ساز موقعیت با AI (Situation Brief) ──
 // «وضعیت اکنون چیست؟»، بریف‌های زمان‌بندی‌شده، پرسش‌وپاسخ آزاد و ارسال یک‌کلیکی
@@ -166,9 +167,9 @@ export function SituationBrief({ articles, onSendToNewspack, big }: Props) {
       <div className="p-3 border-t border-slate-200 dark:border-slate-800 shrink-0">
         <div className="flex items-center gap-2">
           <MessageCircle className="w-4 h-4 text-slate-400 shrink-0" />
-          <input value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === "Enter" && ask()}
+          <Input value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => e.key === "Enter" && ask()}
             placeholder="پرسش آزاد دربارهٔ وضعیت جاری…"
-            className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500" />
+            className="flex-1 text-sm" />
           <button onClick={ask} disabled={asking || !q.trim()}
             className="p-2 rounded-lg bg-violet-600 text-white hover:bg-violet-700 disabled:opacity-50">
             <Send className="w-4 h-4" />

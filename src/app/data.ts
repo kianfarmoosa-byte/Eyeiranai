@@ -15,6 +15,9 @@ export type Article = {
   category: string;
   tags?: string[];
   link?: string;
+  lang?: string;            // "fa" | "ar" | "other" (server-detected)
+  titleOriginal?: string;   // original headline before Persian translation
+  titleTranslated?: boolean; // true when `title` was AI-translated to Persian
 };
 
 export const feeds = [

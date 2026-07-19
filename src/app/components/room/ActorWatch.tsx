@@ -5,6 +5,7 @@ import { scoreArticle } from "../../sentiment";
 import { timeAgoFa, faNum } from "../mobile/utils/fa";
 import { articleMs, articlesOfActor, missedTopics } from "./roomUtils";
 import { getActors, setActors } from "./roomStore";
+import { Input } from "../ui/input";
 
 // ── ۳.۶ نمای رقبا و بازیگران (Actor Watch) ──
 // ستون اختصاصی برای هر رقیب/بازیگر زیرِ رصد + هشدار «سوژهٔ ازدست‌رفته».
@@ -48,9 +49,9 @@ export function ActorWatch({ articles, mySources = [], onSelect, big }: Props) {
         <h3 className={big ? "text-lg" : "text-sm"}>نمای رقبا و بازیگران</h3>
         {!big && (
           <div className="mr-auto flex items-center gap-1">
-            <input value={newActor} onChange={e => setNewActor(e.target.value)} onKeyDown={e => e.key === "Enter" && addActor()}
+            <Input value={newActor} onChange={e => setNewActor(e.target.value)} onKeyDown={e => e.key === "Enter" && addActor()}
               placeholder="نام منبع/رقیب…"
-              className="w-36 bg-slate-100 dark:bg-slate-800 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500" />
+              className="w-36 h-8 px-2 text-xs" />
             <button onClick={addActor} className="p-1.5 rounded-lg bg-sky-600 text-white hover:bg-sky-700"><Plus className="w-3.5 h-3.5" /></button>
           </div>
         )}

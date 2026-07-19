@@ -14,6 +14,7 @@ import { CollaborativeWatch } from "./CollaborativeWatch";
 import { LiveEventMap } from "./LiveEventMap";
 import { CrisisMode } from "./CrisisMode";
 import { getOperator, getPins, setPins as persistPins, getCrisis, setCrisis, defaultProtocol, uid } from "./roomStore";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../ui/select";
 
 // ── اتاق رصد رسانه‌ای — پوستهٔ اصلی با سه حالت نمایش ──
 //   • میز کار (Operator): چند-پنلی، تعامل کامل
@@ -134,10 +135,14 @@ export function MonitoringRoom({ articles, loading, lastUpdated, onRefresh, onSe
   };
 
   const panelSelect = (value: OpPanel, onChange: (p: OpPanel) => void) => (
-    <select value={value} onChange={e => onChange(e.target.value as OpPanel)}
-      className="bg-slate-100 dark:bg-slate-800 rounded-lg px-2 py-1 text-xs">
-      {OP_PANELS.map(p => <option key={p.id} value={p.id}>{p.label}</option>)}
-    </select>
+    <Select value={value} onValueChange={v => onChange(v as OpPanel)}>
+      <SelectTrigger size="sm" className="w-[9rem] text-xs">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {OP_PANELS.map(p => <SelectItem key={p.id} value={p.id}>{p.label}</SelectItem>)}
+      </SelectContent>
+    </Select>
   );
 
   return (
