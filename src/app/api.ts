@@ -19,7 +19,7 @@ async function req(path: string, options: RequestInit = {}) {
   return res.json();
 }
 
-export type RemoteFeed = { id: string; url: string; name: string; icon: string };
+export type RemoteFeed = { id: string; url: string; name: string; icon: string; category?: string };
 
 export type TagRule = {
   id: string;
@@ -73,6 +73,9 @@ export const api = {
     const qs = p.toString();
     return req(`/articles${qs ? `?${qs}` : ""}`).then(r => r as { articles: RemoteArticle[]; total: number; fetched: number });
   },
+  /** Fetch the full readable text of an article from its source URL (server-side extraction + cache). */
+  extractArticle: (url: string) =>
+    req(`/article/extract?url=${encodeURIComponent(url)}`).then(r => r as { title: string; content: string; image?: string }),
   markRead: (id: string) => req("/state/read", { method: "POST", body: JSON.stringify({ id }) }),
   setStar: (id: string, starred: boolean) =>
     req("/state/star", { method: "POST", body: JSON.stringify({ id, starred }) }),
@@ -266,6 +269,22 @@ export const api = {
   automationTickUrl: `${BASE}/automation/tick`,
   automationAuthHeader: `Bearer ${publicAnonKey}`,
 
+  // ── Page Change Monitoring (رصد تغییرات صفحه) ──
+  watchList: () =>
+    req("/watch").then(r => r.items as PageWatch[]),
+  watchAdd: (payload: { url: string; label?: string; selector?: string; intervalMin?: number }) =>
+    req("/watch", { method: "POST", body: JSON.stringify(payload) })
+      .then(r => r as { watch: PageWatch; state: PageWatchState | null }),
+  watchUpdate: (id: string, payload: { label?: string; selector?: string; active?: boolean; intervalMin?: number }) =>
+    req(`/watch/${id}`, { method: "PATCH", body: JSON.stringify(payload) }).then(r => r.watch as PageWatch),
+  watchDelete: (id: string) =>
+    req(`/watch/${id}`, { method: "DELETE" }),
+  watchCheck: (id: string, userId?: string) =>
+    req(`/watch/${id}/check${userId ? `?userId=${encodeURIComponent(userId)}` : ""}`, { method: "POST", body: "{}" })
+      .then(r => r as { watch: PageWatch; state: PageWatchState }),
+  watchClear: (id: string) =>
+    req(`/watch/${id}/clear`, { method: "POST", body: "{}" }),
+
   // ── Social Listening (رصد اجتماعی) ──
   socialGetTopics: () =>
     req("/social/topics").then(r => r.topics as WatchTopic[]),
@@ -294,6 +313,34 @@ export const api = {
   socialScan: () =>
     req("/social/scan", { method: "POST" })
       .then(r => r as { ok: boolean; topics: number; alerts: number; errors: number }),
+};
+
+// ── Page Change Monitoring types ──
+export type PageWatchChange = {
+  ts: number;
+  oldHash: string;
+  newHash: string;
+  diff: string;
+  summary?: string;
+};
+export type PageWatchState = {
+  hash: string;
+  snapshot: string;
+  checkedAt: number;
+  lastChangedAt: number;
+  changes: PageWatchChange[];
+  error?: string;
+};
+export type PageWatch = {
+  id: string;
+  url: string;
+  label: string;
+  selector?: string;
+  active: boolean;
+  intervalMin: number;
+  createdAt: number;
+  updatedAt: number;
+  state?: PageWatchState | null;
 };
 
 export type WatchSource = { url: string; name: string; kind: string; icon?: string };

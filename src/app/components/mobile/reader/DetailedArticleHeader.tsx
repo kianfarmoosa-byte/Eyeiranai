@@ -2,7 +2,7 @@ import { BadgeCheck, Clock, Eye, Megaphone, RefreshCw, Zap } from "lucide-react"
 import type { Article } from "../../../data";
 import { faNum, timeAgoFa } from "../utils/fa";
 
-type Props = { article: Article };
+type Props = { article: Article; titleOverride?: string };
 
 const VERIFIED_SOURCES = new Set([
   "بی‌بی‌سی فارسی", "روزنامه شرق", "همشهری آنلاین", "زومیت", "دیجیاتو", "ایسنا", "ایرنا",
@@ -14,9 +14,9 @@ const BREAKING_HINTS = ["فوری", "لحظه‌به‌لحظه", "همین‌ا
  * Rich article header — source with verified check, byline avatar, publish/update times,
  * read-time, view-count estimate, and contextual badges (Breaking / Sponsored / Updated).
  */
-export function DetailedArticleHeader({ article }: Props) {
+export function DetailedArticleHeader({ article, titleOverride }: Props) {
   const verified = VERIFIED_SOURCES.has(article.source);
-  const title = article.title || "";
+  const title = titleOverride || article.title || "";
   const isSponsored = SPONSORED_HINTS.some((w) => title.includes(w));
   const isBreaking = BREAKING_HINTS.some((w) => title.includes(w));
   const updatedAt =
@@ -71,7 +71,7 @@ export function DetailedArticleHeader({ article }: Props) {
       </div>
 
       {/* title */}
-      <h1 className="mt-3 text-[22px] leading-tight font-black tracking-tight">{article.title}</h1>
+      <h1 className="mt-3 text-[22px] leading-tight font-black tracking-tight">{title}</h1>
 
       {/* byline + meta */}
       <div className="mt-3 flex items-center gap-2.5">

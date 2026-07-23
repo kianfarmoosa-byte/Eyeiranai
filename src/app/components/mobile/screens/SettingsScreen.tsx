@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Minus, Plus, Sun, Moon, Monitor, Trash2, Download, Bell, Type, LayoutGrid, Palette, Check } from "lucide-react";
+import { Minus, Plus, Sun, Moon, Monitor, Trash2, Download, Bell, Type, LayoutGrid, Palette, Check, Languages, CopyMinus } from "lucide-react";
 import { MobileScreen } from "../shell/MobileScreen";
 import { MobileTopBar } from "../shell/MobileTopBar";
 import { useHaptics } from "../hooks";
@@ -7,6 +7,7 @@ import { useToast } from "../primitives/Toast";
 import { DEFAULT_READER_SETTINGS, type ReaderSettings } from "../sheets/ReaderSettingsSheet";
 import { ACCENTS, loadAccentId, saveAccentId, applyAccent } from "../utils/accent";
 import { toFa } from "../utils/fa";
+import { getAutoTranslate, setAutoTranslate, getDedupe, setDedupe } from "../../../translationCache";
 
 const RS_KEY = "kian.mobile.readerSettings";
 
@@ -23,8 +24,24 @@ export function SettingsScreen({ onClose, onToggleTheme, themeMode = "auto", onO
     catch { return DEFAULT_READER_SETTINGS; }
   });
   const [accentId, setAccentId] = useState<string>(() => loadAccentId());
+  const [autoTr, setAutoTr] = useState<boolean>(() => getAutoTranslate());
+  const [dedupe, setDedupeState] = useState<boolean>(() => getDedupe());
   const haptic = useHaptics();
   const toast = useToast();
+
+  const toggleAutoTr = () => {
+    haptic("select");
+    const next = !autoTr;
+    setAutoTr(next);
+    setAutoTranslate(next);
+  };
+
+  const toggleDedupe = () => {
+    haptic("select");
+    const next = !dedupe;
+    setDedupeState(next);
+    setDedupe(next);
+  };
 
   const pickAccent = (id: string) => {
     haptic("select");
@@ -116,6 +133,23 @@ export function SettingsScreen({ onClose, onToggleTheme, themeMode = "auto", onO
           </div>
         </Section>
 
+        <Section title="زبان و ترجمه">
+          <ToggleRow
+            icon={<Languages className="size-4" />}
+            label="ترجمهٔ خودکار تیترها"
+            hint="نمایش خودکار همهٔ تیترهای غیرفارسی به فارسی"
+            on={autoTr}
+            onToggle={toggleAutoTr}
+          />
+          <ToggleRow
+            icon={<CopyMinus className="size-4" />}
+            label="حذف خودکار اخبار تکراری"
+            hint="ادغام تیترهای مشابه از منابع مختلف در یک مورد"
+            on={dedupe}
+            onToggle={toggleDedupe}
+          />
+        </Section>
+
         <Section title="اعلان‌ها و حافظه">
           <Row icon={<Bell className="size-4" />} label="اعلان‌های جدید" hint="به‌زودی" />
           <Row icon={<Download className="size-4" />} label="حافظه آفلاین" hint="فعال" />
@@ -161,6 +195,26 @@ function Row({ icon, label, hint, onClick, danger }: {
       {icon && <span className={`size-8 grid place-items-center rounded-full ${danger ? "bg-rose-500/10" : "bg-[var(--accent)] text-[var(--foreground-muted)]"}`}>{icon}</span>}
       <span className="flex-1 text-[14px]">{label}</span>
       {hint && <span className="text-[12px] text-[var(--foreground-subtle)]">{hint}</span>}
+    </button>
+  );
+}
+
+function ToggleRow({ icon, label, hint, on, onToggle }: {
+  icon?: React.ReactNode; label: string; hint?: string; on: boolean; onToggle: () => void;
+}) {
+  return (
+    <button onClick={onToggle} className="w-full tap press flex items-center gap-3 px-3.5 py-3 text-right">
+      {icon && <span className="size-8 grid place-items-center rounded-full bg-[var(--accent)] text-[var(--foreground-muted)]">{icon}</span>}
+      <span className="flex-1 min-w-0">
+        <span className="block text-[14px]">{label}</span>
+        {hint && <span className="block text-[11.5px] text-[var(--foreground-subtle)] mt-0.5 leading-snug">{hint}</span>}
+      </span>
+      <span
+        aria-hidden
+        className={`shrink-0 w-11 h-6 rounded-full p-0.5 transition-colors ${on ? "bg-[var(--brand-500)]" : "bg-[var(--border-subtle)]"}`}
+      >
+        <span className={`block size-5 rounded-full bg-white shadow transition-transform ${on ? "-translate-x-5" : "translate-x-0"}`} />
+      </span>
     </button>
   );
 }

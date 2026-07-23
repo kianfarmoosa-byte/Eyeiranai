@@ -2,11 +2,14 @@ import { Hono } from "npm:hono";
 import { cors } from "npm:hono/cors";
 import { logger } from "npm:hono/logger";
 import { XMLParser } from "npm:fast-xml-parser";
+import { parse as parseHtml } from "npm:node-html-parser";
+import { franc } from "npm:franc";
 import { createClient } from "npm:@supabase/supabase-js";
 import * as kv from "./kv_store.tsx";
 import { gdelt } from "./gdelt.tsx";
 import { social, runSocialScan } from "./social.tsx";
 import { newspack, runNewspackScheduled } from "./newspack.tsx";
+import { watch, runWatchScan } from "./watch.tsx";
 
 const app = new Hono();
 
@@ -83,16 +86,18 @@ app.get(`${BASE}/health`, (c) => c.json({ status: "ok" }));
 app.route(`${BASE}/gdelt`, gdelt);
 app.route(`${BASE}/social`, social);
 app.route(`${BASE}/newspack`, newspack);
+app.route(`${BASE}/watch`, watch);
 
 // ───────────────────────────── AI (LLM) ─────────────────────────────
 // Proxies AI requests to an OpenAI-compatible endpoint. Keys live only on the
 // server and never reach the frontend. Each user may supply their own key
-// (stored in KV under ai:config:{u}); otherwise the shared AI_API_KEY is used.
-const AI_BASE = "https://api.tokenrouter.com/v1";
-const AI_MODEL = "z-ai/glm-5.2-free";
+// (stored in KV under ai:config:{u}); otherwise the shared AINATIVE_API_KEY is used.
+// Default provider: AINative Studio (OpenAI-compatible chat completions).
+const AI_BASE = "https://api.ainative.studio/api/v1";
+const AI_MODEL = "deepseek-v4-flash";
 
-// Default server key: prefer the dedicated TokenRouter key, fall back to AI_API_KEY.
-const defaultAiKey = () => Deno.env.get("TOKENROUTER_API_KEY") || Deno.env.get("AI_API_KEY") || "";
+// Default server key: AINative Studio only.
+const defaultAiKey = () => Deno.env.get("AINATIVE_API_KEY") || "";
 
 const aiConfigKey = (u: string) => `ai:config:${u}`;
 
@@ -355,19 +360,133 @@ app.post(`${BASE}/ai/digest`, async (c) => {
   }
 });
 
+// ───────────────────── FREE MACHINE TRANSLATION ─────────────────────
+// Key-free, unlimited translation engine used for on-demand translation of
+// non-Persian news (titles + full content). Primary: Google's public endpoint;
+// fallback: Lingva (a Google proxy). Results are cached permanently in KV so a
+// repeated title/article is returned instantly and for free. The token-based AI
+// is only used as a last resort if every free engine fails.
+
+function simpleHash(s: string): string {
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  return (h >>> 0).toString(36);
+}
+
+async function googleFree(text: string, to: string): Promise<string> {
+  const url =
+    `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${encodeURIComponent(to)}&dt=t&q=${encodeURIComponent(text)}`;
+  const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" }, signal: AbortSignal.timeout(12000) });
+  if (!r.ok) throw new Error(`google ${r.status}`);
+  const data = await r.json();
+  const segs = Array.isArray(data?.[0]) ? data[0] : [];
+  const out = segs.map((seg: any) => (Array.isArray(seg) ? String(seg[0] || "") : "")).join("");
+  if (!out.trim()) throw new Error("google empty");
+  return out;
+}
+
+async function lingvaFree(text: string, to: string): Promise<string> {
+  const bases = ["https://lingva.ml", "https://translate.plausibility.cloud"];
+  for (const base of bases) {
+    try {
+      const r = await fetch(`${base}/api/v1/auto/${encodeURIComponent(to)}/${encodeURIComponent(text)}`, {
+        signal: AbortSignal.timeout(12000),
+      });
+      if (!r.ok) continue;
+      const data = await r.json();
+      const t = String(data?.translation || "");
+      if (t.trim()) return t;
+    } catch { /* try next mirror */ }
+  }
+  throw new Error("lingva failed");
+}
+
+// Translate arbitrarily long text by splitting on sentence boundaries (~4500
+// chars per request, the safe limit for the public endpoint).
+async function freeTranslate(text: string, to = "fa"): Promise<string> {
+  const src = String(text || "");
+  if (!src.trim()) return "";
+  const CHUNK = 4500;
+  const chunks: string[] = [];
+  if (src.length <= CHUNK) {
+    chunks.push(src);
+  } else {
+    let buf = "";
+    for (const part of src.split(/(?<=[.!?؟\n])\s+/)) {
+      if ((buf + " " + part).length > CHUNK && buf) { chunks.push(buf); buf = part; }
+      else buf = buf ? buf + " " + part : part;
+    }
+    if (buf) chunks.push(buf);
+  }
+  const out: string[] = [];
+  for (const ch of chunks) {
+    let done = "";
+    try { done = await googleFree(ch, to); }
+    catch (e1) {
+      try { done = await lingvaFree(ch, to); }
+      catch (e2) { console.log("free translate chunk failed:", String(e1), String(e2)); throw e2; }
+    }
+    out.push(done);
+  }
+  return out.join(" ");
+}
+
+// Cache-first translate: KV cache → free engine → AI fallback. Always caches.
+async function cachedTranslate(text: string, to: string, userId?: string): Promise<string> {
+  const src = String(text || "");
+  if (!src.trim()) return src;
+  const key = `tr2:${to}:${src.length}:${simpleHash(src)}`;
+  try {
+    const cached = await kv.get(key);
+    if (typeof cached === "string" && cached) return cached;
+  } catch { /* ignore cache read errors */ }
+
+  let tr = "";
+  try {
+    tr = await freeTranslate(src, to);
+  } catch {
+    // Last resort: token-based AI (only when every free engine failed).
+    try {
+      const target = to === "fa" ? "فارسی" : "انگلیسی";
+      tr = await aiChat(
+        [
+          { role: "system", content: `تو یک مترجم حرفه‌ای هستی. متن ورودی را به ${target} ترجمه کن و فقط متن ترجمه‌شده را با حفظ پاراگراف‌بندی برگردان.` },
+          { role: "user", content: clampText(src, 8000) },
+        ],
+        { maxTokens: 2000, temperature: 0.2, userId },
+      );
+    } catch (e) { console.log("translate AI fallback failed:", String(e)); tr = ""; }
+  }
+
+  if (tr && tr.trim()) {
+    try { await kv.set(key, tr); } catch { /* ignore cache write errors */ }
+    return tr;
+  }
+  return src; // give back the original rather than an empty string
+}
+
+// Run async tasks with a bounded concurrency pool.
+async function mapPool<T, R>(items: T[], limit: number, fn: (item: T, i: number) => Promise<R>): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let next = 0;
+  const workers = new Array(Math.min(limit, items.length)).fill(0).map(async () => {
+    while (true) {
+      const i = next++;
+      if (i >= items.length) break;
+      results[i] = await fn(items[i], i);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
+
 app.post(`${BASE}/ai/translate`, async (c) => {
   try {
-    const { text = "", to = "en" } = await c.req.json();
-    const src = clampText(String(text || ""), 8000);
+    const { text = "", to = "fa" } = await c.req.json();
+    const src = clampText(String(text || ""), 20000);
     if (!src.trim()) return c.json({ text: "" });
-    const target = to === "fa" ? "فارسی" : "انگلیسی";
-    const sys =
-      `تو یک مترجم حرفه‌ای هستی. متن ورودی را به ${target} ترجمه کن. ` +
-      "فقط متن ترجمه‌شده را برگردان، بدون توضیح، بدون نقل‌قول اضافه و با حفظ پاراگراف‌بندی.";
-    const translated = await aiChat(
-      [{ role: "system", content: sys }, { role: "user", content: src }],
-      { maxTokens: 2000, temperature: 0.2, userId: studioUser(c) },
-    );
+    const target = to === "en" ? "en" : "fa";
+    const translated = await cachedTranslate(src, target, studioUser(c));
     return c.json({ text: translated });
   } catch (e) {
     console.log("ai/translate error:", String(e));
@@ -387,42 +506,16 @@ function extractJsonArray(text: string): any[] {
   return Array.isArray(parsed) ? parsed : [];
 }
 
-// Batch-translate many short strings (e.g. headlines) in one call, cached per text.
+// Batch-translate many short strings (e.g. headlines). Each item goes through
+// the free engine + KV cache (cachedTranslate), run with bounded concurrency.
 app.post(`${BASE}/ai/translate-batch`, async (c) => {
   try {
     const { texts = [], to = "fa" } = await c.req.json();
-    const arr = (Array.isArray(texts) ? texts : []).map((t) => String(t || "")).slice(0, 40);
+    const arr = (Array.isArray(texts) ? texts : []).map((t) => String(t || "")).slice(0, 50);
     if (arr.length === 0) return c.json({ texts: [] });
     const target = to === "en" ? "en" : "fa";
-    const cacheKey = (s: string) => `tr:${target}:${s.slice(0, 180)}`;
-
-    const results: string[] = new Array(arr.length).fill("");
-    const todo: string[] = [];
-    const idxMap: number[] = [];
-    for (let i = 0; i < arr.length; i++) {
-      if (!arr[i].trim()) { results[i] = arr[i]; continue; }
-      const cached = await kv.get(cacheKey(arr[i]));
-      if (typeof cached === "string" && cached) results[i] = cached;
-      else { todo.push(arr[i]); idxMap.push(i); }
-    }
-
-    if (todo.length > 0) {
-      const lang = target === "fa" ? "Persian (Farsi)" : "English";
-      const sys =
-        `You are a professional news translator. Translate each item of the input JSON array to ${lang}. ` +
-        `Keep it natural and concise (headline style). Respond ONLY with a JSON array of strings of the SAME length and order. No prose, no code fences.`;
-      const reply = await aiChat(
-        [{ role: "system", content: sys }, { role: "user", content: JSON.stringify(todo) }],
-        { maxTokens: 1800, temperature: 0.2, userId: studioUser(c) },
-      );
-      let parsedArr: any[] = [];
-      try { parsedArr = extractJsonArray(reply); } catch (e) { console.log("translate-batch parse failed:", String(e)); }
-      for (let j = 0; j < todo.length; j++) {
-        const tr = String(parsedArr[j] ?? "").trim() || todo[j];
-        results[idxMap[j]] = tr;
-        try { await kv.set(cacheKey(todo[j]), tr); } catch { /* ignore cache errors */ }
-      }
-    }
+    const uid = studioUser(c);
+    const results = await mapPool(arr, 6, (t) => (t.trim() ? cachedTranslate(t, target, uid) : Promise.resolve(t)));
     return c.json({ texts: results });
   } catch (e) {
     console.log("ai/translate-batch error:", String(e));
@@ -1815,6 +1908,14 @@ app.post(`${BASE}/automation/tick`, async (c) => {
       console.log("newspack scheduled (tick) error:", String(e));
     }
 
+    // 3.6) Page change monitoring — check watched URLs whose interval elapsed.
+    let watchScan = { checked: 0, changed: 0, errors: 0 };
+    try {
+      watchScan = await runWatchScan(now);
+    } catch (e) {
+      console.log("watch scan (tick) error:", String(e));
+    }
+
     // Count what's still queued after this run for at-a-glance dashboards.
     const { retryPending, retryDead } = await countAllRetries();
 
@@ -1844,6 +1945,7 @@ app.post(`${BASE}/automation/tick`, async (c) => {
       retryDead,
       social: socialScan,
       newspack: newspackRun,
+      watch: watchScan,
       summary,
     });
   } catch (e) {
@@ -1940,10 +2042,27 @@ function getText(v: any): string {
   return String(v);
 }
 
-// Cheap, LLM-free language guess used to decide which headlines need Persian
-// translation. Persian and Arabic share the Arabic script, so we look for
-// Persian-specific letters to separate them; anything with mostly Latin/other
-// script is flagged "other" (→ will be translated to Persian on the client).
+// Persian text normalizer: unify Arabic/Persian letter variants, strip
+// diacritics and ZWNJ, collapse whitespace. Used before dedup/detection so the
+// same word written slightly differently is treated identically.
+function normalizeFa(s: string): string {
+  return String(s || "")
+    .replace(/[ً-ْٰٕٖٜٓ-ٟۖ-ۜ۟-ۤۧۨ-ۭ]/g, "") // Arabic diacritics/harakat
+    .replace(/‌/g, " ")                     // ZWNJ → space
+    .replace(/ي/g, "ی").replace(/ك/g, "ک")       // Arabic → Persian forms
+    .replace(/ۀ/g, "ه").replace(/ة/g, "ه")
+    .replace(/[أإآ]/g, "ا").replace(/ؤ/g, "و").replace(/ئ/g, "ی")
+    .replace(/[٠-٩]/g, d => String("٠١٢٣٤٥٦٧٨٩".indexOf(d)))   // Arabic-Indic digits
+    .replace(/[۰-۹]/g, d => String("۰۱۲۳۴۵۶۷۸۹".indexOf(d)))   // Persian digits
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// Language guess used to decide which headlines need Persian translation.
+// A fast script check handles the Arabic-script case (Persian vs Arabic share
+// the script; Persian-specific letters separate them), and `franc` provides an
+// accurate ISO-639-3 verdict for Latin/other scripts. Anything not Persian and
+// not clearly Arabic is flagged "other" (→ translated to Persian on the client).
 function detectLang(s: string): "fa" | "ar" | "other" {
   const t = String(s || "");
   if (!t.trim()) return "fa";
@@ -1953,7 +2072,15 @@ function detectLang(s: string): "fa" | "ar" | "other" {
   if (arabicScript >= latin && arabicScript > 0) {
     return persianSpecific.test(t) ? "fa" : "ar";
   }
-  return latin > 0 ? "other" : "fa";
+  if (latin === 0) return "fa";
+  // Latin/other script present — let franc disambiguate (needs enough text to
+  // be reliable; short strings fall back to the "other" heuristic).
+  try {
+    const code = franc(t, { minLength: 10 });
+    if (code === "pes" || code === "fas") return "fa";
+    if (code === "arb") return "ar";
+  } catch { /* franc unavailable — fall through */ }
+  return "other";
 }
 
 // Normalized content signature for cross-feed duplicate collapse. The same wire
@@ -1967,13 +2094,109 @@ function contentSig(title: string, link: string): string {
     .replace(/\/+$/, "")
     .toLowerCase();
   if (canonLink) return "l:" + canonLink;
-  const t = String(title || "")
-    .toLowerCase()
-    .replace(/[ً-ْ]/g, "")   // strip Arabic diacritics
-    .replace(/ی/g, "ي").replace(/ک/g, "ك")
+  const t = normalizeFa(String(title || "").toLowerCase())
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
   return "t:" + t.slice(0, 90);
+}
+
+// Readability-lite: fetch an article page and extract the main body text.
+// Used by the "full article" view when the RSS feed only provided a short
+// summary (common for international feeds). Result is cached in KV.
+function extractReadable(html: string): { title: string; text: string; image?: string } {
+  const src = String(html || "");
+  let root: ReturnType<typeof parseHtml>;
+  try {
+    root = parseHtml(src, {
+      comment: false,
+      blockTextElements: { script: false, noscript: false, style: false, pre: true },
+    });
+  } catch {
+    // Parser failure — fall back to the old regex-lite path.
+    return extractReadableFallback(src);
+  }
+
+  const metaContent = (sel: string) =>
+    root.querySelector(sel)?.getAttribute("content")?.trim() || "";
+  const title = metaContent('meta[property="og:title"]')
+    || root.querySelector("title")?.text?.trim()
+    || "";
+  const ogImg = metaContent('meta[property="og:image"]') || undefined;
+
+  // Remove non-content regions outright.
+  root.querySelectorAll(
+    "script,style,noscript,svg,form,nav,header,footer,aside,figure,figcaption,iframe,button,input"
+  ).forEach(n => n.remove());
+
+  // Score candidate containers by the amount of paragraph text they hold, then
+  // extract readable blocks from the winner (Readability-style, lightweight).
+  const candidates = root.querySelectorAll("article, main, [role=main], .article, .post, .content, #content, body");
+  let best: any = null;
+  let bestScore = 0;
+  for (const el of candidates) {
+    const paras = el.querySelectorAll("p");
+    let score = 0;
+    for (const p of paras) score += (p.text || "").trim().length;
+    if (score > bestScore) { bestScore = score; best = el; }
+  }
+  const scope = best || root;
+
+  const blocks: string[] = [];
+  for (const el of scope.querySelectorAll("p, h2, h3, li, blockquote")) {
+    const t = (el.text || "").replace(/\s+/g, " ").trim();
+    if (t && t.length >= 40) blocks.push(t);
+  }
+  let text = blocks.join("\n\n");
+  if (text.length < 200) {
+    text = (scope.text || "").replace(/\s+/g, " ").trim();
+  }
+  return { title, text, image: ogImg };
+}
+
+// Regex-based fallback for the rare case node-html-parser throws.
+function extractReadableFallback(html: string): { title: string; text: string; image?: string } {
+  let h = html;
+  h = h.replace(/<!--[\s\S]*?-->/g, "");
+  h = h.replace(/<(script|style|noscript|svg|form|nav|header|footer|aside|figure|figcaption|iframe)[\s\S]*?<\/\1>/gi, " ");
+  const titleMatch = h.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)
+    || h.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  const title = titleMatch ? stripHtml(titleMatch[1]) : "";
+  const ogImg = h.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1];
+  const article = h.match(/<article[\s\S]*?<\/article>/i)?.[0]
+    || h.match(/<body[\s\S]*?<\/body>/i)?.[0]
+    || h;
+  const blocks: string[] = [];
+  const re = /<(p|h2|h3|li|blockquote)[^>]*>([\s\S]*?)<\/\1>/gi;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(article)) !== null) {
+    const t = stripHtml(m[2]);
+    if (t && t.length >= 40) blocks.push(t);
+  }
+  let text = blocks.join("\n\n");
+  if (text.length < 200) text = stripHtml(article);
+  return { title, text, image: ogImg };
+}
+
+async function fetchAndExtractArticle(url: string): Promise<{ title: string; content: string; image?: string }> {
+  const cacheKey = `art_full:${simpleHash(url)}`;
+  try {
+    const cached = await kv.get(cacheKey);
+    if (cached && cached.content) return cached;
+  } catch { /* ignore cache read errors */ }
+  const r = await fetch(url, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (compatible; RSSReader/1.0)",
+      "Accept": "text/html,application/xhtml+xml",
+    },
+    signal: AbortSignal.timeout(12000),
+    redirect: "follow",
+  });
+  if (!r.ok) throw new Error(`fetch ${r.status}`);
+  const html = await r.text();
+  const { title, text, image } = extractReadable(html);
+  const result = { title, content: clampText(text, 20000), image };
+  try { await kv.set(cacheKey, result); } catch { /* ignore cache write errors */ }
+  return result;
 }
 
 async function fetchAndParseFeed(url: string, feedId: string, timeoutMs = 7000) {
@@ -2022,6 +2245,21 @@ async function fetchAndParseFeed(url: string, feedId: string, timeoutMs = 7000) 
 app.get(`${BASE}/feeds`, async (c) => {
   const list = (await kv.get(FEEDS_KEY)) || [];
   return c.json({ feeds: list });
+});
+
+// Fetch and extract the full readable text of an article from its source URL.
+// Used to populate the article content column when the RSS feed only carried a
+// short summary (typical of international feeds). Cached in KV.
+app.get(`${BASE}/article/extract`, async (c) => {
+  try {
+    const url = c.req.query("url");
+    if (!url || !/^https?:\/\//i.test(url)) return c.json({ error: "valid url required" }, 400);
+    const result = await fetchAndExtractArticle(url);
+    return c.json(result);
+  } catch (e) {
+    console.log("article/extract error:", String(e));
+    return c.json({ error: `استخراج متن کامل شکست خورد: ${String(e)}` }, 500);
+  }
 });
 
 app.post(`${BASE}/feeds`, async (c) => {

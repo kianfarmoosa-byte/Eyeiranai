@@ -42,17 +42,30 @@ export function CoverageTimeline({ articles, period }: { articles: Article[]; pe
 
   // aggregate into weekly buckets if requested
   const series = useMemo(() => {
+    type Pt = { key: string; date: Date; label: string; count: number };
+    // Merge any entries that share the same bucket key so the chart never receives
+    // duplicate x categories (which trigger React "same key" warnings in recharts).
+    const dedupe = (pts: Pt[]): Pt[] => {
+      const byKey = new Map<string, Pt>();
+      for (const p of pts) {
+        const existing = byKey.get(p.key);
+        if (existing) existing.count += p.count;
+        else byKey.set(p.key, { ...p });
+      }
+      return Array.from(byKey.values());
+    };
+
     if (resolution === "daily") {
-      return daily.map(d => ({
+      return dedupe(daily.map(d => ({
         key: dayKeyOf(d.date),
         date: d.date,
         label: cal === "shamsi"
           ? jalaali(d.date, { month: "short", day: "numeric" })
           : d.date.toLocaleDateString("en-GB", { month: "short", day: "numeric" }),
         count: d.count,
-      }));
+      })));
     }
-    const out: { key: string; date: Date; label: string; count: number }[] = [];
+    const out: Pt[] = [];
     for (let i = 0; i < daily.length; i += 7) {
       const chunk = daily.slice(i, i + 7);
       const first = chunk[0].date;
@@ -66,7 +79,7 @@ export function CoverageTimeline({ articles, period }: { articles: Article[]; pe
         count: total,
       });
     }
-    return out;
+    return dedupe(out);
   }, [daily, resolution, cal]);
 
   // Map each unique bucket key to its display label so the chart axis can key

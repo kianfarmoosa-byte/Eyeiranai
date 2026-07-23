@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Globe2, Loader2, Plus, Check, Filter, EyeOff, Eye, ArrowDown, ArrowUp, Rss, Radar } from "lucide-react";
 import type { Article } from "../data";
 import { INTL_FEEDS, type IntlFeed } from "../internationalFeeds";
@@ -6,6 +6,7 @@ import { api } from "../api";
 import { ArticleList } from "./ArticleList";
 import type { SortMode } from "./ArticleList";
 import { GdeltExplorer } from "./GdeltExplorer";
+import { studioUserId } from "./mobile/studio/studio";
 
 type Props = {
   onSelectArticle: (a: Article) => void;
@@ -50,6 +51,37 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
   const [activeTab, setActiveTab] = useState<"feeds" | "gdelt">("feeds");
   const scrollWrapRef = useRef<HTMLDivElement>(null);
   const [scroll, setScroll] = useState({ pct: 0, atTop: true, atBottom: false, visibleFrom: 0, visibleTo: 0 });
+
+  // Per-article AI translation of non-Persian headlines to Persian. The translate
+  // icon on each non-Persian card (rendered by ArticleList's TransBtn) calls this.
+  const [translatingIds, setTranslatingIds] = useState<Set<string>>(new Set());
+  const translateHeadlines = useCallback(async (ids: string[]) => {
+    const wanted = new Set(ids);
+    const pending = articles.filter(a => wanted.has(a.id) && !a.titleTranslated && !!a.title);
+    if (pending.length === 0) return;
+    const titles = Array.from(new Set(pending.map(a => a.title)));
+    const pendingIds = new Set(pending.map(a => a.id));
+    setTranslatingIds(prev => { const n = new Set(prev); pendingIds.forEach(id => n.add(id)); return n; });
+    try {
+      const map: Record<string, string> = {};
+      for (let i = 0; i < titles.length; i += 30) {
+        const chunk = titles.slice(i, i + 30);
+        const out = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+        chunk.forEach((t, j) => { if (out[j] && out[j].trim()) map[t] = out[j].trim(); });
+      }
+      if (Object.keys(map).length > 0) {
+        setArticles(prev => prev.map(a => (
+          !a.titleTranslated && pendingIds.has(a.id) && map[a.title]
+            ? { ...a, titleOriginal: a.title, title: map[a.title], titleTranslated: true }
+            : a
+        )));
+      }
+    } catch (e) {
+      console.log("intl headline translation failed:", e);
+    } finally {
+      setTranslatingIds(prev => { const n = new Set(prev); pendingIds.forEach(id => n.delete(id)); return n; });
+    }
+  }, [articles]);
 
   const intlByName = useMemo(() => {
     const m = new Map<string, IntlFeed>();
@@ -120,9 +152,31 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
     }
   };
 
+  // Remove international feeds previously imported but since dropped from
+  // INTL_FEEDS (dead links, or removed African / human-rights sources). Only
+  // touches feeds we own (category prefixed "بین‌الملل"), never user feeds.
+  const pruneStaleIntl = async () => {
+    try {
+      const validUrls = new Set(INTL_FEEDS.map(f => f.url));
+      const server = await api.listFeeds();
+      const stale = server.filter(
+        f => typeof f.category === "string" && f.category.startsWith("بین‌الملل") && !validUrls.has(f.url),
+      );
+      if (stale.length === 0) return;
+      for (const f of stale) {
+        try { await api.removeFeed(f.id); } catch (e) { console.log("intl remove stale feed failed:", f.url, e); }
+      }
+      await refreshRegistered();
+      await loadIntl();
+    } catch (e) {
+      console.log("intl pruneStaleIntl failed:", e);
+    }
+  };
+
   useEffect(() => {
     loadIntl();
     refreshRegistered();
+    pruneStaleIntl();
   }, []);
 
   const scrollTo = (where: "top" | "bottom") => {
@@ -303,25 +357,58 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
         </div>
 
         <div className="flex items-center gap-1 flex-wrap">
-          <button onClick={() => setCountry("all")}
-            className={`text-[11px] px-2.5 py-1 rounded-full border ${country === "all" ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white" : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"}`}>
-            <Filter className="w-3 h-3 inline -mt-0.5" /> همه
-          </button>
-          {COUNTRY_ORDER.map(c => (
-            <button key={c} onClick={() => setCountry(country === c ? "all" : c)}
-              className={`text-[11px] px-2.5 py-1 rounded-full border flex items-center gap-1 ${country === c ? "bg-cyan-600 text-white border-cyan-600" : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"}`}>
-              <span>{COUNTRY_META[c].flag}</span>
-              <span>{COUNTRY_META[c].name}</span>
-              <span className="opacity-70 tabular-nums">{(stats.byCountry.get(c) || 0).toLocaleString("fa-IR")}</span>
-            </button>
-          ))}
+          <details className="relative group [&_summary::-webkit-details-marker]:hidden">
+            <summary className={`list-none cursor-pointer select-none text-[11px] px-2.5 py-1 rounded-full border flex items-center gap-1 ${country !== "all" ? "bg-cyan-600 text-white border-cyan-600" : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"}`}>
+              {country === "all" ? (
+                <><Filter className="w-3 h-3" /><span>کشورها</span></>
+              ) : (
+                <>
+                  <span>{COUNTRY_META[country].flag}</span>
+                  <span>{COUNTRY_META[country].name}</span>
+                  <span className="opacity-70 tabular-nums">{(stats.byCountry.get(country) || 0).toLocaleString("fa-IR")}</span>
+                </>
+              )}
+              <svg className="w-3 h-3 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+            </summary>
+            <div className="absolute z-20 mt-1 right-0 min-w-[200px] max-h-72 overflow-y-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-1">
+              <button onClick={(e) => { setCountry("all"); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}
+                className={`w-full text-right text-[11px] px-2.5 py-1.5 rounded-lg flex items-center gap-2 ${country === "all" ? "bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 font-medium" : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"}`}>
+                <Filter className="w-3 h-3 shrink-0" />
+                <span className="flex-1">همه کشورها</span>
+              </button>
+              {COUNTRY_ORDER.map(c => (
+                <button key={c} onClick={(e) => { setCountry(country === c ? "all" : c); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}
+                  className={`w-full text-right text-[11px] px-2.5 py-1.5 rounded-lg flex items-center gap-2 ${country === c ? "bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 font-medium" : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"}`}>
+                  <span className="shrink-0">{COUNTRY_META[c].flag}</span>
+                  <span className="flex-1 truncate">{COUNTRY_META[c].name}</span>
+                  <span className="opacity-60 tabular-nums">{(stats.byCountry.get(c) || 0).toLocaleString("fa-IR")}</span>
+                </button>
+              ))}
+            </div>
+          </details>
           <span className="w-px h-4 bg-slate-300 dark:bg-slate-700 mx-1" />
-          {Object.entries(CAT_META).map(([key, meta]) => (
-            <button key={key} onClick={() => setCat(cat === key ? "all" : key)}
-              className={`text-[11px] px-2.5 py-1 rounded-full border ${cat === key ? "bg-rose-600 text-white border-rose-600" : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"}`}>
-              {meta.name} <span className="opacity-70 tabular-nums">{(stats.byCat.get(key) || 0).toLocaleString("fa-IR")}</span>
-            </button>
-          ))}
+          <details className="relative group [&_summary::-webkit-details-marker]:hidden">
+            <summary className={`list-none cursor-pointer select-none text-[11px] px-2.5 py-1 rounded-full border flex items-center gap-1 ${cat !== "all" ? "bg-rose-600 text-white border-rose-600" : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"}`}>
+              <span>{cat === "all" ? "دسته‌ها" : CAT_META[cat]?.name}</span>
+              {cat !== "all" && (
+                <span className="opacity-70 tabular-nums">{(stats.byCat.get(cat) || 0).toLocaleString("fa-IR")}</span>
+              )}
+              <svg className="w-3 h-3 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9" /></svg>
+            </summary>
+            <div className="absolute z-20 mt-1 right-0 min-w-[190px] max-h-64 overflow-y-auto bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg p-1">
+              <button onClick={(e) => { setCat("all"); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}
+                className={`w-full text-right text-[11px] px-2.5 py-1.5 rounded-lg flex items-center justify-between gap-2 ${cat === "all" ? "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 font-medium" : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"}`}>
+                <span>همه دسته‌ها</span>
+              </button>
+              {Object.entries(CAT_META).map(([key, meta]) => (
+                <button key={key} onClick={(e) => { setCat(cat === key ? "all" : key); (e.currentTarget.closest("details") as HTMLDetailsElement | null)?.removeAttribute("open"); }}
+                  className={`w-full text-right text-[11px] px-2.5 py-1.5 rounded-lg flex items-center justify-between gap-2 ${cat === key ? "bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 font-medium" : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"}`}>
+                  <span>{meta.name}</span>
+                  <span className="opacity-60 tabular-nums">{(stats.byCat.get(key) || 0).toLocaleString("fa-IR")}</span>
+                </button>
+              ))}
+            </div>
+          </details>
           <div className="flex-1" />
           <button onClick={() => setHideRead(h => !h)}
             className={`text-[11px] px-2.5 py-1 rounded-full border flex items-center gap-1 ${hideRead ? "bg-amber-500 text-white border-amber-500" : "border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300"}`}>
@@ -348,6 +435,8 @@ export function InternationalView({ onSelectArticle, selectedId, onToggleStar, o
         onRefresh={loadIntl}
         onMarkAllRead={onMarkAllRead}
         loading={loading}
+        onTranslate={translateHeadlines}
+        translatingIds={translatingIds}
       />
 
       <div className="pointer-events-none absolute top-2 bottom-2 left-1.5 w-1 rounded-full bg-slate-200/60 dark:bg-slate-800/60 overflow-hidden">

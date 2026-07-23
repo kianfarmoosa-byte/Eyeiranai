@@ -11,6 +11,7 @@ import { GraphView } from "./components/GraphView";
 import { MonitoringRoom } from "./components/room/MonitoringRoom";
 import { InternationalView } from "./components/InternationalView";
 import { SocialListening } from "./components/SocialListening";
+import { WatchView } from "./components/WatchView";
 import { NewspackBuilder } from "./components/newspack/NewspackBuilder";
 import { NewspackScreen } from "./components/mobile/screens/NewspackScreen";
 import { useKeyboardShortcuts } from "./components/useKeyboardShortcuts";
@@ -34,10 +35,13 @@ import { offlineCache } from "./offlineCache";
 import { useTheme } from "./components/ThemeToggle";
 import type { SortMode } from "./components/ArticleList";
 import { api, RemoteArticle, RemoteFeed } from "./api";
+import { Toaster, toast } from "sonner";
+import { useAutoTranslateTitles, getAutoTranslate, setAutoTranslate, useDedupeArticles } from "./translationCache";
 import { studioUserId } from "./components/mobile/studio/studio";
 import { seedMediaDirectory, directorySeeded } from "./seedDirectory";
 import { articles as sampleArticles } from "./data";
 import type { Article } from "./data";
+import { searchArticles, dedupeArticles } from "./textsearch";
 import { duplicatesForArticle } from "./duplicates";
 import { TopicFocusBar } from "./components/TopicFocusBar";
 import { TopicFocusStyles } from "./components/TopicFocusStyles";
@@ -54,7 +58,6 @@ import {
   type FocusMode, type Topic, type Combinator,
 } from "./topics";
 import { TopicBuilder } from "./components/TopicBuilder";
-import { SmartFilterBar } from "./components/SmartFilterBar";
 import {
   MobileShell, HomeScreen, DiscoverScreen, SavedScreen, TopicsScreen, MeScreen, NotesScreen, NoteEditorScreen, SettingsScreen, HistoryScreen, NotificationsScreen, ProfileSettingsScreen, CategoryScreen, DailyBriefingScreen, ReadingStatsScreen, SourceScreen, InternationalNewsScreen,
   MobileReader, useIsMobile, SearchSheet,
@@ -256,39 +259,59 @@ export default function App() {
     offlineCache.prune().catch(() => {});
   }, []);
 
-  // AI-translate non-Persian headlines to Persian (batched + server-cached).
-  // The original headline is preserved in `titleOriginal`; every view that reads
-  // `title` then shows Persian automatically.
+  // AI-translate non-Persian headlines to Persian — USER-CONTROLLED.
+  // Titles are only translated when the user turns on "ترجمه همه" (bulk, applied
+  // progressively as rows scroll into view) or taps the per-title translate
+  // button (selective). The original headline is preserved in `titleOriginal`;
+  // every view that reads `title` then shows Persian automatically.
+  // App-wide "auto-translate all non-Persian headlines" preference, shared with
+  // the mobile Settings toggle via the translation cache module. Toggling here or
+  // on mobile stays in sync (custom event + storage listener inside the hook).
+  const translateAll = useAutoTranslateTitles();
+  const toggleTranslateAll = useCallback(() => {
+    setAutoTranslate(!getAutoTranslate());
+  }, []);
+
+  // App-wide "collapse near-duplicate headlines" preference (defaults on),
+  // shared live with the mobile & desktop Settings toggles.
+  const dedupeOn = useDedupeArticles();
+
   const triedTitlesRef = useRef<Set<string>>(new Set());
-  useEffect(() => {
-    const pending = items
-      .filter(a => !a.titleTranslated
-        && (a.lang ? a.lang !== "fa" : guessNonPersian(a.title))
-        && a.title && !triedTitlesRef.current.has(a.title))
-      .slice(0, 120);
+  const [translatingIds, setTranslatingIds] = useState<Set<string>>(new Set());
+
+  // Translate the given article ids' titles to Persian (batched + server-cached).
+  const translateTitlesByIds = useCallback(async (ids: string[]) => {
+    const wanted = new Set(ids);
+    const pending = items.filter(a =>
+      wanted.has(a.id)
+      && !a.titleTranslated
+      && a.title
+      && (a.lang ? a.lang !== "fa" : guessNonPersian(a.title))
+      && !triedTitlesRef.current.has(a.title));
     if (pending.length === 0) return;
     const titles = Array.from(new Set(pending.map(a => a.title)));
     titles.forEach(t => triedTitlesRef.current.add(t));
-    let cancelled = false;
-    (async () => {
-      try {
-        const map: Record<string, string> = {};
-        for (let i = 0; i < titles.length; i += 30) {
-          const chunk = titles.slice(i, i + 30);
-          const out = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
-          chunk.forEach((t, j) => { if (out[j] && out[j].trim()) map[t] = out[j].trim(); });
-        }
-        if (cancelled || Object.keys(map).length === 0) return;
+    const pendingIds = new Set(pending.map(a => a.id));
+    setTranslatingIds(prev => { const n = new Set(prev); pendingIds.forEach(id => n.add(id)); return n; });
+    try {
+      const map: Record<string, string> = {};
+      for (let i = 0; i < titles.length; i += 30) {
+        const chunk = titles.slice(i, i + 30);
+        const out = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+        chunk.forEach((t, j) => { if (out[j] && out[j].trim()) map[t] = out[j].trim(); });
+      }
+      if (Object.keys(map).length > 0) {
         setItems(prev => prev.map(a => (
-          !a.titleTranslated && map[a.title]
+          !a.titleTranslated && pendingIds.has(a.id) && map[a.title]
             ? { ...a, titleOriginal: a.title, title: map[a.title], titleTranslated: true }
             : a
         )));
-      } catch (e) {
-        console.log("headline translation failed:", e);
       }
-    })();
-    return () => { cancelled = true; };
+    } catch (e) {
+      console.log("headline translation failed:", e);
+    } finally {
+      setTranslatingIds(prev => { const n = new Set(prev); pendingIds.forEach(id => n.delete(id)); return n; });
+    }
   }, [items]);
 
   // Live health-check the whole feed directory and remove dead feeds, looping in
@@ -512,8 +535,8 @@ export default function App() {
       list = applySearch(list, activeSearch);
     }
     if (search.trim()) {
-      const q = search.trim().toLowerCase();
-      list = list.filter(a => a.title.toLowerCase().includes(q) || a.preview.toLowerCase().includes(q));
+      // Persian-aware fuzzy full-text search (ی/ي, ک/ك, ZWNJ, digits normalized).
+      list = searchArticles(list, search.trim());
     }
     if (activeTopics.length && focusMode === "filter") {
       list = list.filter(a => {
@@ -523,8 +546,11 @@ export default function App() {
     }
     if (smartActive) list = applySmartFilter(list, smartActive);
     list = applyMute(list, muteWords);
+    // Collapse near-duplicate headlines (same wire story across outlets) when
+    // the preference is on. Skip while searching so every match stays visible.
+    if (dedupeOn && !search.trim()) list = dedupeArticles(list);
     return list;
-  }, [items, activeView, selectedFeed, selectedCategory, savedIds, search, feeds, searchResults, activeSearch, activeTopics, focusMode, topicScores, smartActive, muteWords]);
+  }, [items, activeView, selectedFeed, selectedCategory, savedIds, search, feeds, searchResults, activeSearch, activeTopics, focusMode, topicScores, smartActive, muteWords, dedupeOn]);
 
   const title = useMemo(() => {
     if (activeView === 'starred') return 'نشان شده‌ها';
@@ -536,6 +562,7 @@ export default function App() {
     if (activeView === 'international') return 'اخبار بین‌الملل';
     if (activeView === 'room') return 'اتاق رصد رسانه‌ای';
     if (activeView === 'social') return 'رصد اجتماعی';
+    if (activeView === 'watch') return 'رصد تغییرات صفحه';
     if (activeView === 'newspack') return 'بسته‌های خبری سفارشی';
     if (activeView === 'feed' && selectedFeed) return feeds.find(f => f.id === selectedFeed)?.name || '';
     if (activeView === 'category' && selectedCategory) return selectedCategory;
@@ -723,6 +750,49 @@ export default function App() {
     const t = setInterval(run, 90_000);
     return () => { alive = false; clearInterval(t); };
   }, [isMobile, mobileSocialOpen, mobileNotifsOpen, activeView]);
+
+  // Page Change Monitoring — unread change count + in-app notification on new
+  // changes. "Seen" is tracked by a timestamp in localStorage; opening the watch
+  // view marks everything up to now as seen.
+  const [watchUnread, setWatchUnread] = useState(0);
+  useEffect(() => {
+    let alive = true;
+    const run = async () => {
+      try {
+        const list = await api.watchList();
+        if (!alive) return;
+        const lastSeen = Number(localStorage.getItem("flw.watch.lastSeen") || 0);
+        const allChanges = list.flatMap(w => (w.state?.changes || []).map(c => ({ w, c })));
+        const fresh = allChanges.filter(x => x.c.ts > lastSeen);
+        setWatchUnread(fresh.length);
+        if (fresh.length) {
+          // In-app toast for the most recent change (desktop + mobile).
+          const newest = fresh.sort((a, b) => b.c.ts - a.c.ts)[0];
+          toast(`تغییر در «${newest.w.label}»`, {
+            description: newest.c.summary || String(newest.c.diff || "").split("\n")[0] || "محتوای صفحه تغییر کرد",
+            icon: "🎯",
+            action: { label: "مشاهده", onClick: () => setActiveView("watch") },
+          });
+          // Fold into the mobile inbox as well.
+          const m = await import("./components/mobile/utils/notifications");
+          m.addWatchChangeNotifs(list);
+          if (isMobile) setMobileUnreadNotifs(m.unreadCount());
+        }
+      } catch (e) {
+        console.log("watch changes sync error:", e);
+      }
+    };
+    run();
+    const t = setInterval(run, 90_000);
+    return () => { alive = false; clearInterval(t); };
+  }, [isMobile]);
+
+  // When the watch view is opened, mark all current changes as seen.
+  useEffect(() => {
+    if (activeView !== "watch") return;
+    try { localStorage.setItem("flw.watch.lastSeen", String(Date.now())); } catch { /* ignore */ }
+    setWatchUnread(0);
+  }, [activeView]);
   const { canInstall: mobileCanInstall } = useInstallPrompt();
   useEffect(() => {
     if (!isMobile || !mobileCanInstall || mobileOnboardOpen) return;
@@ -736,6 +806,7 @@ export default function App() {
       <>
         <DensityProvider />
         <SkeletonStyles />
+        <Toaster position="top-center" dir="rtl" theme={theme} richColors closeButton />
         <MobileShell
           renderTab={(tab) => {
             switch (tab) {
@@ -1005,6 +1076,7 @@ export default function App() {
     <>
     <DensityProvider />
     <SkeletonStyles />
+    <Toaster position="top-center" dir="rtl" theme={theme} richColors closeButton />
     <div dir="rtl" lang="fa" className="size-full flex bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden relative">
       <div className="md:hidden fixed top-0 right-0 left-0 z-30 flex items-center gap-2 px-3 h-12 bg-white/90 dark:bg-slate-950/90 backdrop-blur border-b border-slate-200 dark:border-slate-800">
         <button onClick={() => setMobileDrawer(true)} className="p-2 -mr-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="منو">
@@ -1057,6 +1129,7 @@ export default function App() {
         onClearTopics={clearTopics}
         onAddTopic={() => { setBuilderInitial(null); setBuilderOpen(true); }}
         socialUnread={socialUnread}
+        watchUnread={watchUnread}
       />
       </div>
       {error && (
@@ -1085,6 +1158,8 @@ export default function App() {
         />
       ) : activeView === 'social' ? (
         <SocialListening onOpenStudio={() => setStudioOpen(true)} />
+      ) : activeView === 'watch' ? (
+        <WatchView />
       ) : activeView === 'newspack' ? (
         <NewspackBuilder userId="app" />
       ) : activeView === 'international' ? (
@@ -1103,33 +1178,32 @@ export default function App() {
         </>
       ) : (
       <>
-      <div className={`${showArticleView ? 'hidden md:flex' : 'flex'} flex-1 min-w-0 min-h-0 flex-col overflow-hidden relative`}>
+      <div className={`${showArticleView ? 'hidden md:flex' : 'flex'} flex-1 min-w-0 min-h-0 flex-col relative`}>
         <TopicFocusStyles scores={topicScores as any} mode={focusMode} active={activeTopicIds.length > 0} />
         <TopicPctSync scores={topicScores as any} active={activeTopicIds.length > 0} />
         <TopicHighlightSync scores={topicScores as any} active={activeTopicIds.length > 0} />
         <TopicMinimap articles={filtered} scores={topicScores as any} active={activeTopicIds.length > 0} />
         <TopicJumpCounter articles={filtered} scores={topicScores as any} active={activeTopicIds.length > 0} />
-        <TopicFocusBar
-          articles={items}
-          activeIds={activeTopicIds}
-          onToggle={toggleTopic}
-          onClear={clearTopics}
-          mode={focusMode}
-          onModeChange={setFocusMode}
-          combinator={combinator}
-          onCombinatorChange={setCombinator}
-          customTopics={customTopics}
-          onAddCustom={() => { setBuilderInitial(null); setBuilderOpen(true); }}
-          onEditCustom={(t) => { setBuilderInitial(t); setBuilderOpen(true); }}
-        />
-        <SmartFilterBar
-          articles={items}
-          smartActive={smartActive}
-          onSmartChange={setSmartActive}
-          muteWords={muteWords}
-          onMuteChange={setMuteWords}
-        />
         <ArticleList
+          subHeader={
+            <TopicFocusBar
+              articles={items}
+              activeIds={activeTopicIds}
+              onToggle={toggleTopic}
+              onClear={clearTopics}
+              mode={focusMode}
+              onModeChange={setFocusMode}
+              combinator={combinator}
+              onCombinatorChange={setCombinator}
+              customTopics={customTopics}
+              onAddCustom={() => { setBuilderInitial(null); setBuilderOpen(true); }}
+              onEditCustom={(t) => { setBuilderInitial(t); setBuilderOpen(true); }}
+              smartActive={smartActive}
+              onSmartChange={setSmartActive}
+              muteWords={muteWords}
+              onMuteChange={setMuteWords}
+            />
+          }
           articles={filtered}
           selectedId={selectedId}
           setSelectedId={handleSelect}
@@ -1142,6 +1216,10 @@ export default function App() {
           onRefresh={() => loadAll(selectedFeed ? { feedId: selectedFeed } : {})}
           onMarkAllRead={markAllRead}
           loading={loading}
+          translateAll={translateAll}
+          onToggleTranslateAll={toggleTranslateAll}
+          onTranslate={translateTitlesByIds}
+          translatingIds={translatingIds}
         />
       </div>
       <div className={`${showArticleView ? 'flex fixed md:relative inset-0 md:inset-auto z-20 md:z-auto bg-white dark:bg-slate-950' : 'hidden md:flex'} flex-1 min-w-0 p-[0px] m-[0px]`}>

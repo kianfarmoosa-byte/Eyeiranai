@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, Bookmark, BookmarkCheck, Share2, Type, ExternalLink, Play, Pause, Square, NotebookPen, GitCompare, Clock, Languages, ChevronRight, ChevronLeft, Bold, ArrowUp } from "lucide-react";
+import { ArrowRight, Bookmark, BookmarkCheck, Share2, Type, ExternalLink, Play, Pause, Square, NotebookPen, GitCompare, Clock, Languages, ChevronRight, ChevronLeft, Bold, ArrowUp, Loader2 } from "lucide-react";
 import type { Article } from "../../../data";
 import { ImageWithFallback } from "../../figma/ImageWithFallback";
 import { useBodyScrollLock, useEdgeSwipe, useHaptics, usePrefersReducedMotion, useTTS, useTextSelection } from "../hooks";
@@ -12,9 +12,9 @@ import { RelatedStrip } from "./RelatedStrip";
 import { DetailedArticleHeader } from "./DetailedArticleHeader";
 import { CompareSourcesSheet } from "./CompareSourcesSheet";
 import { EventTimelineSheet } from "./EventTimelineSheet";
-import { translateText, TRANSLATION_DISCLAIMER_EN, TRANSLATION_DISCLAIMER_FA } from "../ai/translate";
 import { api } from "../../../api";
 import { studioUserId } from "../studio/studio";
+import { extractFullContent, getFullContent, getArticleFa, setArticleFa } from "../../../translationCache";
 import { ShareSheet } from "../sheets/ShareSheet";
 import { recordRead } from "../utils/history";
 import { relatedTo } from "../utils/related";
@@ -44,33 +44,95 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
   const [compareOpen, setCompareOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [timelineOpen, setTimelineOpen] = useState(false);
-  const [translateOn, setTranslateOn] = useState(false);
   const [bionicOn, setBionicOn] = useState(false);
-  // AI translation of the full article body. null = not loaded; falls back to local preview.
-  const [aiTranslation, setAiTranslation] = useState<string | null>(null);
-  const [translating, setTranslating] = useState(false);
 
-  // Reset cached translation when the article changes.
-  useEffect(() => { setAiTranslation(null); setTranslateOn(false); }, [article?.id]);
+  // ── Full-text extraction ──
+  // RSS feeds (especially international ones) often carry only a short summary.
+  // When the stored content is thin and a source link exists, fetch the full
+  // readable article body from the server (matches the desktop ArticleView).
+  const [fullContent, setFullContent] = useState<string | null>(null);
+  const [loadingFull, setLoadingFull] = useState(false);
+  const [fullError, setFullError] = useState(false);
+  // The content actually rendered (and translated): the fetched full text if we
+  // have it, otherwise whatever the feed provided.
+  const baseContent = fullContent ?? (article?.content || "");
 
-  // Fetch a real translation the first time the user turns translation on.
+  const loadFull = async () => {
+    if (!article?.link || loadingFull) return;
+    setLoadingFull(true);
+    setFullError(false);
+    const content = await extractFullContent(article.link);
+    if (content && content.length > (article.content?.length || 0)) {
+      setFullContent(content);
+      setTrans(null); // any prior translation was of the shorter text
+    } else if (!article.content?.trim()) {
+      setFullError(true);
+    }
+    setLoadingFull(false);
+  };
+
   useEffect(() => {
-    if (!translateOn || !article || aiTranslation !== null) return;
-    let cancelled = false;
+    setFullContent(null); setLoadingFull(false); setFullError(false);
+    if (!article?.link) return;
+    // Instant if we've already extracted this article before.
+    const cached = getFullContent(article.link);
+    if (cached && cached.length > (article.content?.length || 0)) {
+      setFullContent(cached);
+      return;
+    }
+    const short = (article.content?.trim().length || 0) < 600;
+    if (short) {
+      let cancelled = false;
+      (async () => {
+        setLoadingFull(true);
+        const content = await extractFullContent(article.link);
+        if (cancelled) return;
+        if (content && content.length > (article.content?.length || 0)) setFullContent(content);
+        else if (!article.content?.trim()) setFullError(true);
+        setLoadingFull(false);
+      })();
+      return () => { cancelled = true; };
+    }
+  }, [article?.id]);  // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── On-demand full-article translation to Persian (title + body), toggleable ──
+  // Mirrors the desktop ArticleView: translate non-Persian articles to Persian.
+  const [trans, setTrans] = useState<{ title: string; content: string } | null>(null);
+  const [translating, setTranslating] = useState(false);
+  const [showOriginal, setShowOriginal] = useState(false);
+  // Whether the shown translation was served instantly from cache (no network).
+  const [transFromCache, setTransFromCache] = useState(false);
+  useEffect(() => { setTrans(null); setTranslating(false); setShowOriginal(false); setTransFromCache(false); }, [article?.id]);
+
+  const translateArticle = async () => {
+    if (!article || translating) return;
+    if (trans) { setShowOriginal((v) => !v); return; }
+    // Instant from cache if this article was translated before.
+    const cached = getArticleFa(article.id);
+    if (cached && cached.content) { setTrans(cached); setTransFromCache(true); setShowOriginal(false); return; }
     setTranslating(true);
-    (async () => {
-      try {
-        const text = await api.aiTranslate({ text: article.content, to: "en" }, studioUserId());
-        if (!cancelled) setAiTranslation(text || translateText(article.content, "en"));
-      } catch (e) {
-        console.log("reader AI translate failed, using local preview:", e);
-        if (!cancelled) setAiTranslation(translateText(article.content, "en"));
-      } finally {
-        if (!cancelled) setTranslating(false);
+    try {
+      const paras = baseContent.split("\n\n");
+      const texts = [article.title, ...paras];
+      const out: string[] = [];
+      for (let i = 0; i < texts.length; i += 20) {
+        const chunk = texts.slice(i, i + 20);
+        const r = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+        chunk.forEach((t, j) => out.push(r[j]?.trim() || t));
       }
-    })();
-    return () => { cancelled = true; };
-  }, [translateOn, article?.id, aiTranslation]);  // eslint-disable-line react-hooks/exhaustive-deps
+      const value = { title: out[0] || article.title, content: out.slice(1).join("\n\n") };
+      setArticleFa(article.id, value);
+      setTrans(value);
+      setTransFromCache(false);
+      setShowOriginal(false);
+    } catch (e) {
+      console.log("mobile reader translation failed:", e);
+    } finally {
+      setTranslating(false);
+    }
+  };
+
+  const showingFa = !!trans && !showOriginal;
   const [showTop, setShowTop] = useState(false);
   const [highlights, setHighlights] = useState<string[]>([]);
   useEffect(() => {
@@ -147,7 +209,7 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
                     haptic("select");
                     if (tts.state === "playing") tts.pause();
                     else if (tts.state === "paused") tts.resume();
-                    else tts.speak(`${article.title}. ${article.content}`);
+                    else tts.speak(`${showingFa && trans ? trans.title : article.title}. ${showingFa && trans ? trans.content : baseContent}`);
                   }}
                 >
                   {tts.state === "playing" ? <Pause className="size-5" /> :
@@ -179,10 +241,12 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
                 {article.starred ? <BookmarkCheck className="size-5 text-[var(--brand-500)]" /> : <Bookmark className="size-5" />}
               </IconBtn>
               <IconBtn
-                aria={translateOn ? "نمایش متن اصلی" : "ترجمهٔ انگلیسی (پیش‌نمایش)"}
-                onClick={() => { haptic("select"); setTranslateOn((v) => !v); }}
+                aria={trans ? (showOriginal ? "نمایش ترجمهٔ فارسی" : "نمایش متن اصلی") : "ترجمهٔ کامل خبر به فارسی"}
+                onClick={() => { haptic("select"); translateArticle(); }}
               >
-                <Languages className={`size-5 ${translateOn ? "text-[var(--brand-500)]" : ""}`} />
+                {translating
+                  ? <Loader2 className="size-5 animate-spin text-[var(--brand-500)]" />
+                  : <Languages className={`size-5 ${showingFa ? "text-[var(--brand-500)]" : ""}`} />}
               </IconBtn>
               <IconBtn
                 aria={bionicOn ? "خاموش‌کردن حالت بایونیک" : "حالت بایونیک"}
@@ -199,7 +263,7 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
 
           <div ref={scrollRef} onScroll={onScroll} className="flex-1 overflow-y-auto overscroll-contain">
             <article ref={articleRef} className="max-w-2xl mx-auto px-5 py-6" style={{ fontSize: FONT_SIZES[fsIdx] }}>
-              <DetailedArticleHeader article={article} />
+              <DetailedArticleHeader article={article} titleOverride={showingFa && trans ? trans.title : undefined} />
 
               <div className="mt-4">
                 <SummaryCard article={article} onAsk={() => setAskOpen(true)} />
@@ -217,44 +281,35 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
                 />
               )}
 
-              {translateOn && (
+              {trans && (
                 <div
-                  dir="ltr"
-                  className="mt-4 rounded-[var(--radius-md)] border border-[var(--brand-500)]/30 bg-[var(--brand-500)]/8 px-3 py-2 text-[11.5px] text-[var(--foreground-muted)] flex items-start gap-2"
+                  dir="rtl"
+                  className="mt-4 rounded-[var(--radius-md)] border border-[var(--brand-500)]/30 bg-[var(--brand-500)]/8 px-3 py-2 text-[11.5px] text-[var(--foreground-muted)] flex items-center gap-2"
                 >
-                  <Languages className="size-3.5 shrink-0 text-[var(--brand-500)] mt-0.5" />
-                  <div>
-                    <div className="font-semibold text-[var(--brand-500)] mb-0.5">
-                      {translating ? "Translating…" : "English translation"}
-                    </div>
-                    {translating ? (
-                      <div dir="rtl" lang="fa" className="leading-snug">در حال ترجمه با هوش مصنوعی…</div>
-                    ) : aiTranslation ? (
-                      <div dir="rtl" lang="fa" className="leading-snug opacity-80">ترجمه با هوش مصنوعی انجام شد. برای متن مرجع، به منبع اصلی مراجعه کن.</div>
-                    ) : (
-                      <>
-                        <div dir="ltr" className="leading-snug">{TRANSLATION_DISCLAIMER_EN}</div>
-                        <div dir="rtl" lang="fa" className="leading-snug mt-1 opacity-80">{TRANSLATION_DISCLAIMER_FA}</div>
-                      </>
+                  <Languages className="size-3.5 shrink-0 text-[var(--brand-500)]" />
+                  <span className="flex-1 flex items-center gap-1.5">
+                    {showOriginal ? "در حال نمایش متن اصلی" : "ترجمه‌شده به فارسی"}
+                    {!showOriginal && transFromCache && (
+                      <span className="inline-flex items-center px-1.5 h-4 rounded-full bg-[var(--brand-500)]/12 text-[var(--brand-500)] text-[9px] font-semibold">
+                        از کش
+                      </span>
                     )}
-                  </div>
+                  </span>
+                  <button onClick={() => setShowOriginal((v) => !v)} className="text-[var(--brand-500)] font-semibold">
+                    {showOriginal ? "نمایش ترجمه" : "نمایش متن اصلی"}
+                  </button>
                 </div>
               )}
 
               <div
                 className="mt-5 leading-[1.95] text-[var(--foreground)] whitespace-pre-line"
-                dir={translateOn ? "ltr" : "rtl"}
-                lang={translateOn ? "en" : "fa"}
+                dir="rtl"
+                lang="fa"
               >
-                {translateOn ? (
-                  translating && !aiTranslation ? (
-                    <span dir="rtl" lang="fa" className="text-[var(--foreground-muted)]">در حال آماده‌سازی ترجمه…</span>
-                  ) : (() => {
-                    const txt = aiTranslation ?? translateText(article.content, "en");
-                    return bionicOn ? bionicNodes(txt) : txt;
-                  })()
+                {showingFa && trans ? (
+                  bionicOn ? bionicNodes(trans.content) : trans.content
                 ) : (
-                  splitWithHighlights(article.content, highlights).map((seg, i) =>
+                  splitWithHighlights(baseContent, highlights).map((seg, i) =>
                     seg.mark ? (
                       <mark
                         key={i}
@@ -271,6 +326,21 @@ export function MobileReader({ article, onClose, onToggleSave, onAddNote, pool, 
                       <span key={i}>{bionicOn ? bionicNodes(seg.text) : seg.text}</span>
                     ),
                   )
+                )}
+                {loadingFull && (
+                  <div className="flex items-center gap-2 text-[13px] text-[var(--foreground-muted)] mt-3">
+                    <Loader2 className="size-4 animate-spin" /> در حال بارگذاری متن کامل خبر…
+                  </div>
+                )}
+                {!loadingFull && !fullContent && !fullError && article.link && baseContent.trim().length >= 600 && (
+                  <button onClick={loadFull} className="mt-3 text-[13px] text-[var(--brand-500)] font-semibold">
+                    بارگذاری متن کامل خبر
+                  </button>
+                )}
+                {!loadingFull && fullError && article.link && (
+                  <div className="mt-3 text-[13px] text-[var(--foreground-muted)]">
+                    امکان استخراج خودکار متن کامل نبود؛ از دکمهٔ «مطالعه در منبع اصلی» استفاده کنید.
+                  </div>
                 )}
               </div>
 

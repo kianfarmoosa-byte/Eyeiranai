@@ -1,7 +1,20 @@
-import { Star, CheckCheck, RefreshCw, Filter, LayoutGrid, List, Newspaper, Share2, MoreHorizontal, Clock, ArrowDownAZ, ArrowUpZA, Calendar, Inbox } from "lucide-react";
-import { useMemo, useEffect, useRef, useState } from "react";
+import { Star, CheckCheck, RefreshCw, Filter, LayoutGrid, List, Newspaper, Share2, MoreHorizontal, Clock, ArrowDownAZ, ArrowUpZA, Calendar, Inbox, Languages, Loader2 } from "lucide-react";
+import { useMemo, useEffect, useRef, useState, type ReactNode } from "react";
 import { Article } from "../data";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+
+// Fallback language guess for cached/legacy articles that lack a server `lang`.
+function looksNonPersian(title: string): boolean {
+  const t = String(title || "");
+  if (!t.trim()) return false;
+  const arabicScript = (t.match(/[؀-ۿ]/g) || []).length;
+  const latin = (t.match(/[A-Za-zЀ-ӿͰ-Ͽ]/g) || []).length;
+  return latin > 0 && latin >= arabicScript;
+}
+function needsFa(a: Article): boolean {
+  if (a.titleTranslated || !a.title) return false;
+  return a.lang ? a.lang !== "fa" : looksNonPersian(a.title);
+}
 
 const ROW_H = 64;
 const VIRT_THRESHOLD = 80;
@@ -21,6 +34,11 @@ type Props = {
   onRefresh?: () => void;
   onMarkAllRead?: () => void;
   loading?: boolean;
+  translateAll?: boolean;
+  onToggleTranslateAll?: () => void;
+  onTranslate?: (ids: string[]) => void;
+  translatingIds?: Set<string>;
+  subHeader?: ReactNode;
 };
 
 function parseDate(s: string): number {
@@ -28,7 +46,7 @@ function parseDate(s: string): number {
   return isNaN(t) ? 0 : t;
 }
 
-export function ArticleList({ articles, selectedId, setSelectedId, viewMode, setViewMode, title, toggleStar, sortMode = 'newest', setSortMode, onRefresh, onMarkAllRead, loading }: Props) {
+export function ArticleList({ articles, selectedId, setSelectedId, viewMode, setViewMode, title, toggleStar, sortMode = 'newest', setSortMode, onRefresh, onMarkAllRead, loading, translateAll = false, onToggleTranslateAll, onTranslate, translatingIds, subHeader }: Props) {
   const sorted = useMemo(() => {
     const arr = [...articles];
     if (sortMode === 'newest') arr.sort((a, b) => parseDate(b.date) - parseDate(a.date));
@@ -76,10 +94,57 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
     }
   }, [selectedId, virtualize, sorted]);
 
+  // When "ترجمه همه" is on, translate non-Persian titles progressively as their
+  // rows scroll into view (only rendered rows carry data-aid, so this naturally
+  // covers virtualized lists and paces the AI calls to what the user is seeing).
+  const countNeedsFa = useMemo(() => sorted.filter(needsFa).length, [sorted]);
+  useEffect(() => {
+    if (!translateAll || !onTranslate) return;
+    const root = scrollRef.current;
+    if (!root) return;
+    let queued = new Set<string>();
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const flush = () => {
+      if (queued.size) { onTranslate(Array.from(queued)); queued = new Set(); }
+    };
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          const id = (e.target as HTMLElement).dataset.aid;
+          if (id) queued.add(id);
+        }
+      }
+      clearTimeout(timer);
+      timer = setTimeout(flush, 300);
+    }, { root, rootMargin: "300px 0px" });
+    const observe = () => root.querySelectorAll("[data-aid]").forEach(el => io.observe(el));
+    observe();
+    const mo = new MutationObserver(observe);
+    mo.observe(root, { childList: true, subtree: true });
+    return () => { io.disconnect(); mo.disconnect(); clearTimeout(timer); };
+  }, [translateAll, onTranslate, viewMode, sorted]);
+
   const SortIcon = sortMode === 'oldest' ? ArrowUpZA : sortMode === 'source' ? ArrowDownAZ : Calendar;
   const nextSort: SortMode = sortMode === 'newest' ? 'oldest' : sortMode === 'oldest' ? 'source' : 'newest';
   const sortLabel = sortMode === 'newest' ? 'جدیدترین' : sortMode === 'oldest' ? 'قدیمی‌ترین' : 'بر اساس منبع';
   const isEmpty = !loading && sorted.length === 0;
+
+  // Selective per-title translation control (shown only for non-Persian titles).
+  const TransBtn = ({ a }: { a: Article }) => {
+    if (!onTranslate || !needsFa(a)) return null;
+    const busy = translatingIds?.has(a.id);
+    return (
+      <button
+        onClick={(e) => { e.stopPropagation(); onTranslate([a.id]); }}
+        disabled={busy}
+        className="p-1 rounded text-slate-400 hover:text-emerald-600 hover:bg-slate-200 dark:hover:bg-slate-700"
+        title="ترجمهٔ این تیتر به فارسی"
+      >
+        {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : <Languages className="w-4 h-4" />}
+      </button>
+    );
+  };
+
   return (
     <div className="flex-1 flex flex-col bg-white dark:bg-slate-950 min-w-0 min-h-0 h-full">
       <div className="border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center gap-2 sticky top-0 bg-white dark:bg-slate-950 z-10">
@@ -100,6 +165,18 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
         <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="فیلتر">
           <Filter className="w-4 h-4" />
         </button>
+        {onToggleTranslateAll && (
+          <button
+            onClick={onToggleTranslateAll}
+            className={`px-2 py-2 rounded-lg flex items-center gap-1.5 text-xs transition ${translateAll ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+            title={translateAll ? 'ترجمه خودکار تیترها روشن است — برای خاموش کردن کلیک کنید' : 'ترجمه همهٔ تیترهای غیرفارسی به فارسی هنگام پیمایش'}
+          >
+            {translatingIds && translatingIds.size > 0
+              ? <Loader2 className="w-4 h-4 animate-spin" />
+              : <Languages className="w-4 h-4" />}
+            <span className="hidden lg:inline">ترجمه همه</span>
+          </button>
+        )}
         <div className="w-px h-6 bg-slate-200 dark:bg-slate-700 mx-1"></div>
         <div className="flex items-center bg-slate-100 dark:bg-slate-800 rounded-lg p-0.5">
           <button onClick={() => setViewMode('cards')} className={`p-1.5 rounded ${viewMode === 'cards' ? 'bg-white dark:bg-slate-700 shadow-sm' : ''}`} title="کارت‌ها">
@@ -119,6 +196,8 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
           <MoreHorizontal className="w-4 h-4" />
         </button>
       </div>
+
+      {subHeader}
 
       <div ref={scrollRef} className="flex-1 min-h-0 overflow-y-auto">
         {loading && articles.length === 0 && (
@@ -170,6 +249,7 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                       </div>
                       <div className="truncate">{a.title}</div>
                     </div>
+                    <TransBtn a={a} />
                     <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }} className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded">
                       <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
                     </button>
@@ -202,6 +282,7 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                     </div>
                     <div className="truncate">{a.title}</div>
                   </div>
+                  <TransBtn a={a} />
                   <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }} className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded">
                     <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
                   </button>
@@ -238,9 +319,12 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" /> {a.readTime}
                     </div>
-                    <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }}>
-                      <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <TransBtn a={a} />
+                      <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }}>
+                        <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : 'text-slate-400'}`} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>
@@ -274,6 +358,7 @@ export function ArticleList({ articles, selectedId, setSelectedId, viewMode, set
                   <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mb-2">{a.preview}</p>
                   <div className="flex items-center gap-3 text-xs text-slate-500">
                     <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {a.readTime}</span>
+                    <TransBtn a={a} />
                     <button onClick={(e) => { e.stopPropagation(); toggleStar(a.id); }}>
                       <Star className={`w-4 h-4 ${a.starred ? 'fill-yellow-400 text-yellow-400' : ''}`} />
                     </button>

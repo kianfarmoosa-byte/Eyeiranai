@@ -8,6 +8,7 @@ import { INTL_FEEDS, type IntlFeed } from "../../../internationalFeeds";
 import { api, type RemoteArticle } from "../../../api";
 import { translateText } from "../ai/translate";
 import { studioUserId } from "../studio/studio";
+import { getTitleFa, setTitleFa, translateTitlesFa } from "../../../translationCache";
 import { timeAgoFa, faNum } from "../utils/fa";
 import type { Article } from "../../../data";
 
@@ -20,6 +21,15 @@ type Props = {
 
 const ALL = "all";
 const KEY_IMPORTED = "kian.mobile.intlFeedsImported.v1";
+
+/** Heuristic: a title with meaningful Latin content and little/no Persian text
+ * is treated as non-Persian and gets a translate button. */
+function looksNonPersian(s: string): boolean {
+  if (!s) return false;
+  const fa = (s.match(/[؀-ۿ]/g) || []).length;
+  const latin = (s.match(/[A-Za-z]/g) || []).length;
+  return latin >= 3 && fa < latin;
+}
 
 /**
  * Mobile "International News" screen. Pulls the curated feed list from
@@ -36,9 +46,47 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
   const [showFa, setShowFa] = useState(true);
   const [country, setCountry] = useState<string>(ALL);
   const [cat, setCat] = useState<string>(ALL);
-  // Real AI translations of headlines, cached by original title.
+  // Real AI translations of headlines, cached by original title (seeded from the
+  // shared client cache so previously-translated titles show instantly).
   const [faMap, setFaMap] = useState<Record<string, string>>({});
   const [translating, setTranslating] = useState(false);
+  // Per-card translation state (independent of the global "showFa" toggle):
+  // ids the user explicitly translated, and ids currently being translated.
+  const [perFa, setPerFa] = useState<Set<string>>(new Set());
+  const [perTranslating, setPerTranslating] = useState<Set<string>>(new Set());
+
+  // Translate a single headline to Persian on demand (per-card icon tap).
+  const translateOne = async (a: RemoteArticle) => {
+    haptic("tap");
+    const title = a.title;
+    if (!title) return;
+    if (perFa.has(a.id)) { // already showing → toggle back to original
+      setPerFa(prev => { const n = new Set(prev); n.delete(a.id); return n; });
+      return;
+    }
+    const cached = faMap[title] || getTitleFa(title);
+    if (cached) {
+      if (!faMap[title]) setFaMap(m => ({ ...m, [title]: cached }));
+      setPerFa(prev => new Set(prev).add(a.id));
+      return;
+    }
+    setPerTranslating(prev => new Set(prev).add(a.id));
+    try {
+      const out = await api.aiTranslateBatch({ texts: [title], to: "fa" }, studioUserId());
+      if (out[0] && out[0].trim()) {
+        setTitleFa(title, out[0].trim());
+        setFaMap(m => ({ ...m, [title]: out[0].trim() }));
+        setPerFa(prev => new Set(prev).add(a.id));
+      } else {
+        toast({ kind: "error", message: "ترجمه ناموفق بود" });
+      }
+    } catch (e) {
+      console.log("intl per-card translate failed:", e);
+      toast({ kind: "error", message: "ترجمه ناموفق بود" });
+    } finally {
+      setPerTranslating(prev => { const n = new Set(prev); n.delete(a.id); return n; });
+    }
+  };
 
   const intlByName = useMemo(() => {
     const m = new Map<string, IntlFeed>();
@@ -62,28 +110,44 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
     return [...set.entries()];
   }, []);
 
-  const ensureImported = async () => {
+  // Self-healing reconcile: adds any international feeds missing on the server
+  // AND removes stale international feeds that were imported previously but have
+  // since been dropped from INTL_FEEDS (e.g. dead links, or removed African /
+  // human-rights sources). Idempotent — only touches the server on a diff.
+  const syncFeeds = async () => {
     try {
-      const already = localStorage.getItem(KEY_IMPORTED) === "1";
-      if (already) return;
-      setImporting(true);
-      const existing = new Set((await api.listFeeds()).map((f) => f.url));
-      const payload = INTL_FEEDS
-        .filter((f) => !existing.has(f.url))
+      const validUrls = new Set(INTL_FEEDS.map((f) => f.url));
+      const server = await api.listFeeds();
+      const serverUrls = new Set(server.map((f) => f.url));
+
+      const toAdd = INTL_FEEDS
+        .filter((f) => !serverUrls.has(f.url))
         .map((f) => ({
           url: f.url,
           name: f.nameFa || f.name,
           icon: f.flag,
           category: `بین‌الملل · ${f.countryName} · ${f.categoryFa}`,
         }));
-      if (payload.length > 0) {
-        await api.bulkAdd(payload);
-        toast({ kind: "success", message: `${faNum(payload.length)} منبع بین‌المللی افزوده شد` });
+
+      // Only prune feeds we own (international ones), never user-added feeds.
+      const toRemove = server.filter(
+        (f) => typeof f.category === "string" && f.category.startsWith("بین‌الملل") && !validUrls.has(f.url),
+      );
+
+      if (toAdd.length === 0 && toRemove.length === 0) return;
+      setImporting(true);
+      if (toAdd.length > 0) await api.bulkAdd(toAdd);
+      for (const f of toRemove) {
+        try { await api.removeFeed(f.id); } catch (e) { console.log("intl remove stale feed failed:", f.url, e); }
       }
+      const parts: string[] = [];
+      if (toAdd.length) parts.push(`${faNum(toAdd.length)} منبع افزوده شد`);
+      if (toRemove.length) parts.push(`${faNum(toRemove.length)} منبع حذف شد`);
+      if (parts.length) toast({ kind: "success", message: parts.join(" · ") });
       try { localStorage.setItem(KEY_IMPORTED, "1"); } catch {}
     } catch (e) {
-      console.log("intl ensureImported failed:", e);
-      toast({ kind: "error", message: "افزودن منابع شکست خورد" });
+      console.log("intl syncFeeds failed:", e);
+      toast({ kind: "error", message: "همگام‌سازی منابع شکست خورد" });
     } finally {
       setImporting(false);
     }
@@ -120,7 +184,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
 
   useEffect(() => {
     (async () => {
-      await ensureImported();
+      await syncFeeds();
       await refresh();
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -152,19 +216,21 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
     if (!showFa) return;
     const titles = Array.from(new Set(filtered.slice(0, 100).map((e) => e.article.title))).filter((t) => t && !faMap[t]);
     if (titles.length === 0) return;
+    // Seed instantly from the client cache; only translate what's still missing.
+    const seeded: Record<string, string> = {};
+    const stillMissing: string[] = [];
+    for (const t of titles) { const c = getTitleFa(t); if (c) seeded[t] = c; else stillMissing.push(t); }
+    if (Object.keys(seeded).length) setFaMap((m) => ({ ...m, ...seeded }));
+    if (stillMissing.length === 0) return;
     let cancelled = false;
     (async () => {
       setTranslating(true);
       try {
-        for (let i = 0; i < titles.length; i += 30) {
-          const chunk = titles.slice(i, i + 30);
-          const out = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+        for (let i = 0; i < stillMissing.length; i += 30) {
+          const chunk = stillMissing.slice(i, i + 30);
+          const map = await translateTitlesFa(chunk);
           if (cancelled) return;
-          setFaMap((m) => {
-            const next = { ...m };
-            chunk.forEach((t, j) => { if (out[j]) next[t] = out[j]; });
-            return next;
-          });
+          setFaMap((m) => ({ ...m, ...map }));
         }
       } catch (e) {
         console.log("intl batch translate failed:", e);
@@ -276,12 +342,19 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
         {/* Articles */}
         <ul className="mt-3 px-3 space-y-2">
           {filtered.slice(0, 100).map(({ article, flag, countryName, categoryFa }) => {
-            const titleFa = showFa ? (faMap[article.title] || translateText(article.title, "fa")) : null;
+            const wantFa = showFa || perFa.has(article.id);
+            const titleFa = wantFa ? (faMap[article.title] || translateText(article.title, "fa")) : null;
+            const isNonFa = looksNonPersian(article.title);
+            const busy = perTranslating.has(article.id);
+            const showingFa = perFa.has(article.id);
             return (
               <li key={article.id}>
-                <button
+                <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => open(article)}
-                  className="w-full text-right rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--card)] p-3 tap press active:bg-[var(--accent)] transition-colors"
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(article); } }}
+                  className="w-full text-right rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--card)] p-3 tap press active:bg-[var(--accent)] transition-colors cursor-pointer"
                 >
                   <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-[var(--foreground-subtle)] mb-1">
                     <span aria-hidden>{flag}</span>
@@ -291,8 +364,19 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
                     {categoryFa && (<><span className="opacity-50">·</span><span>{categoryFa}</span></>)}
                     <span className="flex-1" />
                     <span>{timeAgoFa(new Date(article.date).getTime())}</span>
+                    {isNonFa && (
+                      <button
+                        onClick={(e) => { e.stopPropagation(); translateOne(article); }}
+                        disabled={busy}
+                        aria-label={showingFa ? "نمایش تیتر اصلی" : "ترجمهٔ تیتر به فارسی"}
+                        title={showingFa ? "نمایش تیتر اصلی" : "ترجمهٔ تیتر به فارسی"}
+                        className={`shrink-0 size-6 -my-1 grid place-items-center rounded-full tap press transition-colors ${showingFa ? "bg-[var(--brand-500)] text-white" : "text-[var(--brand-500)] active:bg-[var(--accent)]"}`}
+                      >
+                        {busy ? <Loader2 className="size-3.5 animate-spin" /> : <Languages className="size-3.5" />}
+                      </button>
+                    )}
                   </div>
-                  {showFa && titleFa && (
+                  {wantFa && titleFa && (
                     <div dir="rtl" lang="fa" className="text-[14px] font-bold leading-snug">
                       {titleFa}
                     </div>
@@ -300,7 +384,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
                   <div
                     dir="ltr"
                     lang="en"
-                    className={`text-[12.5px] leading-snug ${showFa ? "mt-1 text-[var(--foreground-muted)]" : "text-[var(--foreground)] font-semibold"}`}
+                    className={`text-[12.5px] leading-snug ${wantFa ? "mt-1 text-[var(--foreground-muted)]" : "text-[var(--foreground)] font-semibold"}`}
                   >
                     {article.title}
                   </div>
@@ -310,7 +394,7 @@ export function InternationalNewsScreen({ embedded = false, onClose, onOpenArtic
                       <span dir="ltr" className="truncate">{safeHost(article.link)}</span>
                     </div>
                   )}
-                </button>
+                </div>
               </li>
             );
           })}

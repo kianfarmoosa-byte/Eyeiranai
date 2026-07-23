@@ -1,4 +1,4 @@
-import { Star, Bookmark, Share2, Twitter, Facebook, Link2, Printer, X, ExternalLink, ThumbsUp, MessageCircle, Highlighter, Plus, Quote, Clock } from "lucide-react";
+import { Star, Bookmark, Share2, Twitter, Facebook, Link2, Printer, X, ExternalLink, ThumbsUp, MessageCircle, Highlighter, Plus, Quote, Clock, Languages, Loader2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Article } from "../data";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -6,6 +6,9 @@ import { TagEditor } from "./TagEditor";
 import { SentimentBadge } from "./SentimentBadge";
 import { loadNotes, newNote, appendHighlight, getLastNoteId, setLastNoteId, quotesForArticle, type Note } from "../notes";
 import type { TopicQuery } from "../timeline";
+import { api } from "../api";
+import { studioUserId } from "./mobile/studio/studio";
+import { extractFullContent, getFullContent, getArticleFa, setArticleFa } from "../translationCache";
 
 type Props = {
   article: Article | null;
@@ -27,6 +30,90 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
   const [picker, setPicker] = useState<{ quote: string } | null>(null);
   const [quoteTick, setQuoteTick] = useState(0);
   const quotes = useMemo(() => article ? quotesForArticle(article.id) : [], [article?.id, quoteTick]);
+
+  // On-demand full-article translation to Persian (title + body), toggleable.
+  const [trans, setTrans] = useState<{ title: string; content: string } | null>(null);
+  const [translating, setTranslating] = useState(false);
+  const [showOriginal, setShowOriginal] = useState(false);
+  const [transFromCache, setTransFromCache] = useState(false);
+  useEffect(() => { setTrans(null); setTranslating(false); setShowOriginal(false); setTransFromCache(false); }, [article?.id]);
+
+  // Full-text extraction: RSS feeds (especially international ones) often carry
+  // only a short summary. When the stored content is thin and we have a source
+  // link, fetch the full readable article body from the server and show it in
+  // the content column.
+  const [fullContent, setFullContent] = useState<string | null>(null);
+  const [loadingFull, setLoadingFull] = useState(false);
+  const [fullError, setFullError] = useState(false);
+  // The content actually rendered (and translated): the fetched full text if we
+  // have it, otherwise whatever the feed provided.
+  const baseContent = fullContent ?? (article?.content || "");
+
+  const loadFull = async () => {
+    if (!article?.link || loadingFull) return;
+    setLoadingFull(true);
+    setFullError(false);
+    const content = await extractFullContent(article.link);
+    if (content && content.length > (article.content?.length || 0)) {
+      setFullContent(content);
+      setTrans(null); // any prior translation was of the shorter text
+    } else if (!article.content?.trim()) {
+      setFullError(true);
+    }
+    setLoadingFull(false);
+  };
+
+  useEffect(() => {
+    setFullContent(null); setLoadingFull(false); setFullError(false);
+    if (!article?.link) return;
+    // Instant if we've already extracted this article before.
+    const cached = getFullContent(article.link);
+    if (cached && cached.length > (article.content?.length || 0)) {
+      setFullContent(cached);
+      return;
+    }
+    // Auto-fetch the full body when the feed content is short.
+    const short = (article.content?.trim().length || 0) < 600;
+    if (short) {
+      let cancelled = false;
+      (async () => {
+        setLoadingFull(true);
+        const content = await extractFullContent(article.link);
+        if (cancelled) return;
+        if (content && content.length > (article.content?.length || 0)) setFullContent(content);
+        else if (!article.content?.trim()) setFullError(true);
+        setLoadingFull(false);
+      })();
+      return () => { cancelled = true; };
+    }
+  }, [article?.id]);
+
+  const translateArticle = async () => {
+    if (!article || translating) return;
+    if (trans) { setShowOriginal(v => !v); return; }
+    const cached = getArticleFa(article.id);
+    if (cached && cached.content) { setTrans(cached); setTransFromCache(true); setShowOriginal(false); return; }
+    setTranslating(true);
+    try {
+      const paras = baseContent.split("\n\n");
+      const texts = [article.title, ...paras];
+      const out: string[] = [];
+      for (let i = 0; i < texts.length; i += 20) {
+        const chunk = texts.slice(i, i + 20);
+        const r = await api.aiTranslateBatch({ texts: chunk, to: "fa" }, studioUserId());
+        chunk.forEach((t, j) => out.push(r[j]?.trim() || t));
+      }
+      const value = { title: out[0] || article.title, content: out.slice(1).join("\n\n") };
+      setArticleFa(article.id, value);
+      setTrans(value);
+      setTransFromCache(false);
+      setShowOriginal(false);
+    } catch (e) {
+      console.log("article translation failed:", e);
+    } finally {
+      setTranslating(false);
+    }
+  };
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -116,7 +203,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-slate-200 dark:bg-slate-800 z-20">
         <div className="h-full bg-emerald-500 transition-[width] duration-150" style={{ width: `${progress}%` }}></div>
       </div>
-      <div className="border-b border-slate-200 dark:border-slate-800 p-3 flex items-center gap-1">
+      <div className="border-b border-slate-200 dark:border-slate-800 p-3 flex items-center gap-1 px-[6px] py-[11px] ml-[-156px] mr-[2px] my-[0px]">
         <button onClick={() => toggleStar(article.id)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
           <Star className={`w-4 h-4 ${article.starred ? 'fill-yellow-400 text-yellow-400' : ''}`} />
         </button>
@@ -139,6 +226,14 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
         <button onClick={() => window.print()} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" title="چاپ">
           <Printer className="w-4 h-4" />
         </button>
+        <button
+          onClick={translateArticle}
+          disabled={translating}
+          className={`p-2 rounded-lg disabled:opacity-50 ${trans && !showOriginal ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+          title={trans ? (showOriginal ? 'نمایش ترجمهٔ فارسی' : 'نمایش متن اصلی') : 'ترجمهٔ کامل خبر به فارسی'}
+        >
+          {translating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Languages className="w-4 h-4" />}
+        </button>
         <a
           href={article.link || '#'}
           target="_blank"
@@ -155,7 +250,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
         </button>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto relative m-[0px] p-[0px]">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto relative p-[0px] ml-[-181px] mr-[0px] my-[0px]">
         {hl && (
           <button onClick={quickHighlight}
             style={{ left: Math.max(60, Math.min(hl.x, 380)), top: Math.max(8, hl.y) }}
@@ -196,7 +291,7 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
             <span>•</span>
             <span>{article.author}</span>
           </div>
-          <h1 className="mb-3 leading-relaxed">{article.title}</h1>
+          <h1 className="mb-3 leading-relaxed">{trans && !showOriginal ? trans.title : article.title}</h1>
           <div className="flex items-center gap-3 text-sm text-slate-500 mb-4 flex-wrap">
             <span>{article.date}</span>
             <span>•</span>
@@ -225,10 +320,42 @@ export function ArticleView({ article, onClose, toggleStar, toggleSave, isSaved,
             </div>
           )}
 
+          {trans && (
+            <div className="mb-3 -mt-1 text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5">
+              <Languages className="w-3 h-3" />
+              {showOriginal ? 'در حال نمایش متن اصلی' : 'ترجمه‌شده به فارسی'}
+              {!showOriginal && transFromCache && (
+                <span className="inline-flex items-center px-1.5 h-4 rounded-full bg-emerald-500/12 text-emerald-600 dark:text-emerald-400 text-[9px] font-semibold">
+                  از کش
+                </span>
+              )}
+              <button onClick={() => setShowOriginal(v => !v)} className="underline hover:text-emerald-700">
+                {showOriginal ? 'نمایش ترجمه' : 'نمایش متن اصلی'}
+              </button>
+            </div>
+          )}
           <div ref={contentRef} className="prose prose-slate dark:prose-invert max-w-none leading-loose">
-            {article.content.split('\n\n').map((p, i) => (
+            {((trans && !showOriginal ? trans.content : baseContent).split('\n\n')).map((p, i) => (
               <p key={i} className="mb-4">{p}</p>
             ))}
+            {loadingFull && (
+              <div className="flex items-center gap-2 text-sm text-slate-500 mt-2">
+                <Loader2 className="w-4 h-4 animate-spin" /> در حال بارگذاری متن کامل خبر…
+              </div>
+            )}
+            {!loadingFull && fullError && article.link && (
+              <div className="mt-3 text-sm text-slate-500">
+                امکان استخراج خودکار متن کامل نبود.{" "}
+                <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-emerald-600 dark:text-emerald-400 hover:underline">
+                  مطالعهٔ خبر در منبع اصلی
+                </a>
+              </div>
+            )}
+            {!loadingFull && !fullContent && !fullError && article.link && (baseContent.trim().length >= 600) && (
+              <button onClick={loadFull} className="mt-3 text-sm text-emerald-600 dark:text-emerald-400 hover:underline">
+                بارگذاری متن کامل خبر
+              </button>
+            )}
           </div>
 
           {quotes.length > 0 && (

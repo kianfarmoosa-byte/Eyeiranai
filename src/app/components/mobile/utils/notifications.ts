@@ -1,5 +1,5 @@
 import type { Article } from "../../../data";
-import type { SocialAlert } from "../../../api";
+import type { SocialAlert, PageWatch } from "../../../api";
 import { faNum } from "./fa";
 
 export type NotifKind = "breaking" | "topic" | "digest" | "system" | "mention";
@@ -132,6 +132,34 @@ export function addSocialAlertNotifs(alerts: SocialAlert[]): Notif[] {
       ts: a.ts,
       source: a.topicLabel,
       sourceIcon: "📡",
+    });
+  }
+  return list;
+}
+
+/**
+ * Fold Page-Change-Monitoring events into the in-app inbox. Each change becomes
+ * one notif keyed by `watch-{id}-{ts}`, so a change is only ever surfaced once.
+ */
+export function addWatchChangeNotifs(watches: PageWatch[]): Notif[] {
+  let list = loadNotifs();
+  const events: { id: string; label: string; ch: PageWatch["state"] extends infer S ? any : any }[] = [];
+  for (const w of watches) {
+    for (const ch of w.state?.changes || []) {
+      events.push({ id: `watch-${w.id}-${ch.ts}`, label: w.label, ch });
+    }
+  }
+  // Insert oldest → newest so the freshest change ends up on top.
+  for (const e of events.sort((x, y) => x.ch.ts - y.ch.ts)) {
+    if (list.some((n) => n.id === e.id)) continue;
+    list = addNotif({
+      id: e.id,
+      kind: "system",
+      title: `تغییر در «${e.label}»`,
+      body: e.ch.summary || String(e.ch.diff || "").split("\n")[0] || "محتوای صفحه تغییر کرد",
+      ts: e.ch.ts,
+      source: "رصد تغییرات صفحه",
+      sourceIcon: "🎯",
     });
   }
   return list;

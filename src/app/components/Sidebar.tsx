@@ -1,7 +1,9 @@
-import { Search, Rss, FileText, Star, Circle, Settings, Plus, TrendingUp, Bookmark, Tag, FileUp, ChevronDown, ChevronLeft, RefreshCw, AlertTriangle, Trash2, Network, Globe2, BarChart3, Sunrise, Command, Sparkles, Filter, Brain, NotebookPen, Clock, Pin, X, Wand2, Radar, Package, MonitorDot } from "lucide-react";
+import { Search, Rss, FileText, Star, Circle, Settings, Plus, TrendingUp, Bookmark, Tag, FileUp, ChevronDown, ChevronLeft, RefreshCw, AlertTriangle, Trash2, Network, Globe2, BarChart3, Sunrise, Command, Sparkles, Filter, Brain, NotebookPen, Clock, Pin, X, Wand2, Radar, Package, MonitorDot, Crosshair } from "lucide-react";
 import { useMemo, useState } from "react";
+import { Languages, CopyMinus } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { type Topic, topicColorClasses } from "../topics";
+import { useAutoTranslateTitles, getAutoTranslate, setAutoTranslate, useDedupeArticles, getDedupe, setDedupe } from "../translationCache";
 
 export type SidebarFeed = { id: string; name: string; count: number; icon: string; category: string };
 export type PinnedTopic = { topic: Topic; count: number; active: boolean };
@@ -42,6 +44,7 @@ type Props = {
   onClearTopics?: () => void;
   onAddTopic?: () => void;
   socialUnread?: number;
+  watchUnread?: number;
 };
 
 export function Sidebar({
@@ -52,32 +55,65 @@ export function Sidebar({
   search = "", setSearch = () => {}, lastRefresh = null,
   feedStatus = {}, onOpenOpml = () => {}, onRemoveFeed, onPruneFeeds, pruning = false, onOpenHelp, onOpenRules,
   onOpenStats, onOpenDigest, onOpenPalette, onOpenSourceHub, onOpenSavedSearches, onOpenKnowledge, onOpenNotes, onOpenTimeline, onOpenStudio,
-  pinnedTopics = [], onToggleTopic, onClearTopics, onAddTopic, socialUnread = 0,
+  pinnedTopics = [], onToggleTopic, onClearTopics, onAddTopic, socialUnread = 0, watchUnread = 0,
 }: Props & { onOpenHelp?: () => void; onOpenRules?: () => void }) {
   const [feedsOpen, setFeedsOpen] = useState(true);
   const [catsOpen, setCatsOpen] = useState(true);
   const [expandedCats, setExpandedCats] = useState<Set<string>>(new Set());
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const autoTranslate = useAutoTranslateTitles();
+  const dedupe = useDedupeArticles();
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
+  const toggleGroup = (id: string) => {
+    setCollapsedGroups(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
 
-  const navItems = [
-    { id: 'all', label: 'همه مقالات', icon: FileText, count: totals.all },
-    { id: 'unread', label: 'خوانده نشده', icon: Circle, count: totals.unread },
-    { id: 'starred', label: 'نشان شده‌ها', icon: Star, count: totals.starred },
-    { id: 'saved', label: 'ذخیره شده‌ها', icon: Bookmark, count: totals.saved },
-    { id: 'trending', label: 'پرطرفدارها', icon: TrendingUp, count: null },
-    { id: 'tags', label: 'برچسب‌ها', icon: Tag, count: null },
-    { id: 'international', label: 'اخبار بین‌الملل', icon: Globe2, count: null },
-    { id: 'graph', label: 'نقشهٔ رسانه‌ای', icon: Network, count: null },
-    { id: 'room', label: 'اتاق رصد رسانه‌ای', icon: MonitorDot, count: null },
-    { id: 'social', label: 'رصد اجتماعی', icon: Radar, count: null, badge: socialUnread || null },
-    { id: 'newspack', label: 'بسته‌های خبری سفارشی', icon: Package, count: null },
-    { id: 'digest', label: 'گزارش روزانه', icon: Sunrise, count: null, action: onOpenDigest },
-    { id: 'stats', label: 'داشبورد آمار', icon: BarChart3, count: null, action: onOpenStats },
-    { id: 'source-hub', label: 'منبع‌یاب چندپلتفرمی', icon: Sparkles, count: null, action: onOpenSourceHub },
-    { id: 'saved-searches', label: 'فیلترهای ذخیره‌شده', icon: Filter, count: null, action: onOpenSavedSearches },
-    { id: 'knowledge', label: 'موتور دانش', icon: Brain, count: null, action: onOpenKnowledge },
-    { id: 'notes', label: 'یادداشت‌ها', icon: NotebookPen, count: null, action: onOpenNotes },
-    { id: 'timeline', label: 'خط زمانی موضوع', icon: Clock, count: null, action: onOpenTimeline },
-    { id: 'studio', label: 'استودیوی محتوا', icon: Wand2, count: null, action: onOpenStudio },
+  const navGroups = [
+    {
+      id: 'reading',
+      label: 'خواندن',
+      icon: FileText,
+      items: [
+        { id: 'all', label: 'همه مقالات', icon: FileText, count: totals.all },
+        { id: 'unread', label: 'خوانده نشده', icon: Circle, count: totals.unread },
+        { id: 'starred', label: 'نشان شده‌ها', icon: Star, count: totals.starred },
+        { id: 'saved', label: 'ذخیره شده‌ها', icon: Bookmark, count: totals.saved },
+      ],
+    },
+    {
+      id: 'discover',
+      label: 'کشف و رصد',
+      icon: Radar,
+      items: [
+        { id: 'trending', label: 'پرطرفدارها', icon: TrendingUp, count: null },
+        { id: 'tags', label: 'برچسب‌ها', icon: Tag, count: null },
+        { id: 'international', label: 'اخبار بین‌الملل', icon: Globe2, count: null },
+        { id: 'graph', label: 'نقشهٔ رسانه‌ای', icon: Network, count: null },
+        { id: 'room', label: 'اتاق رصد رسانه‌ای', icon: MonitorDot, count: null },
+        { id: 'social', label: 'رصد اجتماعی', icon: Radar, count: null, badge: socialUnread || null },
+        { id: 'watch', label: 'رصد تغییرات صفحه', icon: Crosshair, count: null, badge: watchUnread || null },
+      ],
+    },
+    {
+      id: 'tools',
+      label: 'ابزارها',
+      icon: Wand2,
+      items: [
+        { id: 'newspack', label: 'بسته‌های خبری سفارشی', icon: Package, count: null },
+        { id: 'digest', label: 'گزارش روزانه', icon: Sunrise, count: null, action: onOpenDigest },
+        { id: 'stats', label: 'داشبورد آمار', icon: BarChart3, count: null, action: onOpenStats },
+        { id: 'source-hub', label: 'منبع‌یاب چندپلتفرمی', icon: Sparkles, count: null, action: onOpenSourceHub },
+        { id: 'saved-searches', label: 'فیلترهای ذخیره‌شده', icon: Filter, count: null, action: onOpenSavedSearches },
+        { id: 'knowledge', label: 'موتور دانش', icon: Brain, count: null, action: onOpenKnowledge },
+        { id: 'notes', label: 'یادداشت‌ها', icon: NotebookPen, count: null, action: onOpenNotes },
+        { id: 'timeline', label: 'خط زمانی موضوع', icon: Clock, count: null, action: onOpenTimeline },
+        { id: 'studio', label: 'استودیوی محتوا', icon: Wand2, count: null, action: onOpenStudio },
+      ],
+    },
   ];
 
   const grouped = useMemo(() => {
@@ -116,9 +152,60 @@ export function Sidebar({
             <div className="text-slate-500 text-sm truncate">user@example.com</div>
           </div>
           <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-          <button className="p-1 hover:bg-slate-200 dark:hover:bg-slate-800 rounded">
-            <Settings className="w-4 h-4 text-slate-500" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setSettingsOpen(o => !o)}
+              aria-label="تنظیمات"
+              title="تنظیمات"
+              className={`p-1 rounded ${settingsOpen ? "bg-slate-200 dark:bg-slate-800" : "hover:bg-slate-200 dark:hover:bg-slate-800"}`}
+            >
+              <Settings className="w-4 h-4 text-slate-500" />
+            </button>
+            {settingsOpen && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setSettingsOpen(false)} />
+                <div className="absolute left-0 top-full mt-2 z-50 w-72 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl p-3" dir="rtl">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-slate-900 dark:text-white">تنظیمات</span>
+                    <button onClick={() => setSettingsOpen(false)} className="p-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800">
+                      <X className="w-3.5 h-3.5 text-slate-500" />
+                    </button>
+                  </div>
+                  <div className="text-[11px] font-medium text-slate-400 mb-1.5 px-0.5">زبان و ترجمه</div>
+                  <button
+                    onClick={() => setAutoTranslate(!getAutoTranslate())}
+                    className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-right"
+                  >
+                    <span className="shrink-0 w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950 grid place-items-center">
+                      <Languages className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-sm text-slate-900 dark:text-white">ترجمهٔ خودکار تیترها</span>
+                      <span className="block text-[11px] text-slate-500 leading-tight">نمایش خودکار همهٔ تیترهای غیرفارسی به فارسی</span>
+                    </span>
+                    <span className={`shrink-0 w-9 h-5 rounded-full transition-colors relative ${autoTranslate ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-700"}`}>
+                      <span className={`absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-white transition-transform ${autoTranslate ? "-translate-x-4" : ""}`} />
+                    </span>
+                  </button>
+                  <button
+                    onClick={() => setDedupe(!getDedupe())}
+                    className="w-full flex items-center gap-3 p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-right"
+                  >
+                    <span className="shrink-0 w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950 grid place-items-center">
+                      <CopyMinus className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    </span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-sm text-slate-900 dark:text-white">حذف خودکار اخبار تکراری</span>
+                      <span className="block text-[11px] text-slate-500 leading-tight">ادغام تیترهای مشابه از منابع مختلف در یک مورد</span>
+                    </span>
+                    <span className={`shrink-0 w-9 h-5 rounded-full transition-colors relative ${dedupe ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-700"}`}>
+                      <span className={`absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-white transition-transform ${dedupe ? "-translate-x-4" : ""}`} />
+                    </span>
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <div className="relative">
           <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -142,30 +229,57 @@ export function Sidebar({
       </div>
 
       <div className="flex-1 overflow-y-auto p-2">
-        <nav className="space-y-0.5 mb-4">
-          {navItems.map(item => {
-            const Icon = item.icon;
-            const active = activeView === item.id;
+        <nav className="mb-4 space-y-3">
+          {navGroups.map(group => {
+            const GroupIcon = group.icon;
+            const collapsed = collapsedGroups.has(group.id);
+            const groupBadge = group.items.reduce((s, it) => s + (Number((it as any).badge) || 0), 0);
             return (
-              <button
-                key={item.id}
-                onClick={() => {
-                  if ((item as any).action) { (item as any).action(); return; }
-                  setActiveView(item.id); setSelectedFeed(null); setSelectedCategory(null);
-                }}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-right transition ${active ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
-              >
-                <Icon className="w-4 h-4 shrink-0" />
-                <span className="flex-1 text-sm">{item.label}</span>
-                {item.count !== null && item.count !== undefined && (
-                  <span className="text-xs bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded-full">{item.count}</span>
+              <div key={group.id}>
+                <button
+                  onClick={() => toggleGroup(group.id)}
+                  className="w-full flex items-center gap-2 px-3 py-1.5 rounded-lg text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition"
+                >
+                  {collapsed ? <ChevronLeft className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  <GroupIcon className="w-3.5 h-3.5" />
+                  <span className="flex-1 text-right text-xs font-semibold tracking-wide">{group.label}</span>
+                  {collapsed && groupBadge > 0 && (
+                    <span className="text-[11px] font-semibold bg-rose-500 text-white px-1.5 min-w-[18px] text-center py-0.5 rounded-full">
+                      {groupBadge.toLocaleString("fa-IR")}
+                    </span>
+                  )}
+                  <span className="text-[11px] text-slate-400">{group.items.length}</span>
+                </button>
+                {!collapsed && (
+                  <div className="space-y-0.5 mt-1">
+                    {group.items.map(item => {
+                      const Icon = item.icon;
+                      const active = activeView === item.id;
+                      return (
+                        <button
+                          key={item.id}
+                          onClick={() => {
+                            if ((item as any).action) { (item as any).action(); return; }
+                            setActiveView(item.id); setSelectedFeed(null); setSelectedCategory(null);
+                          }}
+                          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-right transition ${active ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300' : 'hover:bg-slate-200 dark:hover:bg-slate-800'}`}
+                        >
+                          <Icon className="w-4 h-4 shrink-0" />
+                          <span className="flex-1 text-sm">{item.label}</span>
+                          {item.count !== null && item.count !== undefined && (
+                            <span className="text-xs bg-slate-200 dark:bg-slate-700 px-2 py-0.5 rounded-full">{item.count}</span>
+                          )}
+                          {(item as any).badge ? (
+                            <span className="text-[11px] font-semibold bg-rose-500 text-white px-1.5 min-w-[18px] text-center py-0.5 rounded-full">
+                              {(item as any).badge.toLocaleString("fa-IR")}
+                            </span>
+                          ) : null}
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
-                {(item as any).badge ? (
-                  <span className="text-[11px] font-semibold bg-rose-500 text-white px-1.5 min-w-[18px] text-center py-0.5 rounded-full">
-                    {(item as any).badge.toLocaleString("fa-IR")}
-                  </span>
-                ) : null}
-              </button>
+              </div>
             );
           })}
         </nav>
